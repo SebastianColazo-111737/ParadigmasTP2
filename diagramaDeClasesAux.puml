@@ -1,0 +1,101 @@
+@startuml
+
+class Juego{
+  - j1: Jugador
+  - j2: Jugador
+  - rondaActual: Ronda
+}
+Juego "1  " *-- "  2" Jugador
+
+Juego *-- Ronda
+
+class Jugador{
+  - nombre: String
+  - mazo: Mazo
+  - mano: Mano
+  - descarte: Descarte
+  - mazo: List<Carta>
+  - mano: List<Carta>
+  - descarte: List<Carta>
+  - rondasGanadas: int ?
+}
+Jugador *-- Carta
+
+class Ronda{
+  - tablero: Tablero
+  - climas: ZonaDeClima
+}
+Ronda " 1 " *-- " 2 " Tablero
+Ronda *-- ZonaDeClima
+
+class Tablero {
+  - puntuacion: Int
+  - jugador: Jugador
+}
+Tablero " 1 " *-- " 3 " Seccion
+
+class Seccion{
+  - bonificacion: ?
+  - tipo: Ataque
+  - unidadesJugadas: List<carta>
+}
+Seccion *-- Ataque
+
+class ZonaDeClima{
+}
+
+interface Carta{
+  +jugar(Ronda)
+}
+Carta <|.. Unidad
+Carta <|.. Hechizo
+
+class Unidad{
+  - puntos: Int
+  - tipo: Ataque
+  - modificador: Modificador
+}
+Unidad *-- Ataque
+Unidad o-- Modificador
+
+enum Ataque{
+  CUERPO_A_CUERPO
+  DISTANCIA
+  ASEDIO
+}
+
+interface Modificador{
+}
+
+class sinModificar{
+}
+Modificador <|.. sinModificar
+
+class Legendaria{
+}
+Modificador <|.. Legendaria
+
+class Medico{
+}
+Modificador <|.. Medico
+
+class Agil{
+}
+Modificador <|.. Agil
+
+class Espia{
+}
+Modificador <|.. Espia
+
+class Comandante{
+}
+Modificador <|.. Comandante
+
+class Hermandad{
+}
+Modificador <|.. Hermandad
+
+class Hechizo{
+}
+@enduml 
+
