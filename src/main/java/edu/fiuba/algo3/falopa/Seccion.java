@@ -13,6 +13,14 @@ public class Seccion {
     this.cartas.add(carta);
   }
 
+  public int cantidadCartas() {
+    return this.cartas.size();
+  }
+
+  public Carta retitarUltimaCarta() {
+    return this.cartas.remove(this.cartas.size() - 1);
+  }
+
   public ArrayList<Carta> getSeccion() {
     return this.cartas;
   }

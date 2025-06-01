@@ -17,6 +17,15 @@ public class Juego {
     this.jugadores = jugadores;
   }
 
+  public int cantidadCartasEnSeccion(int indiceSeccion) {
+    return this.secciones.get(indiceSeccion).cantidadCartas();
+  }
+
+  public void colocarCarta(int indiceJugador, int indiceCartaEnMano, int indiceSeccion) {
+    Carta cartaSeleccionada = this.jugadores.get(indiceJugador).obtenerCartaEnMano(indiceCartaEnMano);
+    this.secciones.get(indiceSeccion).addCarta(cartaSeleccionada);
+  }
+
   public int cartasEnManoJugador(int indiceJugador) {
     return jugadores.get(indiceJugador).cantidadCartasEnMano();
   }

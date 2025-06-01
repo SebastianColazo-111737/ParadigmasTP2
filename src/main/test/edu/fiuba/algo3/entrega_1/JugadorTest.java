@@ -13,10 +13,17 @@ public class JugadorTest {
   }
 
   @Test
-  public void jugadoManoTest() {
+  public void jugadorManoTest() {
     Juego juego = new Juego("player1", "player2");
     juego.repartirCartasDelMazoJugador(0);
     assertEquals(10, juego.cartasEnManoJugador(0));
   }
 
+  @Test
+  public void jugadorPuedeColocarUnaCartaEnUnaSeccion() {
+    Juego juego = new Juego("player1", "player2");
+    juego.repartirCartasDelMazoJugador(0);
+    juego.colocarCarta(0, 2, 0);
+    assertEquals(1, juego.cantidadCartasEnSeccion(0));
+  }
 }

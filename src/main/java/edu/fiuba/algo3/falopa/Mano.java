@@ -13,6 +13,10 @@ public class Mano {
     this.cartas.add(carta);
   }
 
+  public Carta getCarta(int indice) {
+    return this.cartas.get(indice);
+  }
+
   public int cantidad() {
     return this.cartas.size();
   }

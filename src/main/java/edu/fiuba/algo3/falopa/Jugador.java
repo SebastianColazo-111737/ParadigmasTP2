@@ -17,6 +17,10 @@ public class Jugador {
     }
   }
 
+  public Carta obtenerCartaEnMano(int indiceCarta) {
+    return this.mano.getCarta(indiceCarta);
+  }
+
   public int cantidadCartasEnMano() {
     return this.mano.cantidad();
   }
