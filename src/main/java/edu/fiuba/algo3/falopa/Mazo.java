@@ -1,20 +1,24 @@
 package edu.fiuba.algo3.falopa;
+
 import java.util.ArrayList;
 
 public class Mazo {
-    private ArrayList<Carta> cartas;
+  private ArrayList<Carta> cartas;
 
-    public Mazo(ArrayList<Carta> cartas){
-        this.cartas = cartas;
-    }
+  public Mazo(ArrayList<Carta> cartas) {
+    this.cartas = cartas;
+  }
 
-    public int cantCartas(){
-        return cartas.size();
-    }
+  public int cantCartas() {
+    return this.cartas.size();
+  }
 
-    public ArrayList<Carta> darCartas(int cant){
-    }
+  public Carta tomarUltimaCarta() {
+    return this.cartas.remove(this.cartas.size() - 1);
+  }
 
+  public ArrayList<Carta> darCartas(int[] indices) {
+    return null;
+  }
 
 }
-
