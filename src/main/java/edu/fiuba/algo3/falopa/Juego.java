@@ -42,7 +42,9 @@ public class Juego {
 
   private ArrayList<Seccion> crearSecciones() {
     ArrayList<Seccion> s = new ArrayList<>();
-    s.add(new Seccion());
+    for (int i = 0; i < 5; i++) {
+      s.add(new Seccion());
+    }
     return s;
   }
 

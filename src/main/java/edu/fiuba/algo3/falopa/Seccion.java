@@ -17,7 +17,7 @@ public class Seccion {
     return this.cartas.size();
   }
 
-  public Carta retitarUltimaCarta() {
+  public Carta retirarUltimaCarta() {
     return this.cartas.remove(this.cartas.size() - 1);
   }
 
