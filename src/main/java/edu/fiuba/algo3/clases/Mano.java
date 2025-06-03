@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.falopa;
+package edu.fiuba.algo3.clases;
 
 import java.util.ArrayList;
 

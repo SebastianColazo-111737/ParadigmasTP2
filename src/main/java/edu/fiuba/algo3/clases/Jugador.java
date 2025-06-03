@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.falopa;
+package edu.fiuba.algo3.clases;
 
 public class Jugador {
   private String nombre;

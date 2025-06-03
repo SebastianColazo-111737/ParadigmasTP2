@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.falopa;
+package edu.fiuba.algo3.clases;
 
 import java.util.ArrayList;
 
@@ -8,13 +8,13 @@ public class Juego {
 
   public Juego(String nombreJ1, String nombreJ2) {
 
+    this.jugadores = new ArrayList<>();
+    Jugador j1 = crearJugador(nombreJ1, crearMazo());
+    Jugador j2 = crearJugador(nombreJ2, crearMazo());
+    jugadores.add(j1);
+    jugadores.add(j2);
+
     this.secciones = crearSecciones();
-
-    ArrayList<Jugador> jugadores = new ArrayList<>();
-    jugadores.add(crearJugador(nombreJ1, crearMazo()));
-    jugadores.add(crearJugador(nombreJ2, crearMazo()));
-
-    this.jugadores = jugadores;
   }
 
   public int cantidadCartasEnSeccion(int indiceSeccion) {
@@ -34,6 +34,11 @@ public class Juego {
     this.jugadores.get(indiceJugador).repartirMano();
   }
 
+  public Carta obtenerCartaEnMano(int indiceJugador,int indiceCarta){
+    return this.jugadores.get(indiceJugador).obtenerCartaEnMano(indiceCarta);
+  }
+
+
   private Mazo crearMazo() {
     Mazo m = new Mazo(fabricarCartas());
     return m;
@@ -42,14 +47,26 @@ public class Juego {
 
   private ArrayList<Seccion> crearSecciones() {
     ArrayList<Seccion> s = new ArrayList<>();
-    for (int i = 0; i < 5; i++) {
-      s.add(new Seccion());
+    for(Jugador jugador : jugadores){
+      s.add(new Seccion(jugador));
+      s.add(new Seccion(jugador));
+      s.add(new Seccion(jugador));
     }
     return s;
   }
 
   private Jugador crearJugador(String nombre, Mazo mazo) {
     return new Jugador(nombre, mazo);
+  }
+
+  public int obtenerPuntajeActualJugador(int indiceJugador){
+    int puntaje = 0;
+    for(Seccion seccion : secciones){
+      if(seccion.perteneceAJugador(jugadores.get(indiceJugador))){
+        puntaje += seccion.obtenerPuntaje();
+      }
+    }
+    return puntaje;
   }
 
   public int cartasEnElMazoJugador(int indiceJugador) {
@@ -63,7 +80,7 @@ public class Juego {
   public ArrayList<Carta> fabricarCartas() {
     ArrayList<Carta> cartas = new ArrayList<>();
     for (int i = 0; i < 21; i++) {
-      Carta carta = new Carta("pepe" + i, i);
+      Carta carta = new Unidad("pepe" + i, i);  // <-- esto antes era new Carta
       cartas.add(carta);
     }
     return cartas;
