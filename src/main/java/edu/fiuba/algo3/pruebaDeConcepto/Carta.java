@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.pruebaDeConcepto;
 
-public class Carta {
+public interface Carta {
+    void jugarCarta(Tablero tablero, Jugador jugador);
 }
