@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.clases;
-import java.util.List;
 
+import java.util.List;
 
 public class Jugador {
   private String nombre;
@@ -19,7 +19,7 @@ public class Jugador {
     }
   }
 
-  public void robarCartas(int cantidad){
+  public void robarCartas(int cantidad) {
     List<Carta> cartasRobadas = this.mazo.darCartas(cantidad);
     this.mano.recibirCartas(cartasRobadas);
   }
@@ -28,19 +28,23 @@ public class Jugador {
     return this.mano.getCarta(indiceCarta);
   }
 
-  public void jugarCarta(Carta carta,Tablero tablero){
-    this.mano.jugarCarta(carta,tablero,this);
+  public void jugarCarta(Carta carta, Tablero tablero) {
+    this.mano.jugarCarta(carta, tablero, this);
   }
 
   public int cartasEnElMazo() {
     return mazo.getCantCartas();
   }
 
-  public Mazo getMazo(){
+  public int cantidadCartasEnMano() {
+    return mano.getCantCartas();
+  }
+
+  public Mazo getMazo() {
     return this.mazo;
   }
 
-  public Mano getMano(){
+  public Mano getMano() {
     return this.mano;
   }
 }

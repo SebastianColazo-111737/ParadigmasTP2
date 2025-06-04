@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.clases;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class Mazo {
     return null;
   }
 
-  public List<Carta> darCartas(int cantidad){
+  public List<Carta> darCartas(int cantidad) {
     List<Carta> entregadas = new ArrayList<>();
     for (int i = 0; i < cantidad && !cartas.isEmpty(); i++) {
       entregadas.add(cartas.remove(cartas.size() - 1));

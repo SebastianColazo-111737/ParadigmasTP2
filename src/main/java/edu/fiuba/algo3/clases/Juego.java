@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.clases;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -14,17 +15,13 @@ public class Juego {
     jugadores.add(jugador2);
 
     this.secciones = crearSecciones();
-    this.tablero = new Tablero(jugador1,jugador2);
+    this.tablero = new Tablero(jugador1, jugador2);
   }
 
-  public int cantidadCartasEnSeccion(Jugador jugador,Carta carta) {
-    if(carta instanceof Unidad){
-      Unidad unidad = (Unidad) carta;
-      Mesa mesa = tablero.getMesa(jugador);
-      Seccion seccion = mesa.getSeccion(unidad.getPosicion());
-      return seccion.getCantUnidades();
-    }
-    return 0;
+  public int cantidadCartasEnSeccion(Jugador jugador, Posicion posicion) {
+    Mesa mesa = tablero.getMesa(jugador);
+    Seccion seccion = mesa.getSeccion(posicion);
+    return seccion.getCantUnidades();
   }
 
   public void colocarCarta(int indiceJugador, int indiceCartaEnMano, int indiceSeccion) {
@@ -32,7 +29,7 @@ public class Juego {
     this.secciones.get(indiceSeccion).addCarta(cartaSeleccionada);
   }
 
-  public void jugarCarta(Jugador jugador, Carta carta){
+  public void jugarCarta(Jugador jugador, Carta carta) {
     jugador.jugarCarta(carta, this.tablero);
   }
 
@@ -40,26 +37,19 @@ public class Juego {
     this.jugadores.get(indiceJugador).repartirMano();
   }
 
-  public void repartirCartas(){
-    for(Jugador jugador : jugadores){
+  public void repartirCartas() {
+    for (Jugador jugador : jugadores) {
       jugador.robarCartas(10);
     }
   }
 
-  public Carta obtenerCartaEnMano(int indiceJugador,int indiceCarta){
+  public Carta obtenerCartaEnMano(int indiceJugador, int indiceCarta) {
     return this.jugadores.get(indiceJugador).obtenerCartaEnMano(indiceCarta);
-  }
-
-
-  private Mazo crearMazo() {
-    Mazo m = new Mazo(fabricarCartas());
-    return m;
-
   }
 
   private ArrayList<Seccion> crearSecciones() {
     ArrayList<Seccion> s = new ArrayList<>();
-    for(Jugador jugador : jugadores){
+    for (Jugador jugador : jugadores) {
       s.add(new Seccion(jugador));
       s.add(new Seccion(jugador));
       s.add(new Seccion(jugador));
@@ -67,14 +57,10 @@ public class Juego {
     return s;
   }
 
-  private Jugador crearJugador(String nombre, Mazo mazo) {
-    return new Jugador(nombre, mazo);
-  }
-
-  public int calcularPuntaje(int indiceJugador){
+  public int calcularPuntaje(int indiceJugador) {
     int puntaje = 0;
-    for(Seccion seccion : secciones){
-      if(seccion.perteneceAJugador(jugadores.get(indiceJugador))){
+    for (Seccion seccion : secciones) {
+      if (seccion.perteneceAJugador(jugadores.get(indiceJugador))) {
         puntaje += seccion.obtenerPuntaje();
       }
     }
@@ -87,15 +73,6 @@ public class Juego {
 
   public void insertarCartaSeccion(int index, Carta carta) {
     this.secciones.get(index).addCarta(carta);
-  }
-
-  public ArrayList<Carta> fabricarCartas() {
-    ArrayList<Carta> cartas = new ArrayList<>();
-    for (int i = 0; i < 21; i++) {
-      Carta carta = new Unidad("pepe" + i, i);  // <-- esto antes era new Carta
-      cartas.add(carta);
-    }
-    return cartas;
   }
 
 }
