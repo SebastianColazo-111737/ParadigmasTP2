@@ -1,18 +1,23 @@
 package edu.fiuba.algo3.clases;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Seccion {
   private ArrayList<Carta> cartasJugadas;
+  private List<Unidad> unidadesJugadas;
   private Jugador jugador;
+
 
   public Seccion() {
     this.cartasJugadas = new ArrayList<>();
+    this.unidadesJugadas = new ArrayList<>();
   }
 
   public Seccion(Jugador jugador){
     this.jugador = jugador;
     this.cartasJugadas = new ArrayList<>();
+    this.unidadesJugadas = new ArrayList<>();
   }
 
   public Jugador getJugador(){
@@ -21,6 +26,14 @@ public class Seccion {
 
   public void addCarta(Carta carta) {
     this.cartasJugadas.add(carta);
+  }
+
+  public void colocarUnidad(Unidad unidad){
+    unidadesJugadas.add(unidad);
+  }
+
+  public int getCantUnidades(){
+    return unidadesJugadas.size();
   }
 
   public int cantidadCartas() {
@@ -41,8 +54,8 @@ public class Seccion {
 
   public int obtenerPuntaje(){
     int total = 0;
-    for (Carta carta : cartasJugadas){
-      total += carta.getValorAtaque();
+    for (Unidad unidad : unidadesJugadas){
+      total += unidad.getValorAtaque();
     }
     return  total;
   }

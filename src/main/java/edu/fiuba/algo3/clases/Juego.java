@@ -1,24 +1,30 @@
 package edu.fiuba.algo3.clases;
-
+import java.util.List;
 import java.util.ArrayList;
 
 public class Juego {
-  private ArrayList<Jugador> jugadores;
+  private List<Jugador> jugadores;
   private ArrayList<Seccion> secciones;
+  private Tablero tablero;
 
-  public Juego(String nombreJ1, String nombreJ2) {
+  public Juego(Jugador jugador1, Jugador jugador2) {
 
     this.jugadores = new ArrayList<>();
-    Jugador j1 = crearJugador(nombreJ1, crearMazo());
-    Jugador j2 = crearJugador(nombreJ2, crearMazo());
-    jugadores.add(j1);
-    jugadores.add(j2);
+    jugadores.add(jugador1);
+    jugadores.add(jugador2);
 
     this.secciones = crearSecciones();
+    this.tablero = new Tablero(jugador1,jugador2);
   }
 
-  public int cantidadCartasEnSeccion(int indiceSeccion) {
-    return this.secciones.get(indiceSeccion).cantidadCartas();
+  public int cantidadCartasEnSeccion(Jugador jugador,Carta carta) {
+    if(carta instanceof Unidad){
+      Unidad unidad = (Unidad) carta;
+      Mesa mesa = tablero.getMesa(jugador);
+      Seccion seccion = mesa.getSeccion(unidad.getPosicion());
+      return seccion.getCantUnidades();
+    }
+    return 0;
   }
 
   public void colocarCarta(int indiceJugador, int indiceCartaEnMano, int indiceSeccion) {
@@ -26,12 +32,18 @@ public class Juego {
     this.secciones.get(indiceSeccion).addCarta(cartaSeleccionada);
   }
 
-  public int cartasEnManoJugador(int indiceJugador) {
-    return jugadores.get(indiceJugador).cantidadCartasEnMano();
+  public void jugarCarta(Jugador jugador, Carta carta){
+    jugador.jugarCarta(carta, this.tablero);
   }
 
   public void repartirCartasDelMazoJugador(int indiceJugador) {
     this.jugadores.get(indiceJugador).repartirMano();
+  }
+
+  public void repartirCartas(){
+    for(Jugador jugador : jugadores){
+      jugador.robarCartas(10);
+    }
   }
 
   public Carta obtenerCartaEnMano(int indiceJugador,int indiceCarta){
@@ -59,7 +71,7 @@ public class Juego {
     return new Jugador(nombre, mazo);
   }
 
-  public int obtenerPuntajeActualJugador(int indiceJugador){
+  public int calcularPuntaje(int indiceJugador){
     int puntaje = 0;
     for(Seccion seccion : secciones){
       if(seccion.perteneceAJugador(jugadores.get(indiceJugador))){

@@ -4,50 +4,81 @@ import edu.fiuba.algo3.clases.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.ArrayList;
+import edu.fiuba.algo3.auxiliares.FabricarCartas;
+import edu.fiuba.algo3.clases.Carta;
+import edu.fiuba.algo3.clases.Unidad;
+
 
 public class JugadorTest {
 
   @Test
   public void jugadorMazoTest() {
-    Juego juego = new Juego("player1", "player2");
-    assertEquals(21, juego.cartasEnElMazoJugador(0));
-    System.out.println("(Test01) Hay suficientes cartas("+juego.cartasEnElMazoJugador(0)+") en el mazo para comenzar");
+    Mazo mazoJugador1 = new Mazo(FabricarCartas.crearCartasDePrueba());
+    Mazo mazoJugador2 = new Mazo(FabricarCartas.crearCartasDePrueba());
+
+    Jugador jugador1 = new Jugador("Jugador1",mazoJugador1);
+    Jugador jugador2 = new Jugador("Jugador2",mazoJugador2);
+
+    Juego juego = new Juego(jugador1, jugador2);
+
+    assertEquals(21, jugador1.getMazo().getCantCartas());
+    System.out.println("(Test01) Hay suficientes cartas("+jugador1.getMazo().getCantCartas()+") en el mazo para comenzar");
   }
 
   @Test
   public void jugadorManoTest() {
-    Juego juego = new Juego("player1", "player2");
-    juego.repartirCartasDelMazoJugador(0);
-    assertEquals(10, juego.cartasEnManoJugador(0));
-    System.out.println("(Test02) Se le reparten " +juego.cartasEnManoJugador(0)+ " cartas de su mazo al jugador");
+
+    Mazo mazoJugador1 = new Mazo(FabricarCartas.crearCartasDePrueba());
+    Mazo mazoJugador2 = new Mazo(FabricarCartas.crearCartasDePrueba());
+
+    Jugador jugador1 = new Jugador("Jugador1",mazoJugador1);
+    Jugador jugador2 = new Jugador("Jugador2",mazoJugador2);
+
+    Juego juego = new Juego(jugador1, jugador2);
+    juego.repartirCartas();
+
+    assertEquals(10, jugador1.getMano().getCantCartas());
+    System.out.println("(Test02) Se le reparten " +jugador1.getMano().getCantCartas()+ " cartas de su mazo al jugador");
   }
 
   @Test
   public void jugadorPuedeColocarUnaCartaEnUnaSeccion() {
-    Juego juego = new Juego("player1", "player2");
-    juego.repartirCartasDelMazoJugador(0);
-    juego.colocarCarta(0, 2, 0);
-    assertEquals(1, juego.cantidadCartasEnSeccion(0));
-    System.out.println("(Test03) Se colocó una carta en una sección del tablero y ahora hay:"+juego.cantidadCartasEnSeccion(0)+"cartas");
+    Mazo mazoJugador1 = new Mazo(FabricarCartas.crearCartasDePrueba());
+    Mazo mazoJugador2 = new Mazo(FabricarCartas.crearCartasDePrueba());
+
+    Jugador jugador1 = new Jugador("Jugador1",mazoJugador1);
+    Jugador jugador2 = new Jugador("Jugador2",mazoJugador2);
+
+    Juego juego = new Juego(jugador1, jugador2);
+    juego.repartirCartas();
+
+    Carta cartaAColocar = jugador1.getMano().getCarta(2);
+    juego.jugarCarta(jugador1,cartaAColocar);
+
+    assertEquals(1, juego.cantidadCartasEnSeccion(jugador1,cartaAColocar));
+    System.out.println("(Test03) Se colocó una carta en una sección del tablero y ahora hay:"+juego.cantidadCartasEnSeccion(jugador1,cartaAColocar)+"cartas");
   }
 
   @Test
   public void jugadorJuegaUnaCartaYObtienePuntaje(){
-    Juego juego = new Juego("player1","player2");
-    juego.repartirCartasDelMazoJugador(0);
+    Mazo mazoJugador1 = new Mazo(FabricarCartas.crearCartasDePrueba());
+    Mazo mazoJugador2 = new Mazo(FabricarCartas.crearCartasDePrueba());
 
-    Carta cartaJugada = juego.obtenerCartaEnMano(0,2);
-    int puntosCartaJugada = ((Unidad) cartaJugada).obtenerPuntosBase();
+    Jugador jugador1 = new Jugador("Jugador1",mazoJugador1);
+    Jugador jugador2 = new Jugador("Jugador2",mazoJugador2);
 
-    juego.colocarCarta(0,2,0);
+    Juego juego = new Juego(jugador1, jugador2);
+    juego.repartirCartas();
 
-    int puntosJugador = juego.obtenerPuntajeActualJugador(0);
+    Carta cartaAColocar = jugador1.getMano().getCarta(2);
+    juego.jugarCarta(jugador1,cartaAColocar);
+
+    int puntosJugador = juego.calcularPuntaje(0);
+    int puntosCartaJugada = cartaAColocar.getValorAtaque();
 
     System.out.println("(Test04) Se jugó la carta con "+ puntosCartaJugada + " puntos, y los puntos del jugador son " + puntosJugador);
-
     assertEquals(puntosCartaJugada, puntosJugador);
   }
-
-
 }
 
