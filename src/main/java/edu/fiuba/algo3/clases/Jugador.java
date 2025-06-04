@@ -28,8 +28,8 @@ public class Jugador {
     return this.mano.getCarta(indiceCarta);
   }
 
-  public void jugarCarta(Carta carta, Tablero tablero) {
-    this.mano.jugarCarta(carta, tablero, this);
+  public Boolean jugarCarta(Unidad carta, Tablero tablero, Posicion posicion) {
+    return tablero.colocarUnidad(carta, this, posicion);
   }
 
   public int cartasEnElMazo() {

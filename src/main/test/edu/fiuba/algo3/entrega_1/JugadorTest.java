@@ -1,18 +1,18 @@
 package edu.fiuba.algo3.entrega_1;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import static org.junit.Assert.assertEquals;
+
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import static org.mockito.Mockito.*;
 
-import java.util.List;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import edu.fiuba.algo3.clases.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import edu.fiuba.algo3.auxiliares.FabricarCartas;
 
 public class JugadorTest {
 
@@ -47,7 +47,7 @@ public class JugadorTest {
   private Carta cartaMock20;
   private Carta cartaMock21;
 
-  @Before
+  @BeforeEach
   public void setup() {
     this.cartaMock1 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO);
     this.cartaMock2 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
@@ -114,17 +114,15 @@ public class JugadorTest {
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
-
-    Juego juego = new Juego(jugador1, jugador2);
-    juego.repartirCartas();
+    jugador1.repartirMano();
+    Tablero tablero = new Tablero(jugador1, jugador2);
 
     // Act
-
     Carta cartaAColocar = jugador1.getMano().getCarta(2);
-    juego.jugarCarta(jugador1, cartaAColocar);
+    jugador1.jugarCarta((Unidad) cartaAColocar, tablero, Posicion.ASEDIO);
 
     // Assert
-    assertEquals(1, juego.cantidadCartasEnSeccion(jugador1, Posicion.A_DISTANCIA));
+    assertEquals(1, tablero.getCantidadCartasEnSeccion(jugador1, Posicion.ASEDIO));
   }
 
   @Test
@@ -132,16 +130,15 @@ public class JugadorTest {
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Tablero tablero = new Tablero(jugador1, jugador2);
+    jugador1.repartirMano();
 
-    Juego juego = new Juego(jugador1, jugador2);
-    juego.repartirCartas();
     // Act
-    Carta cartaAColocar = jugador1.getMano().getCarta(2);
-    juego.jugarCarta(jugador1, cartaAColocar);
 
-    int puntosJugador = juego.calcularPuntaje(0);
-    int puntosCartaJugada = cartaAColocar.getValorAtaque();
+    Carta cartaAColocar = jugador1.obtenerCartaEnMano(8);
+    jugador1.jugarCarta((Unidad) cartaAColocar, tablero, Posicion.CUERPO_A_CUERPO);
+
     // Assert
-    assertEquals(puntosCartaJugada, puntosJugador);
+    assertEquals(cartaAColocar.getValorAtaque(), tablero.getPuntajeEnSeccion(jugador1, Posicion.CUERPO_A_CUERPO));
   }
 }

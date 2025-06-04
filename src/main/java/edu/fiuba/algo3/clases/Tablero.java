@@ -1,28 +1,35 @@
 package edu.fiuba.algo3.clases;
-import java.util.List;
-import java.util.ArrayList;
+
 import java.util.Map;
-import java.util.Objects;
-import java.util.AbstractMap;
 import java.util.HashMap;
 
-
-
-
 public class Tablero {
-    private Map<Jugador,Mesa> mesas;
+  private Map<Jugador, HashMap<Posicion, Seccion>> lado;
 
-    public Tablero(Jugador jugador1, Jugador jugador2){
-        mesas = new HashMap<>();
-        mesas.put(jugador1, new Mesa());
-        mesas.put(jugador2, new Mesa());
-    }
+  public Tablero(Jugador jugador1, Jugador jugador2) {
+    this.lado = new HashMap<>();
+    this.lado.put(jugador1, crearSecciones());
+    this.lado.put(jugador2, crearSecciones());
+  }
 
-    public Mesa getMesa(Jugador jugador){
-        return mesas.get(jugador);
-    }
-    public void colocarUnidad(Unidad unidad, Jugador jugador) {
-        Mesa mesa = mesas.get(jugador);
-        mesa.colocarUnidad(unidad); // mesa decide en qué sección va según la posición de la unidad
-    }
+  private HashMap<Posicion, Seccion> crearSecciones() {
+    HashMap<Posicion, Seccion> s = new HashMap<>();
+    s.put(Posicion.ASEDIO, new Seccion());
+    s.put(Posicion.A_DISTANCIA, new Seccion());
+    s.put(Posicion.CUERPO_A_CUERPO, new Seccion());
+
+    return s;
+  }
+
+  public int getPuntajeEnSeccion(Jugador jugador, Posicion posicion) {
+    return this.lado.get(jugador).get(posicion).obtenerPuntaje();
+  }
+
+  public int getCantidadCartasEnSeccion(Jugador jugador, Posicion posicion) {
+    return this.lado.get(jugador).get(posicion).getCantUnidades();
+  }
+
+  public Boolean colocarUnidad(Unidad unidad, Jugador jugador, Posicion posicion) {
+    return this.lado.get(jugador).get(posicion).colocarUnidad(unidad);
+  }
 }

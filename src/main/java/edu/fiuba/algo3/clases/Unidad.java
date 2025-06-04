@@ -23,10 +23,6 @@ public class Unidad implements Carta {
     return this.posicion;
   }
 
-  public void jugarCarta(Tablero tablero, Jugador jugador) {
-    tablero.colocarUnidad(this, jugador);
-  }
-
   public String getName() {
     return this.nombre;
   }

@@ -5,7 +5,5 @@ public interface Carta {
 
   int getValorAtaque();
 
-  void jugarCarta(Tablero tablero, Jugador jugador);
-
   Posicion getPosicion();
 }
