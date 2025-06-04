@@ -5,25 +5,42 @@ import java.util.ArrayList;
 public class Juego {
   private ArrayList<Jugador> jugadores;
   private ArrayList<Seccion> secciones;
+  private AdminTurnos adminTurnos;
 
-  public Juego(String nombreJ1, String nombreJ2) {
-
-    this.secciones = crearSecciones();
-
-    ArrayList<Jugador> jugadores = new ArrayList<>();
-    jugadores.add(crearJugador(nombreJ1, crearMazo()));
-    jugadores.add(crearJugador(nombreJ2, crearMazo()));
-
+  public Juego(ArrayList<Jugador> jugadores, ArrayList<Seccion> secciones) {
     this.jugadores = jugadores;
+    this.secciones = secciones;
+    this.adminTurnos = new AdminTurnos();
   }
 
   public int cantidadCartasEnSeccion(int indiceSeccion) {
     return this.secciones.get(indiceSeccion).cantidadCartas();
   }
 
-  public void colocarCarta(int indiceJugador, int indiceCartaEnMano, int indiceSeccion) {
-    Carta cartaSeleccionada = this.jugadores.get(indiceJugador).obtenerCartaEnMano(indiceCartaEnMano);
+  public Boolean colocarCarta(int indiceJugador, int indiceCartaEnMano, int indiceSeccion) {
+    if (indiceJugador != this.adminTurnos.getIndiceJugadorActual()) {
+      return false;
+    }
+    Carta cartaSeleccionada = getJugadorActual().obtenerCartaEnMano(indiceCartaEnMano);
     this.secciones.get(indiceSeccion).addCarta(cartaSeleccionada);
+    adminTurnos.siguienteTurno();
+    return true;
+  }
+
+  public int getPuntajeJugador(int indiceJugador) {
+    int puntaje = 0;
+    if (indiceJugador == 0) {
+      for (int i = 0; i < secciones.size() - 3; i++) {
+        puntaje += secciones.get(i).calcularPuntajeSeccion();
+      }
+      return puntaje;
+    }
+
+    for (int i = 3; i < secciones.size(); i++) {
+      puntaje += secciones.get(i).calcularPuntajeSeccion();
+    }
+    return puntaje;
+
   }
 
   public int cartasEnManoJugador(int indiceJugador) {
@@ -34,39 +51,19 @@ public class Juego {
     this.jugadores.get(indiceJugador).repartirMano();
   }
 
-  private Mazo crearMazo() {
-    Mazo m = new Mazo(fabricarCartas());
-    return m;
-
-  }
-
-  private ArrayList<Seccion> crearSecciones() {
-    ArrayList<Seccion> s = new ArrayList<>();
-    for (int i = 0; i < 5; i++) {
-      s.add(new Seccion());
-    }
-    return s;
-  }
-
-  private Jugador crearJugador(String nombre, Mazo mazo) {
-    return new Jugador(nombre, mazo);
-  }
-
   public int cartasEnElMazoJugador(int indiceJugador) {
     return jugadores.get(indiceJugador).cartasEnElMazo();
   }
 
-  public void insertarCartaSeccion(int index, Carta carta) {
-    this.secciones.get(index).addCarta(carta);
+  private Jugador getJugadorActual() {
+    return jugadores.get(this.adminTurnos.getIndiceJugadorActual());
   }
 
-  public ArrayList<Carta> fabricarCartas() {
-    ArrayList<Carta> cartas = new ArrayList<>();
-    for (int i = 0; i < 21; i++) {
-      Carta carta = new Carta("pepe" + i, i);
-      cartas.add(carta);
-    }
-    return cartas;
+  public int getIndiceJugadorActual() {
+    return adminTurnos.getIndiceJugadorActual();
   }
 
+  public int getIndiceJugadorSiguiente() {
+    return adminTurnos.getIndiceJugadorSiguiente();
+  }
 }
