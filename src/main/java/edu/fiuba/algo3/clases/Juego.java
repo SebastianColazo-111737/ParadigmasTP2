@@ -22,13 +22,11 @@ public class Juego {
   }
 
   public Boolean jugarCarta(Jugador jugador, Unidad carta, Posicion posicion) {
-    if (jugador != getJugadorTurnoActual()) {
-      return false;
-    }
-    if (jugador.jugarCarta(carta, this.tablero, posicion)) {
+    if (jugador == getJugadorTurnoActual() && jugador.jugarCarta(carta, this.tablero, posicion)) {
       this.adminTurnos.siguienteTurno();
+      return true;
     }
-    return true;
+    return false;
   }
 
   public void repartirCartas() {

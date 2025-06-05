@@ -14,9 +14,9 @@ public class Tablero {
 
   private HashMap<Posicion, Seccion> crearSecciones() {
     HashMap<Posicion, Seccion> s = new HashMap<>();
-    s.put(Posicion.ASEDIO, new Seccion());
-    s.put(Posicion.A_DISTANCIA, new Seccion());
-    s.put(Posicion.CUERPO_A_CUERPO, new Seccion());
+    s.put(Posicion.ASEDIO, new Seccion(Posicion.ASEDIO));
+    s.put(Posicion.A_DISTANCIA, new Seccion(Posicion.A_DISTANCIA));
+    s.put(Posicion.CUERPO_A_CUERPO, new Seccion(Posicion.CUERPO_A_CUERPO));
 
     return s;
   }

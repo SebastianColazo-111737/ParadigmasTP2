@@ -8,12 +8,7 @@ public class Seccion {
   private Jugador jugador;
   private Posicion tipo;
 
-  public Seccion() {
-    this.unidadesJugadas = new ArrayList<>();
-  }
-
-  public Seccion(Jugador jugador, Posicion posicion) {
-    this.jugador = jugador;
+  public Seccion(Posicion posicion) {
     this.unidadesJugadas = new ArrayList<>();
     this.tipo = posicion;
   }
@@ -32,10 +27,6 @@ public class Seccion {
 
   public int getCantUnidades() {
     return unidadesJugadas.size();
-  }
-
-  public boolean perteneceAJugador(Jugador jugador) {
-    return this.jugador == jugador;
   }
 
   public int obtenerPuntaje() {
