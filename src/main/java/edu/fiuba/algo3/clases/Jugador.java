@@ -34,9 +34,9 @@ public class Jugador {
     return tablero.colocarUnidad(carta, this, posicion);
   }
 
-  public void descartarCarta(Carta carta){
-      mano.quitarCarta(carta);
-      descarte.descartar(carta);
+  public void descartarCarta(Carta carta) {
+    mano.quitarCarta(carta);
+    this.descarte.descartar(carta);
   }
 
   public int cartasEnElMazo() {
@@ -55,7 +55,7 @@ public class Jugador {
     return this.mano;
   }
 
-  public Descarte getDescarte(){
+  public Descarte getDescarte() {
     return this.descarte;
   }
 }

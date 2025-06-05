@@ -6,14 +6,16 @@ import java.util.List;
 public class Seccion {
   private List<Unidad> unidadesJugadas;
   private Jugador jugador;
+  private Posicion tipo;
 
   public Seccion() {
     this.unidadesJugadas = new ArrayList<>();
   }
 
-  public Seccion(Jugador jugador) {
+  public Seccion(Jugador jugador, Posicion posicion) {
     this.jugador = jugador;
     this.unidadesJugadas = new ArrayList<>();
+    this.tipo = posicion;
   }
 
   public Jugador getJugador() {
@@ -21,6 +23,9 @@ public class Seccion {
   }
 
   public Boolean colocarUnidad(Unidad unidad) {
+    if (unidad.getPosicion() != this.tipo) {
+      return false;
+    }
     this.unidadesJugadas.add(unidad);
     return true;
   }

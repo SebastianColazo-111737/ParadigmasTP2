@@ -1,16 +1,20 @@
 package edu.fiuba.algo3.clases;
+
 import java.util.List;
 import java.util.ArrayList;
 
-
 public class Descarte {
-    private List<Carta> pilaDeDescarte = new ArrayList<>();
+  private List<Carta> pilaDeDescarte;
 
-    public void descartar(Carta carta){
-        pilaDeDescarte.add(carta);
-    }
+  public Descarte() {
+    this.pilaDeDescarte = new ArrayList<>();
+  }
 
-    public int getCantCartasEnPila(){
-        return pilaDeDescarte.size();
-    }
+  public void descartar(Carta carta) {
+    pilaDeDescarte.add(carta);
+  }
+
+  public int getCantCartasEnPila() {
+    return pilaDeDescarte.size();
+  }
 }

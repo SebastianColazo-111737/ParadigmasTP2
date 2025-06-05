@@ -25,8 +25,10 @@ public class Juego {
     if (jugador != getJugadorTurnoActual()) {
       return false;
     }
-    this.adminTurnos.siguienteTurno();
-    return jugador.jugarCarta(carta, this.tablero, posicion);
+    if (jugador.jugarCarta(carta, this.tablero, posicion)) {
+      this.adminTurnos.siguienteTurno();
+    }
+    return true;
   }
 
   public void repartirCartas() {
