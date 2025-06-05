@@ -49,25 +49,25 @@ public class JugadorTest {
 
   @BeforeEach
   public void setup() {
-    this.cartaMock1 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO);
+    this.cartaMock1 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO);
     this.cartaMock2 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
     this.cartaMock3 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
     this.cartaMock4 = new Unidad("Medico", 2, Posicion.ASEDIO);
-    this.cartaMock5 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO);
+    this.cartaMock5 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO);
     this.cartaMock6 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
     this.cartaMock7 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock8 = new Unidad("Medico", 2, Posicion.ASEDIO);
+    this.cartaMock8 = new Unidad("Catapulta", 8, Posicion.ASEDIO);
     this.cartaMock9 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO);
     this.cartaMock10 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
     this.cartaMock11 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock12 = new Unidad("Medico", 2, Posicion.ASEDIO);
-    this.cartaMock13 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO);
+    this.cartaMock12 = new Unidad("Catapulta", 8, Posicion.ASEDIO);
+    this.cartaMock13 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO);
     this.cartaMock14 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
     this.cartaMock15 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
     this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO);
     this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
     this.cartaMock18 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock19 = new Unidad("Medico", 2, Posicion.ASEDIO);
+    this.cartaMock19 = new Unidad("Catapulta", 8, Posicion.ASEDIO);
     this.cartaMock20 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
     this.cartaMock21 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
 
@@ -168,10 +168,10 @@ public class JugadorTest {
     jugador1.repartirMano();
 
     // Act
-    Carta colocarPrimeraCarta = jugador1.obtenerCartaEnMano(8);
+    Carta colocarPrimeraCarta = jugador1.obtenerCartaEnMano(9);
     jugador1.jugarCarta((Unidad) colocarPrimeraCarta, tablero, Posicion.ASEDIO);
 
-    Carta colocarSegundaCarta = jugador1.obtenerCartaEnMano(4);
+    Carta colocarSegundaCarta = jugador1.obtenerCartaEnMano(2);
     jugador1.jugarCarta((Unidad) colocarSegundaCarta, tablero, Posicion.ASEDIO);
 
     Unidad unidadJugada = (Unidad) colocarPrimeraCarta;
