@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.clases;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Seccion {
-  private List<Unidad> unidadesJugadas;
+  private ArrayList<Unidad> unidadesJugadas;
   private Jugador jugador;
   private Posicion tipo;
 
@@ -29,10 +28,14 @@ public class Seccion {
     return unidadesJugadas.size();
   }
 
+  public ArrayList<Unidad> getUnidadesSeccion() {
+    return this.unidadesJugadas;
+  }
+
   public int obtenerPuntaje() {
     int total = 0;
     for (Unidad unidad : unidadesJugadas) {
-      total += unidad.getValorAtaque();
+      total += unidad.obtenerPuntosBase();
     }
     return total;
   }

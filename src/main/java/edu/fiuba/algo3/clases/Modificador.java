@@ -7,5 +7,5 @@ public abstract class Modificador {
     return this.esLegendaria;
   }
 
-  public abstract void aplicarEfecto(Carta cartaEnDescarte, Tablero tablero, Jugador jugador);
+  public abstract void aplicarEfecto(Carta cartaContexto, Tablero tablero, Jugador jugador);
 }

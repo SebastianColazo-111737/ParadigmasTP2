@@ -5,7 +5,5 @@ public interface Carta {
 
   Boolean jugar(Tablero tablero, Jugador jugador, Posicion posicion);
 
-  int getValorAtaque();
-
   Posicion getPosicion();
 }

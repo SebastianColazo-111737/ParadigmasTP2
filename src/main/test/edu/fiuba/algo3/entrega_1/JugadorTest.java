@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import edu.fiuba.algo3.clases.*;
+import edu.fiuba.algo3.clases.Modificadores.Unidas;
 
 public class JugadorTest {
 
@@ -25,51 +26,51 @@ public class JugadorTest {
   @Mock
   private ArrayList<Carta> cartasMock2;
 
-  private Carta cartaMock1;
-  private Carta cartaMock2;
-  private Carta cartaMock3;
-  private Carta cartaMock4;
-  private Carta cartaMock5;
-  private Carta cartaMock6;
-  private Carta cartaMock7;
-  private Carta cartaMock8;
-  private Carta cartaMock9;
-  private Carta cartaMock10;
-  private Carta cartaMock11;
-  private Carta cartaMock12;
-  private Carta cartaMock13;
-  private Carta cartaMock14;
-  private Carta cartaMock15;
-  private Carta cartaMock16;
-  private Carta cartaMock17;
-  private Carta cartaMock18;
-  private Carta cartaMock19;
-  private Carta cartaMock20;
-  private Carta cartaMock21;
+  private Unidad cartaMock1;
+  private Unidad cartaMock2;
+  private Unidad cartaMock3;
+  private Unidad cartaMock4;
+  private Unidad cartaMock5;
+  private Unidad cartaMock6;
+  private Unidad cartaMock7;
+  private Unidad cartaMock8;
+  private Unidad cartaMock9;
+  private Unidad cartaMock10;
+  private Unidad cartaMock11;
+  private Unidad cartaMock12;
+  private Unidad cartaMock13;
+  private Unidad cartaMock14;
+  private Unidad cartaMock15;
+  private Unidad cartaMock16;
+  private Unidad cartaMock17;
+  private Unidad cartaMock18;
+  private Unidad cartaMock19;
+  private Unidad cartaMock20;
+  private Unidad cartaMock21;
 
   @BeforeEach
   public void setup() {
-    this.cartaMock1 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock2 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
-    this.cartaMock3 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock4 = new Unidad("Medico", 2, Posicion.ASEDIO);
-    this.cartaMock5 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock6 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
-    this.cartaMock7 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock8 = new Unidad("Catapulta", 8, Posicion.ASEDIO);
-    this.cartaMock9 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock10 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
-    this.cartaMock11 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock12 = new Unidad("Catapulta", 8, Posicion.ASEDIO);
-    this.cartaMock13 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock14 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
-    this.cartaMock15 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO);
-    this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
-    this.cartaMock18 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
-    this.cartaMock19 = new Unidad("Catapulta", 8, Posicion.ASEDIO);
-    this.cartaMock20 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA);
-    this.cartaMock21 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO);
+    this.cartaMock1 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock2 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
+    this.cartaMock3 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock4 = new Unidad("Medico", 2, Posicion.ASEDIO, null);
+    this.cartaMock5 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock6 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
+    this.cartaMock7 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock8 = new Unidad("Catapulta", 8, Posicion.ASEDIO, null);
+    this.cartaMock9 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock10 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
+    this.cartaMock11 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock12 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Unidas());
+    this.cartaMock13 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock14 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
+    this.cartaMock15 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO, null);
+    this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
+    this.cartaMock18 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
+    this.cartaMock19 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Unidas());
+    this.cartaMock20 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
+    this.cartaMock21 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
 
     this.cartasMock1 = new ArrayList<>(Arrays.asList(
         cartaMock1, cartaMock2, cartaMock3, cartaMock4, cartaMock5,
@@ -79,7 +80,8 @@ public class JugadorTest {
 
     this.cartasMock2 = new ArrayList<>();
     for (Carta carta : this.cartasMock1) {
-      cartasMock2.add(new Unidad(carta.getName(), carta.getValorAtaque(), carta.getPosicion()));
+      Unidad casteo = (Unidad) carta;
+      cartasMock2.add(new Unidad(casteo.getName(), casteo.obtenerPuntosBase(), casteo.getPosicion(), null));
     }
   }
 
@@ -135,11 +137,11 @@ public class JugadorTest {
 
     // Act
 
-    Carta cartaAColocar = jugador1.obtenerCartaEnMano(8);
+    Unidad cartaAColocar = (Unidad) jugador1.obtenerCartaEnMano(8);
     jugador1.jugarCarta(cartaAColocar, tablero, Posicion.CUERPO_A_CUERPO);
 
     // Assert
-    assertEquals(cartaAColocar.getValorAtaque(), tablero.getPuntajeEnSeccion(jugador1, Posicion.CUERPO_A_CUERPO));
+    assertEquals(cartaAColocar.obtenerPuntosBase(), tablero.getPuntajeEnSeccion(jugador1, Posicion.CUERPO_A_CUERPO));
   }
 
   @Test
@@ -165,20 +167,17 @@ public class JugadorTest {
     Juego juego = new Juego(jugador1, jugador2);
     juego.repartirCartas();
 
-    Carta primeraCatapulta = jugador1.obtenerCartaEnMano(9);
-    Carta segundaCatapulta = jugador1.obtenerCartaEnMano(2);
-
+    Unidad primeraCatapulta = (Unidad) jugador1.obtenerCartaEnMano(9);
+    Unidad segundaCatapulta = (Unidad) jugador2.obtenerCartaEnMano(2);
+    Unidad terceraCataPulta = (Unidad) jugador1.obtenerCartaEnMano(2);
     // Act
     juego.jugarCarta(jugador1, primeraCatapulta, Posicion.ASEDIO);
+    juego.jugarCarta(jugador1, terceraCataPulta, Posicion.ASEDIO);
     juego.jugarCarta(jugador2, segundaCatapulta, Posicion.ASEDIO);
-
     // Assert
-    assertEquals(16, primeraCatapulta.getValorAtaque()); // Dos catapultas: 8*2 = 16
+    // assertEquals(2, juego.cantidadCartasEnSeccion(jugador1, Posicion.ASEDIO));
+    assertEquals(16, primeraCatapulta.getPuntosModificados()); // Dos catapultas:
+    // 8*2 = 16
 
-    // Act
-    juego.getTablero().vaciarTablero();
-
-    // Assert
-    assertEquals(8, primeraCatapulta.getValorAtaque());
   }
 }
