@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.clases;
-
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -21,6 +22,11 @@ public class Tablero {
     return s;
   }
 
+  public Boolean colocarUnidad(Unidad unidad, Jugador jugador, Posicion posicion) {
+    return this.lado.get(jugador).get(posicion).colocarUnidad(unidad);
+  }
+
+
   public int getPuntajeEnSeccion(Jugador jugador, Posicion posicion) {
     return this.lado.get(jugador).get(posicion).obtenerPuntaje();
   }
@@ -29,7 +35,7 @@ public class Tablero {
     return this.lado.get(jugador).get(posicion).getCantUnidades();
   }
 
-  public Boolean colocarUnidad(Unidad unidad, Jugador jugador, Posicion posicion) {
-    return this.lado.get(jugador).get(posicion).colocarUnidad(unidad);
-  }
+
+
+
 }

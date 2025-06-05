@@ -164,19 +164,23 @@ public class JugadorTest {
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
-    Tablero tablero = new Tablero(jugador1, jugador2);
-    jugador1.repartirMano();
+    Juego juego = new Juego(jugador1, jugador2);
+    juego.repartirCartas();
+
+    Unidad primeraCatapulta = (Unidad) jugador1.obtenerCartaEnMano(9);
+    Unidad segundaCatapulta = (Unidad) jugador1.obtenerCartaEnMano(2);
 
     // Act
-    Carta colocarPrimeraCarta = jugador1.obtenerCartaEnMano(9);
-    jugador1.jugarCarta((Unidad) colocarPrimeraCarta, tablero, Posicion.ASEDIO);
-
-    Carta colocarSegundaCarta = jugador1.obtenerCartaEnMano(2);
-    jugador1.jugarCarta((Unidad) colocarSegundaCarta, tablero, Posicion.ASEDIO);
-
-    Unidad unidadJugada = (Unidad) colocarPrimeraCarta;
+    juego.jugarCarta(jugador1,primeraCatapulta,Posicion.ASEDIO);
+    juego.jugarCarta(jugador2,segundaCatapulta,Posicion.ASEDIO);
 
     // Assert
-    assertEquals(16, unidadJugada.getValorAtaque()); //Dos catapultas: 8*2 = 16
+    assertEquals(16, primeraCatapulta.getValorAtaque()); //Dos catapultas: 8*2 = 16
+
+    // Act
+    juego.getTablero().vaciarTablero();
+
+    //Assert
+    assertEquals(8, primeraCatapulta.getValorAtaque());
   }
 }
