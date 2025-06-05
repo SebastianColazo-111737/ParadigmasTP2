@@ -22,6 +22,10 @@ public class Mano {
     this.cartas.addAll(cartas);
   }
 
+  public void quitarCarta(Carta carta){
+    cartas.remove(carta);
+  }
+
   public int getCantCartas() {
     return this.cartas.size();
   }

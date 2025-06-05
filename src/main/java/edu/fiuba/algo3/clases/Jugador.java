@@ -6,11 +6,13 @@ public class Jugador {
   private String nombre;
   private Mazo mazo;
   private Mano mano;
+  private Descarte descarte;
 
   public Jugador(String nombre, Mazo mazo) {
     this.mazo = mazo;
     this.nombre = nombre;
     this.mano = new Mano();
+    this.descarte = new Descarte();
   }
 
   public void repartirMano() {
@@ -32,6 +34,11 @@ public class Jugador {
     return tablero.colocarUnidad(carta, this, posicion);
   }
 
+  public void descartarCarta(Carta carta){
+      mano.quitarCarta(carta);
+      descarte.descartar(carta);
+  }
+
   public int cartasEnElMazo() {
     return mazo.getCantCartas();
   }
@@ -46,5 +53,9 @@ public class Jugador {
 
   public Mano getMano() {
     return this.mano;
+  }
+
+  public Descarte getDescarte(){
+    return this.descarte;
   }
 }

@@ -141,4 +141,21 @@ public class JugadorTest {
     // Assert
     assertEquals(cartaAColocar.getValorAtaque(), tablero.getPuntajeEnSeccion(jugador1, Posicion.CUERPO_A_CUERPO));
   }
+
+  @Test
+  public void lasCartasPasanALaPilaDeDescarte(){
+    // Arrange
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Tablero tablero = new Tablero(jugador1, jugador2);
+    jugador1.repartirMano();
+
+    Carta cartaADescartar = jugador1.getMano().getCarta(0);
+
+    // Act
+    jugador1.descartarCarta(cartaADescartar);
+
+    //Assert
+    assertEquals(1, jugador1.getDescarte().getCantCartasEnPila());
+  }
 }
