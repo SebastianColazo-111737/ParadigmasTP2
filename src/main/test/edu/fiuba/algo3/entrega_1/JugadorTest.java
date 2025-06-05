@@ -158,4 +158,25 @@ public class JugadorTest {
     //Assert
     assertEquals(1, jugador1.getDescarte().getCantCartasEnPila());
   }
+
+  @Test
+  public void seUnenDosCartasYSeCambianLosPuntos(){
+    // Arrange
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Tablero tablero = new Tablero(jugador1, jugador2);
+    jugador1.repartirMano();
+
+    // Act
+    Carta colocarPrimeraCarta = jugador1.obtenerCartaEnMano(8);
+    jugador1.jugarCarta((Unidad) colocarPrimeraCarta, tablero, Posicion.ASEDIO);
+
+    Carta colocarSegundaCarta = jugador1.obtenerCartaEnMano(4);
+    jugador1.jugarCarta((Unidad) colocarSegundaCarta, tablero, Posicion.ASEDIO);
+
+    Unidad unidadJugada = (Unidad) colocarPrimeraCarta;
+
+    // Assert
+    assertEquals(16, unidadJugada.getValorAtaque()); //Dos catapultas: 8*2 = 16
+  }
 }
