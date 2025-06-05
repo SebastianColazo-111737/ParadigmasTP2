@@ -30,8 +30,12 @@ public class Jugador {
     return this.mano.getCarta(indiceCarta);
   }
 
-  public Boolean jugarCarta(Unidad carta, Tablero tablero, Posicion posicion) {
-    return tablero.colocarUnidad(carta, this, posicion);
+  public Boolean jugarCarta(Carta carta, Tablero tablero, Posicion posicion) {
+    Boolean seColoco = carta.jugar(tablero, this, posicion);
+    if (seColoco) {
+      descartarCarta(carta);
+    }
+    return seColoco;
   }
 
   public void descartarCarta(Carta carta) {
@@ -45,6 +49,10 @@ public class Jugador {
 
   public int cantidadCartasEnMano() {
     return mano.getCantCartas();
+  }
+
+  public int cantidadCartasEnDescarte() {
+    return this.descarte.getCantCartasEnPila();
   }
 
   public Mazo getMazo() {

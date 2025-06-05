@@ -15,6 +15,10 @@ public class Unidad implements Carta {
     return this.puntosBase;
   }
 
+  public Boolean jugar(Tablero tablero, Jugador jugador, Posicion posicion) {
+    return tablero.colocarUnidad(this, jugador, posicion);
+  }
+
   public int obtenerPuntosBase() {
     return this.puntosBase;
   }

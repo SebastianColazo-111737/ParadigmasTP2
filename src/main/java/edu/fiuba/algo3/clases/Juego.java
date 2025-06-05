@@ -21,7 +21,7 @@ public class Juego {
     return tablero.getCantidadCartasEnSeccion(jugador, posicion);
   }
 
-  public Boolean jugarCarta(Jugador jugador, Unidad carta, Posicion posicion) {
+  public Boolean jugarCarta(Jugador jugador, Carta carta, Posicion posicion) {
     if (jugador == getJugadorTurnoActual() && jugador.jugarCarta(carta, this.tablero, posicion)) {
       this.adminTurnos.siguienteTurno();
       return true;
@@ -33,10 +33,6 @@ public class Juego {
     for (Jugador jugador : jugadores) {
       jugador.robarCartas(10);
     }
-  }
-
-  public int cartasEnElMazoJugador(int indiceJugador) {
-    return jugadores.get(indiceJugador).cartasEnElMazo();
   }
 
   public Jugador getJugadorTurnoActual() {

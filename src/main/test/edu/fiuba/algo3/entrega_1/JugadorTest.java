@@ -119,7 +119,7 @@ public class JugadorTest {
 
     // Act
     Carta cartaAColocar = jugador1.getMano().getCarta(2);
-    jugador1.jugarCarta((Unidad) cartaAColocar, tablero, Posicion.ASEDIO);
+    jugador1.jugarCarta(cartaAColocar, tablero, Posicion.ASEDIO);
 
     // Assert
     assertEquals(1, tablero.getCantidadCartasEnSeccion(jugador1, Posicion.ASEDIO));
@@ -136,18 +136,16 @@ public class JugadorTest {
     // Act
 
     Carta cartaAColocar = jugador1.obtenerCartaEnMano(8);
-    jugador1.jugarCarta((Unidad) cartaAColocar, tablero, Posicion.CUERPO_A_CUERPO);
+    jugador1.jugarCarta(cartaAColocar, tablero, Posicion.CUERPO_A_CUERPO);
 
     // Assert
     assertEquals(cartaAColocar.getValorAtaque(), tablero.getPuntajeEnSeccion(jugador1, Posicion.CUERPO_A_CUERPO));
   }
 
   @Test
-  public void lasCartasPasanALaPilaDeDescarte(){
+  public void lasCartasPasanALaPilaDeDescarte() {
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
-    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
-    Tablero tablero = new Tablero(jugador1, jugador2);
     jugador1.repartirMano();
 
     Carta cartaADescartar = jugador1.getMano().getCarta(0);
@@ -155,32 +153,32 @@ public class JugadorTest {
     // Act
     jugador1.descartarCarta(cartaADescartar);
 
-    //Assert
+    // Assert
     assertEquals(1, jugador1.getDescarte().getCantCartasEnPila());
   }
 
   @Test
-  public void seUnenDosCartasYSeCambianLosPuntos(){
+  public void seUnenDosCartasYSeCambianLosPuntos() {
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
     Juego juego = new Juego(jugador1, jugador2);
     juego.repartirCartas();
 
-    Unidad primeraCatapulta = (Unidad) jugador1.obtenerCartaEnMano(9);
-    Unidad segundaCatapulta = (Unidad) jugador1.obtenerCartaEnMano(2);
+    Carta primeraCatapulta = jugador1.obtenerCartaEnMano(9);
+    Carta segundaCatapulta = jugador1.obtenerCartaEnMano(2);
 
     // Act
-    juego.jugarCarta(jugador1,primeraCatapulta,Posicion.ASEDIO);
-    juego.jugarCarta(jugador2,segundaCatapulta,Posicion.ASEDIO);
+    juego.jugarCarta(jugador1, primeraCatapulta, Posicion.ASEDIO);
+    juego.jugarCarta(jugador2, segundaCatapulta, Posicion.ASEDIO);
 
     // Assert
-    assertEquals(16, primeraCatapulta.getValorAtaque()); //Dos catapultas: 8*2 = 16
+    assertEquals(16, primeraCatapulta.getValorAtaque()); // Dos catapultas: 8*2 = 16
 
     // Act
     juego.getTablero().vaciarTablero();
 
-    //Assert
+    // Assert
     assertEquals(8, primeraCatapulta.getValorAtaque());
   }
 }
