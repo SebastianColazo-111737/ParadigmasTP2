@@ -7,3 +7,4 @@ public interface Carta {
 
   Posicion getPosicion();
 }
+

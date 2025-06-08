@@ -38,4 +38,10 @@ public class Tablero {
     return this.lado.get(jugador).get(posicion).getCantUnidades();
   }
 
+  public void aplicarNieveEnCuerpoACuerpo(){
+    for(Jugador jugador : this.lado.keySet()){
+      Seccion cuerpoACuerpo = this.lado.get(jugador).get(Posicion.CUERPO_A_CUERPO);
+      cuerpoACuerpo.aplicarEfectoNieve();
+    }
+  }
 }

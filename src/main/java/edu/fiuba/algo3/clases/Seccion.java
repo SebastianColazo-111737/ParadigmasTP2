@@ -40,4 +40,9 @@ public class Seccion {
     return total;
   }
 
+  public void aplicarEfectoNieve(){
+    for(Unidad unidad : this.unidadesJugadas){
+      unidad.modificarPuntos(1);
+    }
+  }
 }

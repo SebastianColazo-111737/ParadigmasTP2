@@ -37,6 +37,12 @@ public class Unidad implements Carta {
     this.puntosModificados += puntos;
   }
 
+  public void modificarPuntos(int nuevoValor){
+    this.puntosModificados = nuevoValor;
+  }
+
+
+
   public Boolean poseeModificadores() {
     return this.modificador != null;
   }
@@ -52,5 +58,4 @@ public class Unidad implements Carta {
   public String getName() {
     return this.nombre;
   }
-
 }

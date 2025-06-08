@@ -8,6 +8,7 @@ public class Juego {
   private Tablero tablero;
   private AdminTurnos adminTurnos;
 
+
   public Juego(Jugador jugador1, Jugador jugador2) {
 
     this.jugadores = new ArrayList<>();
@@ -24,6 +25,14 @@ public class Juego {
   public Boolean jugarCarta(Jugador jugador, Carta carta, Posicion posicion) {
     if (jugador == getJugadorTurnoActual() && jugador.jugarCarta(carta, this.tablero, posicion)) {
       System.out.println("Jugo la carta correctamente");
+      this.adminTurnos.siguienteTurno();
+      return true;
+    }
+    return false;
+  }
+
+  public Boolean jugarCartaEspecial(Jugador jugador, Especial carta, ZonaEspeciales zonaEspeciales){
+    if(jugador == getJugadorTurnoActual() && jugador.jugarCartaEspecial(carta, this.tablero, zonaEspeciales)){
       this.adminTurnos.siguienteTurno();
       return true;
     }

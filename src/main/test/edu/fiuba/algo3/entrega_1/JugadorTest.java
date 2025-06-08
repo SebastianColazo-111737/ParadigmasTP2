@@ -26,6 +26,10 @@ public class JugadorTest {
   @Mock
   private ArrayList<Carta> cartasMock2;
 
+  @Mock
+  private ZonaEspeciales zonaEspeciales;
+
+
   private Unidad cartaMock1;
   private Unidad cartaMock2;
   private Unidad cartaMock3;
@@ -39,7 +43,7 @@ public class JugadorTest {
   private Unidad cartaMock11;
   private Unidad cartaMock12;
   private Unidad cartaMock13;
-  private Unidad cartaMock14;
+  private Especial cartaMock14;
   private Unidad cartaMock15;
   private Unidad cartaMock16;
   private Unidad cartaMock17;
@@ -63,7 +67,7 @@ public class JugadorTest {
     this.cartaMock11 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
     this.cartaMock12 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Unidas());
     this.cartaMock13 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, null);
-    this.cartaMock14 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
+    this.cartaMock14 = new Nieve("Nieve", zonaEspeciales);
     this.cartaMock15 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
     this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO, null);
     this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
@@ -80,8 +84,10 @@ public class JugadorTest {
 
     this.cartasMock2 = new ArrayList<>();
     for (Carta carta : this.cartasMock1) {
-      Unidad casteo = (Unidad) carta;
-      cartasMock2.add(new Unidad(casteo.getName(), casteo.obtenerPuntosBase(), casteo.getPosicion(), null));
+      if (carta instanceof Unidad) {
+        Unidad unidad = (Unidad) carta;
+        cartasMock2.add(new Unidad(unidad.getName(), unidad.obtenerPuntosBase(), unidad.getPosicion(), null));
+      }
     }
   }
 
@@ -179,5 +185,30 @@ public class JugadorTest {
     assertEquals(16, primeraCatapulta.getPuntosModificados()); // Dos catapultas:
     // 8*2 = 16
 
+  }
+
+  @Test
+  //Nieve: Pone a las cartas CuerpoACuerpo con puntaje 1
+  public void seUsaUnaCartaClimaYSeReducenLosValoresDeLasUnidadesEnLaSeccion(){
+    // Arrange
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+
+
+    Juego juego = new Juego(jugador2, jugador1);
+    ZonaEspeciales zonaEspeciales = new ZonaEspeciales();
+
+    jugador1.repartirMano();
+    jugador2.repartirMano();
+
+    Unidad primeraCartaJugador2 = (Unidad) jugador2.obtenerCartaEnMano(3);
+    Especial primeraCartaJugador1 = (Especial) jugador1.obtenerCartaEnMano(7);
+
+    // Act
+    juego.jugarCarta(jugador2, primeraCartaJugador2, Posicion.CUERPO_A_CUERPO);
+    juego.jugarCartaEspecial(jugador1,primeraCartaJugador1,zonaEspeciales);
+
+    // Assert
+    assertEquals(1,primeraCartaJugador2.getPuntosModificados());
   }
 }

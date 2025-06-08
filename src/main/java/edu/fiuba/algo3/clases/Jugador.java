@@ -38,6 +38,16 @@ public class Jugador {
     return seColoco;
   }
 
+  public Boolean jugarCartaEspecial(Especial carta, Tablero tablero, ZonaEspeciales zonaEspeciales){
+    Boolean seColoco = carta.jugarEspecial(tablero, this, zonaEspeciales);
+    if(seColoco){
+      descartarCarta(carta);
+    }
+    return seColoco;
+  }
+
+
+
   public void descartarCarta(Carta carta) {
     mano.quitarCarta(carta);
     this.descarte.descartar(carta);
