@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 public abstract class Especial implements Carta {
-    public abstract void activar(Tablero tablero);
+
     private String nombre;
     private ZonaEspeciales zona;
 
@@ -14,9 +14,9 @@ public abstract class Especial implements Carta {
         this.zona = zona;
     }
 
-    public void activar(){
+    public abstract void activar(Tablero tablero);
+    public abstract void desactivar(Tablero tablero);
 
-    }
 
     public String getName(){
         return this.nombre;

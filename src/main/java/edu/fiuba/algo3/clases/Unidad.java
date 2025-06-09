@@ -41,6 +41,10 @@ public class Unidad implements Carta {
     this.puntosModificados = nuevoValor;
   }
 
+  public void reiniciarPuntos(){
+    this.puntosModificados = this.puntosBase;
+  }
+
 
 
   public Boolean poseeModificadores() {

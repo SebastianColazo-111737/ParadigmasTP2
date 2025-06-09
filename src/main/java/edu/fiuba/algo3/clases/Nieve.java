@@ -7,6 +7,11 @@ public class Nieve extends Especial{
     }
 
     public void activar(Tablero tablero){
+        System.out.println("Se activó la carta Nieve");
         tablero.aplicarNieveEnCuerpoACuerpo();
+    }
+    public void desactivar(Tablero tablero){
+        System.out.println("Se desactivo la carta Nieve");
+        tablero.desactivarNieveEnCuerpoACuerpo();
     }
 }

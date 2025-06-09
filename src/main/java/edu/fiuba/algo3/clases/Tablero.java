@@ -44,4 +44,11 @@ public class Tablero {
       cuerpoACuerpo.aplicarEfectoNieve();
     }
   }
+
+  public void desactivarNieveEnCuerpoACuerpo(){
+    for(Jugador jugador : this.lado.keySet()){
+      Seccion cuerpoAcuerpo = this.lado.get(jugador).get(Posicion.CUERPO_A_CUERPO);
+      cuerpoAcuerpo.desactivarEfectoNieve();
+    }
+  }
 }

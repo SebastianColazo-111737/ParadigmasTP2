@@ -32,12 +32,12 @@ public class Semana2 {
 
     private Unidad cartaMock1;
     private Unidad cartaMock2;
-    private Especial cartaMock3;
+    private Unidad cartaMock3;
     private Unidad cartaMock4;
     private Unidad cartaMock5;
     private Unidad cartaMock6;
     private Unidad cartaMock7;
-    private Especial cartaMock8;
+    private Unidad cartaMock8;
     private Unidad cartaMock9;
     private Unidad cartaMock10;
     private Unidad cartaMock11;
@@ -48,7 +48,7 @@ public class Semana2 {
     private Unidad cartaMock16;
     private Unidad cartaMock17;
     private Unidad cartaMock18;
-    private Especial cartaMock19;
+    private Unidad cartaMock19;
     private Unidad cartaMock20;
     private Unidad cartaMock21;
 
@@ -56,12 +56,12 @@ public class Semana2 {
     public void setup() {
         this.cartaMock1 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, null);
         this.cartaMock2 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
-        this.cartaMock3 = new Nieve("Nieve", zonaEspeciales);
+        this.cartaMock3 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
         this.cartaMock4 = new Unidad("Medico", 2, Posicion.ASEDIO, null);
         this.cartaMock5 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, null);
         this.cartaMock6 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock7 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
-        this.cartaMock8 = new Nieve("Nieve", zonaEspeciales);
+        this.cartaMock8 = new Unidad("Catapulta", 8, Posicion.ASEDIO, null);
         this.cartaMock9 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO, null);
         this.cartaMock10 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock11 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
@@ -72,7 +72,7 @@ public class Semana2 {
         this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO, null);
         this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock18 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
-        this.cartaMock19 = new Nieve("Nieve", zonaEspeciales);
+        this.cartaMock19 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Unidas());
         this.cartaMock20 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock21 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
 
@@ -90,3 +90,32 @@ public class Semana2 {
             }
         }
     }
+
+
+
+    @Test
+    public void seUsaUnaCartaClimaYSePuedeEliminarEfecto(){
+        // Arrange
+        Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+        Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+
+
+        Juego juego = new Juego(jugador2, jugador1);
+        ZonaEspeciales zonaEspeciales = new ZonaEspeciales();
+
+        jugador1.repartirMano();
+        jugador2.repartirMano();
+
+        Unidad cartaUnidad = (Unidad) jugador2.obtenerCartaEnMano(3);
+        Especial cartaClima = (Especial) jugador1.obtenerCartaEnMano(7);
+
+        // Act
+        juego.jugarCarta(jugador2, cartaUnidad, Posicion.CUERPO_A_CUERPO);
+        juego.jugarCartaEspecial(jugador1,cartaClima,zonaEspeciales);
+
+        cartaClima.desactivar(juego.getTablero());
+
+        // Assert
+        assertEquals(6,cartaUnidad.getPuntosModificados());
+    }
+}

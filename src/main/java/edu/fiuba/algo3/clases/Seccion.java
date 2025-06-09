@@ -45,4 +45,11 @@ public class Seccion {
       unidad.modificarPuntos(1);
     }
   }
+
+  public void desactivarEfectoNieve(){
+    for(Unidad unidad : this.unidadesJugadas){
+      unidad.reiniciarPuntos();
+    }
+  }
+
 }

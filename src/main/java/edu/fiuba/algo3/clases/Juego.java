@@ -52,4 +52,8 @@ public class Juego {
   public Jugador getJugadorSiguienteTurno() {
     return this.jugadores.get(this.adminTurnos.getIndiceJugadorSiguiente());
   }
+
+  public Tablero getTablero() {
+    return this.tablero;
+  }
 }
