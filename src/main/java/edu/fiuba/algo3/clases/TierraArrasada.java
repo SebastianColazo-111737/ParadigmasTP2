@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.clases;
 
 public class TierraArrasada extends Especial{
+
     public TierraArrasada(String nombre, ZonaEspeciales zona){
         super(nombre,zona);
     }

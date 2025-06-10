@@ -72,7 +72,7 @@ public class Semana2 {
         this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO, null);
         this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock18 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
-        this.cartaMock19 = new TierraArrasada("TierraArrasada", zonaEspeciales);
+        this.cartaMock19 = new TierraArrasada("TierraArrasada", zonaEspeciales); //Se ve que no esta contando el indice de esta...
         this.cartaMock20 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock21 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
 
@@ -106,7 +106,7 @@ public class Semana2 {
         jugador1.repartirMano();
         jugador2.repartirMano();
 
-        Unidad cartaUnidad = (Unidad) jugador2.obtenerCartaEnMano(3);
+        Unidad cartaUnidad = (Unidad) jugador2.obtenerCartaEnMano(2);
         Especial cartaClima = (Especial) jugador1.obtenerCartaEnMano(7);
 
         // Act
