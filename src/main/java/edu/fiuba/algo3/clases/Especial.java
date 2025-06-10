@@ -15,7 +15,8 @@ public abstract class Especial implements Carta {
     }
 
     public abstract void activar(Tablero tablero);
-    public abstract void desactivar(Tablero tablero);
+    public  void desactivar(Tablero tablero){
+    }
 
 
     public String getName(){

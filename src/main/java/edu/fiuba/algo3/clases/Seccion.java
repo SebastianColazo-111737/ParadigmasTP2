@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.clases;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class Seccion {
   private ArrayList<Unidad> unidadesJugadas;
@@ -49,6 +52,22 @@ public class Seccion {
   public void desactivarEfectoNieve(){
     for(Unidad unidad : this.unidadesJugadas){
       unidad.reiniciarPuntos();
+    }
+  }
+
+  public void aplicarEfectoTierraArrasada(Jugador jugador){
+    int maxPuntos = this.unidadesJugadas.stream()
+            .mapToInt(Unidad::getPuntosModificados)
+            .max()
+            .orElse(0);
+
+    List<Unidad> aEliminar = this.unidadesJugadas.stream()
+            .filter(u -> u.getPuntosModificados() == maxPuntos)
+            .collect(Collectors.toList());
+
+    for (Unidad unidad : aEliminar) {
+      this.unidadesJugadas.remove(unidad);
+      jugador.descartarCarta(unidad);
     }
   }
 

@@ -48,7 +48,7 @@ public class Semana2 {
     private Unidad cartaMock16;
     private Unidad cartaMock17;
     private Unidad cartaMock18;
-    private Unidad cartaMock19;
+    private Especial cartaMock19;
     private Unidad cartaMock20;
     private Unidad cartaMock21;
 
@@ -72,7 +72,7 @@ public class Semana2 {
         this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO, null);
         this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock18 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
-        this.cartaMock19 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Unidas());
+        this.cartaMock19 = new TierraArrasada("TierraArrasada", zonaEspeciales);
         this.cartaMock20 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, null);
         this.cartaMock21 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, null);
 
@@ -117,5 +117,34 @@ public class Semana2 {
 
         // Assert
         assertEquals(6,cartaUnidad.getPuntosModificados());
+    }
+
+    @Test
+    public void seUsaTierraArrasadaYSeEliminanLasCartasCorrectamente(){
+        // Arrange
+        Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+        Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+
+        Juego juego = new Juego(jugador2, jugador1);
+        ZonaEspeciales zonaEspeciales = new ZonaEspeciales();
+
+        jugador1.repartirMano();
+        jugador2.repartirMano();
+
+        Unidad cartaUnidad1 = (Unidad) jugador2.obtenerCartaEnMano(3);
+        Unidad cartaUnidad2 = (Unidad) jugador2.obtenerCartaEnMano(1);
+
+        Unidad cartaUnidad3 = (Unidad) jugador1.obtenerCartaEnMano(4);
+        Especial cartaTierraArrasada = (Especial) jugador1.obtenerCartaEnMano(2);
+
+        // Act
+        juego.jugarCarta(jugador2, cartaUnidad1, Posicion.CUERPO_A_CUERPO); // <-- esta deberia ir al descarte
+        juego.jugarCarta(jugador1, cartaUnidad3, Posicion.A_DISTANCIA);
+        juego.jugarCarta(jugador2, cartaUnidad2, Posicion.A_DISTANCIA);
+        juego.jugarCartaEspecial(jugador1,cartaTierraArrasada,zonaEspeciales);
+
+        // Assert
+        assertEquals(2, jugador2.getDescarte().getCantCartasEnPila()); //2 cartas en descarte: cartaUnidad1 + cartaTierraArrasada
+        assertEquals(0, juego.cantidadCartasEnSeccion(jugador2, Posicion.CUERPO_A_CUERPO));
     }
 }

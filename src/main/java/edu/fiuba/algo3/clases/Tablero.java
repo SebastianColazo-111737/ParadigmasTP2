@@ -51,4 +51,14 @@ public class Tablero {
       cuerpoAcuerpo.desactivarEfectoNieve();
     }
   }
+
+  public void aplicarTierraArrasada(){
+    for (Jugador jugador : this.lado.keySet()) {
+      Map<Posicion, Seccion> seccionesJugador = this.lado.get(jugador);
+      for (Seccion seccion : seccionesJugador.values()) {
+        seccion.aplicarEfectoTierraArrasada(jugador);
+      }
+    }
+  }
+
 }
