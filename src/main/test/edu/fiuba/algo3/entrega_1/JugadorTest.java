@@ -4,16 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.assertEquals;
 
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import edu.fiuba.algo3.clases.*;
-import edu.fiuba.algo3.clases.Modificadores.Unidas;
+import edu.fiuba.algo3.aux.*;
+import edu.fiuba.algo3.aux.Modificadores.Unidas;
 
 public class JugadorTest {
 
