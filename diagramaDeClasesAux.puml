@@ -1,101 +1,191 @@
 @startuml
-
-class Juego{
-  - j1: Jugador
-  - j2: Jugador
-  - rondaActual: Ronda
+class AdminTurnos {
+    - turno: Int
+    + AdminTurnos()
+    + siguienteTurno()
+    + getNumeroTurno(): Int
+    + getIndiceJugadorActual(): Int
+    + getIndiceJugadorSiguiente(): Int
 }
-Juego "1  " *-- "  2" Jugador
 
-Juego *-- Ronda
-
-class Jugador{
-  - nombre: String
-  - mazo: Mazo
-  - mano: Mano
-  - descarte: Descarte
-  - mazo: List<Carta>
-  - mano: List<Carta>
-  - descarte: List<Carta>
-  - rondasGanadas: int ?
+class Mano {
+    + addCarta(carta: Carta)
+    + getCarta(indice: Int): Carta
+    + recibirCartas(cartas: Lista<Carta>)
+    + quitarCarta(carta: Carta)
+    + getCantCartas(): Int
 }
-Jugador *-- Carta
+Mano *-- "1..*" Carta
 
-class Ronda{
-  - tablero: Tablero
-  - climas: ZonaDeClima
+class Mazo {
+    + Mazo(cartas: ArrayList<Carta>)
+    + getCantCartas(): Int
+    + tomarUltimaCarta(): Carta
+    + darCartas(cantidad: Int): List<Carta>
 }
-Ronda " 1 " *-- " 2 " Tablero
-Ronda *-- ZonaDeClima
+Mazo *-- "1..*" Carta
+
+class Descarte{
+    + descartar(carta: Carta)
+    + getCantCartasEnPila(): Int
+}
+Descarte o-- "0..*" Carta
 
 class Tablero {
-  - puntuacion: Int
-  - jugador: Jugador
-}
-Tablero " 1 " *-- " 3 " Seccion
-
-class Seccion{
-  - bonificacion: ?
-  - tipo: Ataque
-  - unidadesJugadas: List<carta>
-}
-Seccion *-- Ataque
-
-class ZonaDeClima{
+    - lado : Map<Jugador, HashMap<Posicion, Seccion>>
+    + Tablero(jugador1 : Jugador, jugador2 : Jugador)
+    + crearSecciones(): HashMap<Posicion, Seccion>
+    + colocarUnidad(unidad : Unidad, jugador : Jugador, posicion : Posicion) : Boolean
+    + getUnidadesEnSeccion(posicion : Posicion, jugador : Jugador) : ArrayList<Unidad>
+    + getPuntajeEnSeccion(jugador : Jugador, posicion : Posicion) : int
+    + getCantidadCartasEnSeccion(jugador: Jugador, posicion: Posicion): Int
+    + aplicarNieveEnCuerpoACuerpo()
+    + desactivarNieveEnCuerpoACuerpo()
+    + aplicarTierraArrasada()
 }
 
-interface Carta{
-  +jugar(Ronda)
+class Juego {
+    + Juego(jugador1: Jugador, jugador2: Jugador)
+    + cantidadCartasEnSeccion(jugador: Jugador, posicion: Posicion): Int
+    + jugarCarta(jugador: Jugador, carta: Carta, posicion: Posicion): Boolean
+    + jugarCartaEspecial(jugador: Jugador, carta: Especial, zonaEspeciales: ZonaEspeciales): Boolean
+    + repartirCartas()
+    + getJugadorTurnoActual(): Jugador
+    + getJugadorSiguienteTurno(): Jugador
+    + getTablero(): Tablero
 }
-Carta <|.. Unidad
-Carta <|.. Hechizo
+Juego *-- "0..2" Jugador
+Juego *-- "1" AdminTurnos
+Juego *-- "1" Tablero
 
-class Unidad{
-  - puntos: Int
-  - tipo: Ataque
-  - modificador: Modificador
+class Seccion {
+    + Seccion(posicion : Posicion)
+    + getJugador(): Jugador
+    + colocarUnidad(unidad : Unidad) : Boolean
+    + getUnidadesSeccion() : ArrayList<Unidad>
+    + obtenerPuntaje() : int
+    + getCantUnidades() : int
+    + aplicarEfectoNieve()
+    + desactivarEfectoNieve()
+    + aplicarEfectoTierraArrasada(jugador : Jugador)
 }
-Unidad *-- Ataque
-Unidad o-- Modificador
+Seccion o-- "0..*" Unidad
+Seccion *-- "1" Jugador
+Seccion *-- Posicion
 
-enum Ataque{
-  CUERPO_A_CUERPO
-  DISTANCIA
-  ASEDIO
+class Unidad {
+    - nombre : String
+    - puntosBase : int
+    - posicion : Posicion
+    - modificador : Modificador
+    - puntosModificados : int
+    + Unidad(nombre : String, puntosBase : int, posicion : Posicion, modificador : Modificador)
+    + jugar(tablero : Tablero, jugador : Jugador, posicion : Posicion) : Boolean
+    + getPuntosModificados() : int
+    + sumarPuntosModificados(puntos: Int)
+    + modificarPuntos(nuevoValor : int)
+    + reiniciarPuntos()
+    + poseeModificadores() : Boolean
+    + obtenerPuntosBase(): Int
+    + getPosicion(): Posicion
+    + getName(): String
+}
+Unidad ..|> Carta
+
+abstract class Modificador {
+    - esLegendaria : boolean
+    + esLegendaria(): Boolean
+    + {abstract} aplicarEfecto(carta : Carta, tablero : Tablero, jugador : Jugador)
 }
 
-interface Modificador{
+class Agil {
+    + aplicarEfecto(carta : Carta, tablero : Tablero, jugador : Jugador)
+}
+Agil --|> Modificador
+
+class Espia {
+    + aplicarEfecto(carta : Carta, tablero : Tablero, jugador : Jugador)
+}
+Espia --|> Modificador
+
+class Legendaria {
+    + aplicarEfecto(carta : Carta, tablero : Tablero, jugador : Jugador)
+}
+Legendaria --|> Modificador
+
+class Medico {
+    + aplicarEfecto(carta : Carta, tablero : Tablero, jugador : Jugador)
+}
+Medico --|> Modificador
+
+class SumaBase {
+    + aplicarEfecto(carta : Carta, tablero : Tablero, jugador : Jugador)
+}
+SumaBase --|> Modificador
+
+class Unidas {
+    + aplicarEfecto(carta : Carta, tablero : Tablero, jugador : Jugador)
+}
+Unidas --|> Modificador
+
+class Jugador {
+    - nombre : String
+    + Jugador(nombre : String)
+    + repartirMano()
+    + robarCartas(cantidad: Int)
+    + obtenerCartaEnMano(indiceCarta: Int): Carta
+    + jugarCarta(carta: Carta, tablero: Tablero, posicion: Posicion): Boolean
+    + jugarCartaEspecial(carta: Especial, tablero: Tablero, zonaEspeciales: ZonaEspeciales): Boolean
+    + descartarCarta(carta: Carta)
+    + cartasEnElMazo(): Int
+    + cantidadCartasEnMano(): Int
+    + cantidadCartasEnDescarte(): Int
+    + getMazo(): Mazo
+    + getMano(): Mano
+    + getDescarte(): Descarte
+}
+Jugador *-- "1" Mazo
+Jugador *-- "1" Mano
+Jugador *-- "1" Descarte
+
+class ZonaEspeciales {
+    + colocar(carta : Especial, tablero : Tablero)
+    + getCartas() : List<Especial>
+}
+ZonaEspeciales *-- Especial
+
+abstract class Especial {
+    - nombre : String
+    - zona : ZonaEspeciales
+    + Especial(nombre: String, zona: ZonaEspeciales)
+    + activar(tablero: Tablero)
+    + desactivar(tablero: Tablero)
+    + getName(): String
+    + getPosicion(): Posicion
+    + jugar(Tablero tablero,Jugador jugador,Posicion posicion): Boolean
+    + jugarEspecial(tablero: Tablero, jugador: Jugador, zonaEspeciales: ZonaEspeciales): Boolean
+}
+Carta <|.. Especial
+
+class TierraArrasada {
+    + TierraArrasada(nombre: String, zona : ZonaEspeciales)
+    + activar(tablero : Tablero)
+}
+TierraArrasada --|> Especial
+
+class Nieve{
+    + Nieve(nombre: Nombre, zona: ZonaEspeciales)
+    + activar(tablero : Tablero)
+    + desactivar(tablero: Tablero)
+}
+Nieve--|> Especial
+
+class Posicion {
 }
 
-class sinModificar{
+interface Carta {
+    getName(): String
+    jugar(tablero: Tablero, jugador: Jugador, posicion: Posicion): Boolean
+    Posicion getPosicion(): Posicion
 }
-Modificador <|.. sinModificar
-
-class Legendaria{
-}
-Modificador <|.. Legendaria
-
-class Medico{
-}
-Modificador <|.. Medico
-
-class Agil{
-}
-Modificador <|.. Agil
-
-class Espia{
-}
-Modificador <|.. Espia
-
-class Comandante{
-}
-Modificador <|.. Comandante
-
-class Hermandad{
-}
-Modificador <|.. Hermandad
-
-class Hechizo{
-}
-@enduml 
-
+@enduml
