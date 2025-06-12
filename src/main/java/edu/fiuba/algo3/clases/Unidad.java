@@ -17,15 +17,15 @@ public class Unidad implements Carta {
   }
 
   public Boolean jugar(Tablero tablero, Jugador jugador, Posicion posicion) {
+    modificador.aplicarEfectoNato(this, posicion);
+
     if (!tablero.colocarUnidad(this, jugador, posicion)) {
       System.out.println("No se pudo colocar la carta");
       return false;
     }
 
-    if (poseeModificadores()) {
-      this.modificador.aplicarEfecto(this, tablero, jugador);
-      System.out.println("Se aplico modificador");
-    }
+    this.modificador.aplicarEfectoEnTablero(this, tablero, jugador);
+    System.out.println("Se aplico modificador");
     return true;
   }
 
@@ -47,9 +47,7 @@ public class Unidad implements Carta {
 
 
 
-  public Boolean poseeModificadores() {
-    return this.modificador != null;
-  }
+  //public Boolean poseeModificadores() {return this.modificador != null;}
 
   public int obtenerPuntosBase() {
     return this.puntosBase;
@@ -62,4 +60,6 @@ public class Unidad implements Carta {
   public String getName() {
     return this.nombre;
   }
+
+  public void cambiarPosicion(Posicion nuevaPosicion){ this.posicion = nuevaPosicion; }
 }

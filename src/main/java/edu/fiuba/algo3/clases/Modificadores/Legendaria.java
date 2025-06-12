@@ -2,13 +2,16 @@ package edu.fiuba.algo3.clases.Modificadores;
 
 import edu.fiuba.algo3.clases.*;
 
-public class Legendaria extends Modificador {
-  public Legendaria() {
-    this.esLegendaria = true;
+public class Legendaria implements Modificador {
+  //public Legendaria() {
+  //  this.esLegendaria = true;
+  //}
+
+  public void aplicarEfectoNato(Unidad unidad, Posicion nuevaPosicion){
+
   }
 
-  @Override
-  public void aplicarEfecto(Carta carta, Tablero tablero, Jugador Jugador) {
+  public void aplicarEfectoEnTablero(Carta carta, Tablero tablero, Jugador Jugador) {
 
   }
 }
