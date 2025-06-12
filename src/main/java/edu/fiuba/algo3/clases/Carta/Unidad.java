@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.clases.Carta;
 
-import edu.fiuba.algo3.clases.Posicion.IPosicion;
+import edu.fiuba.algo3.modelo.Posicion.IPosicion;
 import edu.fiuba.algo3.clases.Seccion.Seccion;
 
 public class Unidad implements ICarta{

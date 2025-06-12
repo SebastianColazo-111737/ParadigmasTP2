@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.clases.Mazo;
+package edu.fiuba.algo3.modelo.Jugador.Mazo;
 
-import edu.fiuba.algo3.clases.Carta.ICarta;
+import edu.fiuba.algo3.modelo.Carta.*;
 
 import java.util.ArrayList;
 import java.util.List;

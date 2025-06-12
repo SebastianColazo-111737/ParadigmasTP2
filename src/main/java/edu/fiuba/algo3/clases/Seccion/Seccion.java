@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.clases.Seccion;
 
 import edu.fiuba.algo3.clases.Carta.*;
-import edu.fiuba.algo3.clases.Posicion.IPosicion;
+import edu.fiuba.algo3.modelo.Posicion.IPosicion;
 
 import java.util.ArrayList;
 import java.util.List;

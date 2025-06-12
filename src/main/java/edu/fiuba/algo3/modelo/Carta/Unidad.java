@@ -1,9 +1,10 @@
-package edu.fiuba.algo3.clases.Carta;
+package edu.fiuba.algo3.modelo.Carta;
 
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Tablero.Tablero;
 import edu.fiuba.algo3.modelo.Posicion.IPosicion;
-import edu.fiuba.algo3.clases.Seccion.Seccion;
 
-public class Unidad implements ICarta{
+public class Unidad implements ICarta {
     private IPosicion posicion;
     private int puntaje;
 
@@ -13,8 +14,8 @@ public class Unidad implements ICarta{
     }
 
     @Override
-    public void jugarCarta(Seccion seccion) {
-        seccion.colocarUnidad(this);
+    public void jugarCarta(Jugador jugador, Tablero tablero, IPosicion posicion){
+        tablero
     }
 
     public boolean sePuedeColocarEnLaPosicion(IPosicion posicion){
