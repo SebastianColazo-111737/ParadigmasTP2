@@ -11,7 +11,7 @@ public class Legendaria implements Modificador {
 
   }
 
-  public void aplicarEfectoEnTablero(Carta carta, Tablero tablero, Jugador Jugador) {
+  public void aplicarEfectoEnTablero(Carta carta, Tablero tablero, Jugador jugador) {
 
   }
 }

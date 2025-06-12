@@ -13,5 +13,5 @@ public class Agil implements Modificador {
       unidad.cambiarPosicion(nuevaPosicion);
   }
 
-  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador Jugador) {}
+  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador jugador) {}
 }

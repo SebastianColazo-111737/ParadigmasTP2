@@ -14,8 +14,8 @@ public class Unidas implements Modificador {
 
   }
 
-  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador Jugador) {
-    ArrayList<Unidad> cartasEnSeccion = tablero.getUnidadesEnSeccion(cartaContexto.getPosicion(), Jugador);
+  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador jugador) {
+    ArrayList<Unidad> cartasEnSeccion = tablero.getUnidadesEnSeccion(cartaContexto.getPosicion(), jugador);
 
     for (Unidad carta : cartasEnSeccion) {
       if (carta.getName() == cartaContexto.getName()) {

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
+import javafx.geometry.Pos;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.assertEquals;
 
@@ -146,5 +147,28 @@ public class Semana2 {
         // Assert
         assertEquals(2, jugador2.getDescarte().getCantCartasEnPila()); //2 cartas en descarte: cartaUnidad1 + cartaTierraArrasada
         assertEquals(0, juego.cantidadCartasEnSeccion(jugador2, Posicion.CUERPO_A_CUERPO));
+    }
+
+    @Test
+    public void seUsaMedicoYSePuedeAgarrarUnaCartaDeLaPilaDeDescarteYJugarla() {
+        Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+        Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+        Juego juego = new Juego(jugador1, jugador2);
+
+        jugador1.repartirMano();
+        jugador2.repartirMano();
+
+        Unidad cartaUnidad1 = (Unidad) jugador1.obtenerCartaEnMano(4);
+        Unidad cartaMedico = (Unidad) jugador1.obtenerCartaEnMano();
+
+        // Act
+        juego.jugarCarta(jugador1,cartaUnidad1,Posicion.A_DISTANCIA);
+        jugador1.descartarCarta(cartaUnidad1);
+        juego.jugarCarta(jugador1,cartaMedico,Posicion.CUERPO_A_CUERPO);
+        cartaMedico.revivirCarta(jugador1,cartaUnidad1, Posicion.A_DISTANCIA, juego.getTablero());
+
+        // Assert
+        assertEquals(1, juego.cantidadCartasEnSeccion(jugador1, Posicion.A_DISTANCIA));
+        assertEquals(1, jugador1.getDescarte().getCantCartasEnPila()); //Aca deberia estar ahora el medico
     }
 }

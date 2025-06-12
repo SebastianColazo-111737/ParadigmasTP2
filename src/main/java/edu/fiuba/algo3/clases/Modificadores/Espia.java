@@ -12,7 +12,7 @@ public class Espia implements Modificador {
 
   }
 
-  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador Jugador) {
+  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador jugador) {
 
   }
 }
