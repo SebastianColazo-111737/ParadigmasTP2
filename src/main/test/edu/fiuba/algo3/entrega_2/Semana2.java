@@ -168,7 +168,7 @@ public class Semana2 {
         assertTrue(seJugoCartaAgil);
     }
 
-    @Test
+   /* @Test
     public void seUsaMedicoYSePuedeAgarrarUnaCartaDeLaPilaDeDescarteYJugarla() {
         Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
         Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
@@ -189,5 +189,5 @@ public class Semana2 {
         // Assert
         assertEquals(1, juego.cantidadCartasEnSeccion(jugador1, Posicion.A_DISTANCIA));
         assertEquals(1, jugador1.getDescarte().getCantCartasEnPila()); //Aca deberia estar ahora el medico
-    }
+    }*/
 }

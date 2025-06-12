@@ -17,15 +17,19 @@ public class Unidad implements Carta {
   }
 
   public Boolean jugar(Tablero tablero, Jugador jugador, Posicion posicion) {
-    modificador.aplicarEfectoNato(this, posicion);
+    if(this.modificador !=null){
+      modificador.aplicarEfectoNato(this, posicion);
+    }
 
     if (!tablero.colocarUnidad(this, jugador, posicion)) {
       System.out.println("No se pudo colocar la carta");
       return false;
     }
 
-    this.modificador.aplicarEfectoEnTablero(this, tablero, jugador);
-    System.out.println("Se aplico modificador");
+    if(this.modificador !=null){
+      this.modificador.aplicarEfectoEnTablero(this, tablero, jugador);
+      System.out.println("Se aplico modificador");
+    }
     return true;
   }
 

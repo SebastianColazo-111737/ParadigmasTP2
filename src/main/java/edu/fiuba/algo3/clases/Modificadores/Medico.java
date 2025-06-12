@@ -3,6 +3,7 @@ package edu.fiuba.algo3.clases.Modificadores;
 
 import edu.fiuba.algo3.clases.*;
 
+/*
 public class Medico implements Modificador {
   private Carta cartaARevivir;
 
@@ -27,4 +28,4 @@ public class Medico implements Modificador {
     }
     tablero.colocarUnidad(jugador, cartaARevivir, Posicion.A_DISTANCIA);
   }
-}
+}*/
