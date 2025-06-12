@@ -216,22 +216,6 @@ public class JugadorTest {
     // Assert
     assertEquals(1, primeraCartaJugador2.getPuntosModificados());
   }
-
-  @Test
-  public void cartaAgilSeColocaEnPosicionDeseada() {
-    // Arrange
-    Jugador jugador1 = new Jugador("jugador1", new Mazo(this.cartasMock1));
-    Jugador jugador2 = new Jugador("jugador2", new Mazo(this.cartasMock2));
-    Tablero tablero = new Tablero(jugador1, jugador2);
-    Unidad cartaAgil = new Unidad("hechizero", 10, Posicion.A_DISTANCIA, new Agil());
-    Boolean seJugoCartaAgil = false;
-
-    // Act
-    seJugoCartaAgil = jugador1.jugarCarta(cartaAgil, tablero, Posicion.CUERPO_A_CUERPO);
-
-    // Assert
-    assertTrue(seJugoCartaAgil);
-  }
 }
 
 

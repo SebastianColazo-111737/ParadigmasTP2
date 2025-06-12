@@ -1,11 +1,14 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.clases.Modificadores.Agil;
 import javafx.geometry.Pos;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.assertEquals;
 
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
@@ -147,6 +150,22 @@ public class Semana2 {
         // Assert
         assertEquals(2, jugador2.getDescarte().getCantCartasEnPila()); //2 cartas en descarte: cartaUnidad1 + cartaTierraArrasada
         assertEquals(0, juego.cantidadCartasEnSeccion(jugador2, Posicion.CUERPO_A_CUERPO));
+    }
+
+    @Test
+    public void cartaAgilSeColocaEnPosicionDeseada() {
+        // Arrange
+        Jugador jugador1 = new Jugador("jugador1", new Mazo(this.cartasMock1));
+        Jugador jugador2 = new Jugador("jugador2", new Mazo(this.cartasMock2));
+        Tablero tablero = new Tablero(jugador1, jugador2);
+        Unidad cartaAgil = new Unidad("hechizero", 10, Posicion.A_DISTANCIA, new Agil());
+        Boolean seJugoCartaAgil = false;
+
+        // Act
+        seJugoCartaAgil = jugador1.jugarCarta(cartaAgil, tablero, Posicion.CUERPO_A_CUERPO);
+
+        // Assert
+        assertTrue(seJugoCartaAgil);
     }
 
     @Test
