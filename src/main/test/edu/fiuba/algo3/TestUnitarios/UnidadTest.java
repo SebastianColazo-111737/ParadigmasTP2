@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.TestUnitarios;
 
 import edu.fiuba.algo3.clases.Carta.Unidad;
-import edu.fiuba.algo3.clases.Posicion.Asedio;
-import edu.fiuba.algo3.clases.Posicion.IPosicion;
+import edu.fiuba.algo3.modelo.Posicion.IPosicion;
 import edu.fiuba.algo3.clases.Seccion.Seccion;
 import org.junit.jupiter.api.Test;
 

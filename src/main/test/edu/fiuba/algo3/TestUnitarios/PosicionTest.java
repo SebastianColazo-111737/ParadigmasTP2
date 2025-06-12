@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.TestUnitarios;
 
-import edu.fiuba.algo3.clases.Posicion.*;
+import edu.fiuba.algo3.modelo.Posicion.Asedio;
+import edu.fiuba.algo3.modelo.Posicion.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.Posicion.Distancia;
+import edu.fiuba.algo3.modelo.Posicion.IPosicion;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertFalse;

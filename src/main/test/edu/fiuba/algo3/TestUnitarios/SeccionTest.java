@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.TestUnitarios;
 
 
-import edu.fiuba.algo3.clases.Posicion.*;
 import edu.fiuba.algo3.clases.Carta.Unidad;
 import edu.fiuba.algo3.clases.Seccion.*;
 
+import edu.fiuba.algo3.modelo.Posicion.IPosicion;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 

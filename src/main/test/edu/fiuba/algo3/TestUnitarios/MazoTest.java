@@ -1,10 +1,11 @@
 package edu.fiuba.algo3.TestUnitarios;
 
-import edu.fiuba.algo3.clases.Mazo.*;
 import edu.fiuba.algo3.clases.Carta.ICarta;
 
 
-import edu.fiuba.algo3.clases.Mazo.Mazo;
+import edu.fiuba.algo3.modelo.Jugador.Mazo.Mazo;
+import edu.fiuba.algo3.modelo.Jugador.Mazo.MazoCantidadDeCartasPedidasInvalido;
+import edu.fiuba.algo3.modelo.Jugador.Mazo.MazoNoPuedeCambiarCartasVacio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

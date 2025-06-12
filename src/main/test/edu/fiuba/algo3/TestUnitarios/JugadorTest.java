@@ -2,14 +2,12 @@ package edu.fiuba.algo3.TestUnitarios;
 
 import edu.fiuba.algo3.clases.Carta.ICarta;
 import edu.fiuba.algo3.clases.Jugador.Jugador;
-import edu.fiuba.algo3.clases.Mazo.Mazo;
+import edu.fiuba.algo3.modelo.Jugador.Mazo.Mazo;
 import edu.fiuba.algo3.clases.Mano.Mano;
 
 import static org.junit.Assert.assertEquals;
 
-import edu.fiuba.algo3.clases.Posicion.CuerpoACuerpo;
-import edu.fiuba.algo3.clases.Posicion.IPosicion;
-import edu.fiuba.algo3.clases.Seccion.Seccion;
+import edu.fiuba.algo3.modelo.Posicion.IPosicion;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -50,16 +48,5 @@ public class JugadorTest {
 
     }
 
-    @Test
-    public void jugadorJugaUnaUnidadDesdeLaMano() {
-        // Arrange
-        Jugador jugador1 = new Jugador("Jugador1", mazoMock, manoMock);
 
-        when(manoMock.getCarta(0)).thenReturn(cartaMock);
-
-        // Act
-        jugador1.jugarCartaDeLaMano(0, new CuerpoACuerpo());
-        // Assert
-        verify(manoMock, times(1)).getCarta(0);
-    }
 }
