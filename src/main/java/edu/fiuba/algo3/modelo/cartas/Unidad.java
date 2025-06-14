@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.cartas;
 
+import edu.fiuba.algo3.modelo.Juego;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 public class Unidad implements ICarta {
@@ -13,7 +16,14 @@ public class Unidad implements ICarta {
         this.posicion = posicicon;
     }
 
-    public Boolean puedeColocarse(Posicion posiccion){
-        return posiccion.esCompatible(posiccion);
+
+    @Override
+    public void jugarEnJuego(Jugador jugador, Juego juego, Posicion posicionElegida) {
+        Atril atril = juego.getAtril(jugador);
+        atril.colocarUnidad(this, posicionElegida);
+    }
+
+    public int calcularPuntaje(){
+        return puntosBase;
     }
 }

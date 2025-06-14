@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modeloTest;
 
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.cartas.*;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,9 +32,9 @@ public class JuegoTest {
             cartasJ2.add(new Unidad("Catapulta", 8, new Asedio()));
         }
 
-        Jugador jugador1 = new Jugador("Jugador1");
-        Jugador jugador2 = new Jugador("Jugador2");
-        Juego juego = new Juego(jugador1, jugador2);
+        jugador1 = new Jugador("Jugador1");
+        jugador2 = new Jugador("Jugador2");
+        juego = new Juego(jugador1, jugador2);
     }
 
     @Test
@@ -59,9 +61,7 @@ public class JuegoTest {
     @Test
     public void unJugadorPuedeColocarUnaCartaDeUnidadEnUnaSeccionConLaPosicionElegida(){
 
-
         // Arrange
-
         List<ICarta> cartasDelMazoJugador1 = new ArrayList<>();
         ICarta cartaElegida =  new Unidad("Catapulta", 8, new Asedio());
         Posicion posicionElegida = new Asedio();
@@ -75,10 +75,32 @@ public class JuegoTest {
         juego.jugarCarta(jugador1, cartaElegida, posicionElegida);
 
         // Assert
-        assertFalse(jugador1.tieneCartaEnLaMano(cartaElegida));
+        assertFalse(jugador1.getCartasMano().contains(cartaElegida)); //el jugador ya no tiene la carta en la mano
 
-        Seccion seccionJ1 = jugador1.getAtril().getSeccion(posicionElegida);
-        assertTrue(seccionJ1.contieneLaCarta(cartaElegida));
+        Seccion seccionJ1 = juego.getAtril(jugador1).getSeccion(posicionElegida);
+        assertTrue(seccionJ1.getUnidadesColocadas().contains(cartaElegida)); // la Unidad ahora esta en la seccion
 
     }
+
+    @Test
+    public void unJugadortieneUnPuntajeParcialLuegoDeJugarUnaUnidad(){
+
+        // Arrange
+        List<ICarta> cartasDelMazoJugador1 = new ArrayList<>();
+        ICarta carta1 =  new Unidad("Catapulta", 8, new Asedio());
+        ICarta carta2 =  new Unidad("Guerrero", 4, new CuerpoACuerpo());
+        cartasDelMazoJugador1.add(carta1);
+        cartasDelMazoJugador1.add(carta2);
+        jugador1.agregarCartasAlMazo(cartasDelMazoJugador1);
+        jugador1.robarCartas(2);
+
+        // Act
+        juego.jugarCarta(jugador1, carta1, new Asedio());
+        juego.jugarCarta(jugador1, carta2, new CuerpoACuerpo());
+        int puntajeJugador = juego.calcularPuntaje(jugador1);
+        // Assert
+        assertEquals(12, puntajeJugador);
+
+    }
+
 }

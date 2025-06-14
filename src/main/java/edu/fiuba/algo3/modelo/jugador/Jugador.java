@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.jugador;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 
@@ -9,13 +9,13 @@ public class Jugador {
 
     private String nombre;
     private Mazo mazo;
+
     private List<ICarta> mano;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.mazo = new Mazo();
         this.mano = new ArrayList<>();
-
 
     }
 
@@ -25,7 +25,11 @@ public class Jugador {
 
     public void robarCartas(int cantidad){
         List<ICarta> entregadas = this.mazo.darCartas(cantidad);
-        mano.addAll(entregadas);
+        this.mano.addAll(entregadas);
+    }
+
+    public void removerCartaDeLaMano(ICarta carta){
+        this.mano.remove(carta);
     }
 
     public int getCantidadCartasMazo(){

@@ -1,8 +1,9 @@
-package edu.fiuba.algo3.modeloTest;
+package edu.fiuba.algo3.modeloTest.JugadorTest;
 
-import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.Unidad;
+import edu.fiuba.algo3.modelo.jugador.Mazo;
+import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ public class MazoTest {
         cartas = new ArrayList<>();
 
         for (int i = 0; i < 21; i++) {
-            cartas.add(new Unidad());
+            cartas.add(new Unidad("Unidad", 0, new CuerpoACuerpo()));
         }
     }
 
