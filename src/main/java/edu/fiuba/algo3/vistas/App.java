@@ -16,7 +16,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         Lienzo lienzo = new Lienzo();
-        Scene scene = new Scene(lienzo, 800, 600);
+        Scene scene = new Scene(lienzo, 1000, 800);
 
         stage.setTitle("Gwent-Paradigmas");
         stage.setScene(scene);
