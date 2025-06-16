@@ -4,6 +4,7 @@ import edu.fiuba.algo3.clases.Cartas.*;
 import edu.fiuba.algo3.clases.Modificadores.Agil;
 import edu.fiuba.algo3.clases.Modificadores.Espia;
 import edu.fiuba.algo3.clases.Modificadores.Medico;
+import edu.fiuba.algo3.clases.Modificadores.SumaBase;
 import edu.fiuba.algo3.clases.Tipos.*;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.assertEquals;
@@ -253,6 +254,35 @@ public class JugadorTest {
   }
 
   @Test
+  public void testSumaBase() {
+    // Arrange
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Juego juego = new Juego(jugador1, jugador2);
+
+    Unidad cartaSumaBase = new Unidad("CartaAsedioTest", 8, new Asedio(), new SumaBase());
+    Unidad carta1 = new Unidad("Catapulta", 8, new Asedio(), null);
+    Unidad carta2 = new Unidad("Catapulta", 8, new Asedio(), null);
+    Unidad carta3 = new Unidad("Catapulta", 8, new Asedio(), null);
+
+    ArrayList<Carta> mano1 = jugador1.getMano();
+    ArrayList<Carta> mano2 = jugador2.getMano();
+
+    mano1.add(cartaSumaBase);
+    mano1.add(carta1);
+    mano2.add(carta2);
+    mano2.add(carta3);
+
+    juego.jugar(jugador1, carta1, carta1.getTipo());
+    juego.jugar(jugador2, carta2, carta2.getTipo());
+    juego.jugar(jugador1, cartaSumaBase, cartaSumaBase.getTipo());
+    juego.jugar(jugador2, carta3, carta3.getTipo());
+
+    assertEquals(17, jugador1.getPuntajeEnSeccion(cartaSumaBase.getTipo()));
+
+  }
+
+  @Test
   public void testMedico() {
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
@@ -282,6 +312,57 @@ public class JugadorTest {
 
     juego.jugar(jugador1, medico, medico.getTipo());
     assertEquals(2, jugador1.getCantidadCartasEnSeccion(medico.getTipo()));
+
+  }
+
+  @Test
+  public void testUsarEspiaSeColocaEnLaSeccionDelEnemigo() {
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Juego juego = new Juego(jugador1, jugador2);
+
+    Unidad espia = new Unidad("EspiaTest", 1, new Asedio(), new Espia());
+    Unidad carta1 = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad carta2 = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+
+    ArrayList<Carta> mano1 = jugador1.getMano();
+    ArrayList<Carta> mano2 = jugador2.getMano();
+
+    mano1.add(espia);
+    mano1.add(carta1);
+    mano2.add(carta2);
+
+    juego.jugar(jugador1, carta1, carta1.getTipo());
+    juego.jugar(jugador2, carta2, carta2.getTipo());
+    juego.jugar(jugador1, espia, espia.getTipo());
+
+    assertEquals(2, jugador2.getCantidadCartasEnSeccion(espia.getTipo()));
+
+  }
+
+  @Test
+  public void testUsarEspiaTomaDosCartasDelMazo() {
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Juego juego = new Juego(jugador1, jugador2);
+
+    Unidad espia = new Unidad("EspiaTest", 1, new Asedio(), new Espia());
+    Unidad carta1 = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad carta2 = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+
+    ArrayList<Carta> mano1 = jugador1.getMano();
+    ArrayList<Carta> mano2 = jugador2.getMano();
+
+    int esperado = mano1.size() + 2;
+    mano1.add(espia);
+    mano1.add(carta1);
+    mano2.add(carta2);
+
+    juego.jugar(jugador1, carta1, carta1.getTipo());
+    juego.jugar(jugador2, carta2, carta2.getTipo());
+    juego.jugar(jugador1, espia, espia.getTipo());
+
+    assertEquals(esperado, mano1.size());
 
   }
 

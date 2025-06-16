@@ -19,6 +19,10 @@ public class Unidad implements Carta {
     this.modificador = modificador;
   }
 
+  public void agregarModificador(Modificador modificador) {
+    this.modificador = modificador;
+  }
+
   public Modificador getModificador() {
     return this.modificador;
   }
@@ -27,16 +31,20 @@ public class Unidad implements Carta {
     return this.esMismoTipo(carta) && this.nombre == carta.getName();
   }
 
-  public Boolean jugar(ArrayList<Seccion> secciones, Tipo tipo, Jugador jugadorSiguiente) {
-    Boolean seJugo = false;
-    for (Seccion seccion : secciones) {
-      if (seccion.compararCon(tipo)) {
-        seJugo = seccion.colocarUnidad(this);
+  public int jugar(ArrayList<Seccion> secciones, Tipo tipo, Jugador jugadorSiguiente) {
+    int seJugo = -1;
+    if (!(this.poseeModificador() && this.modificador.soyEspia())) {
+      for (Seccion seccion : secciones) {
+        if (seccion.compararCon(tipo) && seccion.colocarUnidad(this)) {
+          seJugo = 0;
+        }
       }
+    } else {
+      seJugo = 0;
     }
-    if (this.poseeModificador() && seJugo)
-      this.modificador.aplicar(this, secciones, jugadorSiguiente, tipo);
-    return true;
+    if (this.poseeModificador() && seJugo == 0)
+      return (this.modificador.aplicar(this, secciones, jugadorSiguiente, tipo));
+    return seJugo;
   }
 
   public boolean poseeModificador() {

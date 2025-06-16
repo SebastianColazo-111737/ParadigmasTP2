@@ -9,10 +9,18 @@ import edu.fiuba.algo3.clases.Tipos.Tipo;
 public class Espia extends Modificador {
   public Espia() {
     this.esLegendaria = false;
+    this.soyEspia = true;
   }
 
-  public ArrayList<Carta> aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
+  public boolean soyEspia() {
+    return this.soyEspia;
+  }
+
+  public int aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
       Tipo posicion) {
-    return null;
+
+    ArrayList<Unidad> seccionAsedioEnemiga = jugadorSiguiente.getUnidadesEnSeccion(posicion);
+    seccionAsedioEnemiga.add(cartaContexto);
+    return 2;
   }
 }

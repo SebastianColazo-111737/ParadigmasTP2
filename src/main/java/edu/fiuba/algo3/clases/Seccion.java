@@ -16,6 +16,7 @@ public class Seccion {
   }
 
   public Boolean colocarUnidad(Unidad unidad) {
+
     this.unidadesJugadas.add(unidad);
     return true;
   }
@@ -31,7 +32,7 @@ public class Seccion {
   public int obtenerPuntaje() {
     int total = 0;
     for (Unidad unidad : unidadesJugadas) {
-      total += unidad.obtenerPuntosBase();
+      total += unidad.getPuntosModificados();
     }
     return total;
   }

@@ -8,9 +8,14 @@ import edu.fiuba.algo3.clases.Tipos.Tipo;
 public class Legendaria extends Modificador {
   public Legendaria() {
     this.esLegendaria = true;
+    this.soyEspia = false;
   }
 
-  public ArrayList<Carta> aplicar(Unidad carta, ArrayList<Seccion> secciones, Jugador jugadorSiguiente, Tipo posicion) {
-    return null;
+  public boolean soyEspia() {
+    return this.soyEspia;
+  }
+
+  public int aplicar(Unidad carta, ArrayList<Seccion> secciones, Jugador jugadorSiguiente, Tipo posicion) {
+    return 0;
   }
 }

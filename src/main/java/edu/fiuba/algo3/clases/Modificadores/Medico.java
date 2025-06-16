@@ -12,13 +12,15 @@ public class Medico extends Modificador {
 
   public Medico() {
     this.esLegendaria = false;
+    this.soyEspia = false;
   }
 
-  public ArrayList<Carta> aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
+  public boolean soyEspia() {
+    return this.soyEspia;
+  }
+
+  public int aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
       Tipo posicion) {
-    if (this.cartaARevivir == null) {
-      return null;
-    }
     // idem
     for (Seccion seccion : secciones) {
       if (seccion.compararCon(this.cartaARevivirPos)) {
@@ -27,7 +29,7 @@ public class Medico extends Modificador {
       }
     }
 
-    return null;
+    return 0;
   }
 
   public void setCartaRevivir(Carta carta, Tipo posicion) {

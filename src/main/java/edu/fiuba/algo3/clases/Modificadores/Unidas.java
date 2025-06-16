@@ -10,9 +10,16 @@ public class Unidas extends Modificador {
 
   public Unidas() {
     this.esLegendaria = false;
+    this.soyEspia = false;
   }
 
-  public ArrayList<Carta> aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
+  @Override
+  public boolean soyEspia() {
+    return this.soyEspia;
+  }
+
+  @Override
+  public int aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
       Tipo posicion) {
     ArrayList<Unidad> cartasEnSeccion = null;
     // Para evitar esto es mejor crear una clase (?)
@@ -27,6 +34,6 @@ public class Unidas extends Modificador {
         carta.sumarPuntosModificados(cartaContexto.obtenerPuntosBase());
       }
     }
-    return null;
+    return 0;
   }
 }

@@ -84,11 +84,14 @@ public class Jugador {
     if (this.mano.indexOf(carta) == -1) {
       return false;
     }
-    Boolean seColoco = carta.jugar(this.secciones, posicion, jugadorSiguiente);
-    if (seColoco) {
+    int cantCartas = carta.jugar(this.secciones, posicion, jugadorSiguiente);
+    if (cantCartas >= 0) {
       this.mano.remove(this.mano.indexOf(carta));
+      for (int i = 0; i < cantCartas; i++) {
+        this.mano.add(this.mazo.tomarUltimaCarta());
+      }
     }
-    return seColoco;
+    return cantCartas >= 0;
   }
 
   // public Boolean jugarCartaEspecial(Especial carta, Tablero tablero,
