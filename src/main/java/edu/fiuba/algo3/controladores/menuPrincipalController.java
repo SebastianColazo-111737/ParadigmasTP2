@@ -13,6 +13,6 @@ public class menuPrincipalController {
 
     @FXML
     void click(ActionEvent event) {
-        lblmensaje.setText("Hola Mundo");
+        lblmensaje.setText("Se pasa a eligir nombre y mazo");
     }
 }
