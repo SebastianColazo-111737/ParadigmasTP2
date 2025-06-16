@@ -19,8 +19,8 @@ public class Unidad implements ICarta {
 
     @Override
     public void jugarEnJuego(Jugador jugador, Juego juego, Posicion posicionElegida) {
-        Atril atril = juego.getAtril(jugador);
-        atril.colocarUnidad(this, posicionElegida);
+//        Atril atril = juego.getAtril(jugador);
+//        atril.colocarUnidad(this, posicionElegida);
     }
 
     public int calcularPuntaje(){
