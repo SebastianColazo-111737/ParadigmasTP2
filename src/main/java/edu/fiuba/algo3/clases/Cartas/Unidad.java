@@ -17,7 +17,10 @@ public class Unidad implements Carta {
     this.puntosModificados = puntosBase;
     this.tipo = tipo;
     this.modificador = modificador;
+  }
 
+  public Modificador getModificador() {
+    return this.modificador;
   }
 
   public Boolean compararCon(Carta carta) {

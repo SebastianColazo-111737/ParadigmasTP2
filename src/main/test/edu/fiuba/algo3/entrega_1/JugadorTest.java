@@ -199,6 +199,33 @@ public class JugadorTest {
   }
 
   @Test
+  public void testAlLimpiarNoQuedanCartas() {
+    // Arrange
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Juego juego = new Juego(jugador1, jugador2);
+
+    Unidad primeraCatapulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad segundaCatapulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad terceraCataPulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+
+    ArrayList<Carta> mano1 = jugador1.getMano();
+    ArrayList<Carta> mano2 = jugador2.getMano();
+
+    mano1.add(primeraCatapulta);
+    mano1.add(terceraCataPulta);
+    mano2.add(segundaCatapulta);
+    // Act
+    juego.jugar(jugador1, primeraCatapulta, primeraCatapulta.getTipo());
+    juego.jugar(jugador2, segundaCatapulta, segundaCatapulta.getTipo());
+    juego.jugar(jugador1, terceraCataPulta, terceraCataPulta.getTipo());
+    juego.limpiarTablero();
+
+    // Assert
+    assertEquals(0, jugador1.getCantidadCartasEnSeccion(primeraCatapulta.getTipo()));
+  }
+
+  @Test
   public void testLaCartaVaAlDescarteAlLimpiarTablero() {
 
     // Arrange
@@ -222,6 +249,39 @@ public class JugadorTest {
     juego.limpiarTablero();
 
     assertEquals(1, jugador1.cantidadCartasEnDescarte());
+
+  }
+
+  @Test
+  public void testMedico() {
+    // Arrange
+    Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+    Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Juego juego = new Juego(jugador1, jugador2);
+
+    Unidad medico = new Unidad("Médico", 2, new Asedio(), new Medico());
+    Unidad carta1 = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad carta2 = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+
+    ArrayList<Carta> mano1 = jugador1.getMano();
+    ArrayList<Carta> mano2 = jugador2.getMano();
+
+    mano1.add(medico);
+    mano1.add(carta1);
+    mano2.add(carta2);
+
+    juego.jugar(jugador1, carta1, carta1.getTipo());
+    juego.jugar(jugador2, carta2, carta2.getTipo());
+
+    juego.limpiarTablero();
+
+    Carta revivir = jugador1.getDescarte().get(0);
+    Medico modificador = (Medico) medico.getModificador();
+
+    modificador.setCartaRevivir(revivir, revivir.getTipo());
+
+    juego.jugar(jugador1, medico, medico.getTipo());
+    assertEquals(2, jugador1.getCantidadCartasEnSeccion(medico.getTipo()));
 
   }
 
