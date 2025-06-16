@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.auxiliares;
 
+import edu.fiuba.algo3.clases.Cartas.*;
 import java.util.ArrayList;
-import edu.fiuba.algo3.clases.Carta;
-import edu.fiuba.algo3.clases.Unidad;
 
 import java.util.ArrayList;
 

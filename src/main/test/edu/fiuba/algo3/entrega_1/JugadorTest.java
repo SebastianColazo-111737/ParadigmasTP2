@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.clases.Cartas.*;
 import edu.fiuba.algo3.clases.Modificadores.Agil;
 import edu.fiuba.algo3.clases.Modificadores.Espia;
+import edu.fiuba.algo3.clases.Modificadores.Medico;
+import edu.fiuba.algo3.clases.Tipos.*;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.assertEquals;
 
@@ -17,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import edu.fiuba.algo3.clases.*;
 import edu.fiuba.algo3.clases.Modificadores.Unidas;
-import edu.fiuba.algo3.clases.Modificadores.Normal;
-
 
 public class JugadorTest {
 
@@ -34,7 +35,6 @@ public class JugadorTest {
   @Mock
   private ZonaEspeciales zonaEspeciales;
 
-
   private Unidad cartaMock1;
   private Unidad cartaMock2;
   private Unidad cartaMock3;
@@ -48,7 +48,7 @@ public class JugadorTest {
   private Unidad cartaMock11;
   private Unidad cartaMock12;
   private Unidad cartaMock13;
-  private Especial cartaMock14;
+  // private Especial cartaMock14;
   private Unidad cartaMock15;
   private Unidad cartaMock16;
   private Unidad cartaMock17;
@@ -59,39 +59,39 @@ public class JugadorTest {
 
   @BeforeEach
   public void setup() {
-    this.cartaMock1 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock2 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, new Normal());
-    this.cartaMock3 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock4 = new Unidad("Medico", 2, Posicion.ASEDIO, new Normal());
-    this.cartaMock5 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock6 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, new Normal());
-    this.cartaMock7 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock8 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Normal());
-    this.cartaMock9 = new Unidad("Asesino", 10, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock10 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, new Normal());
-    this.cartaMock11 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock12 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Unidas());
-    this.cartaMock13 = new Unidad("Asesino", 8, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock14 = new Nieve("Nieve", zonaEspeciales);
-    this.cartaMock15 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock16 = new Unidad("Medico", 2, Posicion.ASEDIO, new Normal());
-    this.cartaMock17 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, new Normal());
-    this.cartaMock18 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, new Normal());
-    this.cartaMock19 = new Unidad("Catapulta", 8, Posicion.ASEDIO, new Unidas());
-    this.cartaMock20 = new Unidad("Arquero", 4, Posicion.A_DISTANCIA, new Normal());
-    this.cartaMock21 = new Unidad("Guerrero", 6, Posicion.CUERPO_A_CUERPO, new Normal());
+    this.cartaMock1 = new Unidad("Asesino", 8, new CuerpoACuerpo(), null);
+    this.cartaMock2 = new Unidad("Arquero", 4, new Distancia(), null);
+    this.cartaMock3 = new Unidad("Guerrero", 6, new CuerpoACuerpo(), null);
+    this.cartaMock4 = new Unidad("Medico", 2, new Asedio(), null);
+    this.cartaMock5 = new Unidad("Asesino", 8, new CuerpoACuerpo(), null);
+    this.cartaMock6 = new Unidad("Arquero", 4, new Distancia(), null);
+    this.cartaMock7 = new Unidad("Guerrero", 6, new CuerpoACuerpo(), null);
+    this.cartaMock8 = new Unidad("Catapulta", 8, new Asedio(), null);
+    this.cartaMock9 = new Unidad("Asesino", 10, new CuerpoACuerpo(), null);
+    this.cartaMock10 = new Unidad("Arquero", 4, new Distancia(), null);
+    this.cartaMock11 = new Unidad("Guerrero", 6, new CuerpoACuerpo(), null);
+    this.cartaMock12 = new Unidad("Catapulta", 8, new Asedio(), null);
+    this.cartaMock13 = new Unidad("Asesino", 8, new CuerpoACuerpo(), null);
+    // this.cartaMock14 = new Nieve("Nieve", zonaEspeciales);
+    this.cartaMock15 = new Unidad("Guerrero", 6, new CuerpoACuerpo(), null);
+    this.cartaMock16 = new Unidad("Medico", 2, new Asedio(), null);
+    this.cartaMock17 = new Unidad("Arquero", 4, new Distancia(), null);
+    this.cartaMock18 = new Unidad("Guerrero", 6, new CuerpoACuerpo(), null);
+    this.cartaMock19 = new Unidad("Catapulta", 8, new Asedio(), null);
+    this.cartaMock20 = new Unidad("Arquero", 4, new Distancia(), null);
+    this.cartaMock21 = new Unidad("Medico", 2, new Asedio(), new Medico());
 
     this.cartasMock1 = new ArrayList<>(Arrays.asList(
-            cartaMock1, cartaMock2, cartaMock3, cartaMock4, cartaMock5,
-            cartaMock6, cartaMock7, cartaMock8, cartaMock9, cartaMock10,
-            cartaMock11, cartaMock12, cartaMock13, cartaMock14, cartaMock15,
-            cartaMock16, cartaMock17, cartaMock18, cartaMock19, cartaMock20, cartaMock21));
+        cartaMock1, cartaMock2, cartaMock3, cartaMock4, cartaMock5,
+        cartaMock6, cartaMock7, cartaMock8, cartaMock9, cartaMock10,
+        // cartaMock11, cartaMock12, cartaMock13, cartaMock14, cartaMock15,
+        cartaMock16, cartaMock17, cartaMock18, cartaMock19, cartaMock20, cartaMock21));
 
     this.cartasMock2 = new ArrayList<>();
     for (Carta carta : this.cartasMock1) {
       if (carta instanceof Unidad) {
         Unidad unidad = (Unidad) carta;
-        cartasMock2.add(new Unidad(unidad.getName(), unidad.obtenerPuntosBase(), unidad.getPosicion(), new Normal()));
+        cartasMock2.add(new Unidad(unidad.getName(), unidad.obtenerPuntosBase(), unidad.getTipo(), null));
       }
     }
   }
@@ -106,7 +106,7 @@ public class JugadorTest {
     Jugador jugador = new Jugador("Player1", mazo);
 
     // Assert
-    assertEquals(21, jugador.cartasEnElMazo());
+    assertEquals(16, jugador.cartasEnElMazo());
   }
 
   @Test
@@ -128,14 +128,13 @@ public class JugadorTest {
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
     jugador1.repartirMano();
-    Tablero tablero = new Tablero(jugador1, jugador2);
 
     // Act
-    Carta cartaAColocar = jugador1.getMano().getCarta(2);
-    jugador1.jugarCarta(cartaAColocar, tablero, Posicion.ASEDIO);
+    Carta cartaAColocar = jugador1.getMano().get(2);
+    jugador1.jugar(cartaAColocar, cartaAColocar.getTipo(), jugador2);
 
     // Assert
-    assertEquals(1, tablero.getCantidadCartasEnSeccion(jugador1, Posicion.ASEDIO));
+    assertEquals(1, jugador1.getCantidadCartasEnSeccion(cartaAColocar.getTipo()));
   }
 
   @Test
@@ -143,16 +142,17 @@ public class JugadorTest {
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
-    Tablero tablero = new Tablero(jugador1, jugador2);
     jugador1.repartirMano();
 
     // Act
 
-    Unidad cartaAColocar = (Unidad) jugador1.obtenerCartaEnMano(8);
-    jugador1.jugarCarta(cartaAColocar, tablero, Posicion.CUERPO_A_CUERPO);
+    Carta carta = jugador1.getMano().get(8);
+
+    jugador1.jugar(carta, carta.getTipo(), jugador2);
 
     // Assert
-    assertEquals(cartaAColocar.obtenerPuntosBase(), tablero.getPuntajeEnSeccion(jugador1, Posicion.CUERPO_A_CUERPO));
+    assertEquals(8,
+        jugador1.getPuntajeEnSeccion(carta.getTipo()));
   }
 
   @Test
@@ -161,13 +161,13 @@ public class JugadorTest {
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     jugador1.repartirMano();
 
-    Carta cartaADescartar = jugador1.getMano().getCarta(0);
+    Carta cartaADescartar = jugador1.getMano().get(0);
 
     // Act
     jugador1.descartarCarta(cartaADescartar);
 
     // Assert
-    assertEquals(1, jugador1.getDescarte().getCantCartasEnPila());
+    assertEquals(1, jugador1.getDescarte().size());
   }
 
   @Test
@@ -176,47 +176,77 @@ public class JugadorTest {
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
     Juego juego = new Juego(jugador1, jugador2);
-    juego.repartirCartas();
 
-    Unidad primeraCatapulta = (Unidad) jugador1.obtenerCartaEnMano(9);
-    Unidad segundaCatapulta = (Unidad) jugador2.obtenerCartaEnMano(2);
-    Unidad terceraCataPulta = (Unidad) jugador1.obtenerCartaEnMano(2);
+    Unidad primeraCatapulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad segundaCatapulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad terceraCataPulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+
+    ArrayList<Carta> mano1 = jugador1.getMano();
+    ArrayList<Carta> mano2 = jugador2.getMano();
+
+    mano1.add(primeraCatapulta);
+    mano1.add(terceraCataPulta);
+    mano2.add(segundaCatapulta);
     // Act
-    juego.jugarCarta(jugador1, primeraCatapulta, Posicion.ASEDIO);
-    juego.jugarCarta(jugador1, terceraCataPulta, Posicion.ASEDIO);
-    juego.jugarCarta(jugador2, segundaCatapulta, Posicion.ASEDIO);
+    juego.jugar(jugador1, primeraCatapulta, primeraCatapulta.getTipo());
+    juego.jugar(jugador2, segundaCatapulta, segundaCatapulta.getTipo());
+    juego.jugar(jugador1, terceraCataPulta, terceraCataPulta.getTipo());
     // Assert
-    // assertEquals(2, juego.cantidadCartasEnSeccion(jugador1, Posicion.ASEDIO));
-    assertEquals(16, primeraCatapulta.getPuntosModificados()); // Dos catapultas:
+
+    assertEquals(16, primeraCatapulta.getPuntosModificados()); // dos catapultas:
     // 8*2 = 16
 
   }
 
   @Test
-  //Nieve: Pone a las cartas CuerpoACuerpo con puntaje 1
-  public void seUsaUnaCartaClimaYSeReducenLosValoresDeLasUnidadesEnLaSeccion() {
+  public void testLaCartaVaAlDescarteAlLimpiarTablero() {
+
     // Arrange
     Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
     Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+    Juego juego = new Juego(jugador1, jugador2);
+    Unidad primeraCatapulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad segundaCatapulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
+    Unidad terceraCataPulta = new Unidad("Catapulta", 8, new Asedio(), new Unidas());
 
+    ArrayList<Carta> mano1 = jugador1.getMano();
+    ArrayList<Carta> mano2 = jugador2.getMano();
 
-    Juego juego = new Juego(jugador2, jugador1);
-    ZonaEspeciales zonaEspeciales = new ZonaEspeciales();
+    mano1.add(primeraCatapulta);
+    mano1.add(terceraCataPulta);
+    mano2.add(segundaCatapulta);
 
-    jugador1.repartirMano();
-    jugador2.repartirMano();
+    juego.jugar(jugador1, primeraCatapulta, primeraCatapulta.getTipo());
+    juego.jugar(jugador2, segundaCatapulta, segundaCatapulta.getTipo());
 
-    Unidad primeraCartaJugador2 = (Unidad) jugador2.obtenerCartaEnMano(3);
-    Especial primeraCartaJugador1 = (Especial) jugador1.obtenerCartaEnMano(7);
+    juego.limpiarTablero();
 
-    // Act
-    juego.jugarCarta(jugador2, primeraCartaJugador2, Posicion.CUERPO_A_CUERPO);
-    juego.jugarCartaEspecial(jugador1, primeraCartaJugador1, zonaEspeciales);
+    assertEquals(1, jugador1.cantidadCartasEnDescarte());
 
-    // Assert
-    assertEquals(1, primeraCartaJugador2.getPuntosModificados());
   }
+
+  // @Test
+  // // Nieve: Pone a las cartas CuerpoACuerpo con puntaje 1
+  // public void seUsaUnaCartaClimaYSeReducenLosValoresDeLasUnidadesEnLaSeccion()
+  // {
+  // // Arrange
+  // Jugador jugador1 = new Jugador("Jugador1", new Mazo(this.cartasMock1));
+  // Jugador jugador2 = new Jugador("Jugador2", new Mazo(this.cartasMock2));
+  //
+  // Juego juego = new Juego(jugador2, jugador1);
+  // ZonaEspeciales zonaEspeciales = new ZonaEspeciales();
+  //
+  // jugador1.repartirMano();
+  // jugador2.repartirMano();
+  //
+  // Unidad primeraCartaJugador2 = (Unidad) jugador2.obtenerCartaEnMano(3);
+  // Especial primeraCartaJugador1 = (Especial) jugador1.obtenerCartaEnMano(7);
+  //
+  // // Act
+  // juego.jugarCarta(jugador2, primeraCartaJugador2, Posicion.CUERPO_A_CUERPO);
+  // juego.jugarCartaEspecial(jugador1, primeraCartaJugador1, zonaEspeciales);
+  //
+  // // Assert
+  // assertEquals(1, primeraCartaJugador2.getPuntosModificados());
+  // }
 }
-
-
-

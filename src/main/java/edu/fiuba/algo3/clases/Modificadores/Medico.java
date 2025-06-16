@@ -1,31 +1,37 @@
 
 package edu.fiuba.algo3.clases.Modificadores;
 
+import edu.fiuba.algo3.clases.Cartas.*;
 import edu.fiuba.algo3.clases.*;
+import edu.fiuba.algo3.clases.Tipos.*;
+import java.util.ArrayList;
 
-/*
-public class Medico implements Modificador {
+public class Medico extends Modificador {
   private Carta cartaARevivir;
+  private Tipo cartaARevivirPos;
 
-  public Medico(Carta cartaARevivir) {
-    this.cartaARevivir = cartaARevivir;
-    //this.esLegendaria = false;
+  public Medico() {
+    this.esLegendaria = false;
   }
 
-  public void aplicarEfectoNato(Unidad unidad, Posicion nuevaPosicion){
-
-  }
-
-  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador jugador) {
-    if(!jugador.getDescarte().contiene(cartaARevivir)){
-      throw new IllegalArgumentException("La carta a revivir no está en la pila de descarte");
+  public ArrayList<Carta> aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
+      Tipo posicion) {
+    if (this.cartaARevivir == null) {
+      return null;
+    }
+    // idem
+    for (Seccion seccion : secciones) {
+      if (seccion.compararCon(this.cartaARevivirPos)) {
+        // Arreglar para que no se tenga que castear !!!!!!!!!!!!!!!!!!!!!!!!!
+        seccion.colocarUnidad((Unidad) this.cartaARevivir);
+      }
     }
 
-    jugador.getDescarte().quitarCarta(cartaARevivir);
-
-    if(!(cartaARevivir instanceof  Unidad)){
-      throw new UnsupportedOperationException("Solo se pueden revivir Unidades");
-    }
-    tablero.colocarUnidad(jugador, cartaARevivir, Posicion.A_DISTANCIA);
+    return null;
   }
-}*/
+
+  public void setCartaRevivir(Carta carta, Tipo posicion) {
+    this.cartaARevivir = carta;
+    this.cartaARevivirPos = posicion;
+  }
+}

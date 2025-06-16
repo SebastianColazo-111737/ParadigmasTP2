@@ -1,13 +1,12 @@
 package edu.fiuba.algo3.clases;
 
-public interface Modificador {
-  //protected boolean esLegendaria;
+import edu.fiuba.algo3.clases.Cartas.*;
+import java.util.ArrayList;
+import edu.fiuba.algo3.clases.Tipos.Tipo;
 
-  //public Boolean esLegendaria() {
-  //  return this.esLegendaria;
-  //}
+public abstract class Modificador {
+  protected boolean esLegendaria;
 
-  // Tal vez deba cambiar el nombre, por los parametros, no todas usaran posicion
-  public void aplicarEfectoNato(Unidad unidad, Posicion nuevaPosicion);
-  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador jugador);
+  public abstract ArrayList<Carta> aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones,
+      Jugador jugadorSiguiente, Tipo posicion);
 }

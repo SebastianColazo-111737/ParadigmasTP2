@@ -1,17 +1,16 @@
 package edu.fiuba.algo3.clases.Modificadores;
 
+import edu.fiuba.algo3.clases.Cartas.*;
 import edu.fiuba.algo3.clases.*;
+import java.util.ArrayList;
+import edu.fiuba.algo3.clases.Tipos.Tipo;
 
-public class Legendaria implements Modificador {
-  //public Legendaria() {
-  //  this.esLegendaria = true;
-  //}
-
-  public void aplicarEfectoNato(Unidad unidad, Posicion nuevaPosicion){
-
+public class Legendaria extends Modificador {
+  public Legendaria() {
+    this.esLegendaria = true;
   }
 
-  public void aplicarEfectoEnTablero(Carta carta, Tablero tablero, Jugador jugador) {
-
+  public ArrayList<Carta> aplicar(Unidad carta, ArrayList<Seccion> secciones, Jugador jugadorSiguiente, Tipo posicion) {
+    return null;
   }
 }

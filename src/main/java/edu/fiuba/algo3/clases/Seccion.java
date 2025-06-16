@@ -1,34 +1,27 @@
 package edu.fiuba.algo3.clases;
 
+import edu.fiuba.algo3.clases.Cartas.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import edu.fiuba.algo3.clases.Tipos.*;
 
 public class Seccion {
   private ArrayList<Unidad> unidadesJugadas;
-  private Jugador jugador;
-  private Posicion tipo;
+  private Tipo tipo;
 
-  public Seccion(Posicion posicion) {
+  public Seccion(Tipo posicion) {
     this.unidadesJugadas = new ArrayList<>();
     this.tipo = posicion;
   }
 
-  public Jugador getJugador() {
-    return this.jugador;
-  }
-
   public Boolean colocarUnidad(Unidad unidad) {
-    if (unidad.getPosicion() != this.tipo) {
-      return false;
-    }
     this.unidadesJugadas.add(unidad);
     return true;
   }
 
   public int getCantUnidades() {
-    return unidadesJugadas.size();
+    return this.unidadesJugadas.size();
   }
 
   public ArrayList<Unidad> getUnidadesSeccion() {
@@ -43,27 +36,41 @@ public class Seccion {
     return total;
   }
 
-  public void aplicarEfectoNieve(){
-    for(Unidad unidad : this.unidadesJugadas){
-      unidad.modificarPuntos(1);
-    }
+  public ArrayList<Carta> limpiar() {
+    ArrayList<Carta> copia = new ArrayList<>(this.unidadesJugadas);
+    this.unidadesJugadas.clear();
+    return copia;
   }
 
-  public void desactivarEfectoNieve(){
-    for(Unidad unidad : this.unidadesJugadas){
+  public Boolean compararCon(Tipo tipo) {
+    return this.tipo.esIgual(tipo);
+  }
+
+  // public void aplicarEfectoNieve() {
+  // for (Unidad unidad : this.unidadesJugadas) {
+  // unidad.modificarPuntos(1);
+  // }
+  // }
+
+  public Tipo getTipo() {
+    return this.tipo;
+  }
+
+  public void desactivarEfectoNieve() {
+    for (Unidad unidad : this.unidadesJugadas) {
       unidad.reiniciarPuntos();
     }
   }
 
-  public void aplicarEfectoTierraArrasada(Jugador jugador){
+  public void aplicarEfectoTierraArrasada(Jugador jugador) {
     int maxPuntos = this.unidadesJugadas.stream()
-            .mapToInt(Unidad::getPuntosModificados)
-            .max()
-            .orElse(0);
+        .mapToInt(Unidad::getPuntosModificados)
+        .max()
+        .orElse(0);
 
     List<Unidad> aEliminar = this.unidadesJugadas.stream()
-            .filter(u -> u.getPuntosModificados() == maxPuntos)
-            .collect(Collectors.toList());
+        .filter(u -> u.getPuntosModificados() == maxPuntos)
+        .collect(Collectors.toList());
 
     for (Unidad unidad : aEliminar) {
       this.unidadesJugadas.remove(unidad);

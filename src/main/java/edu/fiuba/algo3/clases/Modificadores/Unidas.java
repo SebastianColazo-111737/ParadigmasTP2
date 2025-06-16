@@ -1,26 +1,32 @@
 
 package edu.fiuba.algo3.clases.Modificadores;
 
+import edu.fiuba.algo3.clases.Cartas.*;
 import java.util.ArrayList;
-
+import edu.fiuba.algo3.clases.Tipos.Tipo;
 import edu.fiuba.algo3.clases.*;
 
-public class Unidas implements Modificador {
-  //public Unidas() {
-  //  this.esLegendaria = false;
-  //}
+public class Unidas extends Modificador {
 
-  public void aplicarEfectoNato(Unidad unidad, Posicion nuevaPosicion){
-
+  public Unidas() {
+    this.esLegendaria = false;
   }
 
-  public void aplicarEfectoEnTablero(Carta cartaContexto, Tablero tablero, Jugador jugador) {
-    ArrayList<Unidad> cartasEnSeccion = tablero.getUnidadesEnSeccion(cartaContexto.getPosicion(), jugador);
-
-    for (Unidad carta : cartasEnSeccion) {
-      if (carta.getName() == cartaContexto.getName()) {
-        carta.sumarPuntosModificados(carta.obtenerPuntosBase());
+  public ArrayList<Carta> aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
+      Tipo posicion) {
+    ArrayList<Unidad> cartasEnSeccion = null;
+    // Para evitar esto es mejor crear una clase (?)
+    for (Seccion seccion : secciones) {
+      if (seccion.compararCon(posicion)) {
+        cartasEnSeccion = seccion.getUnidadesSeccion();
       }
     }
+
+    for (Unidad carta : cartasEnSeccion) {
+      if (carta.compararCon(cartaContexto) && !carta.equals(cartaContexto)) {
+        carta.sumarPuntosModificados(cartaContexto.obtenerPuntosBase());
+      }
+    }
+    return null;
   }
 }
