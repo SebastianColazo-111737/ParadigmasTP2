@@ -46,31 +46,34 @@ public class Jugador {
     this.mano.addAll(cartasRobadas);
   }
 
-  public Boolean cartaExisteEnMazo(Carta carta) {
-    return this.mano.indexOf(carta) != -1 ? true : false;
+  public Boolean cartaExisteEnMano(Carta carta) {
+    return this.mano.indexOf(carta) != -1;
   }
 
   public ArrayList<Unidad> getUnidadesEnSeccion(Tipo tipo) {
-    for (Seccion seccion : this.secciones)
-      if (seccion.compararCon(tipo))
-        return seccion.getUnidadesSeccion();
-    return null;
+    Seccion s = this.buscarSeccion(tipo);
+    return s != null ? s.getUnidadesSeccion() : null;
   }
 
   public int getPuntajeEnSeccion(Tipo tipo) {
+    Seccion s = this.buscarSeccion(tipo);
+    return s != null ? s.obtenerPuntaje() : 0;
+  }
+
+  public Seccion buscarSeccion(Tipo tipo) {
+    ArrayList<Tipo> tipos = new ArrayList<>();
+    tipos.add(tipo);
+
     for (Seccion seccion : this.secciones)
-      if (seccion.compararCon(tipo))
-        return seccion.obtenerPuntaje();
-    return 0;
+      if (seccion.compararCon(tipos)) {
+        return seccion;
+      }
+    return null;
   }
 
   public int getCantidadCartasEnSeccion(Tipo tipo) {
-    for (Seccion seccion : this.secciones)
-      if (seccion.compararCon(tipo)) {
-        System.out.println("Cantidad en seccion " + seccion.getCantUnidades() + " " + tipo.getClass());
-        return seccion.getCantUnidades();
-      }
-    return 0;
+    Seccion s = this.buscarSeccion(tipo);
+    return s != null ? s.getCantUnidades() : 0;
   }
 
   public void limpiarSecciones() {
@@ -81,11 +84,14 @@ public class Jugador {
   }
 
   public Boolean jugar(Carta carta, Tipo posicion, Jugador jugadorSiguiente) {
-    if (this.mano.indexOf(carta) == -1) {
+
+    if (!this.cartaExisteEnMano(carta)) {
       return false;
     }
-    int cantCartas = carta.jugar(this.secciones, posicion, jugadorSiguiente);
+
+    int cantCartas = carta.jugar(this.buscarSeccion(posicion), this, jugadorSiguiente);
     if (cantCartas >= 0) {
+
       this.mano.remove(this.mano.indexOf(carta));
       for (int i = 0; i < cantCartas; i++) {
         this.mano.add(this.mazo.tomarUltimaCarta());

@@ -7,16 +7,26 @@ import java.util.ArrayList;
 public class Unidad implements Carta {
   private String nombre;
   private int puntosBase;
-  private Tipo tipo;
+  private ArrayList<Tipo> tipo;
   private Modificador modificador;
   private int puntosModificados;
+  private Boolean esLegendaria;
 
-  public Unidad(String nombre, int puntosBase, Tipo tipo, Modificador modificador) {
+  public Unidad(String nombre, int puntosBase, ArrayList<Tipo> tipo, Modificador modificador, Boolean legendaria) {
     this.nombre = nombre;
     this.puntosBase = puntosBase;
     this.puntosModificados = puntosBase;
     this.tipo = tipo;
     this.modificador = modificador;
+    this.esLegendaria = legendaria;
+  }
+
+  public Boolean esAgil() {
+    return this.tipo.size() > 1;
+  }
+
+  public Boolean esLegendaria() {
+    return this.esLegendaria;
   }
 
   public void agregarModificador(Modificador modificador) {
@@ -31,19 +41,18 @@ public class Unidad implements Carta {
     return this.esMismoTipo(carta) && this.nombre == carta.getName();
   }
 
-  public int jugar(ArrayList<Seccion> secciones, Tipo tipo, Jugador jugadorSiguiente) {
+  public int jugar(Seccion seccion, Jugador jugadorActual, Jugador jugadorSiguiente) {
     int seJugo = -1;
+    System.out.println("Pasa por aca?" + seccion.getTipo());
     if (!(this.poseeModificador() && this.modificador.soyEspia())) {
-      for (Seccion seccion : secciones) {
-        if (seccion.compararCon(tipo) && seccion.colocarUnidad(this)) {
-          seJugo = 0;
-        }
+      if (seccion.compararCon(this.tipo) && seccion.colocarUnidad(this)) {
+        seJugo = 0;
       }
     } else {
       seJugo = 0;
     }
     if (this.poseeModificador() && seJugo == 0)
-      return (this.modificador.aplicar(this, secciones, jugadorSiguiente, tipo));
+      return (this.modificador.aplicar(this, seccion, jugadorActual, jugadorSiguiente));
     return seJugo;
   }
 
@@ -56,10 +65,16 @@ public class Unidad implements Carta {
   }
 
   public void sumarPuntosModificados(int puntos) {
+    if (this.esLegendaria) {
+      return;
+    }
     this.puntosModificados += puntos;
   }
 
   public void reiniciarPuntos() {
+    if (this.esLegendaria) {
+      return;
+    }
     this.puntosModificados = this.puntosBase;
   }
 
@@ -67,12 +82,15 @@ public class Unidad implements Carta {
     return this.puntosBase;
   }
 
-  public Tipo getTipo() {
+  public ArrayList<Tipo> getTipo() {
     return this.tipo;
   }
 
   public boolean esMismoTipo(Carta carta) {
-    return this.tipo.esIgual(carta.getTipo());
+    for (Tipo tipo : this.tipo) {
+      return tipo.esIgual(carta.getTipo());
+    }
+    return false;
   }
 
   public String getName() {

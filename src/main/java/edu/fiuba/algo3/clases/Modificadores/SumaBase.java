@@ -3,30 +3,21 @@ package edu.fiuba.algo3.clases.Modificadores;
 
 import edu.fiuba.algo3.clases.Cartas.*;
 import edu.fiuba.algo3.clases.*;
-import java.util.ArrayList;
-import edu.fiuba.algo3.clases.Tipos.Tipo;
 
 public class SumaBase extends Modificador {
   public SumaBase() {
-    this.esLegendaria = false;
     this.soyEspia = false;
   }
 
+  @Override
   public boolean soyEspia() {
     return this.soyEspia;
   }
 
-  public int aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
-      Tipo posicion) {
+  @Override
+  public int aplicar(Unidad cartaContexto, Seccion seccionContexto, Jugador jugadorActual, Jugador jugadorSiguiente) {
 
-    ArrayList<Unidad> cartas = null;
-    for (Seccion seccion : secciones) {
-      if (seccion.compararCon(posicion)) {
-        cartas = seccion.getUnidadesSeccion();
-      }
-    }
-
-    for (Unidad carta : cartas) {
+    for (Unidad carta : seccionContexto.getUnidadesSeccion()) {
       if (!carta.equals(cartaContexto))
         carta.sumarPuntosModificados(1);
     }

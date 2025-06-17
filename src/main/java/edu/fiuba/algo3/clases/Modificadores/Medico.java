@@ -4,31 +4,26 @@ package edu.fiuba.algo3.clases.Modificadores;
 import edu.fiuba.algo3.clases.Cartas.*;
 import edu.fiuba.algo3.clases.*;
 import edu.fiuba.algo3.clases.Tipos.*;
-import java.util.ArrayList;
 
 public class Medico extends Modificador {
   private Carta cartaARevivir;
   private Tipo cartaARevivirPos;
 
   public Medico() {
-    this.esLegendaria = false;
     this.soyEspia = false;
   }
 
+  @Override
   public boolean soyEspia() {
     return this.soyEspia;
   }
 
-  public int aplicar(Unidad cartaContexto, ArrayList<Seccion> secciones, Jugador jugadorSiguiente,
-      Tipo posicion) {
-    // idem
-    for (Seccion seccion : secciones) {
-      if (seccion.compararCon(this.cartaARevivirPos)) {
-        // Arreglar para que no se tenga que castear !!!!!!!!!!!!!!!!!!!!!!!!!
-        seccion.colocarUnidad((Unidad) this.cartaARevivir);
-      }
-    }
+  @Override
+  public int aplicar(Unidad cartaContexto, Seccion seccionContexto, Jugador jugadorActual,
+      Jugador jugadorSiguiente) {
 
+    Seccion seccionPonerCarta = jugadorActual.buscarSeccion(this.cartaARevivirPos);
+    this.cartaARevivir.jugar(seccionPonerCarta, jugadorActual, jugadorSiguiente);
     return 0;
   }
 

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public interface Carta {
   String getName();
 
-  int jugar(ArrayList<Seccion> secciones, Tipo posicion, Jugador jugadorSiguiente);
+  int jugar(Seccion seccion, Jugador jugadorActual, Jugador jugadorSiguiente);
 
   Boolean compararCon(Carta carta);
 
-  Tipo getTipo();
+  ArrayList<Tipo> getTipo();
 }

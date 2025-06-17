@@ -43,7 +43,7 @@ public class Seccion {
     return copia;
   }
 
-  public Boolean compararCon(Tipo tipo) {
+  public Boolean compararCon(ArrayList<Tipo> tipo) {
     return this.tipo.esIgual(tipo);
   }
 

@@ -23,6 +23,7 @@ public class Juego {
   }
 
   public Boolean jugar(Jugador jugador, Carta carta, Tipo posicion) {
+
     if (jugador == getJugadorTurnoActual() && jugador.jugar(carta, posicion, this.getJugadorSiguienteTurno())) {
       this.adminTurnos.siguienteTurno();
       System.out.println(
