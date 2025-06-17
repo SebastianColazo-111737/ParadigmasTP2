@@ -15,7 +15,7 @@ public class VistaSeccion extends StackPane {
     public VistaSeccion(String nombre){
         VistaPuntos puntos = new VistaPuntos();
 
-        Rectangle seccion = new Rectangle(200,60);
+        Rectangle seccion = new Rectangle(240,70);
         seccion.setFill(Color.LIGHTGRAY);
         seccion.setStroke(Color.BLACK);
 

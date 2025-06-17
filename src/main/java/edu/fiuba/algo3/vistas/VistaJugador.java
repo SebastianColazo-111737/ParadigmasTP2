@@ -27,21 +27,31 @@ public class VistaJugador extends VBox {
         secciones.setAlignment(Pos.CENTER);
 
         VistaDescarte descarte = new VistaDescarte("Pila Descarte");
+        VistaMazo mazo = new VistaMazo("Mazo");
+        VistaMano vistaMano = new VistaMano();
+
+        HBox contenedorLateral = new HBox(40,descarte,mazo);
+        contenedorLateral.setAlignment(Pos.CENTER_RIGHT);
+
+        VBox contenedorManoyMazo = estaArriba
+                ? new VBox(10, contenedorLateral, vistaMano)
+                : new VBox(10, vistaMano, contenedorLateral);
 
         BorderPane contenedor = new BorderPane();
         contenedor.setCenter(secciones);
+
         //Ver como sacar estos if's, a lo mejor otra logica tipo duplicar VistaJugador o sino hacer VistaJugador1 y VistaJugador2
         if (estaArriba) {
-            contenedor.setTop(descarte);
-            BorderPane.setAlignment(descarte, Pos.TOP_RIGHT);
-            BorderPane.setMargin(descarte, new Insets(10, 10, 10, 10));
+            contenedor.setTop(contenedorManoyMazo);
+            BorderPane.setAlignment(contenedorManoyMazo, Pos.TOP_RIGHT);
         } else {
-            contenedor.setBottom(descarte);
-            BorderPane.setAlignment(descarte, Pos.BOTTOM_RIGHT);
-            BorderPane.setMargin(descarte, new Insets(10, 10, 10, 10));
+            contenedor.setBottom(contenedorManoyMazo);
+            BorderPane.setAlignment(contenedorManoyMazo, Pos.BOTTOM_RIGHT);
         }
 
         this.setAlignment(Pos.CENTER);
         this.getChildren().addAll(nombre, contenedor);
     }
 }
+
+

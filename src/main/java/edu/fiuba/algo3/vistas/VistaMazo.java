@@ -10,14 +10,17 @@ import javafx.scene.shape.Circle;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 
-public class VistaDescarte extends StackPane{
+public class VistaMazo extends StackPane{
 
-    public VistaDescarte(String nombre){
-        Rectangle fondo = new Rectangle(70,100);
-        fondo.setFill(Color.LIGHTGREEN);
+    public VistaMazo(String nombre){
+        Rectangle fondo = new Rectangle(70,120);
+        fondo.setFill(Color.LIGHTSTEELBLUE);
         fondo.setStroke(Color.BLACK);
 
         Label etiqueta = new Label(nombre);
         this.getChildren().addAll(fondo,etiqueta);
     }
 }
+
+
+
