@@ -1,7 +1,7 @@
-package edu.fiuba.algo3.modelo.jugador.atril;
+package edu.fiuba.algo3.modelo.Juego.Tablero;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.cartas.Unidad;
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 import java.util.ArrayList;

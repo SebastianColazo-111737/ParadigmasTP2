@@ -2,8 +2,9 @@ package edu.fiuba.algo3.modeloTest.Juego;
 
 import edu.fiuba.algo3.modelo.Juego.Juego;
 import edu.fiuba.algo3.modelo.cartas.*;
+import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.Juego.Tablero.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,8 +29,8 @@ public class JuegoTest {
         cartasJ2 = new ArrayList<>();
 
         for (int i = 0; i < 21; i++) {
-            cartasJ1.add(new Unidad("Catapulta", 8, new Asedio())); //algun metodos que cree el mazo?
-            cartasJ2.add(new Unidad("Catapulta", 8, new Asedio()));
+            cartasJ1.add(new UnidadBasica("Catapulta", 8, new Asedio())); //algun metodos que cree el mazo?
+            cartasJ2.add(new UnidadBasica("Catapulta", 8, new Asedio()));
         }
 
         jugador1 = new Jugador("Jugador1");
@@ -63,7 +64,7 @@ public class JuegoTest {
 
         // Arrange
         List<ICarta> cartasDelMazoJugador1 = new ArrayList<>();
-        ICarta cartaElegida =  new Unidad("Catapulta", 8, new Asedio());
+        ICarta cartaElegida =  new UnidadBasica("Catapulta", 8, new Asedio());
         Posicion posicionElegida = new Asedio();
         cartasDelMazoJugador1.add(cartaElegida);
 
@@ -87,8 +88,8 @@ public class JuegoTest {
 
         // Arrange
         List<ICarta> cartasDelMazoJugador1 = new ArrayList<>();
-        ICarta carta1 =  new Unidad("Catapulta", 8, new Asedio());
-        ICarta carta2 =  new Unidad("Guerrero", 4, new CuerpoACuerpo());
+        ICarta carta1 =  new UnidadBasica("Catapulta", 8, new Asedio());
+        ICarta carta2 =  new UnidadBasica("Guerrero", 4, new CuerpoACuerpo());
         cartasDelMazoJugador1.add(carta1);
         cartasDelMazoJugador1.add(carta2);
         jugador1.agregarCartasAlMazo(cartasDelMazoJugador1);

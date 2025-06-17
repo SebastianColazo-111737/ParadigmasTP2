@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.modelo.Juego;
 
+import edu.fiuba.algo3.modelo.Juego.Tablero.Atril;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.jugador.*;
-import edu.fiuba.algo3.modelo.jugador.atril.*;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class Juego {
@@ -20,7 +20,7 @@ public class Juego {
         this.atriles.put(jugador1, new Atril());
         this.atriles.put(jugador2, new Atril());
 
-        this.adminTurnos = new AdminTurnos(new ArrayList<>(this.atriles.keySet()));
+        this.adminTurnos = new AdminTurnos(List.of(jugador1,jugador2));
     }
 
     public void repartirCartasALosJugadores(){
@@ -39,6 +39,10 @@ public class Juego {
 
     // ACCIONES DEL USUARIO EN EL TURNO
 
+    public void cambiarCarta(Jugador jugador, ICarta carta){
+        jugador.cambiarCarta(carta);
+    }
+
     public void pasarTurno(Jugador jugador){
         if(!this.adminTurnos.esSuTurno(jugador)){
             throw new JuegoExepcionJugadorJuegaFueraDeSuTurno();
@@ -51,16 +55,15 @@ public class Juego {
             throw new JuegoExepcionJugadorJuegaFueraDeSuTurno();
         }
 
-        // if(! posiccionElegida.esCompatible(cartaElegida.getPosiccion)) tambien lanza exepcion
+        cartaElegida.jugarEnJuego(jugador, this, posiccionElegida); //le paso el juego y que la carta decida que hacer
 
         jugador.removerCartaDeLaMano(cartaElegida); //Supongo que en la app no podes jugar cartas que no estan ya en tu mano
-        cartaElegida.jugarEnJuego(jugador, this, posiccionElegida); //le paso el juego y que la carta decida que hacer
     }
 
     // ----------------------------------------------------------------------------
     public void proximoTurno(){
         this.adminTurnos.proximoTurno();
-        if(adminTurnos.terminoLaRonda()){
+        if(adminTurnos.ambosPasaronTurno()){
             // veo quien gano la ronda
             // registro la ronda
             // limpio los atriles --> las cartas van a sus pilas de descarte
@@ -70,7 +73,16 @@ public class Juego {
     }
 
     public boolean terminoLaRonda(){
-        return this.adminTurnos.terminoLaRonda();
+        return this.adminTurnos.ambosPasaronTurno();
+    }
+
+    public Jugador getOponente(Jugador jugador){
+        for (Jugador oponente : this.atriles.keySet()) {
+            if(jugador != oponente){
+                return oponente;
+            }
+        }
+        return null;
     }
 
     public Atril getAtril(Jugador jugador){

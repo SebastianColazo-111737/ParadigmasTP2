@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.AtrilTest;
 
-import edu.fiuba.algo3.modelo.cartas.Unidad;
-import edu.fiuba.algo3.modelo.jugador.atril.Atril;
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
+import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
+import edu.fiuba.algo3.modelo.Juego.Tablero.Atril;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
@@ -16,9 +17,9 @@ public class AtrilTest {
 
         // Arrange
         Atril atril = new Atril();
-        Unidad unidad1 = new Unidad("Guerrero", 5, new CuerpoACuerpo());
-        Unidad unidad2 = new Unidad("Arquero", 4, new Distancia());
-        Unidad unidad3 = new Unidad("Catapulta", 8, new Asedio());
+        Unidad unidad1 = new UnidadBasica("Guerrero", 5, new CuerpoACuerpo());
+        Unidad unidad2 = new UnidadBasica("Arquero", 4, new Distancia());
+        Unidad unidad3 = new UnidadBasica("Catapulta", 8, new Asedio());
         atril.colocarUnidad(unidad1, new CuerpoACuerpo());
         atril.colocarUnidad(unidad2, new Distancia());
         atril.colocarUnidad(unidad3, new Asedio());

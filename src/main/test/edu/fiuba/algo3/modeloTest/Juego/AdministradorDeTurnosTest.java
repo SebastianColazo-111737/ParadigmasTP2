@@ -106,12 +106,12 @@ public class AdministradorDeTurnosTest {
 
         // Act
         adminTurnos.jugadorPasaTurno(primerJugador);
-        boolean terminoPrimerIntento = adminTurnos.terminoLaRonda();
+        boolean terminoPrimerIntento = adminTurnos.ambosPasaronTurno();
 
         adminTurnos.proximoTurno();
         Jugador segundoJugador = adminTurnos.getJugadorActual();
         adminTurnos.jugadorPasaTurno(segundoJugador);
-        boolean terminoSegundoIntento = adminTurnos.terminoLaRonda();
+        boolean terminoSegundoIntento = adminTurnos.ambosPasaronTurno();
 
 
         // Assert
@@ -131,9 +131,9 @@ public class AdministradorDeTurnosTest {
         adminTurnos.jugadorPasaTurno(segundoJugador);
         // Act
 
-        boolean terminoPrimerIntento = adminTurnos.terminoLaRonda();
+        boolean terminoPrimerIntento = adminTurnos.ambosPasaronTurno();
         adminTurnos.reiniciarRonda();
-        boolean terminoSegundoIntento = adminTurnos.terminoLaRonda();
+        boolean terminoSegundoIntento = adminTurnos.ambosPasaronTurno();
 
         // Assert
         assertTrue(terminoPrimerIntento);

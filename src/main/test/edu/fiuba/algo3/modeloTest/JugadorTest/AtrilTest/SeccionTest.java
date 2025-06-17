@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.AtrilTest;
 
-import edu.fiuba.algo3.modelo.cartas.Unidad;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
+import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
+import edu.fiuba.algo3.modelo.Juego.Tablero.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.*;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ public class SeccionTest {
     public void unaSeccionPermiteAgregarUnaUnidadASusUnidadesColocadas(){
 
         // Arrange
-        Unidad unidad = new Unidad("Catapulta", 8, new Asedio());
+        Unidad unidad = new UnidadBasica("Catapulta", 8, new Asedio());
         Seccion seccion = new Seccion(new Asedio());
 
         // Act
@@ -73,8 +74,8 @@ public class SeccionTest {
     public void unaSeccionConUnidadesBasicasTieneUnPuntajeIgualALaSumaDeSusPuntajesBase(){
 
         // Arrange
-        Unidad unidad1 = new Unidad("Unidad1", 10, new CuerpoACuerpo());
-        Unidad unidad2 = new Unidad("Unidad2", 5, new CuerpoACuerpo());
+        Unidad unidad1 = new UnidadBasica("Unidad1", 10, new CuerpoACuerpo());
+        Unidad unidad2 = new UnidadBasica("Unidad2", 5, new CuerpoACuerpo());
         Seccion seccion = new Seccion(new CuerpoACuerpo());
 
         seccion.colocarUnidad(unidad1);

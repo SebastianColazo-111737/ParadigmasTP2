@@ -35,10 +35,10 @@ public class AdminTurnos {
     public void proximoTurno() {
         do {
             this.indiceActualJugador = (this.indiceActualJugador + 1) % 2;
-        } while (jugadorPasoTurno.get(this.indiceActualJugador) && !terminoLaRonda());
+        } while (jugadorPasoTurno.get(this.indiceActualJugador) && !ambosPasaronTurno());
     }
 
-    public boolean terminoLaRonda() {
+    public boolean ambosPasaronTurno() {
         return jugadorPasoTurno.get(0) && jugadorPasoTurno.get(1);
     }
 

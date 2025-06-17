@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest;
 
 import edu.fiuba.algo3.modelo.cartas.*;
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
+import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posiciones.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +23,7 @@ public class JugadorTest {
     void setUp() {
         cartas = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
-            cartas.add(new Unidad("Unidad", 0 , new CuerpoACuerpo()));
+            cartas.add(new UnidadBasica("Unidad", 0 , new CuerpoACuerpo()));
         }
 
         jugador = new Jugador("Jugador1");

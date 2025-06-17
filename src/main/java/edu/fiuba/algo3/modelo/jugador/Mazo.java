@@ -36,4 +36,10 @@ public class Mazo {
     public int getCantidadCartas(){
         return this.cartas.size();
     }
+
+    public ICarta cambiarCarta(ICarta carta){
+        ICarta cartaParaIntercambbiar = agarrarCartaAleatoria();
+        this.cartas.add(carta);
+        return cartaParaIntercambbiar;
+    }
 }

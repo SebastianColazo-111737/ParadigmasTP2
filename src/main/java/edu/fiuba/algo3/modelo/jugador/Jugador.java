@@ -32,6 +32,12 @@ public class Jugador {
         this.mano.remove(carta);
     }
 
+    public void cambiarCarta(ICarta carta){
+        removerCartaDeLaMano(carta);
+        this.mano.add(this.mazo.cambiarCarta(carta));
+    }
+
+
     public int getCantidadCartasMazo(){
         return this.mazo.getCantidadCartas();
     }
