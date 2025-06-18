@@ -5,8 +5,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
-import javafx.geometry.Insets;
-import javafx.scene.layout.*;
 import java.util.List;
 
 public class VistaJugador extends VBox {
@@ -28,7 +26,9 @@ public class VistaJugador extends VBox {
 
         VistaDescarte descarte = new VistaDescarte("Pila Descarte");
         VistaMazo mazo = new VistaMazo("Mazo");
-        VistaMano vistaMano = new VistaMano();
+        VistaMano vistaMano = new VistaMano(nombreCarta -> {
+            System.out.println("Se selecciono: " + nombreCarta);
+        });
 
         HBox contenedorLateral = new HBox(40,descarte,mazo);
         contenedorLateral.setAlignment(Pos.CENTER_RIGHT);
@@ -40,7 +40,6 @@ public class VistaJugador extends VBox {
         BorderPane contenedor = new BorderPane();
         contenedor.setCenter(secciones);
 
-        //Ver como sacar estos if's, a lo mejor otra logica tipo duplicar VistaJugador o sino hacer VistaJugador1 y VistaJugador2
         if (estaArriba) {
             contenedor.setTop(contenedorManoyMazo);
             BorderPane.setAlignment(contenedorManoyMazo, Pos.TOP_RIGHT);
