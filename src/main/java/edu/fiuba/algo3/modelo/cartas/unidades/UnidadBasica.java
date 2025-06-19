@@ -1,27 +1,20 @@
 package edu.fiuba.algo3.modelo.cartas.unidades;
 
-import edu.fiuba.algo3.modelo.Juego.Juego;
-import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.Juego.Tablero.Atril;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 
-public class UnidadBasica extends Unidad{
+public class UnidadBasica extends Unidad {
 
-    public UnidadBasica(String nombre, int puntosBase, Posicion posicicon){
-        super(nombre, puntosBase, posicicon);
+    public UnidadBasica(String nombre, Puntaje puntaje, Posicion posicion){
+        super(nombre,puntaje,posicion);
     }
 
     @Override
-    public int calcularPuntaje() {
-        return this.puntosBase;
-    }
-
-    @Override
-    public void jugarEnJuego(Jugador jugador, Juego juego, Posicion posicionElegida) {
-        if(!sePuedeColocar(posicionElegida)){
-            throw new RuntimeException();
+    public void jugarCarta(Jugador jugador, Seccion seccion) {
+        if(!jugador.lePertenece(seccion)){
+            throw new UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion("");
         }
-        Atril atril = juego.getAtril(jugador);
-        atril.colocarUnidad(this, posicionElegida);
+        seccion.colocarUnidad(this);
     }
 }

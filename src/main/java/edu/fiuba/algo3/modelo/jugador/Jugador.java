@@ -1,52 +1,51 @@
 package edu.fiuba.algo3.modelo.jugador;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.jugador.atril.Atril;
+import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
-
-    private String nombre;
     private Mazo mazo;
+    private Mano mano;
+    private Atril atril;
 
-    private List<ICarta> mano;
-
-    public Jugador(String nombre) {
-        this.nombre = nombre;
-        this.mazo = new Mazo();
-        this.mano = new ArrayList<>();
-
+    public Jugador(Mazo mazo, Mano mano, Atril atril) {
+        this.mazo = mazo;
+        this.mano = mano;
+        this.atril = atril;
     }
 
-    public void agregarCartasAlMazo(List<ICarta> cartas){
-        this.mazo.agregarCartas(cartas);
+    public void robarCartasDelMazo(int cantidad){
+        List<ICarta> cartasDelMazo = this.mazo.darCartas(cantidad);
+        this.mano.agregarCarta(cartasDelMazo);
     }
 
-    public void robarCartas(int cantidad){
-        List<ICarta> entregadas = this.mazo.darCartas(cantidad);
-        this.mano.addAll(entregadas);
+    public void cambiarCartaDeLaManoAlMazo(ICarta carta){
+        mano.removerCarta(carta);
+
+        ICarta cartaDelMazo = this.mazo.cambiarCarta(carta);
+        agregarCartaALaMano(cartaDelMazo);
     }
 
-    public void removerCartaDeLaMano(ICarta carta){
-        this.mano.remove(carta);
+    public void agregarCartaALaMano(ICarta carta){
+        this.mano.agregarCarta(carta);
     }
 
-    public void cambiarCarta(ICarta carta){
-        removerCartaDeLaMano(carta);
-        this.mano.add(this.mazo.cambiarCarta(carta));
+    public boolean lePertenece(Seccion seccion){
+        return this.atril.contiene(seccion);
     }
 
+    public void jugarCarta(ICarta carta, Seccion seccion){
+        mano.removerCarta(carta);
 
-    public int getCantidadCartasMazo(){
-        return this.mazo.getCantidadCartas();
-    }
+        try {
+            carta.jugarCarta(this, seccion);
+        }catch (Exception e){
+            mano.agregarCarta(carta);
+            throw e;
+        }
 
-    public List<ICarta> getCartasMano(){
-        return this.mano;
-    }
-
-    public int getCantidadCartasMano(){
-        return this.mano.size();
     }
 }
