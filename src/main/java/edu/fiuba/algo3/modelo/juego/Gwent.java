@@ -25,16 +25,31 @@ public class Gwent {
         }
     }
 
+    public Jugador getJugadorActual(){
+        return this.adminTurnos.getJugadorActual();
+    }
+
+    public void setJugadorActual(Jugador jugador){
+        this.adminTurnos.setJugadorActual(jugador);
+    }
+
     public void pasarTurno(){
         Jugador jugador = adminTurnos.getJugadorActual();
         adminTurnos.jugadorPasaTurno(jugador);
+        if(adminTurnos.todosPasaronTurno()){
+            //registro la ronda
+
+            // si no termino la partida --> inicio una nueva
+            // adminTurnos.reiniciarAdminTurnos();
+        }else{
+            adminTurnos.proximoTurno();
+        }
+
     }
 
     public void jugarCarta(ICarta carta, Seccion seccion){
         Jugador jugador = adminTurnos.getJugadorActual();
         jugador.jugarCarta(carta, seccion);
-
+        adminTurnos.proximoTurno();
     }
-
-
 }

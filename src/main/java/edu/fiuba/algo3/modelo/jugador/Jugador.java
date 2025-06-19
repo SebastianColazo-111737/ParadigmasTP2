@@ -48,4 +48,8 @@ public class Jugador {
         }
 
     }
+
+//    public int getPuntajeActual(){
+//        return atril.getPuntajeActual();
+//    }
 }

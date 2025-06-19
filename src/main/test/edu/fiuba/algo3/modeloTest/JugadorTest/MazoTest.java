@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modeloTest.JugadorTest;
 
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.cartas.unidades.Puntaje;
+import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.jugador.Mazo;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;

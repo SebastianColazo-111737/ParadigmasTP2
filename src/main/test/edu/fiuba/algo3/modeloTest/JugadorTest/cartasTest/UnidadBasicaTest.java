@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest;
 
-import edu.fiuba.algo3.modelo.cartas.unidades.Puntaje;
+import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion;
 import edu.fiuba.algo3.modelo.jugador.*;

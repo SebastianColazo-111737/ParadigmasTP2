@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modeloTest.JugadorTest.AtrilTest;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
-import edu.fiuba.algo3.modelo.cartas.unidades.Puntaje;
+import edu.fiuba.algo3.modelo.jugador.Puntaje;
 
 import edu.fiuba.algo3.modelo.jugador.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
 import edu.fiuba.algo3.modelo.posiciones.*;

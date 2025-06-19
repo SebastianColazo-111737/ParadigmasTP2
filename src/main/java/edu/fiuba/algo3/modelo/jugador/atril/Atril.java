@@ -2,19 +2,20 @@ package edu.fiuba.algo3.modelo.jugador.atril;
 
 
 
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.posiciones.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Atril {
     private List<Seccion> secciones;
-    private List<ICarta> descate;
+    private List<ICarta> descarte;
 
     public Atril(){
         this.secciones = new ArrayList<>();
-        this.descate = new ArrayList<>();
+        this.descarte = new ArrayList<>();
     }
 
     public void agregarSeccion(Seccion seccion){
@@ -25,21 +26,26 @@ public class Atril {
         return this.secciones;
     }
 
+    public List<ICarta> getDescarte(){
+        return this.descarte;
+    }
+
     public boolean contiene(Seccion seccion){
         return this.secciones.contains(seccion);
     }
-//    public int calcularPuntaje(){
-//        int total = 0;
-//        for(Seccion seccino: secciones){
-//            total += seccino.calcularPuntaje();
-//        }
-//        return total;
-//    }
 
-//    public void descartarCartas() {
-//        for (Seccion seccion : secciones) {
-//            List<ICarta> cartas = seccion.removerCartasJugadas();
-//            this.descate.addAll(cartas);
-//        }
-//    }
+    public int getPuntajeActual(){
+        int puntajeActual = 0;
+        for(Seccion seccino: secciones){
+            puntajeActual += seccino.getPuntajeActual();
+        }
+        return puntajeActual;
+    }
+
+    public void descartarCartas() {
+        for (Seccion seccion : secciones) {
+            List<Unidad> cartas = seccion.removerCartasJugadas();
+            this.descarte.addAll(cartas);
+        }
+    }
 }

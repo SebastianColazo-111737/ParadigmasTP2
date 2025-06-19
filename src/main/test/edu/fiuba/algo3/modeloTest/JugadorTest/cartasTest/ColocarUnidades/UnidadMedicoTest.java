@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest.ColocarUnidades;
 
 
-import edu.fiuba.algo3.modelo.cartas.unidades.Puntaje;
+import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
 
@@ -21,12 +21,17 @@ public class UnidadMedicoTest {
     private Mano mano;
     private Mazo mazo;
     private Atril atril;
+    private Seccion seccionCuerpoACuerpoJ1;
+    private Seccion seccionDistanciaJ1;
 
     @BeforeEach
     void setUp() {
         mano = new Mano();
         mazo = new Mazo();
+
         atril = new Atril();
+        seccionCuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
+        seccionDistanciaJ1 = new Seccion(new Distancia());
 
         jugador = new Jugador(mazo, mano, atril);
     }
@@ -35,8 +40,6 @@ public class UnidadMedicoTest {
     public void alJugarseUnMedicoSeColocanEnElJuegoElMedicoYLaUnidadSeteadaParaRevivir(){
 
         // Arrange
-        Seccion seccionCuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
-        Seccion seccionDistanciaJ1 = new Seccion(new Distancia());
         atril.agregarSeccion(seccionCuerpoACuerpoJ1);
         atril.agregarSeccion(seccionDistanciaJ1);
 
@@ -71,8 +74,6 @@ public class UnidadMedicoTest {
     public void alJugarseUnMedicoSinUnaCartaSeteadaParaRevivirSoloSeJuegaElMedico(){
 
         // Arrange
-        Seccion seccionCuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
-        Seccion seccionDistanciaJ1 = new Seccion(new Distancia());
         atril.agregarSeccion(seccionCuerpoACuerpoJ1);
         atril.agregarSeccion(seccionDistanciaJ1);
 
