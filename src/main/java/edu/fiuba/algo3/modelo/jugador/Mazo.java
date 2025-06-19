@@ -8,13 +8,24 @@ import java.util.Random;
 
 public class Mazo {
 
+    // PRUEBA PARA INTERFAZ DE USUARIO
+    private final String nombre;
+
+
     private List<ICarta> cartas;
     private Random random;
 
-    public Mazo(){
+    // PRUEBA PARA INTERFAZ DE USUARIO
+    public Mazo(String nombre) {
+        this.nombre = nombre;
         this.cartas = new ArrayList<>();
         this.random = new Random();
     }
+
+//    public Mazo(){
+//        this.cartas = new ArrayList<>();
+//        this.random = new Random();
+//    }
 
     public void agregarCartas(List<ICarta> cartas){
         this.cartas.addAll(cartas);
@@ -35,5 +46,11 @@ public class Mazo {
 
     public int getCantidadCartas(){
         return this.cartas.size();
+    }
+
+
+    // PRUEBA PARA INTERFAZ DE USUARIO
+    public String getNombre() {
+        return nombre;
     }
 }

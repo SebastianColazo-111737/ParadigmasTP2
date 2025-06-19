@@ -11,6 +11,12 @@ import java.util.List;
 
 public class Juego {
 
+    // PRUEBA PARA INTERFAZ DE USUARIO
+    private Jugador jugador1 = new Jugador();
+    private Jugador jugador2 = new Jugador();
+    private int turno = 1;
+
+
     private HashMap<Jugador, Atril> atriles;
     //private AdminTurnos adminTurnos;
     private Jugador jugadorActual;
@@ -94,5 +100,19 @@ public class Juego {
         //seccionElegida.agregarCarta(cartaElegida, jugadorActual);
         cartaElegida.jugarEnSeccion(seccionElegida);
         // Si no puede jugarse, el controlador debe tratar la excepcion
+    }
+
+
+    // PRUEBA PARA INTERFAZ USUARIO
+    public Jugador jugadorActual() {
+        return turno == 1 ? jugador1 : jugador2;
+    }
+
+    public void siguienteJugador() {
+        turno++;
+    }
+
+    public boolean juegoCompleto() {
+        return turno > 2;
     }
 }

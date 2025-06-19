@@ -8,16 +8,26 @@ import java.util.List;
 public class Jugador {
 
     private String nombre;
-    private List<Carta> mazo;
+
+    // PRUEBA PARA INTERFAZ USUARIO
+    private Mazo mazo;     //private List<Carta> mazo;
+
     private List<Carta> mano;
     private List<Carta> descarte;
 
-    public Jugador(String nombre) {
-        this.nombre = nombre;
-        this.mazo = new ArrayList<>();
-        this.mano = new ArrayList<>();
-        this.descarte = new ArrayList<>();
+
+    // PRUBA PARA INTERFAZ USUARIO
+    public Jugador(){
+
     }
+
+
+//    public Jugador(String nombre) {
+//        this.nombre = nombre;
+//        this.mazo = new ArrayList<>();
+//        this.mano = new ArrayList<>();
+//        this.descarte = new ArrayList<>();
+//    }
 
 //    public void agregarCartasAlMazo(List<ICarta> cartas){
 //        this.mazo.agregarCartas(cartas);
@@ -43,6 +53,24 @@ public class Jugador {
 //    public int getCantidadCartasMano(){
 //        return this.mano.size();
 //    }
+
+    // PRUEBA PARA INTERFAZ USUARIO
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setMazo(Mazo mazo) {
+        this.mazo = mazo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Mazo getMazo() {
+        return mazo;
+    }
+
     public List<Carta> getDescarte(){
         return descarte;
     }
