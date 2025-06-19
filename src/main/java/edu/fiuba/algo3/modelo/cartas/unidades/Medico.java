@@ -29,7 +29,8 @@ public class Medico extends Unidad{
         seccion.colocarUnidad(this);
 
         if(unidadParaRevivir != null){
-            //Necesito que el jugador la tenga en la mano para poder jugarla
+            // puedo agregar un metodo a jugador para que saque la carta de la pila de descarte
+            // y luego la juegue como jugador.revivirCarta(ICarta)
             jugador.agregarCartaALaMano(unidadParaRevivir);
             jugador.jugarCarta(unidadParaRevivir, seccionParaColocarUnidad);
         }
