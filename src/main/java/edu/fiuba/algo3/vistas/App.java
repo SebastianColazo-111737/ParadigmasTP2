@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.SystemInfo;
 import edu.fiuba.algo3.utilidades.Paths;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -17,8 +14,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        AnchorPane load = FXMLLoader.load(getClass().getResource(Paths.HOLA_MUNDO));
-        Scene scene = new Scene(load);
+        AnchorPane menu_principal = FXMLLoader.load(getClass().getResource(Paths.MENU_PRINCIPAL));
+        Scene scene = new Scene(menu_principal);
         stage.setScene(scene);
 //        var javaVersion = SystemInfo.javaVersion();
 //        var javafxVersion = SystemInfo.javafxVersion();

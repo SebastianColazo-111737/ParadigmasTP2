@@ -1,18 +1,17 @@
 package edu.fiuba.algo3.modeloTest.Juego;
 
-import edu.fiuba.algo3.modelo.Juego.Juego;
-import edu.fiuba.algo3.modelo.cartas.*;
+import edu.fiuba.algo3.modelo.cartas.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
-import edu.fiuba.algo3.modelo.posiciones.*;
-
-import org.junit.jupiter.api.BeforeEach;
+import edu.fiuba.algo3.modelo.jugador.Seccion;
+import edu.fiuba.algo3.modelo.modificadores.Modificador;
+import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JuegoTest {
 
@@ -58,29 +57,6 @@ public class JuegoTest {
 //
 //    }
 //
-//    @Test
-//    public void unJugadorPuedeColocarUnaCartaDeUnidadEnUnaSeccionConLaPosicionElegida(){
-//
-//        // Arrange
-//        List<ICarta> cartasDelMazoJugador1 = new ArrayList<>();
-//        ICarta cartaElegida =  new Unidad("Catapulta", 8, new Asedio());
-//        Posicion posicionElegida = new Asedio();
-//        cartasDelMazoJugador1.add(cartaElegida);
-//
-//        jugador1.agregarCartasAlMazo(cartasDelMazoJugador1);
-//        jugador1.robarCartas(1); //ahora la tiene en la mano
-//
-//
-//        // Act
-//        juego.jugarCarta(jugador1, cartaElegida, posicionElegida);
-//
-//        // Assert
-//        assertFalse(jugador1.getCartasMano().contains(cartaElegida)); //el jugador ya no tiene la carta en la mano
-//
-//        Seccion seccionJ1 = juego.getAtril(jugador1).getSeccion(posicionElegida);
-//        assertTrue(seccionJ1.getUnidadesColocadas().contains(cartaElegida)); // la Unidad ahora esta en la seccion
-//
-//    }
 //
 //    @Test
 //    public void unJugadortieneUnPuntajeParcialLuegoDeJugarUnaUnidad(){

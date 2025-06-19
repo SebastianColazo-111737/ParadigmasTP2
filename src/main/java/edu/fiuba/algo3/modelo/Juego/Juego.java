@@ -3,10 +3,8 @@ package edu.fiuba.algo3.modelo.Juego;
 import edu.fiuba.algo3.modelo.cartas.Carta;
 import edu.fiuba.algo3.modelo.jugador.*;
 import edu.fiuba.algo3.modelo.jugador.atril.*;
-import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,16 +81,18 @@ public class Juego {
 //    public int calcularPuntaje(Jugador jugador){
 //        return this.atriles.get(jugador).calcularPuntaje();
 //    }
-
-    public List<Carta> obtenerMano(){
-        return jugadorActual.getCartasMano();
-    }
+//
+//    public List<Carta> obtenerMano(){
+//        return jugadorActual.getCartasMano();
+//    }
 
     public List<Seccion> obtenerSecciones(){
         return secciones;
     }
 
     public void agregarCartaEnSeccion(Carta cartaElegida, Seccion seccionElegida){
-        seccionElegida.agregarCarta(cartaElegida, jugadorActual);
+        //seccionElegida.agregarCarta(cartaElegida, jugadorActual);
+        cartaElegida.jugarEnSeccion(seccionElegida);
+        // Si no puede jugarse, el controlador debe tratar la excepcion
     }
 }

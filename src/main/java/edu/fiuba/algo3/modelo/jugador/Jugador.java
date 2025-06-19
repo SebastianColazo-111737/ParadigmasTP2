@@ -8,15 +8,15 @@ import java.util.List;
 public class Jugador {
 
     private String nombre;
-    private Mazo mazo;
-
+    private List<Carta> mazo;
     private List<Carta> mano;
+    private List<Carta> descarte;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
-        this.mazo = new Mazo();
+        this.mazo = new ArrayList<>();
         this.mano = new ArrayList<>();
-
+        this.descarte = new ArrayList<>();
     }
 
 //    public void agregarCartasAlMazo(List<ICarta> cartas){
@@ -31,16 +31,23 @@ public class Jugador {
 //    public void removerCartaDeLaMano(ICarta carta){
 //        this.mano.remove(carta);
 //    }
-
-    public int getCantidadCartasMazo(){
-        return this.mazo.getCantidadCartas();
+//
+//    public int getCantidadCartasMazo(){
+//        return this.mazo.getCantidadCartas();
+//    }
+//
+//    public List<Carta> getCartasMano(){
+//        return this.mano;
+//    }
+//
+//    public int getCantidadCartasMano(){
+//        return this.mano.size();
+//    }
+    public List<Carta> getDescarte(){
+        return descarte;
     }
 
-    public List<Carta> getCartasMano(){
-        return this.mano;
-    }
-
-    public int getCantidadCartasMano(){
-        return this.mano.size();
+    public void enviarAlDescarte(Carta carta){
+        descarte.add(carta);
     }
 }

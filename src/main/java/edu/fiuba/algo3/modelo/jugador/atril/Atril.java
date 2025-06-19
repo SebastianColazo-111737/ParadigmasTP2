@@ -2,10 +2,8 @@ package edu.fiuba.algo3.modelo.jugador.atril;
 
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.cartas.Unidad;
-import edu.fiuba.algo3.modelo.posiciones.*;
+import edu.fiuba.algo3.modelo.jugador.Seccion;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Atril {
