@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.Individuales;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.layout.StackPane;

@@ -1,5 +1,6 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import java.util.function.Consumer;

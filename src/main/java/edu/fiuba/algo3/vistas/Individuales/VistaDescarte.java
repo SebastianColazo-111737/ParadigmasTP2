@@ -1,16 +1,16 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.Individuales;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class VistaMazo extends StackPane{
-    private static VistaMazo seleccionado = null;
+public class VistaDescarte extends StackPane{
+    private static VistaDescarte seleccionado = null;
     private Rectangle fondo;
 
-    public VistaMazo(String nombre){
-        fondo = new Rectangle(70,120);
+    public VistaDescarte(String nombre){
+        fondo = new Rectangle(70,100);
         fondo.setFill(Color.LIGHTSTEELBLUE);
         fondo.setStroke(Color.BLACK);
         fondo.setStrokeWidth(2);
@@ -37,6 +37,4 @@ public class VistaMazo extends StackPane{
         if(seleccionado != null) seleccionado.deseleccionar();
     }
 }
-
-
 

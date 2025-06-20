@@ -1,12 +1,10 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.layout.BorderPane;
-import org.w3c.dom.css.Rect;
-import javafx.scene.shape.Circle;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 

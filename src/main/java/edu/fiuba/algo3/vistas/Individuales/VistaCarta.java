@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.Individuales;
 
 import javafx.scene.control.Button;
 import java.util.function.Consumer;

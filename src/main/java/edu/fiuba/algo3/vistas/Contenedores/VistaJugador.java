@@ -1,5 +1,7 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
+import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
