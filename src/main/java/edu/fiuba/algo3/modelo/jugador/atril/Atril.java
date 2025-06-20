@@ -1,56 +1,51 @@
 package edu.fiuba.algo3.modelo.jugador.atril;
 
 
+
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.cartas.Unidad;
-import edu.fiuba.algo3.modelo.posiciones.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Atril {
     private List<Seccion> secciones;
-    private List<ICarta> descate; //puede o no estar aca
+    private List<ICarta> descarte;
 
     public Atril(){
         this.secciones = new ArrayList<>();
-        this.secciones.add(new Seccion(new CuerpoACuerpo()));
-        this.secciones.add(new Seccion(new Distancia()));
-        this.secciones.add(new Seccion(new Asedio()));
-
-        this.descate = new ArrayList<>();
+        this.descarte = new ArrayList<>();
     }
 
-    public void colocarUnidad(Unidad unidad, Posicion posicion){
-        Seccion seccion = getSeccion(posicion);
-        seccion.colocarUnidad(unidad);
+    public void agregarSeccion(Seccion seccion){
+        secciones.add(seccion);
     }
 
-    public Seccion getSeccion(Posicion posicion){
-        for(Seccion seccion: secciones){
-            if(seccion.puedeColocarse(posicion)){
-                return seccion;
-            }
-        }
-        return null; // deberia lanzar una exepcion o algo
+    public List<Seccion> getSecciones(){
+        return this.secciones;
     }
 
-    public int calcularPuntaje(){
-        int total = 0;
+    public List<ICarta> getDescarte(){
+        return this.descarte;
+    }
+
+    public boolean contiene(Seccion seccion){
+        return this.secciones.contains(seccion);
+    }
+
+    public int getPuntajeActual(){
+        int puntajeActual = 0;
         for(Seccion seccino: secciones){
-            total += seccino.calcularPuntaje();
+            puntajeActual += seccino.getPuntajeActual();
         }
-        return total;
+        return puntajeActual;
     }
 
     public void descartarCartas() {
         for (Seccion seccion : secciones) {
-            List<ICarta> cartas = seccion.removerCartasJugadas();
-            this.descate.addAll(cartas);
+            List<Unidad> cartas = seccion.removerCartasJugadas();
+            this.descarte.addAll(cartas);
         }
-    }
-
-    public List<ICarta> getDescarte(){
-        return this.descate;
     }
 }

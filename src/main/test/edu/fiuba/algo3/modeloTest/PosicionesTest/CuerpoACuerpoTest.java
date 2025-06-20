@@ -1,10 +1,10 @@
-package edu.fiuba.algo3.modeloTest.Posiciones;
+package edu.fiuba.algo3.modeloTest.PosicionesTest;
 
 import edu.fiuba.algo3.modelo.posiciones.*;
+
 import org.junit.jupiter.api.Test;
-
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CuerpoACuerpoTest {
 

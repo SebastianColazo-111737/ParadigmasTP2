@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.modelo.jugador;
 
-import edu.fiuba.algo3.modelo.cartas.ICarta;
 
+
+import edu.fiuba.algo3.modelo.cartas.ICarta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Mazo {
-
     private List<ICarta> cartas;
     private Random random;
 
@@ -16,7 +16,10 @@ public class Mazo {
         this.random = new Random();
     }
 
-    public void agregarCartas(List<ICarta> cartas){
+    public void agregarCarta(ICarta carta){
+        this.cartas.add(carta);
+    }
+    public void agregarCarta(List<ICarta> cartas){
         this.cartas.addAll(cartas);
     }
 
@@ -33,7 +36,14 @@ public class Mazo {
         return this.cartas.remove(indiceAleatorio);
     }
 
+    public ICarta cambiarCarta(ICarta carta){
+        ICarta cartaDelMazo = agarrarCartaAleatoria();
+        agregarCarta(carta);
+        return cartaDelMazo;
+    }
+
     public int getCantidadCartas(){
         return this.cartas.size();
     }
+
 }

@@ -1,8 +1,17 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest;
 
-import edu.fiuba.algo3.modelo.cartas.*;
+
+import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.posiciones.*;
+import edu.fiuba.algo3.modelo.jugador.Mano;
+import edu.fiuba.algo3.modelo.jugador.Mazo;
+import edu.fiuba.algo3.modelo.jugador.Puntaje;
+import edu.fiuba.algo3.modelo.jugador.atril.Atril;
+import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.posiciones.Asedio;
+import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,61 +19,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class JugadorTest {
 
-    private List<ICarta> cartas;
     private Jugador jugador;
+    private Mano mano;
+    private Mazo mazo;
+    private Atril atril;
+    private Seccion cuerpoACuerpoJ1;
+    private Seccion distanciaJ1;
+    private Seccion asedioJ1;
 
     @BeforeEach
     void setUp() {
-        cartas = new ArrayList<>();
-        for (int i = 0; i < 21; i++) {
-            cartas.add(new Unidad("Unidad", 0 , new CuerpoACuerpo()));
-        }
+        mano = new Mano();
+        mazo = new Mazo();
 
-        jugador = new Jugador("Jugador1");
+        atril = new Atril();
+        cuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
+        distanciaJ1 = new Seccion(new Distancia());
+        asedioJ1 = new Seccion(new Asedio());
+        atril.agregarSeccion(cuerpoACuerpoJ1);
+        atril.agregarSeccion(distanciaJ1);
+        atril.agregarSeccion(asedioJ1);
+
+        jugador = new Jugador(mazo, mano, atril);
     }
 
     @Test
-    public void unJugadorTieneCartasSuficientesEnSuMazoParaIniciarLaPartida(){
+    public void unJugadorPuedeRobarCartasDeSuMazoParaAgreagarlasASuMano(){
         // Arrange
-        jugador.agregarCartasAlMazo(cartas);
+        ICarta cartaParaAgregarAlMazo1 = new UnidadBasica("Unidad1", new Puntaje(5), new CuerpoACuerpo());
+        ICarta cartaParaAgregarAlMazo2 = new UnidadBasica("Unidad2", new Puntaje(4), new Asedio());
+        mazo.agregarCarta(cartaParaAgregarAlMazo1);
+        mazo.agregarCarta(cartaParaAgregarAlMazo2);
+        int cantidadDeCartasEnElMazoInicial = mazo.getCantidadCartas();
+        int cantidadDeCartasEnLaManoInicial = mano.getCantidadCartas();
         // Act
-        int cantidadDeCartas = jugador.getCantidadCartasMazo();
+       jugador.robarCartasDelMazo(2);
 
         // Assert
-        assertEquals(21, cantidadDeCartas);
-
+        assertEquals(2, cantidadDeCartasEnElMazoInicial);
+        assertEquals(0, cantidadDeCartasEnLaManoInicial);
+        assertEquals(0, mazo.getCantidadCartas());
+        assertEquals(2, mano.getCantidadCartas());
     }
 
     @Test
-    public void unJugadorSeCreaSinCartasEnElMazo(){
+    public void unJugadorPuedeCambiarUnaCartaDeSuManoPorOtraDeSuMazo(){
         // Arrange
-        // Act
-        int cantidadDeCartas = jugador.getCantidadCartasMazo();
+        ICarta cartaQueEmpiezaEnLaMano = new UnidadBasica("Unidad1", new Puntaje(5), new CuerpoACuerpo());
+        mano.agregarCarta(cartaQueEmpiezaEnLaMano);
 
-        // Assert
-        assertEquals(0, cantidadDeCartas);
+        ICarta cartaQueEmpiezaEnElMazo = new UnidadBasica("Unidad2", new Puntaje(4), new Asedio());
+        mazo.agregarCarta(cartaQueEmpiezaEnElMazo);
 
-    }
-
-    @Test
-    public void unJugadorPuedeSacarUnaCartaDeSuMano(){
-        // Arrange
-        jugador.agregarCartasAlMazo(cartas);
-        jugador.robarCartas(10); // pasa a tener 10 cartas en la mano
-        ICarta cartaParaRemover = jugador.getCartasMano().get(0);
+        int cantidadDeCartasEnElMazoInicial = mazo.getCantidadCartas();
+        int cantidadDeCartasEnLaManoInicial = mano.getCantidadCartas();
 
         // Act
-        int cantidadDeCartasInicial = jugador.getCantidadCartasMano();
-        jugador.removerCartaDeLaMano(cartaParaRemover);
-        int cantidadDeCartasFinal = jugador.getCantidadCartasMano();
+        jugador.cambiarCartaDeLaManoAlMazo(cartaQueEmpiezaEnLaMano);
 
         // Assert
-        assertEquals(10, cantidadDeCartasInicial);
-        assertEquals(9, cantidadDeCartasFinal);
 
+        assertEquals(cantidadDeCartasEnElMazoInicial, mazo.getCantidadCartas());
+        assertTrue(mano.getCartas().contains(cartaQueEmpiezaEnElMazo));
+        assertEquals(cantidadDeCartasEnLaManoInicial, mano.getCantidadCartas());
     }
 }

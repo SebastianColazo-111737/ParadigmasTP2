@@ -1,8 +1,8 @@
-package edu.fiuba.algo3.modeloTest.Juego;
+package edu.fiuba.algo3.modeloTest.JuegoTest;
 
 
-import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.Juego.AdminTurnos;
+import edu.fiuba.algo3.modelo.juego.AdminTurnos;
+import edu.fiuba.algo3.modelo.juego.AdminturnosTodosPasaronDeTurno;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,19 +13,17 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AdministradorDeTurnosTest {
 
-    private List<Jugador> jugadores;
-    private Jugador jugador1;
-    private Jugador jugador2;
+    private List<String> jugadores;
+    String jugador1 = "J1";
+    String jugador2 = "J2";
 
     @BeforeEach
     void setUp() {
         jugadores = new ArrayList<>();
-        jugador1 = new Jugador("J1");
-        jugador2 = new Jugador("J2");
-
         jugadores.add(jugador1);
         jugadores.add(jugador2);
     }
@@ -34,11 +32,11 @@ public class AdministradorDeTurnosTest {
     public void elAdminDeTurnosPermiteObtenerElJugadorActual(){
 
         // Arrange
-        AdminTurnos adminTurnos = new AdminTurnos(jugadores);
+        AdminTurnos<String> adminTurnos = new AdminTurnos(jugadores);
 
         // Act
         boolean esElTurnoDelJ1 = adminTurnos.esSuTurno(jugador1);
-        Jugador jugadorActual = adminTurnos.getJugadorActual();
+        String jugadorActual = adminTurnos.getJugadorActual();
 
         // Assert
         assertTrue(esElTurnoDelJ1);
@@ -49,11 +47,11 @@ public class AdministradorDeTurnosTest {
     public void elAdminDeTurnosPermiteSetearElJugadorActualDentroDeSusJugadores(){
 
         // Arrange
-        AdminTurnos adminTurnos = new AdminTurnos(jugadores);
+        AdminTurnos<String> adminTurnos = new AdminTurnos(jugadores);
         adminTurnos.setJugadorActual(jugador2);
         // Act
         boolean esElTurnoDelJ2 = adminTurnos.esSuTurno(jugador2);
-        Jugador jugadorActual = adminTurnos.getJugadorActual();
+        String jugadorActual = adminTurnos.getJugadorActual();
 
         // Assert
         assertTrue(esElTurnoDelJ2);
@@ -64,12 +62,12 @@ public class AdministradorDeTurnosTest {
     public void elAdminDeTurnosPermiteAvanzarAlProximoturnoCambiandoAlJugadorActual(){
 
         // Arrange
-        AdminTurnos adminTurnos = new AdminTurnos(jugadores);
-        Jugador primerJugador = adminTurnos.getJugadorActual();
+        AdminTurnos<String> adminTurnos = new AdminTurnos(jugadores);
+        String primerJugador = adminTurnos.getJugadorActual();
 
         // Act
         adminTurnos.proximoTurno();
-        Jugador segundoJugador = adminTurnos.getJugadorActual();
+        String segundoJugador = adminTurnos.getJugadorActual();
 
         // Assert
         assertNotEquals(primerJugador, segundoJugador);
@@ -79,16 +77,16 @@ public class AdministradorDeTurnosTest {
     public void elAdminDeTurnosPermiteQueUnJugadorPaseDeTurno(){
 
         // Arrange
-        AdminTurnos adminTurnos = new AdminTurnos(jugadores);
-        Jugador primerJugador = adminTurnos.getJugadorActual();
+        AdminTurnos<String> adminTurnos = new AdminTurnos(jugadores);
+        String primerJugador = adminTurnos.getJugadorActual();
 
         // Act
         adminTurnos.jugadorPasaTurno(primerJugador);
 
         adminTurnos.proximoTurno();
-        Jugador segundoJugador = adminTurnos.getJugadorActual();
+        String segundoJugador = adminTurnos.getJugadorActual();
         adminTurnos.proximoTurno();
-        Jugador tercerJugador = adminTurnos.getJugadorActual();
+        String tercerJugador = adminTurnos.getJugadorActual();
 
 
         // Assert
@@ -101,17 +99,17 @@ public class AdministradorDeTurnosTest {
     public void elAdminDeTurnosTerminaLaRondaCuandoAmbosJugadoresPasan(){
 
         // Arrange
-        AdminTurnos adminTurnos = new AdminTurnos(jugadores);
-        Jugador primerJugador = adminTurnos.getJugadorActual();
+        AdminTurnos<String> adminTurnos = new AdminTurnos(jugadores);
+        String primerJugador = adminTurnos.getJugadorActual();
 
         // Act
         adminTurnos.jugadorPasaTurno(primerJugador);
-        boolean terminoPrimerIntento = adminTurnos.terminoLaRonda();
+        boolean terminoPrimerIntento = adminTurnos.todosPasaronTurno();
 
         adminTurnos.proximoTurno();
-        Jugador segundoJugador = adminTurnos.getJugadorActual();
+        String segundoJugador = adminTurnos.getJugadorActual();
         adminTurnos.jugadorPasaTurno(segundoJugador);
-        boolean terminoSegundoIntento = adminTurnos.terminoLaRonda();
+        boolean terminoSegundoIntento = adminTurnos.todosPasaronTurno();
 
 
         // Assert
@@ -123,21 +121,43 @@ public class AdministradorDeTurnosTest {
     public void elAdminDeTurnosPermiteReiniciarLaRonda(){
 
         // Arrange
-        AdminTurnos adminTurnos = new AdminTurnos(jugadores);
-        Jugador primerJugador = adminTurnos.getJugadorActual();
+        AdminTurnos<String> adminTurnos = new AdminTurnos(jugadores);
+        String primerJugador = adminTurnos.getJugadorActual();
         adminTurnos.jugadorPasaTurno(primerJugador);
         adminTurnos.proximoTurno();
-        Jugador segundoJugador = adminTurnos.getJugadorActual();
+        String segundoJugador = adminTurnos.getJugadorActual();
         adminTurnos.jugadorPasaTurno(segundoJugador);
         // Act
 
-        boolean terminoPrimerIntento = adminTurnos.terminoLaRonda();
-        adminTurnos.reiniciarRonda();
-        boolean terminoSegundoIntento = adminTurnos.terminoLaRonda();
+        boolean terminoPrimerIntento = adminTurnos.todosPasaronTurno();
+        adminTurnos.reiniciarAdminTurnos();
+        boolean terminoSegundoIntento = adminTurnos.todosPasaronTurno();
 
         // Assert
         assertTrue(terminoPrimerIntento);
         assertFalse(terminoSegundoIntento);
+
+    }
+
+    @Test
+    public void devuelveExcepcionSiVasAlProximoTurnoCuandoTodosLosJugadoresPasaron(){
+
+        // Arrange
+        AdminTurnos<String> adminTurnos = new AdminTurnos(jugadores);
+
+        String primerJugador = adminTurnos.getJugadorActual();
+        adminTurnos.jugadorPasaTurno(primerJugador);
+
+        adminTurnos.proximoTurno();
+
+        String segundoJugador = adminTurnos.getJugadorActual();
+        adminTurnos.jugadorPasaTurno(segundoJugador);
+        // Act
+
+        // Assert
+        assertThrows(AdminturnosTodosPasaronDeTurno.class, () -> {
+            adminTurnos.proximoTurno();
+        });
 
     }
 }
