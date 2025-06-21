@@ -36,4 +36,8 @@ public class Medico extends Unidad{
             jugador.jugarCarta(unidadParaRevivir, seccionParaColocarUnidad);
         }
     }
+    public String nombre(){
+        return this.nombre;
+    }
+
 }

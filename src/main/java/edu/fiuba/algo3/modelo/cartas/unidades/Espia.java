@@ -19,4 +19,8 @@ public class Espia extends Unidad{
         seccion.colocarUnidad(this);
         jugador.robarCartasDelMazo(2);
     }
+    public String nombre(){
+        return this.nombre;
+    }
+
 }

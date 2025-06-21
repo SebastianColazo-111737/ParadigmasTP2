@@ -18,4 +18,8 @@ public class UnidadBasica extends Unidad {
         }
         seccion.colocarUnidad(this);
     }
+    public String nombre(){
+        return this.nombre;
+    }
+
 }
