@@ -17,4 +17,8 @@ public class General extends Unidad{
         }
         seccion.colocarUnidad(this);
     }
+
+    public String nombre(){
+        return this.nombre;
+    }
 }

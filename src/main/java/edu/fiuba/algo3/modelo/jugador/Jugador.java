@@ -49,6 +49,13 @@ public class Jugador {
 
     }
 
+    public Atril atril(){
+        return this.atril;
+    }
+    public Mano mano(){
+        return this.mano;
+    }
+
 //    public int getPuntajeActual(){
 //        return atril.getPuntajeActual();
 //    }

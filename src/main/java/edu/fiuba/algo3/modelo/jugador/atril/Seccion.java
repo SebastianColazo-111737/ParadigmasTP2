@@ -55,4 +55,8 @@ public class Seccion {
         }
         return descartadas;
     }
+
+    public Posicion getPosicion() {
+        return this.posicion;
+    }
 }

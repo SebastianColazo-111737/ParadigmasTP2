@@ -5,4 +5,5 @@ import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 
 public interface ICarta {
     void jugarCarta(Jugador jugador, Seccion seccion);
+    String nombre();
 }

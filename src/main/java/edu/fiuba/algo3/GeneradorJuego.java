@@ -1,46 +1,72 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.juego.Gwent;
-import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.Mano;
-import edu.fiuba.algo3.modelo.jugador.Mazo;
-import edu.fiuba.algo3.modelo.jugador.atril.Atril;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
-import edu.fiuba.algo3.modelo.posiciones.Asedio;
-import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
-import edu.fiuba.algo3.modelo.posiciones.Distancia;
+import java.util.List;
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.vistas.Lienzo;
 
-import java.util.List;
+import edu.fiuba.algo3.modelo.juego.Gwent;
+
+import edu.fiuba.algo3.modelo.jugador.Mano;
+import edu.fiuba.algo3.modelo.jugador.Mazo;
+import edu.fiuba.algo3.modelo.jugador.Puntaje;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.jugador.atril.Atril;
+import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+
+import edu.fiuba.algo3.modelo.posiciones.Asedio;
+import edu.fiuba.algo3.modelo.posiciones.Distancia;
+import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
+
+import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 
 
 public class GeneradorJuego {
 
-    public static Lienzo construirJuego(){
+    public static Lienzo construirJuego() {
+        // Crear cartas para ambos jugadores
+        List<ICarta> cartasJ1 = new ArrayList<>();
+        List<ICarta> cartasJ2 = new ArrayList<>();
 
-        Mano mano1 = new Mano();
-        Mano mano2 = new Mano();
+        for (int i = 0; i < 21; i++) {
+            cartasJ1.add(new UnidadBasica("Espadachin", new Puntaje(8), new CuerpoACuerpo()));
+            cartasJ2.add(new UnidadBasica("Arquero", new Puntaje(8), new Distancia()));
+        }
 
-        Mazo mazo1 = new Mazo();
-        Mazo mazo2 = new Mazo();
+        // Jugador 1
+        Mazo mazoJ1 = new Mazo();
+        mazoJ1.agregarCarta(cartasJ1);
+        Mano manoJ1 = new Mano();
 
-        Seccion cuerpo1 = new Seccion(new CuerpoACuerpo());
-        Seccion distancia1 = new Seccion(new Distancia());
-        Seccion asedio1 = new Seccion(new Asedio());
+        Seccion cuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
+        Seccion distanciaJ1 = new Seccion(new Distancia());
+        Seccion asedioJ1 = new Seccion(new Asedio());
+        Atril atrilJ1 = new Atril();
+        atrilJ1.agregarSeccion(cuerpoACuerpoJ1);
+        atrilJ1.agregarSeccion(distanciaJ1);
+        atrilJ1.agregarSeccion(asedioJ1);
 
-        Seccion cuerpo2 = new Seccion(new CuerpoACuerpo());
-        Seccion distancia2 = new Seccion(new Distancia());
-        Seccion asedio2 = new Seccion(new Asedio());
+        Jugador jugador1 = new Jugador(mazoJ1, manoJ1, atrilJ1);
 
+        // Jugador 2
+        Mazo mazoJ2 = new Mazo();
+        mazoJ2.agregarCarta(cartasJ2);
+        Mano manoJ2 = new Mano();
 
-        Atril atril1 = new Atril();
-        Atril atril2 = new Atril();
+        Seccion cuerpoACuerpoJ2 = new Seccion(new CuerpoACuerpo());
+        Seccion distanciaJ2 = new Seccion(new Distancia());
+        Seccion asedioJ2 = new Seccion(new Asedio());
+        Atril atrilJ2 = new Atril();
+        atrilJ2.agregarSeccion(cuerpoACuerpoJ2);
+        atrilJ2.agregarSeccion(distanciaJ2);
+        atrilJ2.agregarSeccion(asedioJ2);
 
-        Jugador jugador1 = new Jugador(mazo1, mano1, atril1);
-        Jugador jugador2 = new Jugador(mazo2, mano2, atril2);
+        Jugador jugador2 = new Jugador(mazoJ2, manoJ2, atrilJ2);
 
-        Gwent gwent = new Gwent(jugador1,jugador2);
+        // Inicializar juego
+        Gwent juego = new Gwent(jugador1, jugador2);
 
-        return new Lienzo(jugador1,jugador2);
+        return new Lienzo(jugador1, jugador2);
     }
 }
