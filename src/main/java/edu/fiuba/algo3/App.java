@@ -1,10 +1,8 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.SystemInfo;
+import edu.fiuba.algo3.vistas.Lienzo;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -15,7 +13,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        Lienzo lienzo = new Lienzo();
+        Lienzo lienzo = GeneradorJuego.construirJuego();
         Scene scene = new Scene(lienzo, 1000, 1000);
 
         stage.setTitle("Gwent-Paradigmas");

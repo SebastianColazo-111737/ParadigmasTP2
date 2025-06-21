@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.vistas.Contenedores.VistaColumnaIzquierda;
 import edu.fiuba.algo3.vistas.Contenedores.VistaDatos;
 import edu.fiuba.algo3.vistas.Contenedores.VistaJugador;
@@ -14,11 +15,11 @@ import javafx.scene.layout.*;
 import javafx.scene.Node;
 
 public class Lienzo extends StackPane {
-    public Lienzo() {
-        VistaJugador jugador2 = new VistaJugador("", true);
-        VistaJugador jugador1 = new VistaJugador("", false);
+    public Lienzo(Jugador jugador1, Jugador jugador2) {
+        VistaJugador vistaJugador2 = new VistaJugador(jugador2, true);
+        VistaJugador vistaJugador1 = new VistaJugador(jugador1, false);
 
-        VBox tablero = new VBox(20, jugador2, jugador1);
+        VBox tablero = new VBox(20, vistaJugador2, vistaJugador1);
         tablero.setAlignment(Pos.CENTER);
 
         VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda();
