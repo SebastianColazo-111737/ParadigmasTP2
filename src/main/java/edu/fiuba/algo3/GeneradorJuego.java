@@ -38,6 +38,8 @@ public class GeneradorJuego {
         Mazo mazoJ1 = new Mazo();
         mazoJ1.agregarCarta(cartasJ1);
         Mano manoJ1 = new Mano();
+        manoJ1.agregarCarta(mazoJ1.darCartas(10));
+
 
         Seccion cuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
         Seccion distanciaJ1 = new Seccion(new Distancia());
@@ -53,6 +55,8 @@ public class GeneradorJuego {
         Mazo mazoJ2 = new Mazo();
         mazoJ2.agregarCarta(cartasJ2);
         Mano manoJ2 = new Mano();
+        manoJ2.agregarCarta(mazoJ2.darCartas(10));
+
 
         Seccion cuerpoACuerpoJ2 = new Seccion(new CuerpoACuerpo());
         Seccion distanciaJ2 = new Seccion(new Distancia());

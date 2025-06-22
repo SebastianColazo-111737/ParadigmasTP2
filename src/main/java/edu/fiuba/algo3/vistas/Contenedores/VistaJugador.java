@@ -6,66 +6,73 @@ import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public class VistaJugador extends VBox {
+
     public VistaJugador(Jugador jugador, boolean estaArriba){
         super(10);
-        this.setAlignment(Pos.CENTER); //Si se ve raro el vistaJugador sacar estooo!!
+        this.setAlignment(Pos.CENTER);
 
-        VistaAtril vistaAtril = new VistaAtril(jugador.atril(), estaArriba);
-
-        VBox secciones = new VBox(5);
-
-        List<Seccion> seccionesOrdenadas = jugador.atril().getSecciones()
-                .stream()
-                .sorted((s1, s2) -> {
-                    int orden1 = ordenSeccion(s1, estaArriba);
-                    int orden2 = ordenSeccion(s2, estaArriba);
-                    return Integer.compare(orden1, orden2);
-                })
-                .collect(Collectors.toList());
-
-        for (Seccion seccion : seccionesOrdenadas) {
-            secciones.getChildren().add(new VistaSeccion(seccion));
-        }
-        secciones.setAlignment(Pos.CENTER);
-
-        VistaDescarte descarte = new VistaDescarte("Pila Descarte");
-        VistaMazo mazo = new VistaMazo("Mazo");
-
-        VistaMano vistaMano = new VistaMano(jugador.mano().getCartas(),carta -> {
-            System.out.println("Se selecciono: " + carta.nombre());
-        });
-
-        HBox contenedorLateral = new HBox(40,descarte,mazo);
-        contenedorLateral.setAlignment(Pos.CENTER_RIGHT);
-
-        VBox contenedorManoyMazo = estaArriba
-                ? new VBox(10, contenedorLateral, vistaMano)
-                : new VBox(10, vistaMano, contenedorLateral);
+        VBox secciones = construirVistaSecciones(jugador,estaArriba);
+        Node contenedorDerecha = construirContenedorDerecha(jugador,estaArriba);
 
         BorderPane contenedor = new BorderPane();
         contenedor.setCenter(secciones);
 
         if (estaArriba) {
-            contenedor.setTop(contenedorManoyMazo);
-            BorderPane.setAlignment(contenedorManoyMazo, Pos.TOP_RIGHT);
+            contenedor.setTop(contenedorDerecha);
+            BorderPane.setAlignment(contenedorDerecha, Pos.TOP_RIGHT);
         } else {
-            contenedor.setBottom(contenedorManoyMazo);
-            BorderPane.setAlignment(contenedorManoyMazo, Pos.BOTTOM_RIGHT);
+            contenedor.setBottom(contenedorDerecha);
+            BorderPane.setAlignment(contenedorDerecha, Pos.BOTTOM_RIGHT);
+        }
+        this.getChildren().addAll(contenedor);
+    }
+
+    private VBox construirVistaSecciones(Jugador jugador, boolean estaArriba) {
+        List<Seccion> seccionesOrdenadas = jugador.atril().getSecciones()
+                .stream()
+                .sorted(Comparator.comparingInt(seccion -> ordenSeccion(seccion, estaArriba)))
+                .collect(Collectors.toList());
+
+        VBox secciones = new VBox(5);
+        secciones.setAlignment(Pos.CENTER);
+
+        for (Seccion seccion : seccionesOrdenadas) {
+            secciones.getChildren().add(new VistaSeccion(seccion));
         }
 
-        this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll( contenedor);
+        return secciones;
+    }
+
+    private Node construirContenedorDerecha(Jugador jugador, boolean estaArriba) {
+        VistaDescarte descarte = new VistaDescarte("Pila Descarte");
+        VistaMazo mazo = new VistaMazo("Mazo");
+
+        VistaMano vistaMano = new VistaMano(jugador.mano().getCartas(), carta -> {
+            System.out.println("Se seleccionó: " + carta.nombre());
+        });
+
+        HBox contenedorLateral = new HBox(40, descarte, mazo);
+        contenedorLateral.setAlignment(Pos.CENTER_RIGHT);
+
+        VBox contenedor = estaArriba
+                ? new VBox(10, contenedorLateral, vistaMano)
+                : new VBox(10, vistaMano, contenedorLateral);
+
+        return contenedor;
     }
 
     private int ordenSeccion(Seccion seccion, boolean estaArriba) {

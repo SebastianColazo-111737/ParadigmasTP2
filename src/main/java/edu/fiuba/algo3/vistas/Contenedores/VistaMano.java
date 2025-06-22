@@ -16,6 +16,7 @@ public class VistaMano extends HBox {
         this.setAlignment(Pos.CENTER);
 
         for(ICarta cartaModelo : cartas){
+            System.out.println("Agregando carta a la mano: " + cartaModelo.nombre());
             String nombre = cartaModelo.nombre();
 
             VistaCarta carta = new VistaCarta(nombre, vistaCarta -> {
