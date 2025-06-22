@@ -19,7 +19,7 @@ public class VistaMano extends HBox {
             System.out.println("Agregando carta a la mano: " + cartaModelo.nombre());
             String nombre = cartaModelo.nombre();
 
-            VistaCarta carta = new VistaCarta(nombre, vistaCarta -> {
+            VistaCarta carta = new VistaCarta(cartaModelo, vistaCarta -> {
                 if(cartaSeleccionada !=null) cartaSeleccionada.deseleccionar();
                 vistaCarta.seleccionar();
                 cartaSeleccionada = vistaCarta;
@@ -29,5 +29,10 @@ public class VistaMano extends HBox {
             this.getChildren().add(carta);
         }
     }
+
+    public void removerVistaCarta(VistaCarta carta) {
+        this.getChildren().remove(carta);
+    }
+
 }
 

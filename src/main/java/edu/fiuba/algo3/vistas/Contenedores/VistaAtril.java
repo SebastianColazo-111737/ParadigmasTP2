@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.vistas.Contenedores;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
+import edu.fiuba.algo3.vistas.OrdenadorSecciones;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import java.util.List;
@@ -10,31 +12,20 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class VistaAtril extends VBox {
+    private final Jugador jugador;
 
-    public VistaAtril(Atril atril, boolean estaArriba) {
+    public VistaAtril(Atril atril, boolean estaArriba, Jugador jugador, VistaMano vistaMano) {
+        this.jugador = jugador;
         this.setSpacing(5);
         this.setAlignment(Pos.CENTER);
 
         List<Seccion> secciones = atril.getSecciones();
 
-        List<Seccion> ordenadas = ordenarSeccionesVisualmente(secciones, estaArriba);
+        List<Seccion> ordenadas = OrdenadorSecciones.ordenar(secciones, estaArriba);
 
         for (Seccion seccion : ordenadas) {
-            VistaSeccion vistaSeccion = new VistaSeccion(seccion);
+            VistaSeccion vistaSeccion = new VistaSeccion(seccion, jugador, vistaMano);
             this.getChildren().add(vistaSeccion);
         }
-    }
-
-    private List<Seccion> ordenarSeccionesVisualmente(List<Seccion> secciones, boolean estaArriba) {
-        Comparator<Seccion> comparator = Comparator.comparing(seccion -> {
-            String nombre = seccion.getClass().getSimpleName();
-            if (seccion.compararPosiciones(new Asedio())) return "1";
-            if (seccion.compararPosiciones(new Distancia())) return "2";
-            return "3";
-        });
-        if (!estaArriba) {
-            comparator = comparator.reversed();
-        }
-        return secciones.stream().sorted(comparator).collect(Collectors.toList());
     }
 }
