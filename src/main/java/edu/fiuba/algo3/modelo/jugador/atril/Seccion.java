@@ -38,7 +38,7 @@ public class Seccion {
     private void calcularPuntajeActualUnidades(){
         int puntajeTotal = 0;
         for(Unidad unidad : unidadesColocadas){
-            puntajeTotal += unidad.getPuntaje().getPuntajeActual();
+            puntajeTotal += unidad.getPuntajeTotal(this);
         }
         this.puntajeSeccion = new Puntaje(puntajeTotal);
     }

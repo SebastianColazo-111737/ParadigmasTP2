@@ -22,5 +22,4 @@ public class Agil extends Unidad{
     public String nombre(){
         return this.nombre;
     }
-
 }

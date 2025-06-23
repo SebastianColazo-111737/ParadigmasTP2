@@ -4,6 +4,7 @@ package edu.fiuba.algo3.modelo.cartas.unidades;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
+import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 import java.util.ArrayList;
@@ -36,5 +37,7 @@ public abstract class Unidad implements ICarta {
         return this.puntaje;
     }
 
-    //public abstract int calcularPuntajeActual(List<Unidad> unidades);
+    public int getPuntajeTotal(Seccion seccion){
+        return this.puntaje.getPuntajeActual();
+    }
 }
