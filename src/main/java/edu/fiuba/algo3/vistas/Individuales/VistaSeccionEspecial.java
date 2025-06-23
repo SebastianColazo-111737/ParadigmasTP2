@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 public class VistaSeccionEspecial extends StackPane {
 
     public VistaSeccionEspecial(String nombre){
-        Rectangle seccion = new Rectangle(200,70);
+        Rectangle seccion = new Rectangle(150,90);
         seccion.setFill(Color.LIGHTGOLDENRODYELLOW);
         seccion.setStroke(Color.BLACK);
 

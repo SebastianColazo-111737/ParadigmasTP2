@@ -6,7 +6,7 @@ import javafx.scene.layout.StackPane;
 
 public class VistaPuntos extends StackPane {
     public VistaPuntos(){
-        Circle circulo = new Circle(15);
+        Circle circulo = new Circle(20);
         circulo.setFill(Color.GOLDENROD);
         circulo.setStroke(Color.BLACK);
         this.getChildren().add(circulo);

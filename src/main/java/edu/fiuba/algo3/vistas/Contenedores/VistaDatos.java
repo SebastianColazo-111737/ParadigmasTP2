@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 public class VistaDatos extends StackPane {
 
     public VistaDatos(String nombre) {
-        Rectangle seccion = new Rectangle(200,70);
+        Rectangle seccion = new Rectangle(200,100);
         seccion.setFill(Color.LIGHTCYAN);
         seccion.setStroke(Color.BLACK);
 
