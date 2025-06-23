@@ -14,7 +14,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         Lienzo lienzo = GeneradorJuego.construirJuego();
-        Scene scene = new Scene(lienzo, 1000, 1000);
+        Scene scene = new Scene(lienzo, 1200, 1000);
 
         stage.setTitle("Gwent-Paradigmas");
         stage.setScene(scene);
