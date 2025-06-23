@@ -32,5 +32,9 @@ public abstract class Unidad implements ICarta {
         return false;
     }
 
+    public Puntaje getPuntaje(){
+        return this.puntaje;
+    }
+
     //public abstract int calcularPuntajeActual(List<Unidad> unidades);
 }

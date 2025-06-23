@@ -18,12 +18,12 @@ public class VistaDatos extends StackPane {
         Label etiqueta = new Label(nombre);
         StackPane rectanguloConTexto = new StackPane(seccion, etiqueta);
 
-        VistaPuntos Puntos = new VistaPuntos();
+        /*VistaPuntos Puntos = new VistaPuntos();
 
         StackPane.setAlignment(Puntos, Pos.TOP_RIGHT);
-        StackPane.setMargin(Puntos, new Insets(5,-205,0,0));
+        StackPane.setMargin(Puntos, new Insets(5,-205,0,0));*/
 
-        this.getChildren().addAll(rectanguloConTexto, Puntos);
+        this.getChildren().addAll(rectanguloConTexto/*, Puntos*/);
     }
 }
 

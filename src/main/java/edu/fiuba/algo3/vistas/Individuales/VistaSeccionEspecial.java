@@ -14,7 +14,7 @@ public class VistaSeccionEspecial extends StackPane {
         Label etiqueta = new Label(nombre);
         StackPane rectanguloConTexto = new StackPane(seccion, etiqueta);
 
-        VistaPuntos Puntos = new VistaPuntos();
+        //VistaPuntos Puntos = new VistaPuntos();
 
         this.getChildren().addAll(rectanguloConTexto);
     }

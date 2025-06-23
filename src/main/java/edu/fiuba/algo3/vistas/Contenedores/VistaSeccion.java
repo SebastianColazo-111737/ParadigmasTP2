@@ -26,15 +26,15 @@ public class VistaSeccion extends StackPane {
 
     private final Seccion seccionModelo;
     private final Jugador jugador;
-    //private final HBox contenido;
     private final Pane cartasApoyadas;
+    private final VistaPuntos vistaPuntos;
     private static final int CapacidadMaxima = 8;
 
     public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano){
         this.seccionModelo = seccionModelo;
         this.jugador = jugador;
 
-        VistaPuntos puntos = new VistaPuntos();
+        this.vistaPuntos = new VistaPuntos(seccionModelo.getPuntajeActual());
 
         Rectangle rectangulo = new Rectangle(380,90);
         rectangulo.setFill(Color.LIGHTGRAY);
@@ -42,7 +42,7 @@ public class VistaSeccion extends StackPane {
 
         Label etiqueta = new Label(nombreDesdePos(seccionModelo));
         StackPane fondo = new StackPane(rectangulo,etiqueta);
-        HBox base = new HBox(-5,puntos,fondo);
+        HBox base = new HBox(-5,vistaPuntos,fondo);
         base.setAlignment(Pos.CENTER_LEFT);
 
         this.cartasApoyadas = new Pane();
@@ -78,6 +78,7 @@ public class VistaSeccion extends StackPane {
                 vistaCarta.setLayoutY(0);
                 cartasApoyadas.getChildren().add(vistaCarta);
 
+                vistaPuntos.actualizarPuntaje(seccionModelo.getPuntajeActual());
                 vistaMano.removerVistaCarta(vistaCarta);
 
                 System.out.println("Carta colocada en: " + this.seccionModelo.getPosicion());
