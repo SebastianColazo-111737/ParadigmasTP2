@@ -8,9 +8,9 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 import edu.fiuba.algo3.modelo.jugador.Mano;
 import edu.fiuba.algo3.modelo.jugador.Mazo;
-import edu.fiuba.algo3.modelo.jugador.Puntaje;
-import edu.fiuba.algo3.modelo.jugador.atril.Atril;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.juego.Puntaje;
+import edu.fiuba.algo3.modelo.tablero.atril.Atril;
+import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;

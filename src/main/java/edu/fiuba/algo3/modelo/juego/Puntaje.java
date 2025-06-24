@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.jugador;
+package edu.fiuba.algo3.modelo.juego;
 
 public class Puntaje {
     private int puntajeBase;
@@ -19,5 +19,9 @@ public class Puntaje {
 
     public void setPuntajeActual(int nuevoPuntaje){
         this.puntajeActual = nuevoPuntaje;
+    }
+
+    public void multiplicarPuntaje(int multiplicador){
+        this.puntajeActual*= multiplicador;
     }
 }

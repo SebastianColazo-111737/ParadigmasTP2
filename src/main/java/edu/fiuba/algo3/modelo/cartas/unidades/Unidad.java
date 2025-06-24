@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.cartas.unidades;
 
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.jugador.Puntaje;
+import edu.fiuba.algo3.modelo.juego.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 import java.util.ArrayList;
@@ -23,6 +23,10 @@ public abstract class Unidad implements ICarta {
         this.posicionesDisponibles.add(posicicon);
     }
 
+    public String getNombre(){return this.nombre;}
+
+    public Puntaje getPuntaje(){return this.puntaje;}
+
     public boolean sePuedeColocar(Posicion posicion){
         for(Posicion posicionesDisponibles: posicionesDisponibles){
             if(posicionesDisponibles.esCompatible(posicion)){
@@ -32,5 +36,10 @@ public abstract class Unidad implements ICarta {
         return false;
     }
 
-    //public abstract int calcularPuntajeActual(List<Unidad> unidades);
+    public abstract void calcularPuntajeActual(List<Unidad> unidades);
+
+    public int getPuntajeActual(){
+        return this.puntaje.getPuntajeActual();
+    }
+
 }

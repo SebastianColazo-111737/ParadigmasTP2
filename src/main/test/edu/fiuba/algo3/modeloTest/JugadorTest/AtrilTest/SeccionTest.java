@@ -1,38 +1,18 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.AtrilTest;
 
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
-import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
-import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
-import edu.fiuba.algo3.modelo.jugador.Puntaje;
-
-import edu.fiuba.algo3.modelo.jugador.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
+import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
+import edu.fiuba.algo3.modelo.cartas.unidades.*;
+import edu.fiuba.algo3.modelo.juego.Puntaje;
+import edu.fiuba.algo3.modelo.tablero.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
 import edu.fiuba.algo3.modelo.posiciones.*;
+
+
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SeccionTest {
-
-    @Test
-    public void unaSeccionTieneUnaPosicionYSePuedeCompararConOtrasPosiciones(){
-
-        // Arrange
-        Seccion seccion = new Seccion(new CuerpoACuerpo());
-
-        // Act
-        boolean esCompatibleConPosicionCuerpoACuerpo = seccion.compararPosiciones(new CuerpoACuerpo());
-        boolean esCompatibleConPosicionDistancia = seccion.compararPosiciones(new Distancia());
-        boolean esCompatibleConPosicionAsedio = seccion.compararPosiciones(new Asedio());
-
-        // Assert
-        assertTrue(esCompatibleConPosicionCuerpoACuerpo);
-        assertFalse(esCompatibleConPosicionDistancia);
-        assertFalse(esCompatibleConPosicionAsedio);
-
-    }
 
     @Test
     public void unaSeccionPermiteAgregarUnaUnidadASusUnidadesColocadasCuandoTienenLaMismaPosicion(){
@@ -72,6 +52,25 @@ public class SeccionTest {
     }
 
     @Test
+    public void unaSeccionPermiteRemoverUnaUnidadColocada(){
+        // Arrange
+        Seccion seccion = new Seccion(new CuerpoACuerpo());
+        UnidadBasica guerrero = new UnidadBasica("Guerrero", new Puntaje(8), new CuerpoACuerpo());
+
+        seccion.colocarUnidad(guerrero);
+        int cantidadDeUnidadesColocadasInicial = seccion.getUnidadesColocadas().size();
+        // Act
+
+        seccion.removerUnidad(guerrero);
+
+        // Assert
+        assertEquals(1, cantidadDeUnidadesColocadasInicial);
+        assertFalse(seccion.getUnidadesColocadas().contains(guerrero));
+        assertEquals(0, seccion.getUnidadesColocadas().size());
+    }
+
+
+    @Test
     public void unaSeccionPermiteRemoverLasUnidadesColocadas(){
 
         // Arrange
@@ -88,7 +87,7 @@ public class SeccionTest {
         // Act
 
         int cantidadDeUnidadesEnSeccionInicial = seccion.getUnidadesColocadas().size();
-        List<Unidad> unidadesDescartadas = seccion.removerCartasJugadas();
+        List<Unidad> unidadesDescartadas = seccion.removerUnidadesJugadas();
         int cantidadDeUnidadesEnSeccionFinal = seccion.getUnidadesColocadas().size();
 
         // Assert
@@ -100,34 +99,36 @@ public class SeccionTest {
 
     }
 
-//    @Test
-//    public void unaSeccionSinUnidadesTieneUnPuntajeDe0(){
-//
-//        // Arrange
-//        Seccion seccion = new Seccion(new CuerpoACuerpo());
-//
-//        // Act
-//        int puntajeSeccion = seccion.calcularPuntaje();
-//        // Assert
-//        assertEquals(0, puntajeSeccion);
-//
-//    }
-//
-//    @Test
-//    public void unaSeccionConUnidadesBasicasTieneUnPuntajeIgualALaSumaDeSusPuntajesBase(){
-//
-//        // Arrange
-//        Unidad unidad1 = new UnidadBasica("Unidad1", 10, new CuerpoACuerpo());
-//        Unidad unidad2 = new UnidadBasica("Unidad2", 5, new CuerpoACuerpo());
-//        Seccion seccion = new Seccion(new CuerpoACuerpo());
-//
-//        seccion.colocarUnidad(unidad1);
-//        seccion.colocarUnidad(unidad2);
-//
-//        // Act
-//        int puntajeSeccion = seccion.calcularPuntaje();
-//        // Assert
-//        assertEquals(15, puntajeSeccion);
-//
-//    }
+    @Test
+    public void unaSeccionSinUnidadesTieneUnPuntajeDe0(){
+
+        // Arrange
+        Seccion seccion = new Seccion(new CuerpoACuerpo());
+
+        // Act
+        int puntajeSeccion = seccion.getPuntajeActual();
+        // Assert
+        assertEquals(0, puntajeSeccion);
+
+    }
+
+    @Test
+    public void unaSeccionConUnidadesBasicasTieneUnPuntajeIgualALaSumaDeSusPuntajesBase(){
+
+        // Arrange
+        Unidad unidad1 = new UnidadBasica("Unidad1", new Puntaje(10), new CuerpoACuerpo());
+        Unidad unidad2 = new UnidadBasica("Unidad2", new Puntaje(5), new CuerpoACuerpo());
+        Seccion seccion = new Seccion(new CuerpoACuerpo());
+
+        seccion.colocarUnidad(unidad1);
+        seccion.colocarUnidad(unidad2);
+
+        // Act
+        int puntajeSeccion = seccion.getPuntajeActual();
+        // Assert
+        assertEquals(15, puntajeSeccion);
+    }
+
+
+
 }

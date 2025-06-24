@@ -1,9 +1,13 @@
 package edu.fiuba.algo3.modelo.cartas.unidades;
 
-import edu.fiuba.algo3.modelo.jugador.Puntaje;
+import edu.fiuba.algo3.modelo.juego.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.tablero.atril.Atril;
+import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
+
+import java.util.List;
 
 public class Agil extends Unidad{
 
@@ -13,10 +17,16 @@ public class Agil extends Unidad{
     }
 
     @Override
-    public void jugarCarta(Jugador jugador, Seccion seccion) {
-        if(!jugador.lePertenece(seccion)){
-            throw new UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion("");
+    public void calcularPuntajeActual(List<Unidad> unidades) {
+
+    }
+
+    @Override
+    public void jugarCarta(Jugador jugador, Tablero tablero, Posicion posicion){
+        if(!this.sePuedeColocar(posicion)){
+            throw new RuntimeException();
         }
-        seccion.colocarUnidad(this);
+        Atril atrilJugador = tablero.getAtril(jugador);
+        atrilJugador.colocarUnidad(this, posicion);
     }
 }

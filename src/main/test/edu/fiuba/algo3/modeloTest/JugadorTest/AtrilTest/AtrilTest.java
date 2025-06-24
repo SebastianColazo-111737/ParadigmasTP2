@@ -3,13 +3,12 @@ package edu.fiuba.algo3.modeloTest.JugadorTest.AtrilTest;
 
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
-import edu.fiuba.algo3.modelo.jugador.Puntaje;
-import edu.fiuba.algo3.modelo.jugador.atril.*;
+import edu.fiuba.algo3.modelo.juego.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.*;
+import edu.fiuba.algo3.modelo.tablero.atril.Atril;
+import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 

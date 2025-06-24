@@ -1,9 +1,10 @@
-package edu.fiuba.algo3.modelo.jugador.atril;
+package edu.fiuba.algo3.modelo.tablero.atril;
 
 
 
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 
 import java.util.ArrayList;
@@ -30,8 +31,28 @@ public class Atril {
         return this.descarte;
     }
 
-    public boolean contiene(Seccion seccion){
-        return this.secciones.contains(seccion);
+    public void colocarUnidad(Unidad unidad, Posicion posicion){
+        for(Seccion seccion: secciones){
+            if(seccion.puedeColocarse(posicion)){
+                seccion.colocarUnidad(unidad);
+            }
+        }
+    }
+
+    public void activarClima(Posicion posicion){
+        for(Seccion seccion: secciones){
+            if(seccion.puedeColocarse(posicion)){
+                seccion.activarClima();
+            }
+        }
+    }
+
+    public void activarMoraleBoost(Posicion posicion){
+        for(Seccion seccion: secciones){
+            if(seccion.puedeColocarse(posicion)){
+                seccion.activarMoraleBoost();
+            }
+        }
     }
 
     public int getPuntajeActual(){
@@ -44,7 +65,7 @@ public class Atril {
 
     public void descartarCartas() {
         for (Seccion seccion : secciones) {
-            List<Unidad> cartas = seccion.removerCartasJugadas();
+            List<Unidad> cartas = seccion.removerUnidadesJugadas();
             this.descarte.addAll(cartas);
         }
     }

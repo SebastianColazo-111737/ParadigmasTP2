@@ -2,7 +2,9 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.posiciones.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +12,16 @@ import java.util.List;
 public class Gwent {
     private AdminTurnos<Jugador> adminTurnos;
     private List<Jugador> jugadores;
+    private Tablero tablero;
 
-    public Gwent(Jugador jugador1, Jugador jugador2){
+    public Gwent(Jugador jugador1, Jugador jugador2, Tablero tablero){
         this.jugadores = new ArrayList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
         this.adminTurnos = new AdminTurnos<>(this.jugadores);
+
+        this.tablero = tablero;
     }
 
     public void repartirCartasALosJugadores(){
@@ -47,9 +52,12 @@ public class Gwent {
 
     }
 
-    public void jugarCarta(ICarta carta, Seccion seccion){
+    public void jugarCarta(ICarta carta, Posicion posicion){
         Jugador jugador = adminTurnos.getJugadorActual();
-        jugador.jugarCarta(carta, seccion);
+
+        // puede lanzar exepcion si el jugador no tiene la carta en la mano
+        jugador.jugarCarta(carta, this.tablero, posicion);
+
         adminTurnos.proximoTurno();
     }
 }

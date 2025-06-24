@@ -1,20 +1,20 @@
 package edu.fiuba.algo3.modelo.jugador;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.jugador.atril.Atril;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.posiciones.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.tablero.atril.Atril;
+import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
 
 import java.util.List;
 
 public class Jugador {
     private Mazo mazo;
     private Mano mano;
-    private Atril atril;
 
     public Jugador(Mazo mazo, Mano mano, Atril atril) {
         this.mazo = mazo;
         this.mano = mano;
-        this.atril = atril;
     }
 
     public void robarCartasDelMazo(int cantidad){
@@ -33,15 +33,12 @@ public class Jugador {
         this.mano.agregarCarta(carta);
     }
 
-    public boolean lePertenece(Seccion seccion){
-        return this.atril.contiene(seccion);
-    }
 
-    public void jugarCarta(ICarta carta, Seccion seccion){
+    public void jugarCarta(ICarta carta, Tablero tablero, Posicion posicion){
         mano.removerCarta(carta);
 
         try {
-            carta.jugarCarta(this, seccion);
+            carta.jugarCarta(this, tablero, posicion);
         }catch (Exception e){
             mano.agregarCarta(carta);
             throw e;
@@ -49,7 +46,4 @@ public class Jugador {
 
     }
 
-//    public int getPuntajeActual(){
-//        return atril.getPuntajeActual();
-//    }
 }
