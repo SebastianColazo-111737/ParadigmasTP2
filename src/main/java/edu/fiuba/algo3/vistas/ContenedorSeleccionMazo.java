@@ -14,38 +14,39 @@ import javafx.stage.Stage;
 
 public class ContenedorSeleccionMazo extends VBox {
 
-    public ContenedorSeleccionMazo(Stage stage, Juego juego) {
-        this.setPrefSize(800, 600);
+    public ContenedorSeleccionMazo(Stage stage, Juego juego, Scene escenaTablero) {
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(30);
-        this.setPadding(new Insets(40));
+        this.setSpacing(20);
+        this.setPadding(new Insets(30));
+        Label etiqueta = new Label("ELIGE TU MAZO DE GUERRA");
+        etiqueta.setFont(Font.font(20));
+        HBox botones = new HBox(30);
+        botones.setAlignment(Pos.CENTER);
 
-        Label titulo = new Label("ELIGE TU MAZO DE GUERRA");
-        titulo.setFont(new Font(20));
+        botones.getChildren().addAll(
+                crearBotonMazo("MAZO1", stage, juego, escenaTablero),
+                crearBotonMazo("MAZO2", stage, juego, escenaTablero),
+                crearBotonMazo("MAZO3", stage, juego, escenaTablero)
+        );
 
-        HBox contenedorBotones = new HBox(30);
-        contenedorBotones.setAlignment(Pos.CENTER);
+        this.getChildren().addAll(etiqueta, botones);
+    }
 
-        String[] nombresMazos = {"MAZO1", "MAZO2", "MAZO3"};
+    private Button crearBotonMazo(String nombreMazo, Stage stage, Juego juego, Scene escenaTablero) {
+        Button boton = new Button(nombreMazo);
+        boton.setMinSize(104, 147);
+        boton.setOnAction(e -> {
+            juego.jugadorActual().setMazo(new Mazo(nombreMazo));
+            juego.siguienteJugador();
 
-        for (String nombre : nombresMazos) {
-            Button boton = new Button(nombre);
-            boton.setMinSize(104, 147);
-            boton.setOnAction(e -> {
-                juego.jugadorActual().setMazo(new Mazo(nombre));
-                juego.siguienteJugador();
-
-                if (!juego.juegoCompleto()) {
-                    ContenedorNombreJugador contenedorNombre = new ContenedorNombreJugador(stage, juego, new Scene(new ContenedorSeleccionMazo(stage, juego), 600, 400));
-                    stage.setScene(new Scene(contenedorNombre));
-                } else {
-                    ContenedorMenuPrincipal contenedorMenu = new ContenedorMenuPrincipal(stage, juego, null);
-                    stage.setScene(new Scene(contenedorMenu));
-                }
-            });
-            contenedorBotones.getChildren().add(boton);
-        }
-
-        this.getChildren().addAll(titulo, contenedorBotones);
+            if (!juego.juegoCompleto()) {
+                ContenedorSeleccionMazo nuevoMazo = new ContenedorSeleccionMazo(stage, juego, escenaTablero);
+                ContenedorNombreJugador nuevoNombre = new ContenedorNombreJugador(stage, juego,  new Scene(nuevoMazo, 600, 400));
+                stage.setScene(new Scene(nuevoNombre));
+            } else {
+                stage.setScene(escenaTablero);
+            }
+        });
+        return boton;
     }
 }

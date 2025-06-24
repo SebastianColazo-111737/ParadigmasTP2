@@ -13,22 +13,21 @@ import javafx.stage.Stage;
 
 public class ContenedorNombreJugador extends VBox {
 
-    public ContenedorNombreJugador(Stage stage, Juego juego, Scene escenaSeleccionMazo) {
-        this.setPrefSize(800, 600);
+    public ContenedorNombreJugador(Stage stage, Juego juego, Scene escenaMazo) {
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(30);
-        this.setPadding(new Insets(40));
+        this.setSpacing(20);
+        this.setPadding(new Insets(30));
 
-        Label titulo = new Label("INGRESA TU NOMBRE GUERRERO");
-        titulo.setFont(new Font(20));
+        Label etiqueta = new Label("INGRESA TU NOMBRE GUERRERO");
+        etiqueta.setFont(Font.font(20));
         TextField campoNombre = new TextField();
 
-        Button botonConfirmar = new Button("Confirmar");
-        botonConfirmar.setOnAction(e -> {
+        Button confirmar = new Button("Confirmar");
+        confirmar.setOnAction(e -> {
             juego.jugadorActual().setNombre(campoNombre.getText());
-            stage.setScene(escenaSeleccionMazo);
+            stage.setScene(escenaMazo);
         });
 
-        this.getChildren().addAll(titulo, campoNombre, botonConfirmar);
+        this.getChildren().addAll(etiqueta, campoNombre, confirmar);
     }
 }
