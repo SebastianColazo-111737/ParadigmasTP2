@@ -11,12 +11,32 @@ public class Gwent {
     private AdminTurnos<Jugador> adminTurnos;
     private List<Jugador> jugadores;
 
+    // PRUEBA PARA INTERFAZ
+    private int turno = 1;
+
     public Gwent(Jugador jugador1, Jugador jugador2){
         this.jugadores = new ArrayList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
 
         this.adminTurnos = new AdminTurnos<>(this.jugadores);
+    }
+
+    public List<Jugador> getJugadores(){
+        return jugadores;
+    }
+
+    // PRUEBA PARA INTERFAZ USUARIO
+    public Jugador jugadorActual() {
+        return turno == 1 ? jugadores.get(0) : jugadores.get(1);
+    }
+
+    public void siguienteJugador() {
+        turno++;
+    }
+
+    public boolean juegoCompleto() {
+        return turno > 2;
     }
 
     public void repartirCartasALosJugadores(){

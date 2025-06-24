@@ -11,10 +11,19 @@ public class Mazo {
     private List<ICarta> cartas;
     private Random random;
 
-    public Mazo(){
+    // PRUEBA PARA INTERFAZ DE USUARIO
+    private final String nombre;
+    // PRUEBA PARA INTERFAZ DE USUARIO
+    public Mazo(String nombre) {
+        this.nombre = nombre;
         this.cartas = new ArrayList<>();
         this.random = new Random();
     }
+
+//    public Mazo(){
+//        this.cartas = new ArrayList<>();
+//        this.random = new Random();
+//    }
 
     public void agregarCarta(ICarta carta){
         this.cartas.add(carta);

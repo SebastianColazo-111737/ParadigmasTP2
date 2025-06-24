@@ -3,6 +3,8 @@ package edu.fiuba.algo3.vistas.Individuales;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
+
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javafx.scene.image.Image;
@@ -15,13 +17,27 @@ public class VistaCarta extends Button {
     public static VistaCarta cartaSeleccionada;
     private final ICarta cartaModelo;
 
-    public VistaCarta(ICarta cartaModelo, Consumer<VistaCarta> oneSeleccionar) {
+    public VistaCarta(ICarta cartaModelo, Consumer<VistaCarta> oneSeleccionar, BiConsumer<String, Image> onMostrarDescripcion) {
         super(cartaModelo.nombre());
         this.cartaModelo = cartaModelo;
 
         this.setPrefSize(55, 80);
         this.deseleccionar();
-        this.setOnAction(e -> oneSeleccionar.accept(this));
+        //this.setOnAction(e -> oneSeleccionar.accept(this));
+        this.setOnMouseClicked(e -> {
+            if (e.isStillSincePress()) { // CREO QUE DISTINGUE ENTRE CLICK Y ARRASTRE
+                String nombre = cartaModelo.nombre();
+                String ruta = "/" + nombre.toLowerCase() + ".png";
+                try {
+                    Image imagen = new Image(getClass().getResource(ruta).toExternalForm());
+                    onMostrarDescripcion.accept(nombre, imagen);
+                } catch (Exception ex) {
+                    System.out.println("Imagen no encontrada para: " + nombre);
+                }
+
+                oneSeleccionar.accept(this);
+            }
+        });
         this.moverCarta();
     }
 

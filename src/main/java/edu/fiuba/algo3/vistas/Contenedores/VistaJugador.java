@@ -9,6 +9,7 @@ import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -16,6 +17,7 @@ import javafx.geometry.Pos;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -24,13 +26,15 @@ public class VistaJugador extends VBox {
 
     private final VistaMano vistaMano;
 
-    public VistaJugador(Jugador jugador, boolean estaArriba){
+    public VistaJugador(Jugador jugador, boolean estaArriba, BiConsumer<String, Image> onMostrarDescripcion){
         super(10);
         this.setAlignment(Pos.CENTER);
 
-        this.vistaMano = new VistaMano(jugador.mano().getCartas(), carta -> {
-            System.out.println("Se seleccionó: " + carta.nombre());
-        });
+        this.vistaMano = new VistaMano(jugador.mano().getCartas(),
+            carta ->
+            System.out.println("Se seleccionó: " + carta.nombre()),
+            onMostrarDescripcion
+        );
 
         VBox secciones = construirVistaSecciones(jugador,estaArriba);
         Node contenedorDerecha = construirContenedorDerecha(jugador,estaArriba);
