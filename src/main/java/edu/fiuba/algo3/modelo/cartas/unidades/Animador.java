@@ -5,8 +5,8 @@ import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
-public class General extends Unidad{
-    public General(String nombre, Puntaje puntaje, Posicion posicion){
+public class Animador extends Unidad{
+    public Animador(String nombre, Puntaje puntaje, Posicion posicion){
         super(nombre,puntaje,posicion);
     }
 

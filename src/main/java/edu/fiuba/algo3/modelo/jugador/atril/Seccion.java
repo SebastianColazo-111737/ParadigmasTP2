@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.jugador.atril;
 
+import edu.fiuba.algo3.modelo.cartas.unidades.Animador;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
@@ -36,9 +37,14 @@ public class Seccion {
     }
 
     private void calcularPuntajeActualUnidades(){
+        int cantAnimadoresEnSeccion = (int) unidadesColocadas.stream()
+                .filter(u -> u instanceof Animador)
+                .count();
+
         int puntajeTotal = 0;
         for(Unidad unidad : unidadesColocadas){
-            puntajeTotal += unidad.getPuntajeTotal(this);
+            if(unidad instanceof Animador) puntajeTotal += unidad.getPuntajeTotal(this);
+            else puntajeTotal += unidad.getPuntajeTotal(this) + cantAnimadoresEnSeccion;
         }
         this.puntajeSeccion = new Puntaje(puntajeTotal);
     }
