@@ -24,7 +24,7 @@ public class VistaJugador extends VBox {
 
     private final VistaMano vistaMano;
 
-    public VistaJugador(Jugador jugador, boolean estaArriba){
+    public VistaJugador(Jugador jugador, boolean estaArriba, VistaMano vistaMano){
         super(10);
         this.setAlignment(Pos.CENTER);
 

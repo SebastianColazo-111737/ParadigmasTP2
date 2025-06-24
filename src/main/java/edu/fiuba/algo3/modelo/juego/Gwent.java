@@ -47,6 +47,7 @@ public class Gwent {
 
     }
 
+
     public void jugarCarta(ICarta carta, Seccion seccion){
         Jugador jugador = adminTurnos.getJugadorActual();
         jugador.jugarCarta(carta, seccion);

@@ -29,9 +29,14 @@ public class GeneradorJuego {
         List<ICarta> cartasJ1 = new ArrayList<>();
         List<ICarta> cartasJ2 = new ArrayList<>();
 
-        for (int i = 0; i < 21; i++) {
-            cartasJ1.add(new UnidadBasica("Espadachin", new Puntaje(8), new CuerpoACuerpo()));
-            cartasJ2.add(new UnidadBasica("Arquero", new Puntaje(8), new Distancia()));
+        for (int i = 0; i < 10; i++) {
+            cartasJ1.add(new UnidadBasica("Espadachin", new Puntaje(4), new CuerpoACuerpo()));
+            cartasJ2.add(new UnidadBasica("Arquero", new Puntaje(3), new Distancia()));
+        }
+
+        for (int i = 0; i < 11; i++) {
+            cartasJ1.add(new UnidadBasica("Mago", new Puntaje(5), new Distancia()));
+            cartasJ2.add(new UnidadBasica("Catapulta", new Puntaje(8), new Asedio()));
         }
 
         // Jugador 1

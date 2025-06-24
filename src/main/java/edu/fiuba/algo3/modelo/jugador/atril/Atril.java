@@ -36,8 +36,8 @@ public class Atril {
 
     public int getPuntajeActual(){
         int puntajeActual = 0;
-        for(Seccion seccino: secciones){
-            puntajeActual += seccino.getPuntajeActual();
+        for(Seccion seccion: secciones){
+            puntajeActual += seccion.getPuntajeActual();
         }
         return puntajeActual;
     }
