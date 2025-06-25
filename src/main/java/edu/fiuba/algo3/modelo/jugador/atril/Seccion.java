@@ -4,69 +4,78 @@ import edu.fiuba.algo3.modelo.cartas.unidades.Animador;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
-import edu.fiuba.algo3.modelo.cartas.*;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Seccion {
-    private Posicion posicion;
-    private List<Unidad> unidadesColocadas;
+  private Posicion posicion;
+  private List<Unidad> unidadesColocadas;
+  private Boolean debuff;
+  private int duplicadores;
 
-    private Puntaje puntajeSeccion;
-    private final static int puntajeBaseSeccion = 0;
+  public Seccion(Posicion posiccion) {
+    this.posicion = posiccion;
+    this.unidadesColocadas = new ArrayList<>();
+    this.duplicadores = 1;
+  }
 
-    public Seccion(Posicion posiccion){
-        this.posicion = posiccion;
-        this.unidadesColocadas = new ArrayList<>();
-        this.puntajeSeccion = new Puntaje(puntajeBaseSeccion);
+  public void agregarDuplicador() {
+    this.duplicadores *= 2;
+  }
+
+  public Boolean compararPosiciones(Posicion posicion) {
+    return this.posicion.esCompatible(posicion);
+  }
+
+  public void colocarUnidad(Unidad unidad) {
+    if (!unidad.sePuedeColocar(posicion)) {
+      throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("");
     }
+    unidadesColocadas.add(unidad);
+  }
 
-    public Boolean compararPosiciones(Posicion posicion){
-        return this.posicion.esCompatible(posicion);
+  public Puntaje calcularPuntajeActualUnidades() {
+    if (this.debuff)
+      return new Puntaje(this.unidadesColocadas.size());
+
+    int cantAnimadoresEnSeccion = (int) unidadesColocadas.stream()
+        .filter(u -> u instanceof Animador)
+        .count();
+
+    int puntajeTotal = 0;
+    for (Unidad unidad : unidadesColocadas) {
+      if (unidad instanceof Animador)
+        puntajeTotal += unidad.getPuntajeTotal(this) * this.duplicadores;
+      else
+        puntajeTotal += unidad.getPuntajeTotal(this) * this.duplicadores + cantAnimadoresEnSeccion;
     }
+    return new Puntaje(puntajeTotal);
+  }
 
-    public void colocarUnidad(Unidad unidad){
-        if(!unidad.sePuedeColocar(posicion)){
-            throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("");
-        }
-        unidadesColocadas.add(unidad);
-        calcularPuntajeActualUnidades();
-        //this.puntajeSeccion.calcularPuntaje(unidadesColocadas);
+  public List<Unidad> getUnidadesColocadas() {
+    return this.unidadesColocadas;
+  }
+
+  public List<Unidad> removerCartasJugadas() {
+    List<Unidad> descartadas = new ArrayList<>();
+    while (!unidadesColocadas.isEmpty()) {
+      descartadas.add(unidadesColocadas.remove(0));
     }
+    this.debuff = false;
+    this.duplicadores = 1;
+    return descartadas;
+  }
 
-    private void calcularPuntajeActualUnidades(){
-        int cantAnimadoresEnSeccion = (int) unidadesColocadas.stream()
-                .filter(u -> u instanceof Animador)
-                .count();
+  public void activarDebuff() {
+    this.debuff = true;
+  }
 
-        int puntajeTotal = 0;
-        for(Unidad unidad : unidadesColocadas){
-            if(unidad instanceof Animador) puntajeTotal += unidad.getPuntajeTotal(this);
-            else puntajeTotal += unidad.getPuntajeTotal(this) + cantAnimadoresEnSeccion;
-        }
-        this.puntajeSeccion = new Puntaje(puntajeTotal);
-    }
+  public void limpiarDebuff() {
+    this.debuff = false;
+  }
 
-    public List<Unidad> getUnidadesColocadas(){
-        return this.unidadesColocadas;
-    }
-
-
-    public int getPuntajeActual(){
-        return this.puntajeSeccion.getPuntajeActual();
-    }
-
-    public List<Unidad> removerCartasJugadas(){
-        List<Unidad> descartadas = new ArrayList<>();
-        while (!unidadesColocadas.isEmpty()) {
-            descartadas.add(unidadesColocadas.remove(0));
-        }
-        return descartadas;
-    }
-
-    public Posicion getPosicion() {
-        return this.posicion;
-    }
+  public Posicion getPosicion() {
+    return this.posicion;
+  }
 }

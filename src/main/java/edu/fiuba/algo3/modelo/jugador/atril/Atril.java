@@ -1,51 +1,83 @@
 package edu.fiuba.algo3.modelo.jugador.atril;
 
-
-
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-
-
+import edu.fiuba.algo3.modelo.posiciones.*;
+import java.util.function.Consumer;
 import java.util.ArrayList;
 import java.util.List;
+import edu.fiuba.algo3.modelo.cartas.especiales.CEspecial;
 
 public class Atril {
-    private List<Seccion> secciones;
-    private List<ICarta> descarte;
+  private List<Seccion> secciones;
+  private SeccionEspecial especiales;
 
-    public Atril(){
-        this.secciones = new ArrayList<>();
-        this.descarte = new ArrayList<>();
-    }
+  public Atril() {
+    this.secciones = new ArrayList<>();
+  }
 
-    public void agregarSeccion(Seccion seccion){
-        secciones.add(seccion);
-    }
+  public void agregarSeccion(Seccion seccion) {
+    secciones.add(seccion);
+  }
 
-    public List<Seccion> getSecciones(){
-        return this.secciones;
-    }
+  public List<Seccion> getSecciones() {
+    return this.secciones;
+  }
 
-    public List<ICarta> getDescarte(){
-        return this.descarte;
-    }
+  public void colocarEspecial(CEspecial carta) {
+    this.especiales.agregarCarta(carta);
+  }
 
-    public boolean contiene(Seccion seccion){
-        return this.secciones.contains(seccion);
-    }
-
-    public int getPuntajeActual(){
-        int puntajeActual = 0;
-        for(Seccion seccion: secciones){
-            puntajeActual += seccion.getPuntajeActual();
+  public void aplicar(ArrayList<Posicion> posicionesAfectadas, Consumer<Seccion> efecto) {
+    for (Posicion posicion : posicionesAfectadas) {
+      for (Seccion seccion : this.secciones) {
+        if (seccion.compararPosiciones(posicion)) {
+          efecto.accept(seccion);
         }
-        return puntajeActual;
+      }
     }
+  }
 
-    public void descartarCartas() {
-        for (Seccion seccion : secciones) {
-            List<Unidad> cartas = seccion.removerCartasJugadas();
-            this.descarte.addAll(cartas);
-        }
+  public void duplicarPuntos(ArrayList<Posicion> posicionesAfectadas) {
+    aplicar(posicionesAfectadas, Seccion::agregarDuplicador);
+  }
+
+  public void activarDebuff(ArrayList<Posicion> posicionesAfectadas) {
+    aplicar(posicionesAfectadas, Seccion::activarDebuff);
+  }
+
+  public void limpiarDebuff(ArrayList<Posicion> posicionesAfectadas) {
+    aplicar(posicionesAfectadas, Seccion::limpiarDebuff);
+  }
+
+  public void colocarCarta(ICarta carta, Posicion posicion) {
+    for (Seccion seccion : this.secciones) {
+      if (seccion.compararPosiciones(posicion)) {
+        // se caestea -> arreglar
+        seccion.colocarUnidad((Unidad) carta);
+      }
     }
+  }
+
+  public boolean contiene(Seccion seccion) {
+    return this.secciones.contains(seccion);
+  }
+
+  public int getPuntajeActual() {
+    int puntajeActual = 0;
+    for (Seccion seccion : secciones) {
+      puntajeActual += seccion.calcularPuntajeActualUnidades().getPuntajeActual(); // Tell dont ask -> fix
+    }
+    return puntajeActual;
+  }
+
+  public ArrayList<ICarta> descartarCartas() {
+    ArrayList<ICarta> cartasDescarte = new ArrayList<>();
+    for (Seccion seccion : secciones) {
+      List<Unidad> cartas = seccion.removerCartasJugadas();
+      cartasDescarte.addAll(cartas);
+    }
+    cartasDescarte.addAll(this.especiales.limpiar());
+    return cartasDescarte;
+  }
 }

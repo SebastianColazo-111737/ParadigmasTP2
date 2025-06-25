@@ -18,84 +18,81 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UnidadEspiaTest {
-    private Jugador jugador;
-    private Mano mano;
-    private Mazo mazo;
-    private Atril atril;
+  private Jugador jugador;
+  private Mano mano;
+  private Mazo mazo;
+  private Atril atril;
+  private Jugador jugador2;
 
-    @BeforeEach
-    void setUp() {
-        mano = new Mano();
-        mazo = new Mazo();
-        atril = new Atril();
+  @BeforeEach
+  void setUp() {
+    mano = new Mano();
+    mazo = new Mazo();
+    atril = new Atril();
 
+    jugador = new Jugador(mazo, mano, atril);
+    jugador2 = new Jugador(new Mazo(), new Mano(), new Atril());
 
+  }
 
-        jugador = new Jugador(mazo, mano, atril);
-    }
+  @Test
+  public void unaUnidadEspiaSePuedeColocarEnUnaSeccionDiferenteALasDelJugadorYRoba2CartasDelMazo() {
+    // Arrange
+    Seccion seccionCuerpoAcuerpo = new Seccion(new CuerpoACuerpo());
 
-    @Test
-    public void unaUnidadEspiaSePuedeColocarEnUnaSeccionDiferenteALasDelJugadorYRoba2CartasDelMazo(){
-        // Arrange
-        Seccion seccionCuerpoAcuerpo = new Seccion(new CuerpoACuerpo());
+    UnidadBasica unidadParaRobar1 = new UnidadBasica(
+        "robo1",
+        new Puntaje(0),
+        new CuerpoACuerpo());
+    UnidadBasica unidadParaRobar2 = new UnidadBasica(
+        "robo2",
+        new Puntaje(0),
+        new CuerpoACuerpo());
 
-        UnidadBasica unidadParaRobar1 = new UnidadBasica(
-                "robo1",
-                new Puntaje(0),
-                new CuerpoACuerpo()
-        );
-        UnidadBasica unidadParaRobar2 = new UnidadBasica(
-                "robo2",
-                new Puntaje(0),
-                new CuerpoACuerpo()
-        );
+    Espia jamesBond = new Espia(
+        "007",
+        new Puntaje(6),
+        new CuerpoACuerpo());
 
-        Espia jamesBond = new Espia(
-                "007",
-                new Puntaje(6),
-                new CuerpoACuerpo()
-        );
+    mano.agregarCarta(jamesBond);
+    mazo.agregarCarta(List.of(unidadParaRobar1, unidadParaRobar2));
 
-        mano.agregarCarta(jamesBond);
-        mazo.agregarCarta(List.of(unidadParaRobar1, unidadParaRobar2));
+    // Act
+    int cantidadDeCartasEnLaManoInicial = mano.getCantidadCartas();
+    int cantidadDeCartasEnElMazoInicial = mazo.getCantidadCartas();
 
-        // Act
-        int cantidadDeCartasEnLaManoInicial = mano.getCantidadCartas();
-        int cantidadDeCartasEnElMazoInicial = mazo.getCantidadCartas();
+    jugador.jugarCarta(jamesBond, jugador2, jamesBond.getTipo().get(0));
 
-        jugador.jugarCarta(jamesBond, seccionCuerpoAcuerpo);
+    int cantidadDeCartasEnLaManoFinal = mano.getCantidadCartas();
+    int cantidadDeCartasEnElMazoFinal = mazo.getCantidadCartas();
 
-        int cantidadDeCartasEnLaManoFinal = mano.getCantidadCartas();
-        int cantidadDeCartasEnElMazoFinal = mazo.getCantidadCartas();
+    // Assert
+    assertEquals(1, cantidadDeCartasEnLaManoInicial);
+    assertEquals(2, cantidadDeCartasEnElMazoInicial);
 
-        // Assert
-        assertEquals(1, cantidadDeCartasEnLaManoInicial);
-        assertEquals(2, cantidadDeCartasEnElMazoInicial);
+    assertEquals(1, seccionCuerpoAcuerpo.getUnidadesColocadas().size());
+    assertTrue(seccionCuerpoAcuerpo.getUnidadesColocadas().contains(jamesBond));
 
-        assertEquals(1, seccionCuerpoAcuerpo.getUnidadesColocadas().size());
-        assertTrue(seccionCuerpoAcuerpo.getUnidadesColocadas().contains(jamesBond));
+    assertEquals(2, cantidadDeCartasEnLaManoFinal);
+    assertEquals(0, cantidadDeCartasEnElMazoFinal);
+  }
 
-        assertEquals(2, cantidadDeCartasEnLaManoFinal);
-        assertEquals(0, cantidadDeCartasEnElMazoFinal);
-    }
+  @Test
+  public void unaUnidadEspiaNOSePuedeColocarEnUnaSeccionQuePerteneceAlJugador() {
+    // Arrange
+    Seccion seccionCuerpoAcuerpoJ1 = new Seccion(new CuerpoACuerpo());
+    atril.agregarSeccion(seccionCuerpoAcuerpoJ1);
 
-    @Test
-    public void unaUnidadEspiaNOSePuedeColocarEnUnaSeccionQuePerteneceAlJugador(){
-        // Arrange
-        Seccion seccionCuerpoAcuerpoJ1 = new Seccion(new CuerpoACuerpo());
-        atril.agregarSeccion(seccionCuerpoAcuerpoJ1);
+    Espia jamesBond = new Espia(
+        "007",
+        new Puntaje(6),
+        new CuerpoACuerpo());
+    mano.agregarCarta(jamesBond);
 
-        Espia jamesBond = new Espia(
-                "007",
-                new Puntaje(6),
-                new CuerpoACuerpo()
-        );
-        mano.agregarCarta(jamesBond);
-
-        // Act
-        // Assert
-        assertThrows(UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion.class, () -> {
-            jugador.jugarCarta(jamesBond, seccionCuerpoAcuerpoJ1);
-        });
-    }
+    // Act
+    // Assert
+    assertThrows(UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion.class, () -> {
+      jugador.jugarCarta(jamesBond, jugador2, jamesBond.getTipo().get(0));
+    });
+  }
 }
