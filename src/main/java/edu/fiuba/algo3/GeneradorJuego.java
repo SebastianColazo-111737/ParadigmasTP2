@@ -75,7 +75,8 @@ public class GeneradorJuego {
 
         // Inicializar juego
         Gwent juego = new Gwent(jugador1, jugador2);
+        ControladorTurnos controladorTurnos = new ControladorTurnos(juego);
 
-        return new Lienzo(jugador1, jugador2);
+        return new Lienzo(jugador1, jugador2, juego, controladorTurnos);
     }
 }

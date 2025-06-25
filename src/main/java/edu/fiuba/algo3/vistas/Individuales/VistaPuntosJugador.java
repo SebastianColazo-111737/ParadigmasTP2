@@ -37,7 +37,7 @@ public class VistaPuntosJugador extends StackPane {
         this.getChildren().addAll(circulo, textoPuntaje);
         this.setAlignment(Pos.CENTER);
 
-        // Timeline que revisa si cambió el puntaje
+        // Timeline que revisa si se actualizo el puntaje
         Timeline actualizador = new Timeline(new KeyFrame(Duration.millis(200), e -> {
             int nuevoPuntaje = atril.getPuntajeActual();
             if (nuevoPuntaje != puntajeAnterior) {

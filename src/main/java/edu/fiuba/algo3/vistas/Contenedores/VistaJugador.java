@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
+import edu.fiuba.algo3.vistas.Individuales.VistaTurnos;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -24,7 +26,7 @@ public class VistaJugador extends VBox {
 
     private final VistaMano vistaMano;
 
-    public VistaJugador(Jugador jugador, boolean estaArriba, VistaMano vistaMano){
+    public VistaJugador(Jugador jugador, boolean estaArriba, VistaMano vistaMano, VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos){
         super(10);
         this.setAlignment(Pos.CENTER);
 
@@ -32,7 +34,7 @@ public class VistaJugador extends VBox {
             System.out.println("Se seleccionó: " + carta.nombre());
         });
 
-        VBox secciones = construirVistaSecciones(jugador,estaArriba);
+        VBox secciones = construirVistaSecciones(jugador,estaArriba, vistaTurnos, controladorTurnos);
         Node contenedorDerecha = construirContenedorDerecha(jugador,estaArriba);
 
         BorderPane contenedor = new BorderPane();
@@ -48,14 +50,14 @@ public class VistaJugador extends VBox {
         this.getChildren().addAll(contenedor);
     }
 
-    private VBox construirVistaSecciones(Jugador jugador, boolean estaArriba) {
+    private VBox construirVistaSecciones(Jugador jugador, boolean estaArriba, VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos) {
         List<Seccion> seccionesOrdenadas = OrdenadorSecciones.ordenar(jugador.atril().getSecciones(), estaArriba);
 
         VBox secciones = new VBox(5);
         secciones.setAlignment(Pos.CENTER);
 
         for (Seccion seccion : seccionesOrdenadas) {
-            secciones.getChildren().add(new VistaSeccion(seccion, jugador, this.vistaMano));
+            secciones.getChildren().add(new VistaSeccion(seccion, jugador, this.vistaMano, vistaTurnos, controladorTurnos));
         }
         return secciones;
     }

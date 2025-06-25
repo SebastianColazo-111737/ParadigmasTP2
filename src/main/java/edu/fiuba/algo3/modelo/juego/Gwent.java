@@ -35,7 +35,9 @@ public class Gwent {
 
     public void pasarTurno(){
         Jugador jugador = adminTurnos.getJugadorActual();
-        adminTurnos.jugadorPasaTurno(jugador);
+        //adminTurnos.jugadorPasaTurno(jugador);
+        adminTurnos.proximoTurno();
+        /*
         if(adminTurnos.todosPasaronTurno()){
             //registro la ronda
 
@@ -43,14 +45,12 @@ public class Gwent {
             // adminTurnos.reiniciarAdminTurnos();
         }else{
             adminTurnos.proximoTurno();
-        }
-
+        }*/
     }
-
 
     public void jugarCarta(ICarta carta, Seccion seccion){
         Jugador jugador = adminTurnos.getJugadorActual();
         jugador.jugarCarta(carta, seccion);
-        adminTurnos.proximoTurno();
+        //adminTurnos.proximoTurno();
     }
 }

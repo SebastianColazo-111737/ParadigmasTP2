@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
@@ -9,6 +10,7 @@ import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
+import edu.fiuba.algo3.vistas.Individuales.VistaTurnos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -29,10 +31,14 @@ public class VistaSeccion extends StackPane {
     private final Pane cartasApoyadas;
     private final VistaPuntos vistaPuntos;
     private static final int CapacidadMaxima = 8;
+    private ControladorTurnos controladorTurnos;
+    private VistaTurnos vistaTurnos;
 
-    public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano){
+    public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano,VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos){
         this.seccionModelo = seccionModelo;
         this.jugador = jugador;
+        this.controladorTurnos = controladorTurnos;
+        this.vistaTurnos = vistaTurnos;
 
         this.vistaPuntos = new VistaPuntos(seccionModelo.getPuntajeActual());
 
@@ -67,7 +73,8 @@ public class VistaSeccion extends StackPane {
 
             if(tablaSeccion.hasString()
                     && VistaCarta.cartaSeleccionada != null
-                    && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima ){
+                    && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima
+                    && controladorTurnos.jugadorActual().equals(jugador)){
 
                 VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
                 ICarta cartaModelo = vistaCarta.getCartaModelo();
@@ -80,6 +87,9 @@ public class VistaSeccion extends StackPane {
 
                 vistaPuntos.actualizarPuntaje(seccionModelo.getPuntajeActual());
                 vistaMano.removerVistaCarta(vistaCarta);
+
+                controladorTurnos.AvanzarTurno();
+                vistaTurnos.actualizarTurnos();
 
                 System.out.println("Carta colocada en: " + this.seccionModelo.getPosicion());
                 VistaCarta.cartaSeleccionada = null;
