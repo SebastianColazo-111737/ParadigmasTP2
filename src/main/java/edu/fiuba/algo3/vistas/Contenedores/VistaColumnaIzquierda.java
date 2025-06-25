@@ -1,16 +1,9 @@
 package edu.fiuba.algo3.vistas.Contenedores;
 
-import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.vistas.Individuales.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import edu.fiuba.algo3.vistas.Contenedores.VistaDatos;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 public class VistaColumnaIzquierda extends VBox {
     private final VistaDatos infoJugador1;

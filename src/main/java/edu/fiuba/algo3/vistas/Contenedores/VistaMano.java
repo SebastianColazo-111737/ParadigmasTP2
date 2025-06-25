@@ -3,7 +3,6 @@ package edu.fiuba.algo3.vistas.Contenedores;
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
-import edu.fiuba.algo3.vistas.Individuales.VistaTurnos;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import java.util.function.Consumer;

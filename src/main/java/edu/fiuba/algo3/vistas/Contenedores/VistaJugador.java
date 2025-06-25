@@ -2,23 +2,16 @@ package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
-import edu.fiuba.algo3.modelo.posiciones.Asedio;
-import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
-import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
-import edu.fiuba.algo3.vistas.Individuales.VistaTurnos;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 

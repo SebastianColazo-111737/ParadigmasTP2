@@ -3,15 +3,10 @@ import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.atril.Atril;
-import edu.fiuba.algo3.modelo.posiciones.Asedio;
-import edu.fiuba.algo3.modelo.posiciones.Distancia;
-import edu.fiuba.algo3.vistas.Individuales.VistaTurnos;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import java.util.List;
-import java.util.Comparator;
-import java.util.stream.Collectors;
 
 public class VistaAtril extends VBox {
     private final Atril atril;

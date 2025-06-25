@@ -1,8 +1,7 @@
-package edu.fiuba.algo3.vistas.Individuales;
+package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.vistas.Contenedores.VistaMano;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -23,7 +22,9 @@ public class VistaTurnos extends VBox {
         this.vistaMano1 = vistaMano1;
         this.vistaMano2 = vistaMano2;
 
-        this.indicadorDeTurno = new Circle(10);
+        this.indicadorDeTurno = new Circle(20);
+        indicadorDeTurno.setStrokeWidth(4);
+        indicadorDeTurno.setStroke(Color.BLACK);
         this.getChildren().add(indicadorDeTurno);
 
         this.setAlignment(Pos.CENTER);

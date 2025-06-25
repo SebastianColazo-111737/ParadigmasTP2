@@ -10,7 +10,6 @@ import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
-import edu.fiuba.algo3.vistas.Individuales.VistaTurnos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -18,10 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import java.util.Stack;
 
 
 public class VistaSeccion extends StackPane {
