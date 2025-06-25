@@ -1,9 +1,7 @@
-package edu.fiuba.algo3.modelo.tablero.atril;
+package edu.fiuba.algo3.modelo.tablero;
 
-
-
+import edu.fiuba.algo3.modelo.cartas.Carta;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
-import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 
@@ -12,11 +10,10 @@ import java.util.List;
 
 public class Atril {
     private List<Seccion> secciones;
-    private List<ICarta> descarte;
+//    private List<Carta> descarte;
 
     public Atril(){
         this.secciones = new ArrayList<>();
-        this.descarte = new ArrayList<>();
     }
 
     public void agregarSeccion(Seccion seccion){
@@ -27,9 +24,6 @@ public class Atril {
         return this.secciones;
     }
 
-    public List<ICarta> getDescarte(){
-        return this.descarte;
-    }
 
     public void colocarUnidad(Unidad unidad, Posicion posicion){
         for(Seccion seccion: secciones){
@@ -63,10 +57,11 @@ public class Atril {
         return puntajeActual;
     }
 
-    public void descartarCartas() {
+    public List<Carta> removerCartasJugadas() {
+        List<Carta> cartasDescartadas = new ArrayList<>();
         for (Seccion seccion : secciones) {
-            List<Unidad> cartas = seccion.removerUnidadesJugadas();
-            this.descarte.addAll(cartas);
+            cartasDescartadas.addAll(seccion.removerUnidadesJugadas());
         }
+        return cartasDescartadas;
     }
 }

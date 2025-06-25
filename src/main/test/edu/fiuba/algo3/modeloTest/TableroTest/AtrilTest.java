@@ -1,14 +1,17 @@
-package edu.fiuba.algo3.modeloTest.JugadorTest.AtrilTest;
+package edu.fiuba.algo3.modeloTest.TableroTest;
 
 
+import edu.fiuba.algo3.modelo.cartas.Carta;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
-import edu.fiuba.algo3.modelo.juego.Puntaje;
+import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.*;
-import edu.fiuba.algo3.modelo.tablero.atril.Atril;
-import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
+import edu.fiuba.algo3.modelo.tablero.Atril;
+import edu.fiuba.algo3.modelo.tablero.Seccion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -59,9 +62,13 @@ public class AtrilTest {
         asedio.colocarUnidad(unidad3);
 
         // Act
-       atril.descartarCartas();
+       List<Carta> cartasJugadas = atril.removerCartasJugadas();
 
         // Assert
-        assertEquals(3, atril.getDescarte().size());
+        assertEquals(3, cartasJugadas.size());
+        assertTrue(cartasJugadas.contains(unidad1));
+        assertTrue(cartasJugadas.contains(unidad2));
+        assertTrue(cartasJugadas.contains(unidad3));
+
     }
 }

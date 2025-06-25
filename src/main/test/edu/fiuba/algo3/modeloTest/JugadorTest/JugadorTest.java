@@ -1,17 +1,12 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest;
 
 
-import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.Puntaje;
+import edu.fiuba.algo3.modelo.cartas.Carta;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
-import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.Mano;
-import edu.fiuba.algo3.modelo.jugador.Mazo;
-import edu.fiuba.algo3.modelo.juego.Puntaje;
-import edu.fiuba.algo3.modelo.tablero.atril.Atril;
-import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
-import edu.fiuba.algo3.modelo.posiciones.Asedio;
-import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
-import edu.fiuba.algo3.modelo.posiciones.Distancia;
+import edu.fiuba.algo3.modelo.jugador.*;
+import edu.fiuba.algo3.modelo.posiciones.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,32 +19,22 @@ public class JugadorTest {
     private Jugador jugador;
     private Mano mano;
     private Mazo mazo;
-    private Atril atril;
-    private Seccion cuerpoACuerpoJ1;
-    private Seccion distanciaJ1;
-    private Seccion asedioJ1;
+    private Descarte descarte;
 
     @BeforeEach
     void setUp() {
         mano = new Mano();
         mazo = new Mazo();
+        descarte = new Descarte();
 
-        atril = new Atril();
-        cuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
-        distanciaJ1 = new Seccion(new Distancia());
-        asedioJ1 = new Seccion(new Asedio());
-        atril.agregarSeccion(cuerpoACuerpoJ1);
-        atril.agregarSeccion(distanciaJ1);
-        atril.agregarSeccion(asedioJ1);
-
-        jugador = new Jugador(mazo, mano, atril);
+        jugador = new Jugador(mazo, mano, descarte);
     }
 
     @Test
     public void unJugadorPuedeRobarCartasDeSuMazoParaAgreagarlasASuMano(){
         // Arrange
-        ICarta cartaParaAgregarAlMazo1 = new UnidadBasica("Unidad1", new Puntaje(5), new CuerpoACuerpo());
-        ICarta cartaParaAgregarAlMazo2 = new UnidadBasica("Unidad2", new Puntaje(4), new Asedio());
+        Carta cartaParaAgregarAlMazo1 = new UnidadBasica("Unidad1", new Puntaje(5), new CuerpoACuerpo());
+        Carta cartaParaAgregarAlMazo2 = new UnidadBasica("Unidad2", new Puntaje(4), new Asedio());
         mazo.agregarCarta(cartaParaAgregarAlMazo1);
         mazo.agregarCarta(cartaParaAgregarAlMazo2);
         int cantidadDeCartasEnElMazoInicial = mazo.getCantidadCartas();
@@ -67,10 +52,10 @@ public class JugadorTest {
     @Test
     public void unJugadorPuedeCambiarUnaCartaDeSuManoPorOtraDeSuMazo(){
         // Arrange
-        ICarta cartaQueEmpiezaEnLaMano = new UnidadBasica("Unidad1", new Puntaje(5), new CuerpoACuerpo());
+        Carta cartaQueEmpiezaEnLaMano = new UnidadBasica("Unidad1", new Puntaje(5), new CuerpoACuerpo());
         mano.agregarCarta(cartaQueEmpiezaEnLaMano);
 
-        ICarta cartaQueEmpiezaEnElMazo = new UnidadBasica("Unidad2", new Puntaje(4), new Asedio());
+        Carta cartaQueEmpiezaEnElMazo = new UnidadBasica("Unidad2", new Puntaje(4), new Asedio());
         mazo.agregarCarta(cartaQueEmpiezaEnElMazo);
 
         int cantidadDeCartasEnElMazoInicial = mazo.getCantidadCartas();

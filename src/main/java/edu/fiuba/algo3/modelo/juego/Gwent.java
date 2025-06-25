@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.Carta;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
@@ -52,11 +52,15 @@ public class Gwent {
 
     }
 
-    public void jugarCarta(ICarta carta, Posicion posicion){
+    public void jugarCarta(Carta carta, Posicion posicion){
         Jugador jugador = adminTurnos.getJugadorActual();
 
         // puede lanzar exepcion si el jugador no tiene la carta en la mano
-        jugador.jugarCarta(carta, this.tablero, posicion);
+        jugador.removerCartaDeLaMano(carta);
+
+        // puede lanzar exepciones
+        carta.jugarCarta(jugador, tablero, posicion);
+
 
         adminTurnos.proximoTurno();
     }

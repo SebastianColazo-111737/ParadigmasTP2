@@ -1,16 +1,19 @@
 package edu.fiuba.algo3.modeloTest.JuegoTest;
 
-import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.Carta;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.juego.Gwent;
+import edu.fiuba.algo3.modelo.jugador.Descarte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 
 import edu.fiuba.algo3.modelo.jugador.Mano;
 import edu.fiuba.algo3.modelo.jugador.Mazo;
-import edu.fiuba.algo3.modelo.juego.Puntaje;
-import edu.fiuba.algo3.modelo.tablero.atril.Atril;
-import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
+import edu.fiuba.algo3.modelo.Puntaje;
+import edu.fiuba.algo3.modelo.posiciones.Posicion;
+import edu.fiuba.algo3.modelo.tablero.Tablero;
+import edu.fiuba.algo3.modelo.tablero.Atril;
+import edu.fiuba.algo3.modelo.tablero.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
@@ -27,14 +30,20 @@ public class GwentTest {
     private Jugador jugador1;
     private Mazo mazoJ1;
     private Mano manoJ1;
+    private Descarte descarteJ1;
+
+    private Jugador jugador2;
+    private Mazo mazoJ2;
+    private Mano manoJ2;
+    private Descarte descarteJ2;
+
+    private Tablero tablero;
+
     private Atril atrilJ1;
     private Seccion cuerpoACuerpoJ1;
     private Seccion distanciaJ1;
     private Seccion asedioJ1;
 
-    private Jugador jugador2;
-    private Mazo mazoJ2;
-    private Mano manoJ2;
     private Atril atrilJ2;
     private Seccion cuerpoACuerpoJ2;
     private Seccion distanciaJ2;
@@ -45,8 +54,8 @@ public class GwentTest {
     @BeforeEach
     void setUp() {
 
-        List<ICarta> cartasJ1 = new ArrayList<>();
-        List<ICarta> cartasJ2 = new ArrayList<>();
+        List<Carta> cartasJ1 = new ArrayList<>();
+        List<Carta> cartasJ2 = new ArrayList<>();
 
         for (int i = 0; i < 21; i++) {
             cartasJ1.add(new UnidadBasica("CatapultaJ1", new Puntaje(8), new Asedio()));
@@ -56,8 +65,21 @@ public class GwentTest {
         //setUpJugador1
         mazoJ1 = new Mazo();
         mazoJ1.agregarCarta(cartasJ1);
-
         manoJ1 = new Mano();
+        descarteJ1 = new Descarte();
+        jugador1 = new Jugador(mazoJ1, manoJ1, descarteJ1);
+
+        //setUpJugador2
+        mazoJ2 = new Mazo();
+        mazoJ2.agregarCarta(cartasJ2);
+        manoJ2 = new Mano();
+        descarteJ2 = new Descarte();
+        jugador2 = new Jugador(mazoJ2, manoJ2, descarteJ2);
+
+
+        // setUp tablero
+
+        Tablero tablero = new Tablero();
 
         atrilJ1 = new Atril();
         cuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
@@ -67,14 +89,6 @@ public class GwentTest {
         atrilJ1.agregarSeccion(distanciaJ1);
         atrilJ1.agregarSeccion(asedioJ1);
 
-        jugador1 = new Jugador(mazoJ1, manoJ1, atrilJ1);
-
-        //setUpJugador2
-        mazoJ2 = new Mazo();
-        mazoJ2.agregarCarta(cartasJ2);
-
-        manoJ2 = new Mano();
-
         atrilJ2 = new Atril();
         cuerpoACuerpoJ2 = new Seccion(new CuerpoACuerpo());
         distanciaJ2 = new Seccion(new Distancia());
@@ -83,9 +97,10 @@ public class GwentTest {
         atrilJ2.agregarSeccion(distanciaJ2);
         atrilJ2.agregarSeccion(asedioJ2);
 
-        jugador2 = new Jugador(mazoJ2, manoJ2, atrilJ2);
+        tablero.agregarJugador(jugador1, atrilJ1);
+        tablero.agregarJugador(jugador2, atrilJ2);
 
-        juego = new Gwent(jugador1, jugador2);
+        juego = new Gwent(jugador1, jugador2, tablero);
     }
 
     @Test
@@ -131,21 +146,21 @@ public class GwentTest {
 
 
     @Test
-    public void unJugadorPuedeJugarUnaCartaDeSuManoEnUnaSeccionElegida(){
+    public void unJugadorPuedeJugarUnaCartaDeSuManoEnUnaPosicionElegida(){
 
         // Arrange
         juego.repartirCartasALosJugadores();
 
         // En el controlador el usuario deberia elegir la carta del modelo
         // haciendo click en la vista-carta asociada
-        ICarta cartaElegida = manoJ1.getCartas().get(0);
+        Carta cartaElegida = manoJ1.getCartas().get(0);
 
         // lo mismo para la seccion
-        Seccion seccionElegida = asedioJ1;
+        Posicion posicionElegida = new Asedio();
 
         // Act
         juego.setJugadorActual(jugador1);
-        juego.jugarCarta(cartaElegida, seccionElegida);
+        juego.jugarCarta(cartaElegida, posicionElegida);
 
         // Assert
         assertEquals(9, manoJ1.getCantidadCartas());
@@ -160,15 +175,15 @@ public class GwentTest {
         // Arrange
         juego.repartirCartasALosJugadores();
 
-        ICarta cartaElegida = manoJ2.getCartas().get(0);
-        Seccion seccionElegida = asedioJ2;
+        Carta cartaElegida = manoJ2.getCartas().get(0);
+        Posicion posicionElegida = new Asedio();
 
         // Act
         juego.setJugadorActual(jugador1);
         juego.pasarTurno();
 
         Jugador jugadorSegundoTurno = juego.getJugadorActual();
-        juego.jugarCarta(cartaElegida,seccionElegida);
+        juego.jugarCarta(cartaElegida,posicionElegida);
         Jugador jugadorTercerTurno = juego.getJugadorActual();
 
 

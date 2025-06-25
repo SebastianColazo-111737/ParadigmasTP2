@@ -1,7 +1,6 @@
-package edu.fiuba.algo3.modelo.tablero.atril;
+package edu.fiuba.algo3.modelo.tablero;
 
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
-import edu.fiuba.algo3.modelo.juego.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 
@@ -15,14 +14,13 @@ public class Seccion {
     private boolean afectadoPorClima;
     private boolean afectadoPorMoraleBoost;
 
-    private Puntaje puntajeSeccion;
-    private final static int puntajeBaseSeccion = 0;
+    private int puntajeSeccion;
 
     public Seccion(Posicion posiccion){
         this.posicion = posiccion;
         this.unidadesColocadas = new ArrayList<Unidad>();
 
-        this.puntajeSeccion = new Puntaje(puntajeBaseSeccion);
+        this.puntajeSeccion = 0;
 
         this.afectadoPorClima = false;
         this.afectadoPorMoraleBoost = false;
@@ -37,31 +35,15 @@ public class Seccion {
     }
 
 
-
-
     public void colocarUnidad(Unidad unidad){
         if(!unidad.sePuedeColocar(posicion)){
             throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("");
         }
         unidadesColocadas.add(unidad);
-        actualizarPuntajes();
     }
 
     public Boolean puedeColocarse(Posicion posicion){
         return this.posicion.esCompatible(posicion);
-    }
-
-    private void actualizarPuntajes(){
-        for (Unidad unidadColocada: unidadesColocadas){
-            if(afectadoPorClima){
-                unidadColocada.getPuntaje().setPuntajeActual(1);
-            }
-            unidadColocada.calcularPuntajeActual(this.unidadesColocadas);
-
-            if(afectadoPorMoraleBoost){
-                unidadColocada.getPuntaje().multiplicarPuntaje(2);
-            }
-        }
     }
 
     public void removerUnidad(Unidad unidad){
@@ -81,7 +63,6 @@ public class Seccion {
     }
 
     public int getPuntajeActual(){
-        return this.puntajeSeccion.getPuntajeActual();
+        return this.puntajeSeccion;
     }
-
 }

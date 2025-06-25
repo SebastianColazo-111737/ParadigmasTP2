@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.tablero;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.tablero.atril.Atril;
 
 import java.util.HashMap;
 
@@ -27,5 +26,11 @@ public class Tablero {
             }
         }
         return null; //o lanza exepcion
+    }
+
+    public void limpiarTablero(){
+        for(Jugador jugador: atriles.keySet()){
+            jugador.descartarCarta(atriles.get(jugador).removerCartasJugadas());
+        }
     }
 }

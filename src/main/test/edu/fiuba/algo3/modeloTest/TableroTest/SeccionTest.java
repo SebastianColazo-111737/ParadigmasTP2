@@ -1,9 +1,9 @@
-package edu.fiuba.algo3.modeloTest.JugadorTest.AtrilTest;
+package edu.fiuba.algo3.modeloTest.TableroTest;
 
-import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
+import edu.fiuba.algo3.modelo.tablero.Seccion;
 import edu.fiuba.algo3.modelo.cartas.unidades.*;
-import edu.fiuba.algo3.modelo.juego.Puntaje;
-import edu.fiuba.algo3.modelo.tablero.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
+import edu.fiuba.algo3.modelo.Puntaje;
+import edu.fiuba.algo3.modelo.tablero.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
 import edu.fiuba.algo3.modelo.posiciones.*;
 
 

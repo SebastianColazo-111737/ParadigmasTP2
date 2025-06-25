@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.juego;
+package edu.fiuba.algo3.modelo;
 
 public class Puntaje {
     private int puntajeBase;

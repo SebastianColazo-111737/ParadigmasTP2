@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest;
 
 
-import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.juego.Puntaje;
+import edu.fiuba.algo3.modelo.cartas.Carta;
+import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.jugador.Mazo;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class MazoTest {
 
-    private List<ICarta> cartas;
+    private List<Carta> cartas;
     @BeforeEach
     void setUp() {
         cartas = new ArrayList<>();
@@ -48,7 +48,7 @@ public class MazoTest {
         mazo.agregarCarta(cartas);
 
         // Act
-        List<ICarta> cartasSacadasDelMazo = mazo.darCartas(10);
+        List<Carta> cartasSacadasDelMazo = mazo.darCartas(10);
         int cantidadDeCartasSacadasDelMazo = cartasSacadasDelMazo.size();
         int cantidadDeCartasDelMazo = mazo.getCantidadCartas();
 
@@ -63,10 +63,10 @@ public class MazoTest {
         Mazo mazo = new Mazo();
         mazo.agregarCarta(cartas);
 
-        ICarta cartaParaIntercambiar = new UnidadBasica("Mago", new Puntaje(5), new CuerpoACuerpo());
+        Carta cartaParaIntercambiar = new UnidadBasica("Mago", new Puntaje(5), new CuerpoACuerpo());
 
         // Act
-        ICarta cartaDelMazo = mazo.cambiarCarta(cartaParaIntercambiar);
+        Carta cartaDelMazo = mazo.cambiarCarta(cartaParaIntercambiar);
 
         // Assert
         assertEquals(21, mazo.getCantidadCartas());

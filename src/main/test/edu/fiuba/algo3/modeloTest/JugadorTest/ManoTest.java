@@ -2,10 +2,10 @@ package edu.fiuba.algo3.modeloTest.JugadorTest;
 
 
 import edu.fiuba.algo3.modelo.cartas.unidades.*;
-import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.Carta;
 import edu.fiuba.algo3.modelo.jugador.Mano;
 import edu.fiuba.algo3.modelo.jugador.ManoNoContieneCartaException;
-import edu.fiuba.algo3.modelo.juego.Puntaje;
+import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ManoTest {
 
-    private List<ICarta> cartas;
+    private List<Carta> cartas;
     @BeforeEach
     void setUp() {
         cartas = new ArrayList<>();

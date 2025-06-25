@@ -1,31 +1,39 @@
 package edu.fiuba.algo3.modelo.cartas.unidades;
 
-import edu.fiuba.algo3.modelo.juego.Puntaje;
-import edu.fiuba.algo3.modelo.posiciones.Posicion;
+import edu.fiuba.algo3.modelo.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.modelo.tablero.Tablero;
-import edu.fiuba.algo3.modelo.tablero.atril.Atril;
-import edu.fiuba.algo3.modelo.tablero.atril.Seccion;
+import edu.fiuba.algo3.modelo.tablero.Atril;
 
-import java.util.List;
+public class UnidadBasica implements Unidad {
+    private String nombre;
+    private Puntaje puntaje;
+    private Posicion posicionValida;
 
-public class UnidadBasica extends Unidad {
-
-    public UnidadBasica(String nombre, Puntaje puntaje, Posicion posicion){
-        super(nombre,puntaje,posicion);
+    public UnidadBasica(String nombre, Puntaje puntaje, Posicion posicionValida) {
+        this.nombre = nombre;
+        this.puntaje = puntaje;
+        this.posicionValida = posicionValida;
     }
 
     @Override
-    public void calcularPuntajeActual(List<Unidad> unidades) {
-
+    public String getNombre() {
+        return nombre;
     }
 
     @Override
-    public void jugarCarta(Jugador jugador, Tablero tablero, Posicion posicion){
-        if(!this.sePuedeColocar(posicion)){
-            throw new RuntimeException();
-        }
-        Atril atrilJugador = tablero.getAtril(jugador);
-        atrilJugador.colocarUnidad(this, posicion);
+    public boolean sePuedeColocar(Posicion posicion){
+        return posicionValida.esCompatible(posicion);
+    }
+
+    @Override
+    public Atril atrilDestino(Jugador jugador, Tablero tablero) {
+        return tablero.getAtril(jugador);
+    }
+
+    @Override
+    public void realizarAccionAdicional(Jugador jugador, Tablero tablero) {
+        // no hace nada
     }
 }
