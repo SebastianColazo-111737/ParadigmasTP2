@@ -8,6 +8,7 @@ import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.Contenedores.VistaTurnos;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
@@ -15,8 +16,12 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.Node;
 
+import java.util.function.BiConsumer;
+
 public class Lienzo extends StackPane {
     private VistaTurnos vistaTurnos;
+    private VistaColumnaIzquierda columnaIzquierda;
+    private BiConsumer<String, Image> mostrarDescripcion;
 
     public Lienzo(Jugador jugador1, Jugador jugador2, Gwent juego, ControladorTurnos controladorTurnos) {
 
@@ -44,6 +49,7 @@ public class Lienzo extends StackPane {
 
         controladorTurnos.setVistas(vistaAtrilJugador1, vistaAtrilJugador2, puntosJugador1, puntosJugador2);
 
+
         //Creacion del tablero
         VBox tablero = new VBox(20, vistaJugador2, vistaJugador1);
         tablero.setAlignment(Pos.CENTER);
@@ -64,5 +70,9 @@ public class Lienzo extends StackPane {
 
         this.getChildren().add(contenedor);
         this.setPadding(new Insets(20));
+    }
+
+    public void setMostrarDescripcion(BiConsumer<String, Image> mostrarDescripcion){
+        this.mostrarDescripcion = mostrarDescripcion;
     }
 }

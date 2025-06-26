@@ -12,17 +12,15 @@ import javafx.stage.Stage;
 
 public class ContenedorMenuPrincipal extends VBox {
 
-    public ContenedorMenuPrincipal(Stage stage, Gwent juego, Scene escenaNombreJugador) {
-        this.setPrefSize(800, 600);
+    public ContenedorMenuPrincipal(Stage stage, Runnable iniciarJuego) {
         this.setAlignment(Pos.CENTER);
-        this.setSpacing(40);
-        this.setPadding(new Insets(50));
+        this.setSpacing(20);
 
-        Label titulo = new Label("GWENT");
+        Label titulo = new Label("BIENVENIDO A GWENT");
         titulo.setFont(new Font("Arial", 48));
 
         Button botonJugar = new Button("JUGAR");
-        botonJugar.setOnAction(e -> stage.setScene(escenaNombreJugador));
+        botonJugar.setOnAction(e -> iniciarJuego.run());
 
         this.getChildren().addAll(titulo, botonJugar);
     }

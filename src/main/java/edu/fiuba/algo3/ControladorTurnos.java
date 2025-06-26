@@ -62,6 +62,8 @@ public class ControladorTurnos {
     }
   }
 
-
+  public boolean juegoCompleto() {
+    return jugadorActual().mazo() != null && jugadorProximo().mazo() != null;
+  }
 }
 

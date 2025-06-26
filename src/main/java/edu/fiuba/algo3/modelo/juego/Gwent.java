@@ -67,4 +67,7 @@ public class Gwent {
         adminTurnos.reiniciarAdminTurnos();
     }
 
+    public List<Jugador> getJugadores() {
+        return this.jugadores;
+    }
 }

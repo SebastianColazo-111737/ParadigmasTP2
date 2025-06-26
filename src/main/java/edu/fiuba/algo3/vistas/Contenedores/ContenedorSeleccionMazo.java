@@ -1,7 +1,10 @@
-/*package edu.fiuba.algo3.vistas.Contenedores;
+package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.GeneradorMazo;
 import edu.fiuba.algo3.modelo.juego.Gwent;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.Mazo;
+import edu.fiuba.algo3.ControladorTurnos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +17,7 @@ import javafx.stage.Stage;
 
 public class ContenedorSeleccionMazo extends VBox {
 
-    public ContenedorSeleccionMazo(Stage stage, Gwent juego, Scene escenaTablero) {
+    public ContenedorSeleccionMazo(Stage stage, Runnable onMazoSeleccionado) {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
         this.setPadding(new Insets(30));
@@ -24,29 +27,18 @@ public class ContenedorSeleccionMazo extends VBox {
         botones.setAlignment(Pos.CENTER);
 
         botones.getChildren().addAll(
-                crearBotonMazo("MAZO1", stage, juego, escenaTablero),
-                crearBotonMazo("MAZO2", stage, juego, escenaTablero),
-                crearBotonMazo("MAZO3", stage, juego, escenaTablero)
+                crearBotonMazo("MAZO1", stage, onMazoSeleccionado),
+                crearBotonMazo("MAZO2", stage, onMazoSeleccionado),
+                crearBotonMazo("MAZO3", stage, onMazoSeleccionado)
         );
 
         this.getChildren().addAll(etiqueta, botones);
     }
 
-    private Button crearBotonMazo(String nombreMazo, Stage stage, Gwent juego, Scene escenaTablero) {
+    private Button crearBotonMazo(String nombreMazo, Stage stage, Runnable onMazoSeleccionado) {
         Button boton = new Button(nombreMazo);
         boton.setMinSize(104, 147);
-        boton.setOnAction(e -> {
-            juego.getJugadorActual().setMazo(new Mazo(nombreMazo));
-            juego.siguienteJugador();
-
-            if (!juego.juegoCompleto()) {
-                ContenedorSeleccionMazo nuevoMazo = new ContenedorSeleccionMazo(stage, juego, escenaTablero);
-                ContenedorNombreJugador nuevoNombre = new ContenedorNombreJugador(stage, juego,  new Scene(nuevoMazo, 600, 400));
-                stage.setScene(new Scene(nuevoNombre));
-            } else {
-                stage.setScene(escenaTablero);
-            }
-        });
+        boton.setOnAction(e -> onMazoSeleccionado.run());
         return boton;
     }
-}*/
+}

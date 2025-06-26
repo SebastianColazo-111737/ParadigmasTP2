@@ -1,5 +1,6 @@
-/*package edu.fiuba.algo3.vistas.Contenedores;
+package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.GeneradorJuego;
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -14,7 +15,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class ContenedorTablero extends StackPane {
-    public ContenedorTablero(Stage stage, Gwent juego) {
+    public ContenedorTablero(Stage stage, Gwent juego, ControladorTurnos controladorTurnos) {
         this.setAlignment(Pos.CENTER);
         this.setPadding(new Insets(20));
         this.setStyle("-fx-background-color: #202020;");
@@ -25,7 +26,9 @@ public class ContenedorTablero extends StackPane {
         Jugador jugador2 = jugadores.get(1);
 
         // VAN A APARECER LOS BOTONES POR ENCIMA DEL TABLERO (LIENZO)
-        Lienzo lienzo = new Lienzo(jugador1, jugador2, this::mostrarVistaDescripcion);
+        Lienzo lienzo = new Lienzo(jugador1, jugador2, juego, controladorTurnos);
+        lienzo.setMostrarDescripcion(this::mostrarVistaDescripcion);
+
         this.getChildren().add(lienzo);
     }
 
@@ -36,4 +39,4 @@ public class ContenedorTablero extends StackPane {
         StackPane.setAlignment(vista, Pos.CENTER);
         this.getChildren().add(vista);
     }
-}*/
+}

@@ -12,11 +12,15 @@ public class Jugador {
     private Mazo mazo;
     private Mano mano;
     private Atril atril;
+    private String nombre;
 
     public Jugador(Mazo mazo, Mano mano, Atril atril) {
         this.mazo = mazo;
         this.mano = mano;
         this.atril = atril;
+    }
+    public void setNombre(String nombre){
+        this.nombre = nombre;
     }
 
     public void robarCartasDelMazo(int cantidad) {
@@ -77,6 +81,14 @@ public class Jugador {
 
     public Mano mano() {
         return this.mano;
+    }
+
+    public Mazo mazo(){
+        return  this.mazo;
+    }
+
+    public String Nombre(){
+        return this.nombre;
     }
 
 }
