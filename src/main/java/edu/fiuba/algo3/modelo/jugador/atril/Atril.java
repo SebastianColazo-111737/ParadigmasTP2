@@ -14,6 +14,7 @@ public class Atril {
 
   public Atril() {
     this.secciones = new ArrayList<>();
+    this.especiales = new SeccionEspecial();
   }
 
   public void agregarSeccion(Seccion seccion) {
