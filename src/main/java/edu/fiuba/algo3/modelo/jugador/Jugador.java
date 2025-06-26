@@ -1,17 +1,20 @@
 package edu.fiuba.algo3.modelo.jugador;
-import edu.fiuba.algo3.modelo.cartas.Carta;
+
+import edu.fiuba.algo3.modelo.carta.Carta;
+import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
+import edu.fiuba.algo3.modelo.posicion.Posicion;
 
 import java.util.List;
 
 public class Jugador {
     private Mazo mazo;
     private Mano mano;
-    private Descarte descarte;
+    private Atril atril;
 
-    public Jugador(Mazo mazo, Mano mano, Descarte descarte) {
+    public Jugador(Mazo mazo, Mano mano, Atril atril) {
         this.mazo = mazo;
         this.mano = mano;
-        this.descarte = descarte;
+        this.atril = atril;
     }
 
     public void robarCartasDelMazo(int cantidad){
@@ -20,6 +23,8 @@ public class Jugador {
     }
 
     public void cambiarCartaDeLaManoAlMazo(Carta carta){
+
+        //Puede lanzar exepcion
         mano.removerCarta(carta);
 
         Carta cartaDelMazo = this.mazo.cambiarCarta(carta);
@@ -34,11 +39,23 @@ public class Jugador {
         this.mano.removerCarta(carta);
     }
 
-    public void descartarCarta(Carta carta){
-        this.descarte.descartarCarta(carta);
+
+    public void jugarCarta(Carta carta, Jugador oponenete, Posicion posicionElegida){
+
+        //puede lanzar exepcion
+        mano.removerCarta(carta);
+
+        try {
+            carta.jugarCarta(this, oponenete, posicionElegida);
+
+        } catch (Exception e) {
+
+            // le vuelvo a agregar la carta
+            mano.agregarCarta(carta);
+            throw new RuntimeException(e);
+        }
+
     }
 
-    public void descartarCarta(List<Carta> cartas){
-        this.descarte.descartarCarta(cartas);
-    }
+    public Atril getAtril(){return this.atril;}
 }

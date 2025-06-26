@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo.jugador;
 
-import edu.fiuba.algo3.modelo.cartas.Carta;
+import edu.fiuba.algo3.modelo.carta.Carta;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Mano {
     private List<Carta> cartas;
@@ -19,14 +19,6 @@ public class Mano {
         this.cartas.addAll(cartas);
     }
 
-    public List<Carta> getCartas(){
-        return this.cartas;
-    }
-
-    public int getCantidadCartas(){
-        return this.cartas.size();
-    }
-
     public void removerCarta(Carta carta){
         if(!this.cartas.contains(carta)){
             throw new ManoNoContieneCartaException(
@@ -35,4 +27,14 @@ public class Mano {
         }
         this.cartas.remove(carta);
     }
+
+
+
+    public List<Carta> getCartas(){
+        return this.cartas;
+    }
+    public int getCantidadCartas(){
+        return this.cartas.size();
+    }
+
 }
