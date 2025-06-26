@@ -97,6 +97,11 @@ public class VistaSeccion extends StackPane {
     });
   }
 
+  public void actualizar(){
+    cartasApoyadas.getChildren().clear();
+    vistaPuntos.actualizarPuntaje(seccionModelo.getPuntajeActual());
+  }
+
   private String nombreDesdePos(Seccion seccion) {
     Posicion pos = seccion.getPosicion();
     if (pos instanceof CuerpoACuerpo)

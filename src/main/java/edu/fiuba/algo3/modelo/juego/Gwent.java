@@ -37,20 +37,11 @@ public class Gwent {
     this.adminTurnos.setJugadorActual(jugador);
   }
 
-  public void pasarTurno() {
-    Jugador jugador = adminTurnos.getJugadorActual();
-    // adminTurnos.jugadorPasaTurno(jugador);
+  public void pasarTurno(){
+    if(todosPasaron()){
+      throw new AdminturnosTodosPasaronDeTurno("Todos los jugadores pasaron de turno");
+    }
     adminTurnos.proximoTurno();
-    /*
-     * if(adminTurnos.todosPasaronTurno()){
-     * //registro la ronda
-     * 
-     * // si no termino la partida --> inicio una nueva
-     * // adminTurnos.reiniciarAdminTurnos();
-     * }else{
-     * adminTurnos.proximoTurno();
-     * }
-     */
   }
 
   public void jugarCarta(ICarta carta, Posicion posicion) {
@@ -58,4 +49,25 @@ public class Gwent {
     jugador.jugarCarta(carta, this.adminTurnos.getJugadorProximo(), posicion);
     // adminTurnos.proximoTurno();
   }
+
+  public boolean finalizarParticipacion(){
+    Jugador juego = adminTurnos.getJugadorActual();
+    adminTurnos.jugadorPasaTurno(juego);
+
+    boolean rondaTerminada = adminTurnos.todosPasaronTurno();
+    if(!rondaTerminada) adminTurnos.proximoTurno();
+    return rondaTerminada;
+  }
+
+  public boolean todosPasaron(){
+    return adminTurnos.todosPasaronTurno();
+  }
+
+  public void reiniciarRonda(){
+    for(Jugador jugador : jugadores){
+      jugador.limpiarSecciones();
+    }
+    adminTurnos.reiniciarAdminTurnos();
+  }
+
 }
