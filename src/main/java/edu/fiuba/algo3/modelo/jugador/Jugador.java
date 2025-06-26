@@ -12,11 +12,14 @@ public class Jugador {
   private Mazo mazo;
   private Mano mano;
   private Atril atril;
+  private Descarte descarte;
 
   public Jugador(Mazo mazo, Mano mano, Atril atril) {
     this.mazo = mazo;
     this.mano = mano;
     this.atril = atril;
+    this.descarte = new Descarte();
+
   }
 
   public void robarCartasDelMazo(int cantidad) {
@@ -33,6 +36,10 @@ public class Jugador {
 
   public void activarDebuff(ArrayList<Posicion> posicionesAfectadas) {
     this.atril.activarDebuff(posicionesAfectadas);
+  }
+
+  public void quemarCartaMasFuerte() {
+    this.atril.quemarCartaMasFuerte();
   }
 
   public void duplicarPuntos(ArrayList<Posicion> posicionesAfectadas) {
@@ -52,27 +59,32 @@ public class Jugador {
   }
 
   public void jugarCarta(ICarta carta, Jugador jugadorSiguiente, Posicion tipo) {
-    mano.removerCarta(carta);
 
     try {
       carta.jugar(this, jugadorSiguiente, tipo);
     } catch (Exception e) {
-      mano.agregarCarta(carta);
       throw e;
     }
 
+    mano.removerCarta(carta);
   }
 
   public void colocarUnidad(ICarta carta, Posicion posicion) {
     atril.colocarCarta(carta, posicion);
+
   }
 
   public void colocarCartaEspecial(CEspecial carta) {
     atril.colocarEspecial(carta);
+
   }
 
   public Atril atril() {
     return this.atril;
+  }
+
+  public void limpiarTodo() {
+    this.descarte.agregarCarta(this.atril.descartarCartas());
   }
 
   public Mano mano() {

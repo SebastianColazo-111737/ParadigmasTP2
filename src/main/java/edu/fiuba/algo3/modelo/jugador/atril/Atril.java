@@ -14,6 +14,7 @@ public class Atril {
 
   public Atril() {
     this.secciones = new ArrayList<>();
+    this.especiales = new SeccionEspecial();
   }
 
   public void agregarSeccion(Seccion seccion) {
@@ -26,6 +27,30 @@ public class Atril {
 
   public void colocarEspecial(CEspecial carta) {
     this.especiales.agregarCarta(carta);
+  }
+
+  public ICarta quemarCartaMasFuerte() {
+    ArrayList<Unidad> cartas = new ArrayList<>();
+    Unidad fuerte = null;
+    for (Seccion seccion : this.secciones) {
+      cartas.add(seccion.tomarCartaMasFuerte());
+    }
+
+    fuerte = cartas.get(0);
+    for (Unidad carta : cartas) {
+      if (carta.masFuerteQue(fuerte))
+        fuerte = carta;
+    }
+    this.descartarCarta(fuerte);
+    return fuerte;
+  }
+
+  private void descartarCarta(Unidad carta) {
+    for (Seccion seccion : this.secciones) {
+      if (seccion.contieneCarta(carta)) {
+        seccion.removerCarta(carta);
+      }
+    }
   }
 
   public void aplicar(ArrayList<Posicion> posicionesAfectadas, Consumer<Seccion> efecto) {
@@ -51,6 +76,7 @@ public class Atril {
   }
 
   public void colocarCarta(ICarta carta, Posicion posicion) {
+
     for (Seccion seccion : this.secciones) {
       if (seccion.compararPosiciones(posicion)) {
         // se caestea -> arreglar

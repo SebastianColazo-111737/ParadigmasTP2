@@ -12,7 +12,6 @@ public class Espia extends Unidad {
 
   @Override
   public void jugar(Jugador jugadorActual, Jugador JugadorSiguiente, Posicion posicion) {
-
     JugadorSiguiente.colocarUnidad(this, posicion);
     jugadorActual.robarCartasDelMazo(2);
   }

@@ -36,6 +36,23 @@ public class Seccion {
     unidadesColocadas.add(unidad);
   }
 
+  public Unidad tomarCartaMasFuerte() {
+    Unidad fuerte = this.unidadesColocadas.get(0);
+    for (Unidad unidad : this.unidadesColocadas) {
+      if (unidad.masFuerteQue(fuerte)) {
+        fuerte = unidad;
+      }
+    }
+    return fuerte;
+  }
+
+  public void removerCarta(Unidad carta) {
+    // Mejor una excepcion -> Luego
+    if (!this.contieneCarta(carta))
+      return;
+    this.unidadesColocadas.remove(carta);
+  }
+
   public Puntaje calcularPuntajeActualUnidades() {
     if (this.debuff)
       return new Puntaje(this.unidadesColocadas.size());
@@ -52,6 +69,10 @@ public class Seccion {
         puntajeTotal += unidad.getPuntajeTotal(this) * this.duplicadores + cantAnimadoresEnSeccion;
     }
     return new Puntaje(puntajeTotal);
+  }
+
+  public Boolean contieneCarta(Unidad unidad) {
+    return this.unidadesColocadas.contains(unidad);
   }
 
   public List<Unidad> getUnidadesColocadas() {

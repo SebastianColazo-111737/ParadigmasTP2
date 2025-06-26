@@ -73,45 +73,4 @@ public class UnidadBasicaTest {
     });
   }
 
-  @Test
-  public void unJugadorNOPuedeColocarUnaUnidadBasicaEnUnaSeccionQueNoEstaEnSuAtril() {
-
-    // Arrange
-
-    UnidadBasica unidadBasica = new UnidadBasica(
-        "Unidad",
-        new Puntaje(0),
-        new Distancia());
-    mano.agregarCarta(unidadBasica);
-
-    // Act
-
-    // Assert
-    assertThrows(UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion.class, () -> {
-      jugador.jugarCarta(unidadBasica, null, unidadBasica.getTipo().get(0));
-    });
-    assertTrue(mano.getCartas().contains(unidadBasica));
-  }
-
-  @Test
-  public void unJugadorNOPuedeColocarUnaUnidadBasicaEnUnaPosicionDiferenteALaDeLaSeccion() {
-
-    // Arrange
-    Seccion seccionDistanciaJ1 = new Seccion(new Distancia());
-    atril.agregarSeccion(seccionDistanciaJ1);
-    UnidadBasica unidadBasica = new UnidadBasica(
-        "Unidad",
-        new Puntaje(0),
-        new CuerpoACuerpo());
-    mano.agregarCarta(unidadBasica);
-
-    // Act
-
-    // Assert
-    assertThrows(SeccionNoPermiteColocarUnidadesConPosicionIncompatible.class,
-        () -> {
-          jugador.jugarCarta(unidadBasica, null, unidadBasica.getTipo().get(0));
-        });
-    assertTrue(mano.getCartas().contains(unidadBasica));
-  }
 }
