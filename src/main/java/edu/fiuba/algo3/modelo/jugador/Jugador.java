@@ -79,7 +79,4 @@ public class Jugador {
     return this.mano;
   }
 
-  // public int getPuntajeActual(){
-  // return atril.getPuntajeActual();
-  // }
 }

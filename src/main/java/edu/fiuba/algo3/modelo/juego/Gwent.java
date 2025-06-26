@@ -64,9 +64,6 @@ public class Gwent {
   }
 
   public void reiniciarRonda(){
-    for(Jugador jugador : jugadores){
-      jugador.limpiarSecciones();
-    }
     adminTurnos.reiniciarAdminTurnos();
   }
 

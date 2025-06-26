@@ -18,6 +18,7 @@ public class Seccion {
     this.posicion = posiccion;
     this.unidadesColocadas = new ArrayList<>();
     this.duplicadores = 1;
+    this.debuff = false;
   }
 
   public void agregarDuplicador() {
@@ -78,4 +79,5 @@ public class Seccion {
   public Posicion getPosicion() {
     return this.posicion;
   }
+
 }

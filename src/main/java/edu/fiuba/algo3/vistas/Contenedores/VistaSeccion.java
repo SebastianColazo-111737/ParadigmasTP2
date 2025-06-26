@@ -99,7 +99,7 @@ public class VistaSeccion extends StackPane {
 
   public void actualizar(){
     cartasApoyadas.getChildren().clear();
-    vistaPuntos.actualizarPuntaje(seccionModelo.getPuntajeActual());
+    vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
   }
 
   private String nombreDesdePos(Seccion seccion) {

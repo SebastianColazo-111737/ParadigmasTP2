@@ -28,7 +28,7 @@ public class AdminTurnos<T> {
   }
 
   public T getJugadorProximo() {
-    return this.jugadores.get(indiceJugadorActual + 1);
+    return this.jugadores.get((indiceJugadorActual + 1)%jugadores.size());
   }
 
   public void setJugadorActual(T jugador) {
