@@ -15,11 +15,8 @@ public class VistaColumnaIzquierda extends VBox {
         this.setPadding(new Insets(20));
         this.setMaxWidth(180);
 
-        //VistaPuntosJugador puntosJugador1 = new VistaPuntosJugador(vistaAtril1);
-        //VistaPuntosJugador puntosJugador2 = new VistaPuntosJugador(vistaAtril2);
-
-        this.infoJugador2 = new VistaDatos("Jugador 2", puntosJ2);
-        this.infoJugador1 = new VistaDatos("Jugador 1", puntosJ1);
+        this.infoJugador2 = new VistaDatos("Ogro", puntosJ2);
+        this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
 
         VistaSeccionEspecial especiales = new VistaSeccionEspecial("Especiales");
 
@@ -32,5 +29,5 @@ public class VistaColumnaIzquierda extends VBox {
     public VistaPuntosJugador getPuntosJugador2(){
         return infoJugador2.getVistaPuntosJugador();
     }
-}
 
+}

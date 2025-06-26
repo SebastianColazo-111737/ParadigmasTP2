@@ -91,4 +91,8 @@ public class Jugador {
     return this.mano;
   }
 
+  public Mazo mazo(){
+    return  this.mazo;
+  }
+
 }

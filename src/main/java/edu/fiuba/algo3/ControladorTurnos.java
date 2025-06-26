@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.vistas.Contenedores.VistaAtril;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 public class ControladorTurnos {
   private final Gwent juego;
@@ -53,15 +55,26 @@ public class ControladorTurnos {
       }
 
       if (puntosJugador1.getRondasGanadas() == 2) {
-        System.out.println("El JUGADOR 1 gana!");
+        mostrarGanador("¡EL GUERRERO");
       } else if (puntosJugador2.getRondasGanadas() == 2) {
-        System.out.println("El JUGADOR2 gana!");
+        mostrarGanador("¡EL OGRO GANA");
       }
 
       juego.reiniciarRonda();
     }
   }
 
+  private void mostrarGanador(String mensaje) {
+    Platform.runLater(() -> {
+      Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+      alerta.setTitle("JUEGO TERMINADO!, gracias");
+      alerta.setHeaderText(null);
+      alerta.setContentText(mensaje);
+      alerta.showAndWait();
+    });
+  }
 
+  public boolean juegoCompleto() {
+    return jugadorActual().mazo() != null && jugadorProximo().mazo() != null;
+  }
 }
-
