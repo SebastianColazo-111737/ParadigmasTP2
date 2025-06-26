@@ -15,8 +15,8 @@ public class VistaColumnaIzquierda extends VBox {
         this.setPadding(new Insets(20));
         this.setMaxWidth(180);
 
-        this.infoJugador2 = new VistaDatos("Jugador 2", puntosJ2);
-        this.infoJugador1 = new VistaDatos("Jugador 1", puntosJ1);
+        this.infoJugador2 = new VistaDatos("Ogro", puntosJ2);
+        this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
 
         VistaSeccionEspecial especiales = new VistaSeccionEspecial("Especiales");
 
