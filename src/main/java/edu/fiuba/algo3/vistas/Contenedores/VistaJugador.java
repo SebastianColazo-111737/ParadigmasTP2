@@ -1,24 +1,27 @@
 package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
-import edu.fiuba.algo3.modelo.posiciones.Asedio;
-import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
-import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
 import javafx.scene.Node;
+<<<<<<< interfaz-grafica
+=======
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+>>>>>>> union-de-interfaces-forzada
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 
-import java.util.Comparator;
 import java.util.List;
+<<<<<<< interfaz-grafica
+=======
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
+>>>>>>> union-de-interfaces-forzada
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
@@ -26,7 +29,11 @@ public class VistaJugador extends VBox {
 
     private final VistaMano vistaMano;
 
+<<<<<<< interfaz-grafica
+    public VistaJugador(Jugador jugador, boolean estaArriba, VistaMano vistaMano, VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos){
+=======
     public VistaJugador(Jugador jugador, boolean estaArriba, BiConsumer<String, Image> onMostrarDescripcion){
+>>>>>>> union-de-interfaces-forzada
         super(10);
         this.setAlignment(Pos.CENTER);
 
@@ -36,7 +43,7 @@ public class VistaJugador extends VBox {
             onMostrarDescripcion
         );
 
-        VBox secciones = construirVistaSecciones(jugador,estaArriba);
+        VBox secciones = construirVistaSecciones(jugador,estaArriba, vistaTurnos, controladorTurnos);
         Node contenedorDerecha = construirContenedorDerecha(jugador,estaArriba);
 
         BorderPane contenedor = new BorderPane();
@@ -52,14 +59,14 @@ public class VistaJugador extends VBox {
         this.getChildren().addAll(contenedor);
     }
 
-    private VBox construirVistaSecciones(Jugador jugador, boolean estaArriba) {
+    private VBox construirVistaSecciones(Jugador jugador, boolean estaArriba, VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos) {
         List<Seccion> seccionesOrdenadas = OrdenadorSecciones.ordenar(jugador.atril().getSecciones(), estaArriba);
 
         VBox secciones = new VBox(5);
         secciones.setAlignment(Pos.CENTER);
 
         for (Seccion seccion : seccionesOrdenadas) {
-            secciones.getChildren().add(new VistaSeccion(seccion, jugador, this.vistaMano));
+            secciones.getChildren().add(new VistaSeccion(seccion, jugador, this.vistaMano, vistaTurnos, controladorTurnos));
         }
         return secciones;
     }

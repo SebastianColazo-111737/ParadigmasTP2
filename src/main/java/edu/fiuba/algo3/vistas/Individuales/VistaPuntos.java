@@ -6,7 +6,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-
+//Esto seria para los puntos de las secciones
 public class VistaPuntos extends StackPane {
     private final Text textoPuntaje;
 

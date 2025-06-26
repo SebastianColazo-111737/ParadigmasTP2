@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas.Contenedores;
 
+import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
@@ -16,85 +17,99 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import java.util.Stack;
-
 
 public class VistaSeccion extends StackPane {
 
-    private final Seccion seccionModelo;
-    private final Jugador jugador;
-    private final Pane cartasApoyadas;
-    private final VistaPuntos vistaPuntos;
-    private static final int CapacidadMaxima = 8;
+  private final Seccion seccionModelo;
+  private final Jugador jugador;
+  private final Pane cartasApoyadas;
+  private final VistaPuntos vistaPuntos;
+  private static final int CapacidadMaxima = 8;
+  private ControladorTurnos controladorTurnos;
+  private VistaTurnos vistaTurnos;
 
-    public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano){
-        this.seccionModelo = seccionModelo;
-        this.jugador = jugador;
+  public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano, VistaTurnos vistaTurnos,
+      ControladorTurnos controladorTurnos) {
+    this.seccionModelo = seccionModelo;
+    this.jugador = jugador;
+    this.controladorTurnos = controladorTurnos;
+    this.vistaTurnos = vistaTurnos;
 
-        this.vistaPuntos = new VistaPuntos(seccionModelo.getPuntajeActual());
+    this.vistaPuntos = new VistaPuntos(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
 
-        Rectangle rectangulo = new Rectangle(380,90);
-        rectangulo.setFill(Color.LIGHTGRAY);
-        rectangulo.setStroke(Color.BLACK);
+    Rectangle rectangulo = new Rectangle(380, 90);
+    rectangulo.setFill(Color.LIGHTGRAY);
+    rectangulo.setStroke(Color.BLACK);
 
-        Label etiqueta = new Label(nombreDesdePos(seccionModelo));
-        StackPane fondo = new StackPane(rectangulo,etiqueta);
-        HBox base = new HBox(-5,vistaPuntos,fondo);
-        base.setAlignment(Pos.CENTER_LEFT);
+    Label etiqueta = new Label(nombreDesdePos(seccionModelo));
+    StackPane fondo = new StackPane(rectangulo, etiqueta);
+    HBox base = new HBox(-5, vistaPuntos, fondo);
+    base.setAlignment(Pos.CENTER_LEFT);
 
-        this.cartasApoyadas = new Pane();
-        this.cartasApoyadas.setPickOnBounds(false);
+    this.cartasApoyadas = new Pane();
+    this.cartasApoyadas.setPickOnBounds(false);
 
-        this.getChildren().addAll(base,cartasApoyadas);
-        this.recibirCarta(vistaMano);
-    }
+    this.getChildren().addAll(base, cartasApoyadas);
+    this.recibirCarta(vistaMano);
+  }
 
-    private void recibirCarta(VistaMano vistaMano){
-        this.setOnDragOver(e->{
-            if(e.getGestureSource() instanceof VistaCarta
-                && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima ){
-                e.acceptTransferModes(TransferMode.MOVE);
-            }
-            e.consume();
-        });
+  private void recibirCarta(VistaMano vistaMano) {
+    this.setOnDragOver(e -> {
+      if (e.getGestureSource() instanceof VistaCarta
+          && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima) {
+        e.acceptTransferModes(TransferMode.MOVE);
+      }
+      e.consume();
+    });
 
-        this.setOnDragDropped(e->{
-            Dragboard tablaSeccion = e.getDragboard();
-            boolean seMovio = false;
+    this.setOnDragDropped(e -> {
+      Dragboard tablaSeccion = e.getDragboard();
+      boolean seMovio = false;
 
-            if(tablaSeccion.hasString()
-                    && VistaCarta.cartaSeleccionada != null
-                    && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima ){
+      if (tablaSeccion.hasString()
+          && VistaCarta.cartaSeleccionada != null
+          && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima
+          && controladorTurnos.jugadorActual().equals(jugador)) {
 
-                VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
-                ICarta cartaModelo = vistaCarta.getCartaModelo();
+        VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
+        ICarta cartaModelo = vistaCarta.getCartaModelo();
 
-                jugador.jugarCarta(cartaModelo, this.seccionModelo);
+        jugador.jugarCarta(cartaModelo, this.controladorTurnos.jugadorProximo(), this.seccionModelo.getPosicion());
 
-                vistaCarta.setLayoutX(seccionModelo.getUnidadesColocadas().size()*30);
-                vistaCarta.setLayoutY(0);
-                cartasApoyadas.getChildren().add(vistaCarta);
+        vistaCarta.setLayoutX(seccionModelo.getUnidadesColocadas().size() * 30);
+        vistaCarta.setLayoutY(0);
+        cartasApoyadas.getChildren().add(vistaCarta);
 
-                vistaPuntos.actualizarPuntaje(seccionModelo.getPuntajeActual());
-                vistaMano.removerVistaCarta(vistaCarta);
+        vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
+        vistaMano.removerVistaCarta(vistaCarta);
 
-                System.out.println("Carta colocada en: " + this.seccionModelo.getPosicion());
-                VistaCarta.cartaSeleccionada = null;
-                seMovio = true;
-            }
-            e.setDropCompleted(seMovio);
-            e.consume();
-        });
-    }
+        controladorTurnos.AvanzarTurno();
+        vistaTurnos.actualizarTurnos();
 
-    private String nombreDesdePos(Seccion seccion){
-        Posicion pos = seccion.getPosicion();
-        if (pos instanceof CuerpoACuerpo) return "\uD83D\uDDE1\uFE0F";
-        if (pos instanceof Distancia) return "⋙";
-        if (pos instanceof Asedio) return "\uD83D\uDEE1\uFE0F";
-        return "La seccion no existe";
-    }
+        System.out.println("Carta colocada en: " + this.seccionModelo.getPosicion());
+        VistaCarta.cartaSeleccionada = null;
+        seMovio = true;
+      }
+      e.setDropCompleted(seMovio);
+      e.consume();
+    });
+  }
+
+  public void actualizar(){
+    cartasApoyadas.getChildren().clear();
+    vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
+  }
+
+  private String nombreDesdePos(Seccion seccion) {
+    Posicion pos = seccion.getPosicion();
+    if (pos instanceof CuerpoACuerpo)
+      return "\uD83D\uDDE1\uFE0F";
+    if (pos instanceof Distancia)
+      return "⋙";
+    if (pos instanceof Asedio)
+      return "\uD83D\uDEE1\uFE0F";
+    return "La seccion no existe";
+  }
 }

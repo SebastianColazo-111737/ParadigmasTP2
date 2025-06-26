@@ -5,20 +5,18 @@ import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
-public class Animador extends Unidad{
-    public Animador(String nombre, Puntaje puntaje, Posicion posicion){
-        super(nombre,puntaje,posicion);
-    }
+public class Animador extends Unidad {
+  public Animador(String nombre, Puntaje puntaje, Posicion posicion) {
+    super(nombre, puntaje, posicion);
+  }
 
-    @Override
-    public void jugarCarta(Jugador jugador, Seccion seccion) {
-        if(!jugador.lePertenece(seccion)){
-            throw new UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion("");
-        }
-        seccion.colocarUnidad(this);
-    }
+  @Override
+  public void jugar(Jugador jugadorActual, Jugador jugadorSiguiente, Posicion posicion) {
 
-    public String nombre(){
-        return this.nombre;
-    }
+    jugadorActual.colocarUnidad(this, posicion);
+  }
+
+  public String nombre() {
+    return this.nombre;
+  }
 }

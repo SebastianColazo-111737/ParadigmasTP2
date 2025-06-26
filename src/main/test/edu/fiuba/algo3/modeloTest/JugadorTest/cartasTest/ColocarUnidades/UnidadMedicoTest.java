@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest.ColocarUnidades;
 
-
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
@@ -17,82 +16,79 @@ import static org.junit.Assert.assertTrue;
 
 public class UnidadMedicoTest {
 
-    private Jugador jugador;
-    private Mano mano;
-    private Mazo mazo;
-    private Atril atril;
-    private Seccion seccionCuerpoACuerpoJ1;
-    private Seccion seccionDistanciaJ1;
+  private Jugador jugador;
+  private Mano mano;
+  private Mazo mazo;
+  private Atril atril;
+  private Seccion seccionCuerpoACuerpoJ1;
+  private Seccion seccionDistanciaJ1;
 
-    @BeforeEach
-    void setUp() {
-        mano = new Mano();
-        mazo = new Mazo();
+  @BeforeEach
+  void setUp() {
+    mano = new Mano();
+    mazo = new Mazo();
 
-        atril = new Atril();
-        seccionCuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
-        seccionDistanciaJ1 = new Seccion(new Distancia());
+    atril = new Atril();
+    seccionCuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
+    seccionDistanciaJ1 = new Seccion(new Distancia());
 
-        jugador = new Jugador(mazo, mano, atril);
-    }
+    jugador = new Jugador(mazo, mano, atril);
+  }
 
-    @Test
-    public void alJugarseUnMedicoSeColocanEnElJuegoElMedicoYLaUnidadSeteadaParaRevivir(){
+  @Test
+  public void alJugarseUnMedicoSeColocanEnElJuegoElMedicoYLaUnidadSeteadaParaRevivir() {
 
-        // Arrange
-        atril.agregarSeccion(seccionCuerpoACuerpoJ1);
-        atril.agregarSeccion(seccionDistanciaJ1);
+    // Arrange
+    atril.agregarSeccion(seccionCuerpoACuerpoJ1);
+    atril.agregarSeccion(seccionDistanciaJ1);
 
-        Medico medico = new Medico(
-                "DrHouse",
-                new Puntaje(5),
-                new Distancia()
-        );
-        mano.agregarCarta(medico);
+    Medico medico = new Medico(
+        "DrHouse",
+        new Puntaje(5),
+        new Distancia());
+    mano.agregarCarta(medico);
 
-        UnidadBasica unidadBasica = new UnidadBasica(
-                "Pepe",
-                new Puntaje(4),
-                new CuerpoACuerpo()
-        );
+    UnidadBasica unidadBasica = new UnidadBasica(
+        "Pepe",
+        new Puntaje(4),
+        new CuerpoACuerpo());
 
-        medico.setUnidadParaRevivir(unidadBasica, seccionCuerpoACuerpoJ1);
+    medico.setUnidadParaRevivir(unidadBasica, unidadBasica.getTipo().get(0));
 
-        // Act
+    // Act
 
-        jugador.jugarCarta(medico, seccionDistanciaJ1);
+    jugador.jugarCarta(medico, null, medico.getTipo().get(0));
 
-        // Assert
+    // Assert
 
-        assertEquals(1, seccionCuerpoACuerpoJ1.getUnidadesColocadas().size());
-        assertEquals(1, seccionDistanciaJ1.getUnidadesColocadas().size());
-        assertTrue(seccionCuerpoACuerpoJ1.getUnidadesColocadas().contains(unidadBasica));
-        assertTrue(seccionDistanciaJ1.getUnidadesColocadas().contains(medico));
-    }
+    assertEquals(1, seccionCuerpoACuerpoJ1.getUnidadesColocadas().size());
+    assertEquals(1, seccionDistanciaJ1.getUnidadesColocadas().size());
+    assertTrue(seccionCuerpoACuerpoJ1.getUnidadesColocadas().contains(unidadBasica));
+    assertTrue(seccionDistanciaJ1.getUnidadesColocadas().contains(medico));
+  }
 
-    @Test
-    public void alJugarseUnMedicoSinUnaCartaSeteadaParaRevivirSoloSeJuegaElMedico(){
+  @Test
+  public void alJugarseUnMedicoSinUnaCartaSeteadaParaRevivirSoloSeJuegaElMedico() {
 
-        // Arrange
-        atril.agregarSeccion(seccionCuerpoACuerpoJ1);
-        atril.agregarSeccion(seccionDistanciaJ1);
+    // Arrange
+    atril.agregarSeccion(seccionCuerpoACuerpoJ1);
+    atril.agregarSeccion(seccionDistanciaJ1);
 
-        Medico medico = new Medico(
-                "DrHouse",
-                new Puntaje(5),
-                new Distancia()
-        );
-        mano.agregarCarta(medico);
+    Medico medico = new Medico(
+        "DrHouse",
+        new Puntaje(5),
+        new Distancia());
+    mano.agregarCarta(medico);
 
-        // Act
+    // Act
 
-        jugador.jugarCarta(medico, seccionDistanciaJ1);
+    jugador.jugarCarta(medico, null, medico.getTipo().get(0));
 
-        // Assert
+    // Assert
 
-        assertEquals(0, seccionCuerpoACuerpoJ1.getUnidadesColocadas().size());
-        assertEquals(1, seccionDistanciaJ1.getUnidadesColocadas().size());
-        assertTrue(seccionCuerpoACuerpoJ1.getUnidadesColocadas().isEmpty());
-        assertTrue(seccionDistanciaJ1.getUnidadesColocadas().contains(medico));
-    }
+    assertEquals(0, seccionCuerpoACuerpoJ1.getUnidadesColocadas().size());
+    assertEquals(1, seccionDistanciaJ1.getUnidadesColocadas().size());
+    assertTrue(seccionCuerpoACuerpoJ1.getUnidadesColocadas().isEmpty());
+    assertTrue(seccionDistanciaJ1.getUnidadesColocadas().contains(medico));
+  }
 }

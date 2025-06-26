@@ -1,9 +1,13 @@
 package edu.fiuba.algo3.modelo.cartas;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.posiciones.*;
+import java.util.List;
 
 public interface ICarta {
-    void jugarCarta(Jugador jugador, Seccion seccion);
-    String nombre();
+  void jugar(Jugador jugadorActual, Jugador jugadorSiguiente, Posicion posicion);
+
+  List<Posicion> getTipo();
+
+  String nombre();
 }
