@@ -19,7 +19,7 @@ public class VistaCarta extends Button {
         super(cartaModelo.nombre());
         this.cartaModelo = cartaModelo;
 
-        this.setPrefSize(100, 80);
+        this.setPrefSize(50, 80);
         this.deseleccionar();
         this.setOnAction(e -> oneSeleccionar.accept(this));
         this.moverCarta();

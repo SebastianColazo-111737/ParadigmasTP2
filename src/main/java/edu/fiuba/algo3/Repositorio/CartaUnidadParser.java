@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.Repositorio;
 
+import edu.fiuba.algo3.modelo.posiciones.Asedio;
+import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
+import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import org.json.simple.JSONObject;
 
 import edu.fiuba.algo3.modelo.cartas.unidades.Agil;
@@ -20,42 +23,56 @@ import java.util.List;
 public class CartaUnidadParser {
 
   public static Unidad desdeJson(JSONObject cartaJson) {
-    Unidad carta = null;
-    List<Posicion> posicion = PosicionParser.desdeJson(cartaJson);
+    Unidad carta;
+    List<Posicion> posiciones = PosicionParser.desdeJson(cartaJson);
+    String nombreOriginal = (String) cartaJson.get("nombre");
+    String nombreConEmoji = agregarEmojis(nombreOriginal, posiciones);
+
+    int puntos = Math.toIntExact((Long) cartaJson.get("puntos"));
+    Puntaje puntaje = new Puntaje(puntos);
 
     List<String> modificadores = new ArrayList<>();
     JSONArray mods = (JSONArray) cartaJson.get("modificador");
     for (Object mod : mods) {
       modificadores.add((String) mod);
     }
-    String modificador = "";
-    if (modificadores.size() > 0)
-      modificador = modificadores.get(0);
-    if (modificador == "Medico")
-      carta = new Medico((String) cartaJson.get("nombre"), new Puntaje(Math.toIntExact((Long) cartaJson.get("puntos"))),
-          posicion.get(0));
-    else if (modificador == "Legendaria")
-      carta = new Legendaria((String) cartaJson.get("nombre"),
-          new Puntaje(Math.toIntExact((Long) cartaJson.get("puntos"))), posicion.get(0));
 
-    else if (modificador == "Carta Unida")
-      carta = new Unidas((String) cartaJson.get("nombre"),
-          new Puntaje(Math.toIntExact((Long) cartaJson.get("puntos"))), posicion.get(0));
-    else if (modificador == "Morale Boost")
-      carta = new Animador((String) cartaJson.get("nombre"),
-          new Puntaje(Math.toIntExact((Long) cartaJson.get("puntos"))), posicion.get(0));
-    else if (modificador == "Agil")
-      carta = new Agil((String) cartaJson.get("nombre"),
-          new Puntaje(Math.toIntExact((Long) cartaJson.get("puntos"))), posicion.get(0), posicion.get(1));
+    String modificador = modificadores.isEmpty() ? "" : modificadores.get(0);
 
-    else if (modificador == "Espia")
-      carta = new Espia((String) cartaJson.get("nombre"),
-          new Puntaje(Math.toIntExact((Long) cartaJson.get("puntos"))), posicion.get(0));
-
-    else
-      carta = new UnidadBasica((String) cartaJson.get("nombre"),
-          new Puntaje(Math.toIntExact((Long) cartaJson.get("puntos"))), posicion.get(0));
+    // Usar .equals(...) en vez de ==
+    if (modificador.equals("Medico")) {
+      carta = new Medico(nombreConEmoji, puntaje, posiciones.get(0));
+    } else if (modificador.equals("Legendaria")) {
+      carta = new Legendaria(nombreConEmoji, puntaje, posiciones.get(0));
+    } else if (modificador.equals("Carta Unida")) {
+      carta = new Unidas(nombreConEmoji, puntaje, posiciones.get(0));
+    } else if (modificador.equals("Morale Boost")) {
+      carta = new Animador(nombreConEmoji, puntaje, posiciones.get(0));
+    } else if (modificador.equals("Agil")) {
+      carta = new Agil(nombreConEmoji, puntaje, posiciones.get(0), posiciones.get(1));
+    } else if (modificador.equals("Espia")) {
+      carta = new Espia(nombreConEmoji, puntaje, posiciones.get(0));
+    } else {
+      carta = new UnidadBasica(nombreConEmoji, puntaje, posiciones.get(0));
+    }
 
     return carta;
+  }
+
+  private static String agregarEmojis(String nombreOriginal, List<Posicion> posiciones) {
+    StringBuilder sb = new StringBuilder(nombreOriginal);
+    sb.append("\n");
+
+    for (Posicion p : posiciones) {
+      if (p instanceof CuerpoACuerpo) {
+        sb.append("🗡️ ");
+      } else if (p instanceof Distancia) {
+        sb.append("⋙ ");
+      } else if (p instanceof Asedio) {
+        sb.append("🛡️ ");
+      }
+    }
+
+    return sb.toString().trim();
   }
 }
