@@ -9,21 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
-<<<<<<< interfaz-grafica
-  private Mazo mazo;
-  private Mano mano;
-  private Atril atril;
-
-  public Jugador(Mazo mazo, Mano mano, Atril atril) {
-    this.mazo = mazo;
-    this.mano = mano;
-    this.atril = atril;
-  }
-=======
     private Mazo mazo;
     private Mano mano;
     private Atril atril;
-    private String nombre;
 
     public Jugador(Mazo mazo, Mano mano, Atril atril) {
         this.mazo = mazo;
@@ -31,87 +19,64 @@ public class Jugador {
         this.atril = atril;
     }
 
-    // PRUEBA PARA INTERFAZ USUARIO
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setMazo(Mazo mazo) {
-        this.mazo = mazo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public Mazo getMazo() {
-        return mazo;
-    }
-
-    public void robarCartasDelMazo(int cantidad){
+    public void robarCartasDelMazo(int cantidad) {
         List<ICarta> cartasDelMazo = this.mazo.darCartas(cantidad);
         this.mano.agregarCarta(cartasDelMazo);
     }
->>>>>>> union-de-interfaces-forzada
 
-  public void robarCartasDelMazo(int cantidad) {
-    List<ICarta> cartasDelMazo = this.mazo.darCartas(cantidad);
-    this.mano.agregarCarta(cartasDelMazo);
-  }
+    public void cambiarCartaDeLaManoAlMazo(ICarta carta) {
+        mano.removerCarta(carta);
 
-  public void cambiarCartaDeLaManoAlMazo(ICarta carta) {
-    mano.removerCarta(carta);
-
-    ICarta cartaDelMazo = this.mazo.cambiarCarta(carta);
-    agregarCartaALaMano(cartaDelMazo);
-  }
-
-  public void activarDebuff(ArrayList<Posicion> posicionesAfectadas) {
-    this.atril.activarDebuff(posicionesAfectadas);
-  }
-
-  public void duplicarPuntos(ArrayList<Posicion> posicionesAfectadas) {
-    this.atril.duplicarPuntos(posicionesAfectadas);
-  }
-
-  public void limpiarDebuff(ArrayList<Posicion> posicionesAfectadas) {
-    this.atril.limpiarDebuff(posicionesAfectadas);
-  }
-
-  public void agregarCartaALaMano(ICarta carta) {
-    this.mano.agregarCarta(carta);
-  }
-
-  public boolean lePertenece(Seccion seccion) {
-    return this.atril.contiene(seccion);
-  }
-
-  public void jugarCarta(ICarta carta, Jugador jugadorSiguiente, Posicion tipo) {
-    mano.removerCarta(carta);
-
-    try {
-      carta.jugar(this, jugadorSiguiente, tipo);
-    } catch (Exception e) {
-      mano.agregarCarta(carta);
-      throw e;
+        ICarta cartaDelMazo = this.mazo.cambiarCarta(carta);
+        agregarCartaALaMano(cartaDelMazo);
     }
 
-  }
+    public void activarDebuff(ArrayList<Posicion> posicionesAfectadas) {
+        this.atril.activarDebuff(posicionesAfectadas);
+    }
 
-  public void colocarUnidad(ICarta carta, Posicion posicion) {
-    atril.colocarCarta(carta, posicion);
-  }
+    public void duplicarPuntos(ArrayList<Posicion> posicionesAfectadas) {
+        this.atril.duplicarPuntos(posicionesAfectadas);
+    }
 
-  public void colocarCartaEspecial(CEspecial carta) {
-    atril.colocarEspecial(carta);
-  }
+    public void limpiarDebuff(ArrayList<Posicion> posicionesAfectadas) {
+        this.atril.limpiarDebuff(posicionesAfectadas);
+    }
 
-  public Atril atril() {
-    return this.atril;
-  }
+    public void agregarCartaALaMano(ICarta carta) {
+        this.mano.agregarCarta(carta);
+    }
 
-  public Mano mano() {
-    return this.mano;
-  }
+    public boolean lePertenece(Seccion seccion) {
+        return this.atril.contiene(seccion);
+    }
+
+    public void jugarCarta(ICarta carta, Jugador jugadorSiguiente, Posicion tipo) {
+        mano.removerCarta(carta);
+
+        try {
+            carta.jugar(this, jugadorSiguiente, tipo);
+        } catch (Exception e) {
+            mano.agregarCarta(carta);
+            throw e;
+        }
+
+    }
+
+    public void colocarUnidad(ICarta carta, Posicion posicion) {
+        atril.colocarCarta(carta, posicion);
+    }
+
+    public void colocarCartaEspecial(CEspecial carta) {
+        atril.colocarEspecial(carta);
+    }
+
+    public Atril atril() {
+        return this.atril;
+    }
+
+    public Mano mano() {
+        return this.mano;
+    }
 
 }
