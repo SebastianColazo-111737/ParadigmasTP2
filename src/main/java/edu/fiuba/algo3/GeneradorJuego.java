@@ -1,8 +1,15 @@
 package edu.fiuba.algo3;
 
+import java.io.FileReader;
 import java.util.List;
 import java.util.ArrayList;
 
+import edu.fiuba.algo3.Repositorio.MazoParser;
+import edu.fiuba.algo3.modelo.jugador.Mazo;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import java.io.FileReader;
+import edu.fiuba.algo3.Repositorio.MazoParser;
 import edu.fiuba.algo3.vistas.Lienzo;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
@@ -20,32 +27,30 @@ import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 
 public class GeneradorJuego {
 
     public static Lienzo construirJuego() {
-        // Crear cartas para ambos jugadores
-        List<ICarta> cartasJ1 = new ArrayList<>();
-        List<ICarta> cartasJ2 = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            cartasJ1.add(new UnidadBasica("Espadachin", new Puntaje(4), new CuerpoACuerpo()));
-            cartasJ2.add(new UnidadBasica("Arquero", new Puntaje(3), new Distancia()));
-        }
-
-        for (int i = 0; i < 11; i++) {
-            cartasJ1.add(new UnidadBasica("Mago", new Puntaje(5), new Distancia()));
-            cartasJ2.add(new UnidadBasica("Catapulta", new Puntaje(8), new Asedio()));
-        }
-
-        // Jugador 1
-        Mazo mazoJ1 = new Mazo();
-        mazoJ1.agregarCarta(cartasJ1);
+        Mazo mazoJ1 = null;
+        Mazo mazoJ2 = null;
         Mano manoJ1 = new Mano();
-        manoJ1.agregarCarta(mazoJ1.darCartas(10));
+        Mano manoJ2 = new Mano();
+      try {
+            // Jugador 1
+            mazoJ1 = generarMazo("mazo_jugador_uno");
+            manoJ1.agregarCarta(mazoJ1.darCartas(10));
 
 
+            // Jugador 2
+            mazoJ2 = generarMazo("mazo_jugador_uno");
+            manoJ2.agregarCarta(mazoJ2.darCartas(10));
+
+        } catch (Exception e) {
+
+        }
         Seccion cuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
         Seccion distanciaJ1 = new Seccion(new Distancia());
         Seccion asedioJ1 = new Seccion(new Asedio());
@@ -53,16 +58,7 @@ public class GeneradorJuego {
         atrilJ1.agregarSeccion(cuerpoACuerpoJ1);
         atrilJ1.agregarSeccion(distanciaJ1);
         atrilJ1.agregarSeccion(asedioJ1);
-
         Jugador jugador1 = new Jugador(mazoJ1, manoJ1, atrilJ1);
-
-        // Jugador 2
-        Mazo mazoJ2 = new Mazo();
-        mazoJ2.agregarCarta(cartasJ2);
-        Mano manoJ2 = new Mano();
-        manoJ2.agregarCarta(mazoJ2.darCartas(10));
-
-
         Seccion cuerpoACuerpoJ2 = new Seccion(new CuerpoACuerpo());
         Seccion distanciaJ2 = new Seccion(new Distancia());
         Seccion asedioJ2 = new Seccion(new Asedio());
@@ -79,4 +75,15 @@ public class GeneradorJuego {
 
         return new Lienzo(jugador1, jugador2, juego, controladorTurnos);
     }
+    private static Mazo generarMazo(String mazoString) throws Exception {
+        Mazo mazo;
+        JSONParser parser = new JSONParser();
+        JSONObject root = (JSONObject) parser.parse(new FileReader("src/test/resources/json/gwent.json"));
+
+        JSONObject mazoJson = (JSONObject) root.get(mazoString);
+
+        mazo = MazoParser.desdeJson(mazoJson);
+        return mazo;
+    }
+
 }

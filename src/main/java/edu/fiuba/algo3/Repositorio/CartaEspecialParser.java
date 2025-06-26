@@ -23,6 +23,10 @@ public class CartaEspecialParser {
       posiciones.add(new CuerpoACuerpo());
       posiciones.add(new Distancia());
       posiciones.add(new Asedio());
+
+      nombre = agregarEmojis(nombre, posiciones);
+
+
       return new BuffCartas(nombre, posiciones);
     }
 
@@ -43,6 +47,7 @@ public class CartaEspecialParser {
         seccionFake.put("seccion", nombrePos);
         posiciones.addAll(PosicionParser.desdeJson(seccionFake));
       }
+      nombre = agregarEmojis(nombre, posiciones);
 
       return new Debuff(nombre, posiciones);
     }
@@ -53,4 +58,22 @@ public class CartaEspecialParser {
 
     return null;
   }
+
+  private static String agregarEmojis(String nombreOriginal, ArrayList<Posicion> posiciones) {
+    StringBuilder sb = new StringBuilder(nombreOriginal);
+    sb.append("\n");
+
+    for (Posicion p : posiciones) {
+      if (p instanceof CuerpoACuerpo) {
+        sb.append("🗡️ ");
+      } else if (p instanceof Distancia) {
+        sb.append("⋙ ");
+      } else if (p instanceof Asedio) {
+        sb.append("🛡️ ");
+      }
+    }
+
+    return sb.toString().trim();
+  }
+
 }
