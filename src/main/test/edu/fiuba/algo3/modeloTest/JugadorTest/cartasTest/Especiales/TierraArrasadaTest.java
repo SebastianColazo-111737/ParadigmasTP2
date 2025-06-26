@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.especiales.BuffCartas;
 import edu.fiuba.algo3.modelo.cartas.especiales.CEspecial;
 import edu.fiuba.algo3.modelo.cartas.especiales.TierraArrasada;
+import edu.fiuba.algo3.modelo.cartas.unidades.Legendaria;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidas;
@@ -109,6 +110,49 @@ public class TierraArrasadaTest {
     jugador.jugarCarta(quemar, jugador2, null);
     // Assert
     assertEquals(11, atril.getPuntajeActual());
+  }
+
+  @Test
+  public void TierraArrasadaNoAfectaLegendaria() {
+
+    // Arrange
+    ArrayList<Posicion> posicionesAfectar = new ArrayList<>();
+    posicionesAfectar.add(new Distancia());
+    CEspecial quemar = new TierraArrasada("quermarTEST", posicionesAfectar);
+
+    Legendaria legendaria = new Legendaria(
+        "Ashe",
+        new Puntaje(20),
+        new Distancia());
+
+    UnidadBasica unidad1 = new UnidadBasica(
+        "Unidad",
+        new Puntaje(7),
+        new Distancia());
+    UnidadBasica unidad2 = new UnidadBasica(
+        "Unidad",
+        new Puntaje(3),
+        new Distancia());
+
+    UnidadBasica unidad3 = new UnidadBasica(
+        "Unidad",
+        new Puntaje(1),
+        new Distancia());
+
+    mano.agregarCarta(unidad1);
+    mano.agregarCarta(unidad2);
+    mano.agregarCarta(unidad3);
+    mano.agregarCarta(legendaria);
+    mano.agregarCarta(quemar);
+
+    // Act
+    jugador.jugarCarta(legendaria, jugador2, legendaria.getTipo().get(0));
+    jugador.jugarCarta(unidad1, jugador2, unidad1.getTipo().get(0));
+    jugador.jugarCarta(unidad2, jugador2, unidad1.getTipo().get(0));
+    jugador.jugarCarta(unidad3, jugador2, unidad1.getTipo().get(0));
+    jugador.jugarCarta(quemar, jugador2, null);
+    // Assert
+    assertEquals(24, atril.getPuntajeActual());
   }
 
 }

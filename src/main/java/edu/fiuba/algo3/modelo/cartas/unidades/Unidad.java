@@ -36,7 +36,7 @@ public abstract class Unidad implements ICarta {
   }
 
   public Boolean masFuerteQue(Unidad unidad) {
-    return this.getPuntaje().getPuntajeActual() > unidad.getPuntaje().getPuntajeActual();
+    return (unidad == null) || this.getPuntaje().getPuntajeActual() > unidad.getPuntaje().getPuntajeActual();
   }
 
   public Puntaje getPuntaje() {

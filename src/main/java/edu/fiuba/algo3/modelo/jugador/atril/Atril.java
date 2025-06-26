@@ -39,6 +39,9 @@ public class Atril {
         cartas.add(seccion.tomarCartaMasFuerte());
     }
 
+    if (cartas.size() == 0) {
+      return fuerte;
+    }
     fuerte = cartas.get(0);
     for (Unidad carta : cartas) {
       if (carta.masFuerteQue(fuerte))

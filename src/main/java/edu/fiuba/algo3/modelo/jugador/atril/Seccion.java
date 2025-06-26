@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.jugador.atril;
 
 import edu.fiuba.algo3.modelo.cartas.unidades.Animador;
+import edu.fiuba.algo3.modelo.cartas.unidades.Legendaria;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
@@ -40,11 +41,13 @@ public class Seccion {
     if (this.unidadesColocadas.size() == 0) {
       return null;
     }
-    Unidad fuerte = this.unidadesColocadas.get(0);
+    Unidad fuerte = null;
     for (Unidad unidad : this.unidadesColocadas) {
-      if (unidad.masFuerteQue(fuerte)) {
+
+      if (!(unidad instanceof Legendaria) && unidad.masFuerteQue(fuerte)) {
         fuerte = unidad;
       }
+
     }
     return fuerte;
   }
@@ -57,17 +60,29 @@ public class Seccion {
   }
 
   public Puntaje calcularPuntajeActualUnidades() {
-    if (this.debuff)
-      return new Puntaje(this.unidadesColocadas.size());
+    int puntajeTotal = 0;
+
+    if (this.debuff) {
+      for (Unidad unidad : unidadesColocadas) {
+        if (unidad instanceof Legendaria) {
+          puntajeTotal += unidad.getPuntaje().getPuntajeActual();
+        } else {
+          puntajeTotal += 1;
+        }
+      }
+      return new Puntaje(puntajeTotal);
+    }
 
     int cantAnimadoresEnSeccion = (int) unidadesColocadas.stream()
         .filter(u -> u instanceof Animador)
         .count();
 
-    int puntajeTotal = 0;
     for (Unidad unidad : unidadesColocadas) {
       if (unidad instanceof Animador)
         puntajeTotal += unidad.getPuntajeTotal(this) * this.duplicadores;
+
+      else if (unidad instanceof Legendaria)
+        puntajeTotal += unidad.getPuntajeTotal(this);
       else
         puntajeTotal += unidad.getPuntajeTotal(this) * this.duplicadores + cantAnimadoresEnSeccion;
     }
