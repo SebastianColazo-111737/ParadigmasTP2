@@ -32,8 +32,11 @@ public class Atril {
   public ICarta quemarCartaMasFuerte() {
     ArrayList<Unidad> cartas = new ArrayList<>();
     Unidad fuerte = null;
+
     for (Seccion seccion : this.secciones) {
-      cartas.add(seccion.tomarCartaMasFuerte());
+      Unidad carta = seccion.tomarCartaMasFuerte();
+      if (carta != null)
+        cartas.add(seccion.tomarCartaMasFuerte());
     }
 
     fuerte = cartas.get(0);

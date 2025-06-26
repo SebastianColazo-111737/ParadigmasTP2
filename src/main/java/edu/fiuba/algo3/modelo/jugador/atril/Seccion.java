@@ -37,6 +37,9 @@ public class Seccion {
   }
 
   public Unidad tomarCartaMasFuerte() {
+    if (this.unidadesColocadas.size() == 0) {
+      return null;
+    }
     Unidad fuerte = this.unidadesColocadas.get(0);
     for (Unidad unidad : this.unidadesColocadas) {
       if (unidad.masFuerteQue(fuerte)) {
