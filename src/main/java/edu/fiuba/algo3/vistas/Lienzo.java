@@ -3,11 +3,22 @@ package edu.fiuba.algo3.vistas;
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+<<<<<<< interfaz-grafica
 import edu.fiuba.algo3.vistas.Contenedores.*;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.Contenedores.VistaTurnos;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
+=======
+import edu.fiuba.algo3.vistas.Contenedores.ContenedorTablero;
+import edu.fiuba.algo3.vistas.Contenedores.VistaColumnaIzquierda;
+import edu.fiuba.algo3.vistas.Contenedores.VistaDatos;
+import edu.fiuba.algo3.vistas.Contenedores.VistaJugador;
+import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
+import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
+import edu.fiuba.algo3.vistas.Individuales.VistaSeccionEspecial;
+import javafx.scene.image.Image;
+>>>>>>> union-de-interfaces-forzada
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
@@ -15,8 +26,16 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.Node;
 
+import java.util.function.BiConsumer;
+
 public class Lienzo extends StackPane {
+<<<<<<< interfaz-grafica
     private VistaTurnos vistaTurnos;
+=======
+    public Lienzo(Jugador jugador1, Jugador jugador2, BiConsumer<String, Image> onMostrarDescripcion) {
+        VistaJugador vistaJugador2 = new VistaJugador(jugador2, true, onMostrarDescripcion);
+        VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, onMostrarDescripcion);
+>>>>>>> union-de-interfaces-forzada
 
     public Lienzo(Jugador jugador1, Jugador jugador2, Gwent juego, ControladorTurnos controladorTurnos) {
 

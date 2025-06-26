@@ -6,12 +6,22 @@ import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
 import javafx.scene.Node;
+<<<<<<< interfaz-grafica
+=======
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+>>>>>>> union-de-interfaces-forzada
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 
 import java.util.List;
+<<<<<<< interfaz-grafica
+=======
+import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
+>>>>>>> union-de-interfaces-forzada
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
@@ -19,13 +29,19 @@ public class VistaJugador extends VBox {
 
     private final VistaMano vistaMano;
 
+<<<<<<< interfaz-grafica
     public VistaJugador(Jugador jugador, boolean estaArriba, VistaMano vistaMano, VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos){
+=======
+    public VistaJugador(Jugador jugador, boolean estaArriba, BiConsumer<String, Image> onMostrarDescripcion){
+>>>>>>> union-de-interfaces-forzada
         super(10);
         this.setAlignment(Pos.CENTER);
 
-        this.vistaMano = new VistaMano(jugador.mano().getCartas(), carta -> {
-            System.out.println("Se seleccionó: " + carta.nombre());
-        });
+        this.vistaMano = new VistaMano(jugador.mano().getCartas(),
+            carta ->
+            System.out.println("Se seleccionó: " + carta.nombre()),
+            onMostrarDescripcion
+        );
 
         VBox secciones = construirVistaSecciones(jugador,estaArriba, vistaTurnos, controladorTurnos);
         Node contenedorDerecha = construirContenedorDerecha(jugador,estaArriba);

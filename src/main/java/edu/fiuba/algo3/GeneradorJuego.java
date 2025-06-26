@@ -23,8 +23,10 @@ import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 
 
 public class GeneradorJuego {
+    // DEVUELVE SOLO JUGADORES
+    public static List<Jugador> crearJugadores() {
+        List<Jugador> jugadores = new ArrayList<>();
 
-    public static Lienzo construirJuego() {
         // Crear cartas para ambos jugadores
         List<ICarta> cartasJ1 = new ArrayList<>();
         List<ICarta> cartasJ2 = new ArrayList<>();
@@ -40,7 +42,7 @@ public class GeneradorJuego {
         }
 
         // Jugador 1
-        Mazo mazoJ1 = new Mazo();
+        Mazo mazoJ1 = new Mazo("provisorio");
         mazoJ1.agregarCarta(cartasJ1);
         Mano manoJ1 = new Mano();
         manoJ1.agregarCarta(mazoJ1.darCartas(10));
@@ -57,7 +59,7 @@ public class GeneradorJuego {
         Jugador jugador1 = new Jugador(mazoJ1, manoJ1, atrilJ1);
 
         // Jugador 2
-        Mazo mazoJ2 = new Mazo();
+        Mazo mazoJ2 = new Mazo("provisiorio");
         mazoJ2.agregarCarta(cartasJ2);
         Mano manoJ2 = new Mano();
         manoJ2.agregarCarta(mazoJ2.darCartas(10));
@@ -77,6 +79,12 @@ public class GeneradorJuego {
         Gwent juego = new Gwent(jugador1, jugador2);
         ControladorTurnos controladorTurnos = new ControladorTurnos(juego);
 
+<<<<<<< interfaz-grafica
         return new Lienzo(jugador1, jugador2, juego, controladorTurnos);
+=======
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        return jugadores;
+>>>>>>> union-de-interfaces-forzada
     }
 }
