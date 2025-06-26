@@ -42,8 +42,8 @@ public class Jugador {
     this.atril.quemarCartaMasFuerte();
   }
 
-  public void duplicarPuntos(ArrayList<Posicion> posicionesAfectadas) {
-    this.atril.duplicarPuntos(posicionesAfectadas);
+  public void duplicarPuntos(Posicion posicion) {
+    this.atril.duplicarPuntos(posicion);
   }
 
   public void limpiarDebuff(ArrayList<Posicion> posicionesAfectadas) {

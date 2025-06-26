@@ -101,7 +101,7 @@ public class MoralBoostTest {
     jugador.jugarCarta(unidad1, jugador2, unidad1.getTipo().get(0));
     jugador.jugarCarta(unidad2, jugador2, unidad1.getTipo().get(0));
     jugador.jugarCarta(unidad3, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(moraleBoost, jugador2, null);
+    jugador.jugarCarta(moraleBoost, jugador2, unidad1.getTipo().get(0));
     // Assert
     assertEquals(18, atril.getPuntajeActual());
   }
@@ -144,7 +144,7 @@ public class MoralBoostTest {
     jugador.jugarCarta(unidad1, jugador2, unidad1.getTipo().get(0));
     jugador.jugarCarta(unidad2, jugador2, unidad1.getTipo().get(0));
     jugador.jugarCarta(unidad3, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(moraleBoost, jugador2, null);
+    jugador.jugarCarta(moraleBoost, jugador2, unidad1.getTipo().get(0));
     // Assert
     assertEquals(38, atril.getPuntajeActual());
   }

@@ -13,10 +13,9 @@ public class BuffCartas extends CEspecial {
   @Override
   public void jugar(Jugador jugadorActual, Jugador jugadorSiguiente, Posicion posicion) {
 
-    // Arreglar lo de posicion -> Luego checo
     jugadorActual.colocarCartaEspecial(this);
-    jugadorActual.duplicarPuntos(this.posicionesAfectar);
-    jugadorSiguiente.duplicarPuntos(this.posicionesAfectar);
+    jugadorActual.duplicarPuntos(posicion);
+    jugadorSiguiente.duplicarPuntos(posicion);
 
   }
 

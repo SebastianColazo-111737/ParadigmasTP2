@@ -69,8 +69,10 @@ public class Atril {
     }
   }
 
-  public void duplicarPuntos(ArrayList<Posicion> posicionesAfectadas) {
-    aplicar(posicionesAfectadas, Seccion::agregarDuplicador);
+  public void duplicarPuntos(Posicion posicion) {
+    ArrayList<Posicion> p = new ArrayList<>();
+    p.add(posicion);
+    aplicar(p, Seccion::agregarDuplicador);
   }
 
   public void activarDebuff(ArrayList<Posicion> posicionesAfectadas) {
