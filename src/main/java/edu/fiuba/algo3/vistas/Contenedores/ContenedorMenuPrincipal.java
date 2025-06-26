@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas.Contenedores;
+/*package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import javafx.geometry.Insets;
@@ -26,4 +26,4 @@ public class ContenedorMenuPrincipal extends VBox {
 
         this.getChildren().addAll(titulo, botonJugar);
     }
-}
+}*/

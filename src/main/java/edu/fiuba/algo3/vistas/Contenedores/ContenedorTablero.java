@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas.Contenedores;
+/*package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.GeneradorJuego;
 import edu.fiuba.algo3.modelo.juego.Gwent;
@@ -36,4 +36,4 @@ public class ContenedorTablero extends StackPane {
         StackPane.setAlignment(vista, Pos.CENTER);
         this.getChildren().add(vista);
     }
-}
+}*/

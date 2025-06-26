@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas.Contenedores;
+/*package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import javafx.geometry.Insets;
@@ -30,4 +30,4 @@ public class ContenedorNombreJugador extends VBox {
 
         this.getChildren().addAll(etiqueta, campoNombre, confirmar);
     }
-}
+}*/

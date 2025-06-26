@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas.Contenedores;
+/*package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Mazo;
@@ -49,4 +49,4 @@ public class ContenedorSeleccionMazo extends VBox {
         });
         return boton;
     }
-}
+}*/
