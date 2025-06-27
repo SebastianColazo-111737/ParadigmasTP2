@@ -37,7 +37,7 @@ public class VistaSeccion extends StackPane {
     this.controladorTurnos = controladorTurnos;
     this.vistaTurnos = vistaTurnos;
 
-    this.vistaPuntos = new VistaPuntos(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
+    this.vistaPuntos = new VistaPuntos(seccionModelo);
 
     Rectangle rectangulo = new Rectangle(380, 90);
     rectangulo.setFill(Color.LIGHTGRAY);
