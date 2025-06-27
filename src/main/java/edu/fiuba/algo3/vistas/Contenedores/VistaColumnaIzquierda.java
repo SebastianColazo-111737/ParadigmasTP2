@@ -18,9 +18,10 @@ public class VistaColumnaIzquierda extends VBox {
         this.infoJugador2 = new VistaDatos("Ogro", puntosJ2);
         this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
 
-        VistaSeccionEspecial especiales = new VistaSeccionEspecial("Especiales");
+        //VistaSeccionEspecial especiales = new VistaSeccionEspecial("Especiales");
 
-        this.getChildren().addAll(vistaTurnos,infoJugador2, especiales, infoJugador1);
+
+        this.getChildren().addAll(vistaTurnos,infoJugador2, /*especiales,*/ infoJugador1);
     }
 
     public VistaPuntosJugador getPuntosJugador1(){

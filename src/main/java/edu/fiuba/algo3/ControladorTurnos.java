@@ -55,9 +55,9 @@ public class ControladorTurnos {
       }
 
       if (puntosJugador1.getRondasGanadas() == 2) {
-        mostrarGanador("¡EL GUERRERO");
+        mostrarGanador("¡EL GUERRERO GANA!");
       } else if (puntosJugador2.getRondasGanadas() == 2) {
-        mostrarGanador("¡EL OGRO GANA");
+        mostrarGanador("¡EL OGRO GANA!");
       }
 
       juego.reiniciarRonda();

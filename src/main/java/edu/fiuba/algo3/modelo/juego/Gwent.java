@@ -65,6 +65,9 @@ public class Gwent {
 
   public void reiniciarRonda(){
     adminTurnos.reiniciarAdminTurnos();
+    for (Jugador jugador : jugadores){
+      jugador.atril().descartarCartas();
+    }
   }
 
 }

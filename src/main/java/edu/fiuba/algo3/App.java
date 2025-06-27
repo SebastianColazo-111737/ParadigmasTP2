@@ -38,7 +38,7 @@ public class App extends Application {
     // Inicia el menú de bienvenida
     private void iniciarMenu() {
         Label titulo = new Label("Bienvenido a GWENT");
-        titulo.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        titulo.setFont(Font.font("Arial", FontWeight.BOLD,50));
 
         Text tituloReglas = new Text("Reglas del juego:\n\n");
         tituloReglas.setFont(Font.font("Arial", FontWeight.BOLD, 30));
