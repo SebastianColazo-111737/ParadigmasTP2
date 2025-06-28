@@ -24,18 +24,21 @@ public class CartaUnidadParser {
 
   public static Unidad desdeJson(JSONObject cartaJson) {
     Unidad carta;
+
     List<Posicion> posiciones = PosicionParser.desdeJson(cartaJson);
-    String nombreOriginal = (String) cartaJson.get("nombre");
-    String nombreConEmoji = agregarEmojis(nombreOriginal, posiciones);
-
-    int puntos = Math.toIntExact((Long) cartaJson.get("puntos"));
-    Puntaje puntaje = new Puntaje(puntos);
-
     List<String> modificadores = new ArrayList<>();
+
     JSONArray mods = (JSONArray) cartaJson.get("modificador");
     for (Object mod : mods) {
       modificadores.add((String) mod);
     }
+
+    String nombreOriginal = (String) cartaJson.get("nombre");
+    String nombreConEmoji = agregarEmojisPosicion(nombreOriginal, posiciones);
+    nombreConEmoji += "\n" + agregarEmojisModificador(modificadores);
+
+    int puntos = Math.toIntExact((Long) cartaJson.get("puntos"));
+    Puntaje puntaje = new Puntaje(puntos);
 
     String modificador = modificadores.isEmpty() ? "" : modificadores.get(0);
 
@@ -59,7 +62,7 @@ public class CartaUnidadParser {
     return carta;
   }
 
-  private static String agregarEmojis(String nombreOriginal, List<Posicion> posiciones) {
+  private static String agregarEmojisPosicion(String nombreOriginal, List<Posicion> posiciones) {
     StringBuilder sb = new StringBuilder(nombreOriginal);
     sb.append("\n");
 
@@ -75,4 +78,35 @@ public class CartaUnidadParser {
 
     return sb.toString().trim();
   }
+
+  private static String agregarEmojisModificador(List<String> modificadores ){
+    StringBuilder sb = new StringBuilder();
+
+    for(String mod : modificadores) {
+      switch (mod) {
+        case "Medico":
+          sb.append("➀");
+          break;
+        case "Legendaria":
+          sb.append("②");
+          break;
+        case "Carta Unida":
+          sb.append("③");
+          break;
+        case "Morale Boost":
+          sb.append("④");
+          break;
+        case "Agil":
+          sb.append("⑤");
+          break;
+        case "Espia":
+          sb.append("⑥");
+          break;
+      }
+    }
+    return sb.toString().trim();
+  }
+
+
+
 }
