@@ -61,6 +61,8 @@ public class ControladorTurnos {
       }
 
       juego.reiniciarRonda();
+      vistaAtril1.actualizar();
+      vistaAtril2.actualizar();
     }
   }
 

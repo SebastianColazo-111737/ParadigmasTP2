@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
@@ -20,6 +21,8 @@ import javafx.geometry.Pos;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 
+import java.util.List;
+
 public class VistaSeccion extends StackPane {
 
   private final Seccion seccionModelo;
@@ -27,15 +30,18 @@ public class VistaSeccion extends StackPane {
   private final Pane cartasApoyadas;
   private final VistaPuntos vistaPuntos;
   private static final int CapacidadMaxima = 8;
-  private ControladorTurnos controladorTurnos;
-  private VistaTurnos vistaTurnos;
+  private final ControladorTurnos controladorTurnos;
+  private final VistaTurnos vistaTurnos;
+  private final VistaMano vistaMano;
 
   public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano, VistaTurnos vistaTurnos,
       ControladorTurnos controladorTurnos) {
+
     this.seccionModelo = seccionModelo;
     this.jugador = jugador;
     this.controladorTurnos = controladorTurnos;
     this.vistaTurnos = vistaTurnos;
+    this.vistaMano = vistaMano;
 
     this.vistaPuntos = new VistaPuntos(seccionModelo);
 
@@ -52,10 +58,11 @@ public class VistaSeccion extends StackPane {
     this.cartasApoyadas.setPickOnBounds(false);
 
     this.getChildren().addAll(base, cartasApoyadas);
-    this.recibirCarta(vistaMano);
+    configurarDragYDrop();
+    actualizar();
   }
 
-  private void recibirCarta(VistaMano vistaMano) {
+  private void configurarDragYDrop() {
     this.setOnDragOver(e -> {
       if (e.getGestureSource() instanceof VistaCarta
           && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima) {
@@ -76,20 +83,15 @@ public class VistaSeccion extends StackPane {
         VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
         ICarta cartaModelo = vistaCarta.getCartaModelo();
 
-        jugador.jugarCarta(cartaModelo, this.controladorTurnos.jugadorProximo(), this.seccionModelo.getPosicion());
-
-        vistaCarta.setLayoutX(seccionModelo.getUnidadesColocadas().size() * 30);
-        vistaCarta.setLayoutY(0);
-        cartasApoyadas.getChildren().add(vistaCarta);
-
-        vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
+        jugador.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
         vistaMano.removerVistaCarta(vistaCarta);
 
         controladorTurnos.AvanzarTurno();
         vistaTurnos.actualizarTurnos();
 
-        System.out.println("Carta colocada en: " + this.seccionModelo.getPosicion());
-        VistaCarta.cartaSeleccionada = null;
+        this.actualizar();
+
+        //VistaCarta.cartaSeleccionada = null;
         seMovio = true;
       }
       e.setDropCompleted(seMovio);
@@ -99,6 +101,16 @@ public class VistaSeccion extends StackPane {
 
   public void actualizar(){
     cartasApoyadas.getChildren().clear();
+
+    int i = 0;
+    for (Unidad unidad : seccionModelo.getUnidadesColocadas()) {
+      VistaCarta vistaCarta = new VistaCarta(unidad, vista -> {}); // Consumer vacío
+      vistaCarta.setLayoutX(i * 30);
+      vistaCarta.setLayoutY(0);
+      cartasApoyadas.getChildren().add(vistaCarta);
+      i++;
+    }
+
     vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
   }
 
