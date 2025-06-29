@@ -27,7 +27,7 @@ public class VistaSeccion extends StackPane {
 
   private final Seccion seccionModelo;
   private final Jugador jugador;
-  private final Pane cartasApoyadas;
+  private final HBox cartasApoyadas;
   private final VistaPuntos vistaPuntos;
   private static final int CapacidadMaxima = 8;
   private final ControladorTurnos controladorTurnos;
@@ -54,8 +54,8 @@ public class VistaSeccion extends StackPane {
     HBox base = new HBox(-5, vistaPuntos, fondo);
     base.setAlignment(Pos.CENTER_LEFT);
 
-    this.cartasApoyadas = new Pane();
-    this.cartasApoyadas.setPickOnBounds(false);
+    this.cartasApoyadas = new HBox(5);
+    this.cartasApoyadas.setAlignment(Pos.CENTER_LEFT);
 
     this.getChildren().addAll(base, cartasApoyadas);
     configurarDragYDrop();
@@ -102,13 +102,9 @@ public class VistaSeccion extends StackPane {
   public void actualizar(){
     cartasApoyadas.getChildren().clear();
 
-    int i = 0;
     for (Unidad unidad : seccionModelo.getUnidadesColocadas()) {
-      VistaCarta vistaCarta = new VistaCarta(unidad, vista -> {}); // Consumer vacío
-      vistaCarta.setLayoutX(i * 30);
-      vistaCarta.setLayoutY(0);
+      VistaCarta vistaCarta = new VistaCarta(unidad, vista -> {});
       cartasApoyadas.getChildren().add(vistaCarta);
-      i++;
     }
 
     vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
