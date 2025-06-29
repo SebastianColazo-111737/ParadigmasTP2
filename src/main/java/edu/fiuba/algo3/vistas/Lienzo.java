@@ -47,6 +47,8 @@ public class Lienzo extends StackPane {
         //Creacion del tablero
         VBox tablero = new VBox(20, vistaJugador2, vistaJugador1);
         tablero.setAlignment(Pos.CENTER);
+        tablero.setMinWidth(750);
+        tablero.setMinHeight(750);
 
         //Union del tablero con la columnaIzquierda
         HBox contenedor = new HBox(40, columnaIzquierda, tablero);

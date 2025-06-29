@@ -63,8 +63,8 @@ public class VistaJugador extends VBox {
         contenedorLateral.setAlignment(Pos.CENTER_RIGHT);
 
         VBox contenedor = estaArriba
-                ? new VBox(10, contenedorLateral, this.vistaMano)
-                : new VBox(10, this.vistaMano, contenedorLateral);
+                ? new VBox(15, contenedorLateral, this.vistaMano)
+                : new VBox(15, this.vistaMano, contenedorLateral);
         return contenedor;
     }
 }

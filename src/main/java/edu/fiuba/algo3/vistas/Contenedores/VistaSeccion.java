@@ -11,19 +11,19 @@ import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.text.Font;
 
 import java.util.List;
 
-public class VistaSeccion extends StackPane {
+public class VistaSeccion extends HBox {
 
   private final Seccion seccionModelo;
   private final Jugador jugador;
@@ -35,7 +35,7 @@ public class VistaSeccion extends StackPane {
   private final VistaMano vistaMano;
 
   public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano, VistaTurnos vistaTurnos,
-      ControladorTurnos controladorTurnos) {
+                      ControladorTurnos controladorTurnos) {
 
     this.seccionModelo = seccionModelo;
     this.jugador = jugador;
@@ -45,27 +45,48 @@ public class VistaSeccion extends StackPane {
 
     this.vistaPuntos = new VistaPuntos(seccionModelo);
 
-    Rectangle rectangulo = new Rectangle(380, 90);
+    this.setSpacing(10);
+    this.setAlignment(Pos.CENTER_LEFT);
+    this.setPadding(new Insets(5));
+
+    this.setPrefHeight(100);
+    this.setMinHeight(100);
+
+    this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+    this.setBorder(new Border(new BorderStroke(
+            Color.BLACK,
+            BorderStrokeStyle.SOLID,
+            CornerRadii.EMPTY,
+            new BorderWidths(2)
+    )));
+
+    Rectangle rectangulo = new Rectangle(380, 120);
     rectangulo.setFill(Color.LIGHTGRAY);
     rectangulo.setStroke(Color.BLACK);
 
     Label etiqueta = new Label(nombreDesdePos(seccionModelo));
-    StackPane fondo = new StackPane(rectangulo, etiqueta);
-    HBox base = new HBox(-5, vistaPuntos, fondo);
-    base.setAlignment(Pos.CENTER_LEFT);
+    etiqueta.setFont(Font.font(24));
+
+    StackPane contenedorEmoji = new StackPane(etiqueta);
+    contenedorEmoji.setPrefSize(60, 80);
 
     this.cartasApoyadas = new HBox(5);
     this.cartasApoyadas.setAlignment(Pos.CENTER_LEFT);
+    this.cartasApoyadas.setPrefHeight(110);
+    this.cartasApoyadas.setMinHeight(110);
 
-    this.getChildren().addAll(base, cartasApoyadas);
+    this.getChildren().addAll(vistaPuntos, contenedorEmoji, cartasApoyadas);
+
     configurarDragYDrop();
     actualizar();
+    this.setMinWidth(700);
+
   }
 
   private void configurarDragYDrop() {
     this.setOnDragOver(e -> {
       if (e.getGestureSource() instanceof VistaCarta
-          && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima) {
+              && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima) {
         e.acceptTransferModes(TransferMode.MOVE);
       }
       e.consume();
@@ -76,9 +97,9 @@ public class VistaSeccion extends StackPane {
       boolean seMovio = false;
 
       if (tablaSeccion.hasString()
-          && VistaCarta.cartaSeleccionada != null
-          && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima
-          && controladorTurnos.jugadorActual().equals(jugador)) {
+              && VistaCarta.cartaSeleccionada != null
+              && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima
+              && controladorTurnos.jugadorActual().equals(jugador)) {
 
         VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
         ICarta cartaModelo = vistaCarta.getCartaModelo();
