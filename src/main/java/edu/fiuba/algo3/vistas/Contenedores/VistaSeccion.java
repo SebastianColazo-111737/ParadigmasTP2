@@ -109,10 +109,8 @@ public class VistaSeccion extends HBox {
 
         controladorTurnos.AvanzarTurno();
         vistaTurnos.actualizarTurnos();
-
         this.actualizar();
 
-        //VistaCarta.cartaSeleccionada = null;
         seMovio = true;
       }
       e.setDropCompleted(seMovio);

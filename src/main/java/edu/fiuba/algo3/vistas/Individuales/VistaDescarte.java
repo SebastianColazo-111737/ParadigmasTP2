@@ -10,7 +10,7 @@ public class VistaDescarte extends StackPane{
     private Rectangle fondo;
 
     public VistaDescarte(String nombre){
-        fondo = new Rectangle(70,100);
+        fondo = new Rectangle(90,120);
         fondo.setFill(Color.LIGHTSTEELBLUE);
         fondo.setStroke(Color.BLACK);
         fondo.setStrokeWidth(2);

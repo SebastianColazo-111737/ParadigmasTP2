@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -14,6 +15,7 @@ import javafx.geometry.Pos;
 import java.util.List;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import junit.framework.JUnit4TestAdapter;
 
 public class VistaJugador extends VBox {
 
@@ -27,20 +29,23 @@ public class VistaJugador extends VBox {
             System.out.println("Se seleccionó: " + carta.nombre());
         });
 
-        VBox secciones = construirVistaSecciones(jugador,estaArriba, vistaTurnos, controladorTurnos);
-        Node contenedorDerecha = construirContenedorDerecha(jugador,estaArriba);
+        VBox secciones = construirVistaSecciones(jugador, estaArriba, vistaTurnos, controladorTurnos);
+        Node contenedorDerecha = construirContenedorDerecha(jugador, estaArriba);
 
         BorderPane contenedor = new BorderPane();
         contenedor.setCenter(secciones);
+        contenedor.setRight(contenedorDerecha); // <- CAMBIO CLAVE
+
+        VBox contenedorTotal = new VBox(10);
+        contenedorTotal.setAlignment(Pos.CENTER);
 
         if (estaArriba) {
-            contenedor.setTop(contenedorDerecha);
-            BorderPane.setAlignment(contenedorDerecha, Pos.TOP_RIGHT);
+            contenedorTotal.getChildren().addAll(this.vistaMano, contenedor);
         } else {
-            contenedor.setBottom(contenedorDerecha);
-            BorderPane.setAlignment(contenedorDerecha, Pos.BOTTOM_RIGHT);
+            contenedorTotal.getChildren().addAll(contenedor, this.vistaMano);
         }
-        this.getChildren().addAll(contenedor);
+
+        this.getChildren().add(contenedorTotal);
     }
 
     private VBox construirVistaSecciones(Jugador jugador, boolean estaArriba, VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos) {
@@ -59,13 +64,16 @@ public class VistaJugador extends VBox {
         VistaDescarte descarte = new VistaDescarte("Pila Descarte");
         VistaMazo mazo = new VistaMazo("Mazo");
 
-        HBox contenedorLateral = new HBox(40, descarte, mazo);
-        contenedorLateral.setAlignment(Pos.CENTER_RIGHT);
+        VBox contenedorLateral = new VBox(40);
+        contenedorLateral.setAlignment(Pos.CENTER);
+        contenedorLateral.setPadding(new Insets(10));
 
-        VBox contenedor = estaArriba
-                ? new VBox(15, contenedorLateral, this.vistaMano)
-                : new VBox(15, this.vistaMano, contenedorLateral);
-        return contenedor;
+        if (estaArriba) {
+            contenedorLateral.getChildren().addAll(descarte, mazo);
+        } else {
+            contenedorLateral.getChildren().addAll(mazo, descarte);
+        }
+        return contenedorLateral;
     }
 }
 

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.jugador.Mano;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
@@ -41,4 +42,3 @@ public class VistaMano extends HBox {
         }
     }
 }
-
