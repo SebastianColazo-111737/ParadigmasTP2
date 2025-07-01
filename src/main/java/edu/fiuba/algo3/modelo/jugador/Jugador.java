@@ -95,4 +95,7 @@ public class Jugador {
     return  this.mazo;
   }
 
+  public List<ICarta> cartasDelDescarte(){
+    return this.descarte.getCartas();
+  }
 }

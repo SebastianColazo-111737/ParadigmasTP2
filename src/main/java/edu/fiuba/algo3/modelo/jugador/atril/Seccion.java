@@ -100,7 +100,10 @@ public class Seccion {
   public List<Unidad> removerCartasJugadas() {
     List<Unidad> descartadas = new ArrayList<>();
     while (!unidadesColocadas.isEmpty()) {
-      descartadas.add(unidadesColocadas.remove(0));
+      Unidad carta = unidadesColocadas.remove(0);
+      descartadas.add(carta);
+      System.out.println("Se descarto: "+ carta);
+
     }
     this.debuff = false;
     this.duplicadores = 1;

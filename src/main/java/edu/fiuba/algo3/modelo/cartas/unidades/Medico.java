@@ -15,6 +15,7 @@ public class Medico extends Unidad {
   }
 
   public void setUnidadParaRevivir(ICarta carta, Posicion posicion) {
+    System.out.println("setUnidadParaRevivir invocado con: " + carta);
     this.cartaParaRevivir = carta;
     this.posicionCartaParaRevivir = posicion;
   }
@@ -30,6 +31,10 @@ public class Medico extends Unidad {
 
   public String nombre() {
     return this.nombre;
+  }
+
+  public boolean tieneUnidadParaRevivir(){
+    return this.cartaParaRevivir != null;
   }
 
 }

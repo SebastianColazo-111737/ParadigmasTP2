@@ -28,17 +28,20 @@ public class Lienzo extends StackPane {
         //Creacion de VistaTurnos
         VistaTurnos vistaTurnos = new VistaTurnos(juego, jugador1,jugador2, vistaManoJugador1, vistaManoJugador2, controladorTurnos);
 
+        VistaDescarte vistaDescarteJ1 = new VistaDescarte("Descarte Jugador1", jugador1);
+        VistaDescarte vistaDescarteJ2 = new VistaDescarte("Descarte Jugador1",jugador2);
+
         //Creacion de los VistaAtril
-        VistaAtril vistaAtrilJugador2 = new VistaAtril(jugador2.atril(), true, jugador2, vistaManoJugador2, vistaTurnos, controladorTurnos);
-        VistaAtril vistaAtrilJugador1 = new VistaAtril(jugador1.atril(), false, jugador1, vistaManoJugador1, vistaTurnos, controladorTurnos);
+        VistaAtril vistaAtrilJugador2 = new VistaAtril(jugador2.atril(), true, jugador2, vistaManoJugador2, vistaTurnos, controladorTurnos, vistaDescarteJ2);
+        VistaAtril vistaAtrilJugador1 = new VistaAtril(jugador1.atril(), false, jugador1, vistaManoJugador1, vistaTurnos, controladorTurnos,vistaDescarteJ1);
 
         //Crear VistaPuntosJugador
         VistaPuntosJugador puntosJugador1 =  new VistaPuntosJugador(vistaAtrilJugador1);
         VistaPuntosJugador puntosJugador2 =  new VistaPuntosJugador(vistaAtrilJugador2);
 
         //Creacion de los VistaJugador
-        VistaJugador vistaJugador2 = new VistaJugador(jugador2, true, vistaManoJugador2, vistaTurnos, controladorTurnos);
-        VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, vistaManoJugador1, vistaTurnos, controladorTurnos);
+        VistaJugador vistaJugador2 = new VistaJugador(jugador2, true, vistaManoJugador2, vistaTurnos, controladorTurnos,vistaDescarteJ2);
+        VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, vistaManoJugador1, vistaTurnos, controladorTurnos,vistaDescarteJ1);
 
         //Creacion de la columnaIzquierda
         VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(vistaAtrilJugador1, vistaAtrilJugador2, vistaTurnos, puntosJugador1,puntosJugador2);

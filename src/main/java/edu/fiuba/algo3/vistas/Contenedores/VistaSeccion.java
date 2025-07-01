@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
@@ -10,6 +11,7 @@ import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
+import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -33,15 +35,17 @@ public class VistaSeccion extends HBox {
   private final ControladorTurnos controladorTurnos;
   private final VistaTurnos vistaTurnos;
   private final VistaMano vistaMano;
+  private final VistaDescarte vistaDescarte;
 
   public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano, VistaTurnos vistaTurnos,
-                      ControladorTurnos controladorTurnos) {
+                      ControladorTurnos controladorTurnos, VistaDescarte vistaDescarte) {
 
     this.seccionModelo = seccionModelo;
     this.jugador = jugador;
     this.controladorTurnos = controladorTurnos;
     this.vistaTurnos = vistaTurnos;
     this.vistaMano = vistaMano;
+    this.vistaDescarte = vistaDescarte;
 
     this.vistaPuntos = new VistaPuntos(seccionModelo);
 
@@ -106,6 +110,23 @@ public class VistaSeccion extends HBox {
 
         jugador.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
         vistaMano.removerVistaCarta(vistaCarta);
+
+        System.out.println("Carta jugada: " + cartaModelo.getClass().getSimpleName());
+
+        if (cartaModelo instanceof Medico) {
+          Medico medico = (Medico) cartaModelo;
+
+          vistaDescarte.mostrarPanelParaRevivir(cartaSeleccionada -> {
+            medico.setUnidadParaRevivir(cartaSeleccionada, cartaSeleccionada.getTipo().get(0));
+            System.out.println("Carta para revivir seteada: " + cartaSeleccionada.nombre());
+
+            medico.jugar(jugador, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
+            controladorTurnos.AvanzarTurno();
+          });
+        }
+
+
+
 
         controladorTurnos.AvanzarTurno();
         vistaTurnos.actualizarTurnos();
