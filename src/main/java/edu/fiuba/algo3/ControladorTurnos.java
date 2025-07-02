@@ -52,6 +52,7 @@ public class ControladorTurnos {
 
     if (rondaTerminada) {
       System.out.println("RONDA TERMINADA");
+
       int puntaje1 = vistaAtril1.PuntajeTotalAtril();
       int puntaje2 = vistaAtril2.PuntajeTotalAtril();
 
@@ -65,6 +66,10 @@ public class ControladorTurnos {
         mostrarGanador("¡EL GUERRERO GANA!");
       } else if (puntosJugador2.getRondasGanadas() == 2) {
         mostrarGanador("¡EL OGRO GANA!");
+      }
+
+      for (Jugador jugador : juego.getJugadores()) {
+        jugador.limpiarTodo();
       }
 
       juego.reiniciarRonda();

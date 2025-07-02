@@ -2,11 +2,14 @@ package edu.fiuba.algo3.modelo.jugador;
 
 import edu.fiuba.algo3.modelo.cartas.*;
 import edu.fiuba.algo3.modelo.cartas.especiales.CEspecial;
+import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Optional;
 
 public class Jugador {
   private Mazo mazo;
@@ -79,12 +82,31 @@ public class Jugador {
 
   }
 
+  // Funcion alternativa para revivir la ultima carta descartada en vez de tener que elegir una
+  public Optional<ICarta> revivirUltimaUnidadDescarte() {
+    List<ICarta> cartas = new ArrayList<>(this.descarte.getCartas()); // copia segura
+
+    for (int i = cartas.size() - 1; i >= 0; i--) {
+      ICarta carta = cartas.get(i);
+      if (carta instanceof Unidad) {
+
+        this.descarte.removerCarta(carta);
+        this.mano.agregarCarta(carta);
+        return Optional.of(carta);
+      }
+    }
+
+    return Optional.empty();
+  }
+
   public Atril atril() {
     return this.atril;
   }
 
   public void limpiarTodo() {
-    this.descarte.agregarCarta(this.atril.descartarCartas());
+    List<ICarta> descartadas = this.atril.descartarCartas();
+    this.descarte.agregarCarta(descartadas);
+
   }
 
   public Mano mano() {

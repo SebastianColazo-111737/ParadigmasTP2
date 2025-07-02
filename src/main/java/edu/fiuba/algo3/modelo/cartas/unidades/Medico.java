@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
+import java.util.Optional;
+
 public class Medico extends Unidad {
 
   private ICarta cartaParaRevivir;
@@ -22,10 +24,15 @@ public class Medico extends Unidad {
 
   @Override
   public void jugar(Jugador jugadorActual, Jugador jugadorSiguiente, Posicion posicion) {
-    // Si esta carta se jugó hay que usar la carta que revivió -> Ojito
     jugadorActual.colocarUnidad(this, posicion);
-    if (this.cartaParaRevivir != null) {
-      this.cartaParaRevivir.jugar(jugadorActual, jugadorSiguiente, this.posicionCartaParaRevivir);
+
+    Optional<ICarta> revivida = jugadorActual.revivirUltimaUnidadDescarte();
+
+    if (revivida.isPresent()) {
+      ICarta carta = revivida.get();
+      carta.jugar(jugadorActual, jugadorSiguiente, ((Unidad) carta).getTipo().get(0));
+    } else {
+      System.out.println(" → El médico no pudo revivir ninguna carta.");
     }
   }
 

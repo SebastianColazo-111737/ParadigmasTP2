@@ -41,4 +41,16 @@ public class VistaMano extends HBox {
             vistaTurnos.actualizarTurnos();
         }
     }
+
+    public void recibirCartaRevivida(ICarta cartaModelo){
+        System.out.println("Agregando carta revivida a la mano: " + cartaModelo.nombre());
+        VistaCarta nuevaVista = new VistaCarta(cartaModelo, vistaCarta -> {
+            if (cartaSeleccionada != null) cartaSeleccionada.deseleccionar();
+            vistaCarta.seleccionar();
+            cartaSeleccionada = vistaCarta;
+        });
+        this.getChildren().add(nuevaVista);
+    }
+
+
 }

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
+import edu.fiuba.algo3.modelo.jugador.Descarte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
@@ -24,6 +25,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.text.Font;
 
 import java.util.List;
+import java.util.Optional;
 
 public class VistaSeccion extends HBox {
 
@@ -108,23 +110,22 @@ public class VistaSeccion extends HBox {
         VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
         ICarta cartaModelo = vistaCarta.getCartaModelo();
 
-        jugador.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
+        Jugador jugadorActual = controladorTurnos.jugadorActual();
+
+        if (cartaModelo instanceof Medico) {
+          Optional<ICarta> revivida = jugadorActual.revivirUltimaUnidadDescarte();
+          if (revivida.isPresent()) {
+            System.out.println("Carta revivida: " + revivida.get().nombre());
+            vistaMano.recibirCartaRevivida(revivida.get());
+          } else {
+            System.out.println("No se revivió ninguna carta.");
+          }
+        }
+
+        jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
         vistaMano.removerVistaCarta(vistaCarta);
 
         System.out.println("Carta jugada: " + cartaModelo.getClass().getSimpleName());
-
-        if (cartaModelo instanceof Medico) {
-          Medico medico = (Medico) cartaModelo;
-
-          vistaDescarte.mostrarPanelParaRevivir(cartaSeleccionada -> {
-            medico.setUnidadParaRevivir(cartaSeleccionada, cartaSeleccionada.getTipo().get(0));
-            System.out.println("Carta para revivir seteada: " + cartaSeleccionada.nombre());
-
-            medico.jugar(jugador, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
-            controladorTurnos.AvanzarTurno();
-          });
-        }
-
 
 
 

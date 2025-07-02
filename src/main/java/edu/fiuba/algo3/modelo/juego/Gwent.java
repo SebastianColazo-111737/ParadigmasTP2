@@ -37,6 +37,10 @@ public class Gwent {
     this.adminTurnos.setJugadorActual(jugador);
   }
 
+  public List<Jugador> getJugadores() {
+    return this.jugadores;
+  }
+
   public void pasarTurno(){
     if(todosPasaron()){
       throw new AdminturnosTodosPasaronDeTurno("Todos los jugadores pasaron de turno");
@@ -47,7 +51,6 @@ public class Gwent {
   public void jugarCarta(ICarta carta, Posicion posicion) {
     Jugador jugador = adminTurnos.getJugadorActual();
     jugador.jugarCarta(carta, this.adminTurnos.getJugadorProximo(), posicion);
-    // adminTurnos.proximoTurno();
   }
 
   public boolean finalizarParticipacion(){
