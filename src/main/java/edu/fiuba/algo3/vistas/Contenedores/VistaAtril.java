@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.OrdenadorSecciones;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,7 @@ public class VistaAtril extends VBox {
             VistaSeccion vistaSeccion = new VistaSeccion(seccion, jugador, vistaMano, vistaTurnos, controladorTurnos, vistaDescarte);
             this.getChildren().add(vistaSeccion);
         }
+
     }
 
     public void actualizar(){

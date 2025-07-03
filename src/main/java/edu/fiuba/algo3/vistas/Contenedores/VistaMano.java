@@ -49,8 +49,8 @@ public class VistaMano extends HBox {
             vistaCarta.seleccionar();
             cartaSeleccionada = vistaCarta;
         });
+        nuevaVista.setStyle("-fx-background-color: #3CB371; -fx-border-color: black; -fx-border-width: 2px;");
         this.getChildren().add(nuevaVista);
     }
-
 
 }

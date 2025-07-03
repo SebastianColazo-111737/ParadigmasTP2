@@ -19,5 +19,4 @@ public class Espia extends Unidad {
   public String nombre() {
     return this.nombre;
   }
-
 }

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.unidades.Espia;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Descarte;
@@ -14,6 +15,7 @@ import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -87,6 +89,7 @@ public class VistaSeccion extends HBox {
     actualizar();
     this.setMinWidth(700);
 
+    seccionModelo.agregarObservador(()-> Platform.runLater(this::actualizar));
   }
 
   private void configurarDragYDrop() {
@@ -112,6 +115,7 @@ public class VistaSeccion extends HBox {
 
         Jugador jugadorActual = controladorTurnos.jugadorActual();
 
+        //Ver de meter esta logica de medico en un metodo aparte, modularizar
         if (cartaModelo instanceof Medico) {
           Optional<ICarta> revivida = jugadorActual.revivirUltimaUnidadDescarte();
           if (revivida.isPresent()) {
@@ -120,6 +124,11 @@ public class VistaSeccion extends HBox {
           } else {
             System.out.println("No se revivió ninguna carta.");
           }
+        }
+
+        if(cartaModelo instanceof Espia){
+          jugador.robarCartasDelMazo(2);
+          //Resto de la logica
         }
 
         jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());

@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.cartas.unidades.Legendaria;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Seccion {
   private Posicion posicion;
   private List<Unidad> unidadesColocadas;
+  private List<Runnable> observadores = new ArrayList<>();
   private Boolean debuff;
   private int duplicadores;
 
@@ -30,11 +32,23 @@ public class Seccion {
     return this.posicion.esCompatible(posicion);
   }
 
+  public void agregarObservador(Runnable obs) {
+    this.observadores.add(obs);
+  }
+
+  private void notificar() {
+    for (Runnable obs : observadores) {
+      obs.run();
+    }
+  }
+
+
   public void colocarUnidad(Unidad unidad) {
     if (!unidad.sePuedeColocar(posicion)) {
       throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("");
     }
     unidadesColocadas.add(unidad);
+    notificar();
   }
 
   public Unidad tomarCartaMasFuerte() {
@@ -53,10 +67,9 @@ public class Seccion {
   }
 
   public void removerCarta(Unidad carta) {
-    // Mejor una excepcion -> Luego
-    if (!this.contieneCarta(carta))
-      return;
+    if (!this.contieneCarta(carta)) return;
     this.unidadesColocadas.remove(carta);
+    notificar();
   }
 
   public Puntaje calcularPuntajeActualUnidades() {

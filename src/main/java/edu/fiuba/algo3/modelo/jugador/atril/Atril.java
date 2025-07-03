@@ -87,8 +87,8 @@ public class Atril {
 
     for (Seccion seccion : this.secciones) {
       if (seccion.compararPosiciones(posicion)) {
-        // se caestea -> arreglar
         seccion.colocarUnidad((Unidad) carta);
+
       }
     }
   }
@@ -114,4 +114,5 @@ public class Atril {
     cartasDescarte.addAll(this.especiales.limpiar());
     return cartasDescarte;
   }
+
 }
