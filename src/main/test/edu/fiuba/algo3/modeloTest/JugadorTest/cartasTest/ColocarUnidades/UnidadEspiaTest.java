@@ -70,24 +70,4 @@ public class UnidadEspiaTest {
     assertEquals(2, cantidadDeCartasEnLaManoFinal);
     assertEquals(0, cantidadDeCartasEnElMazoFinal);
   }
-
-  // @Test
-  // public void unaUnidadEspiaNOSePuedeColocarEnUnaSeccionQuePerteneceAlJugador()
-  // {
-  // // Arrange
-  // Seccion seccionCuerpoAcuerpoJ1 = new Seccion(new CuerpoACuerpo());
-  // atril.agregarSeccion(seccionCuerpoAcuerpoJ1);
-  //
-  // Espia jamesBond = new Espia(
-  // "007",
-  // new Puntaje(6),
-  // new CuerpoACuerpo());
-  // mano.agregarCarta(jamesBond);
-  //
-  // // Act
-  // // Assert
-  // assertThrows(UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion.class, () -> {
-  // jugador.jugarCarta(jamesBond, jugador2, jamesBond.getTipo().get(0));
-  // });
-  // }
 }

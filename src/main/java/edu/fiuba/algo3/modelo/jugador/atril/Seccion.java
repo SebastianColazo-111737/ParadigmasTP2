@@ -42,7 +42,6 @@ public class Seccion {
     }
   }
 
-
   public void colocarUnidad(Unidad unidad) {
     if (!unidad.sePuedeColocar(posicion)) {
       throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("");

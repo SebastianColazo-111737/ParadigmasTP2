@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Mano {
     private List<ICarta> cartas;
+    private List<Runnable> observadores = new ArrayList<>();
 
     public Mano(){
         this.cartas = new ArrayList<>();
@@ -15,9 +16,11 @@ public class Mano {
 
     public void agregarCarta(ICarta carta){
         this.cartas.add(carta);
+
     }
     public void agregarCarta(List<ICarta> cartas){
         this.cartas.addAll(cartas);
+        notificarObservadores();
     }
 
     public List<ICarta> getCartas(){
@@ -35,5 +38,16 @@ public class Mano {
             );
         }
         this.cartas.remove(carta);
+        notificarObservadores();
+    }
+
+    public void agregarObservador(Runnable observador) {
+        this.observadores.add(observador);
+    }
+
+    private void notificarObservadores() {
+        for (Runnable obs : observadores) {
+            obs.run();
+        }
     }
 }

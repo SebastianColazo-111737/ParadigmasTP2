@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.vistas.Contenedores.*;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
-//import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.Contenedores.VistaTurnos;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
@@ -17,13 +16,12 @@ import javafx.scene.layout.*;
 import javafx.scene.Node;
 
 public class Lienzo extends StackPane {
-    private VistaTurnos vistaTurnos;
 
     public Lienzo(Jugador jugador1, Jugador jugador2, Gwent juego, ControladorTurnos controladorTurnos) {
 
         //Creacion de las VistasMano
-        VistaMano vistaManoJugador1 = new VistaMano(jugador1.mano().getCartas(), carta -> {});
-        VistaMano vistaManoJugador2 = new VistaMano(jugador2.mano().getCartas(), carta -> {});
+        VistaMano vistaManoJugador1 = new VistaMano(jugador1.mano(), jugador1.mano().getCartas());
+        VistaMano vistaManoJugador2 = new VistaMano(jugador2.mano(), jugador2.mano().getCartas());
 
         //Creacion de VistaTurnos
         VistaTurnos vistaTurnos = new VistaTurnos(juego, jugador1,jugador2, vistaManoJugador1, vistaManoJugador2, controladorTurnos);
@@ -40,11 +38,11 @@ public class Lienzo extends StackPane {
         VistaPuntosJugador puntosJugador2 =  new VistaPuntosJugador(vistaAtrilJugador2);
 
         //Creacion de los VistaJugador
-        VistaJugador vistaJugador2 = new VistaJugador(jugador2, true, vistaManoJugador2, vistaTurnos, controladorTurnos,vistaDescarteJ2);
-        VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, vistaManoJugador1, vistaTurnos, controladorTurnos,vistaDescarteJ1);
+        VistaJugador vistaJugador2 = new VistaJugador(jugador2, true, vistaTurnos, controladorTurnos,vistaDescarteJ2);
+        VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, vistaTurnos, controladorTurnos,vistaDescarteJ1);
 
         //Creacion de la columnaIzquierda
-        VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(vistaAtrilJugador1, vistaAtrilJugador2, vistaTurnos, puntosJugador1,puntosJugador2);
+        VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(vistaTurnos, puntosJugador1,puntosJugador2);
 
         controladorTurnos.setVistas(vistaAtrilJugador1, vistaAtrilJugador2, puntosJugador1, puntosJugador2);
 

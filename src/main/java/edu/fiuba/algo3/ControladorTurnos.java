@@ -1,11 +1,8 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.juego.AdminTurnos;
-import edu.fiuba.algo3.modelo.juego.AdminturnosTodosPasaronDeTurno;
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.vistas.Contenedores.VistaAtril;
-import edu.fiuba.algo3.vistas.Contenedores.VistaMano;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -30,8 +27,6 @@ public class ControladorTurnos {
     this.vistaAtril2 = atrilJugador2;
     this.puntosJugador1 = jugador1;
     this.puntosJugador2 = jugador2;
-
-
   }
 
   public Jugador jugadorActual() {
@@ -86,10 +81,5 @@ public class ControladorTurnos {
       alerta.setContentText(mensaje);
       alerta.showAndWait();
     });
-  }
-
-
-  public boolean juegoCompleto() {
-    return jugadorActual().mazo() != null && jugadorProximo().mazo() != null;
   }
 }

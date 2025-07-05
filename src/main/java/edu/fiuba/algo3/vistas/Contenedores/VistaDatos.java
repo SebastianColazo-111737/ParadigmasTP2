@@ -28,14 +28,6 @@ public class VistaDatos extends StackPane {
 
         this.getChildren().addAll(rectanguloConTexto, vistaPuntosJugador);
     }
-
-    public VistaPuntosJugador getVistaPuntosJugador(){
-        return this.vistaPuntosJugador;
-    }
-
-    public void actualizarPuntaje(int puntajeActualizado){
-        vistaPuntosJugador.actualizarPuntaje(puntajeActualizado);
-    }
 }
 
 

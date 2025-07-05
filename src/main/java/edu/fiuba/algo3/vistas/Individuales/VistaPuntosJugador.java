@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.vistas.Individuales;
 
-
-//Tambien lo voy a usar para mostrar las rondas ganadas
-
 import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.vistas.Contenedores.VistaAtril;
 import javafx.animation.Animation;
@@ -82,10 +79,4 @@ public class VistaPuntosJugador extends StackPane {
     public int getRondasGanadas(){
         return rondasGanadas;
     }
-
-    /*public void reiniciarRonda(){   <--- Esto serviria si tenemos algun boton para reiniciar el juego completamente
-        puntajeAnterior = -1;
-        for(Circle c : circulosDeRonda) c.setFill(Color.GREY);
-        rondasGanadas = 0;
-    } */
 }

@@ -13,14 +13,10 @@ import java.util.List;
 
 public class VistaAtril extends VBox {
     private final Atril atril;
-    private final Jugador jugador;
-    private final VistaDescarte vistaDescarte;
 
     public VistaAtril(Atril atril, boolean estaArriba, Jugador jugador, VistaMano vistaMano,
                       VistaTurnos vistaTurnos, ControladorTurnos controladorTurnos, VistaDescarte vistaDescarte) {
         this.atril = atril;
-        this.jugador = jugador;
-        this.vistaDescarte = vistaDescarte;
         this.setSpacing(5);
         this.setAlignment(Pos.CENTER);
 
@@ -28,10 +24,9 @@ public class VistaAtril extends VBox {
         List<Seccion> ordenadas = OrdenadorSecciones.ordenar(secciones, estaArriba);
 
         for (Seccion seccion : ordenadas) {
-            VistaSeccion vistaSeccion = new VistaSeccion(seccion, jugador, vistaMano, vistaTurnos, controladorTurnos, vistaDescarte);
+            VistaSeccion vistaSeccion = new VistaSeccion(seccion, jugador, vistaMano, vistaTurnos, controladorTurnos);
             this.getChildren().add(vistaSeccion);
         }
-
     }
 
     public void actualizar(){

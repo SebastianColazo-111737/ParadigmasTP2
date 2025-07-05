@@ -1,22 +1,15 @@
 package edu.fiuba.algo3;
 
 import java.io.FileReader;
-import java.util.List;
-import java.util.ArrayList;
 
 import edu.fiuba.algo3.Repositorio.MazoParser;
 import edu.fiuba.algo3.modelo.jugador.Mazo;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.io.FileReader;
-import edu.fiuba.algo3.Repositorio.MazoParser;
 import edu.fiuba.algo3.vistas.Lienzo;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
-
 import edu.fiuba.algo3.modelo.jugador.Mano;
-import edu.fiuba.algo3.modelo.jugador.Mazo;
-import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
@@ -24,11 +17,6 @@ import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
-
-import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 
 public class GeneradorJuego {

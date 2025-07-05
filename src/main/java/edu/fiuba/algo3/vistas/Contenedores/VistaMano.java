@@ -4,8 +4,13 @@ import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.jugador.Mano;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.List;
 
@@ -14,27 +19,24 @@ public class VistaMano extends HBox {
     private VistaCarta cartaSeleccionada = null;
     private ControladorTurnos controladorTurnos;
     private VistaTurnos vistaTurnos;
+    private final Mano manoModelo;
 
-    public VistaMano(List<ICarta> cartas, Consumer<ICarta> onCartaSeleccionada){
+    private final List<ICarta> cartasRevividas = new ArrayList<>();
+
+    public VistaMano(Mano manoModelo,List<ICarta> cartas){
+        this.manoModelo = manoModelo;
         this.setSpacing(5);
         this.setAlignment(Pos.CENTER);
 
-        for(ICarta cartaModelo : cartas){
-            System.out.println("Agregando carta a la mano: " + cartaModelo.nombre());
-            String nombre = cartaModelo.nombre();
+        this.actualizar();
 
-            VistaCarta carta = new VistaCarta(cartaModelo, vistaCarta -> {
-                if(cartaSeleccionada !=null) cartaSeleccionada.deseleccionar();
-                vistaCarta.seleccionar();
-                cartaSeleccionada = vistaCarta;
-                onCartaSeleccionada.accept(cartaModelo);
-            });
+        manoModelo.agregarObservador(() -> Platform.runLater(this::actualizar));
 
-            this.getChildren().add(carta);
-        }
     }
     public void removerVistaCarta(VistaCarta carta) {
         this.getChildren().remove(carta);
+
+        cartasRevividas.remove(carta.getCartaModelo());
 
         if(controladorTurnos != null && vistaTurnos != null){
             controladorTurnos.AvanzarTurno();
@@ -44,13 +46,22 @@ public class VistaMano extends HBox {
 
     public void recibirCartaRevivida(ICarta cartaModelo){
         System.out.println("Agregando carta revivida a la mano: " + cartaModelo.nombre());
-        VistaCarta nuevaVista = new VistaCarta(cartaModelo, vistaCarta -> {
-            if (cartaSeleccionada != null) cartaSeleccionada.deseleccionar();
-            vistaCarta.seleccionar();
-            cartaSeleccionada = vistaCarta;
-        });
-        nuevaVista.setStyle("-fx-background-color: #3CB371; -fx-border-color: black; -fx-border-width: 2px;");
-        this.getChildren().add(nuevaVista);
+        cartasRevividas.add(cartaModelo);
+        this.actualizar();
+    }
+
+    public void actualizar() {
+        this.getChildren().clear();
+
+        for (ICarta carta : manoModelo.getCartas()) {
+            VistaCarta vistaCarta = new VistaCarta(carta, vista -> {
+                if (cartaSeleccionada != null) cartaSeleccionada.deseleccionar();
+                vista.seleccionar();
+                cartaSeleccionada = vista;
+            });
+
+            this.getChildren().add(vistaCarta);
+        }
     }
 
 }

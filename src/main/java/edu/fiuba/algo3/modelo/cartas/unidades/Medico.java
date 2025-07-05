@@ -9,17 +9,8 @@ import java.util.Optional;
 
 public class Medico extends Unidad {
 
-  private ICarta cartaParaRevivir;
-  private Posicion posicionCartaParaRevivir;
-
   public Medico(String nombre, Puntaje puntaje, Posicion posicion) {
     super(nombre, puntaje, posicion);
-  }
-
-  public void setUnidadParaRevivir(ICarta carta, Posicion posicion) {
-    System.out.println("setUnidadParaRevivir invocado con: " + carta);
-    this.cartaParaRevivir = carta;
-    this.posicionCartaParaRevivir = posicion;
   }
 
   @Override
@@ -30,7 +21,6 @@ public class Medico extends Unidad {
 
     if (revivida.isPresent()) {
       ICarta carta = revivida.get();
-      carta.jugar(jugadorActual, jugadorSiguiente, ((Unidad) carta).getTipo().get(0));
     } else {
       System.out.println(" → El médico no pudo revivir ninguna carta.");
     }
@@ -38,10 +28,6 @@ public class Medico extends Unidad {
 
   public String nombre() {
     return this.nombre;
-  }
-
-  public boolean tieneUnidadParaRevivir(){
-    return this.cartaParaRevivir != null;
   }
 
 }

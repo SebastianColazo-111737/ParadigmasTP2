@@ -18,6 +18,7 @@ import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -25,8 +26,6 @@ import javafx.geometry.Pos;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.text.Font;
-
-import java.util.List;
 import java.util.Optional;
 
 public class VistaSeccion extends HBox {
@@ -39,17 +38,16 @@ public class VistaSeccion extends HBox {
   private final ControladorTurnos controladorTurnos;
   private final VistaTurnos vistaTurnos;
   private final VistaMano vistaMano;
-  private final VistaDescarte vistaDescarte;
+
 
   public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano, VistaTurnos vistaTurnos,
-                      ControladorTurnos controladorTurnos, VistaDescarte vistaDescarte) {
+                      ControladorTurnos controladorTurnos) {
 
     this.seccionModelo = seccionModelo;
     this.jugador = jugador;
     this.controladorTurnos = controladorTurnos;
     this.vistaTurnos = vistaTurnos;
     this.vistaMano = vistaMano;
-    this.vistaDescarte = vistaDescarte;
 
     this.vistaPuntos = new VistaPuntos(seccionModelo);
 
@@ -94,59 +92,63 @@ public class VistaSeccion extends HBox {
 
   private void configurarDragYDrop() {
     this.setOnDragOver(e -> {
-      if (e.getGestureSource() instanceof VistaCarta
-              && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima) {
+      if (esDragValido(e)) {
         e.acceptTransferModes(TransferMode.MOVE);
       }
       e.consume();
     });
 
     this.setOnDragDropped(e -> {
-      Dragboard tablaSeccion = e.getDragboard();
-      boolean seMovio = false;
-
-      if (tablaSeccion.hasString()
-              && VistaCarta.cartaSeleccionada != null
-              && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima
-              && controladorTurnos.jugadorActual().equals(jugador)) {
-
-        VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
-        ICarta cartaModelo = vistaCarta.getCartaModelo();
-
-        Jugador jugadorActual = controladorTurnos.jugadorActual();
-
-        //Ver de meter esta logica de medico en un metodo aparte, modularizar
-        if (cartaModelo instanceof Medico) {
-          Optional<ICarta> revivida = jugadorActual.revivirUltimaUnidadDescarte();
-          if (revivida.isPresent()) {
-            System.out.println("Carta revivida: " + revivida.get().nombre());
-            vistaMano.recibirCartaRevivida(revivida.get());
-          } else {
-            System.out.println("No se revivió ninguna carta.");
-          }
-        }
-
-        if(cartaModelo instanceof Espia){
-          jugador.robarCartasDelMazo(2);
-          //Resto de la logica
-        }
-
-        jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
-        vistaMano.removerVistaCarta(vistaCarta);
-
-        System.out.println("Carta jugada: " + cartaModelo.getClass().getSimpleName());
-
-
-
-        controladorTurnos.AvanzarTurno();
-        vistaTurnos.actualizarTurnos();
-        this.actualizar();
-
-        seMovio = true;
-      }
+      boolean seMovio = procesarDrop(e);
       e.setDropCompleted(seMovio);
       e.consume();
     });
+  }
+
+  private boolean esDragValido(DragEvent e) {
+    return e.getGestureSource() instanceof VistaCarta
+            && seccionModelo.getUnidadesColocadas().size() < CapacidadMaxima;
+  }
+
+  private boolean procesarDrop(DragEvent e) {
+    Dragboard tablaSeccion = e.getDragboard();
+
+    if (!tablaSeccion.hasString()
+            || VistaCarta.cartaSeleccionada == null
+            || seccionModelo.getUnidadesColocadas().size() >= CapacidadMaxima
+            || !controladorTurnos.jugadorActual().equals(jugador)) {
+      return false;
+    }
+
+    VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
+    ICarta cartaModelo = vistaCarta.getCartaModelo();
+
+    if (cartaModelo instanceof Medico) {
+      manejarCartaMedico((Medico) cartaModelo);
+    }
+
+    Jugador jugadorActual = controladorTurnos.jugadorActual();
+    jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
+
+    vistaMano.removerVistaCarta(vistaCarta);
+    controladorTurnos.AvanzarTurno();
+    vistaTurnos.actualizarTurnos();
+    this.actualizar();
+
+    System.out.println("Carta jugada: " + cartaModelo.getClass().getSimpleName());
+
+    return true;
+  }
+
+  private void manejarCartaMedico(Medico medico) {
+    Jugador jugadorActual = controladorTurnos.jugadorActual();
+    Optional<ICarta> revivida = jugadorActual.revivirUltimaUnidadDescarte();
+    if (revivida.isPresent()) {
+      System.out.println("Carta revivida: " + revivida.get().nombre());
+      vistaMano.recibirCartaRevivida(revivida.get());
+    } else {
+      System.out.println("No se revivio ninguna carta.");
+    }
   }
 
   public void actualizar(){

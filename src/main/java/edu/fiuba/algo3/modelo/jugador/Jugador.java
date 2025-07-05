@@ -82,20 +82,19 @@ public class Jugador {
 
   }
 
-  // Funcion alternativa para revivir la ultima carta descartada en vez de tener que elegir una
   public Optional<ICarta> revivirUltimaUnidadDescarte() {
-    List<ICarta> cartas = new ArrayList<>(this.descarte.getCartas()); // copia segura
+    List<ICarta> cartas = new ArrayList<>(this.descarte.getCartas());
 
-    for (int i = cartas.size() - 1; i >= 0; i--) {
-      ICarta carta = cartas.get(i);
+    ListIterator<ICarta> iterador = cartas.listIterator(cartas.size());
+
+    while (iterador.hasPrevious()) {
+      ICarta carta = iterador.previous();
       if (carta instanceof Unidad) {
-
         this.descarte.removerCarta(carta);
         this.mano.agregarCarta(carta);
         return Optional.of(carta);
       }
     }
-
     return Optional.empty();
   }
 
@@ -117,7 +116,4 @@ public class Jugador {
     return  this.mazo;
   }
 
-  public List<ICarta> cartasDelDescarte(){
-    return this.descarte.getCartas();
-  }
 }

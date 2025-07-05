@@ -22,18 +22,15 @@ public class VistaJugador extends VBox {
     private final VistaMano vistaMano;
     private final VistaDescarte vistaDescarte;
 
-    public VistaJugador(Jugador jugador, boolean estaArriba, VistaMano vistaMano, VistaTurnos vistaTurnos,
+    public VistaJugador(Jugador jugador, boolean estaArriba, VistaTurnos vistaTurnos,
                         ControladorTurnos controladorTurnos, VistaDescarte vistaDescarte){
         super(10);
         this.setAlignment(Pos.CENTER);
 
         this.vistaDescarte = vistaDescarte;
-        this.vistaMano = new VistaMano(jugador.mano().getCartas(), carta -> {
-            System.out.println("Se seleccionó: " + carta.nombre());
-        });
+        this.vistaMano = new VistaMano(jugador.mano(), jugador.mano().getCartas());
 
-
-        VBox secciones = construirVistaSecciones(jugador, estaArriba, vistaTurnos, controladorTurnos, vistaDescarte);
+        VBox secciones = construirVistaSecciones(jugador, estaArriba, vistaTurnos, controladorTurnos);
         Node contenedorDerecha = construirContenedorDerecha(jugador, estaArriba);
 
         BorderPane contenedor = new BorderPane();
@@ -53,7 +50,7 @@ public class VistaJugador extends VBox {
     }
 
     private VBox construirVistaSecciones(Jugador jugador, boolean estaArriba, VistaTurnos vistaTurnos,
-                                         ControladorTurnos controladorTurnos, VistaDescarte vistaDescarte) {
+                                         ControladorTurnos controladorTurnos) {
 
         List<Seccion> seccionesOrdenadas = OrdenadorSecciones.ordenar(jugador.atril().getSecciones(), estaArriba);
 
@@ -61,23 +58,20 @@ public class VistaJugador extends VBox {
         secciones.setAlignment(Pos.CENTER);
 
         for (Seccion seccion : seccionesOrdenadas) {
-            secciones.getChildren().add(new VistaSeccion(seccion, jugador, this.vistaMano, vistaTurnos, controladorTurnos, vistaDescarte));
+            secciones.getChildren().add(new VistaSeccion(seccion, jugador, this.vistaMano, vistaTurnos, controladorTurnos));
         }
         return secciones;
     }
 
     private Node construirContenedorDerecha(Jugador jugador, boolean estaArriba) {
-        //VistaDescarte descarte = new VistaDescarte("Pila Descarte");
-        //VistaMazo mazo = new VistaMazo("Mazo");
-
         VBox contenedorLateral = new VBox(40);
         contenedorLateral.setAlignment(Pos.CENTER);
         contenedorLateral.setPadding(new Insets(10));
 
         if (estaArriba) {
-            contenedorLateral.getChildren().addAll(this.vistaDescarte, new VistaMazo("Mazo"));
+            contenedorLateral.getChildren().addAll( new VistaMazo("MAZO J2", jugador.mazo()),this.vistaDescarte);
         } else {
-            contenedorLateral.getChildren().addAll(new VistaMazo("Mazo"), this.vistaDescarte);
+            contenedorLateral.getChildren().addAll( this.vistaDescarte, new VistaMazo("MAZO J1", jugador.mazo()));
         }
         return contenedorLateral;
     }

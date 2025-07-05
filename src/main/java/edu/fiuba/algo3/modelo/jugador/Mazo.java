@@ -10,6 +10,7 @@ import java.util.Random;
 public class Mazo {
     private List<ICarta> cartas;
     private Random random;
+    private List<Runnable> observadores = new ArrayList<>();
 
     public Mazo(){
         this.cartas = new ArrayList<>();
@@ -23,11 +24,22 @@ public class Mazo {
         this.cartas.addAll(cartas);
     }
 
+    public void agregarObservador(Runnable obs) {
+        this.observadores.add(obs);
+    }
+
+    private void notificar() {
+        for (Runnable obs : observadores) {
+            obs.run();
+        }
+    }
+
     public List<ICarta> darCartas(int cantidad){
         List<ICarta> cartasParaDar = new ArrayList<>();
         for (int i = 0; i < cantidad && !this.cartas.isEmpty(); i++) {
             cartasParaDar.add(agarrarCartaAleatoria());
         }
+        notificar();
         return cartasParaDar;
     }
 
