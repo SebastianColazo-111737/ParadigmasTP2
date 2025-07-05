@@ -30,7 +30,7 @@ public class VistaColumnaIzquierda extends VBox {
 
     private VBox crearGuiaModificadores() {
         Label titulo = new Label("Guía de Modificadores:");
-        titulo.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        titulo.setFont(Font.font("Arial", FontWeight.BOLD, 14));
 
         VBox itemsGuia = new VBox(8);
         itemsGuia.setPadding(new Insets(5));
@@ -45,7 +45,7 @@ public class VistaColumnaIzquierda extends VBox {
                 crearItemGuia("Sin modificador", "#FFF8DC")
         );
 
-        VBox infoColores = new VBox(10, titulo, itemsGuia);
+        VBox infoColores = new VBox(14, titulo, itemsGuia);
         infoColores.setPadding(new Insets(10));
         infoColores.setStyle("-fx-background-color: lightgray; -fx-border-color: black;");
         infoColores.setMaxWidth(200);

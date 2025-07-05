@@ -2,7 +2,7 @@
   "mazo_jugador_uno": {
     "unidades": [
       {
-        "nombre": "Birna Bran",
+        "nombre": "Birna",
         "puntos": 2,
         "modificador": [
           "Medico"
@@ -10,7 +10,7 @@
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Geralt de Rivia",
+        "nombre": "Geralt",
         "puntos": 15,
         "modificador": [
           "Legendaria"
@@ -18,7 +18,7 @@
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Guerrero del Clan an Craite",
+        "nombre": "Guerrero ",
         "puntos": 6,
         "modificador": [
           "Carta Unida"
@@ -34,13 +34,13 @@
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Vampiro: Katakan",
+        "nombre": "Vampiro",
         "puntos": 5,
         "modificador": [],
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Barclay Els",
+        "nombre": "Barclay",
         "puntos": 6,
         "modificador": [
           "Agil"
@@ -48,7 +48,7 @@
         "seccion": "Cuerpo a Cuerpo, Rango"
       },
       {
-        "nombre": "Celaeno Harpía",
+        "nombre": "Celaeno",
         "puntos": 2,
         "modificador": [
           "Agil"
@@ -56,13 +56,13 @@
         "seccion": "Cuerpo a Cuerpo, Rango"
       },
       {
-        "nombre": "Arquero de Infantería Negro",
+        "nombre": "Arquero",
         "puntos": 10,
         "modificador": [],
         "seccion": "Rango"
       },
       {
-        "nombre": "Pirata del Clan Dimun",
+        "nombre": "Pirata",
         "puntos": 6,
         "modificador": [
           "Quemar"
@@ -70,7 +70,7 @@
         "seccion": "Rango"
       },
       {
-        "nombre": "Cazadores de Dragones de Crinfrid",
+        "nombre": "Cazadores",
         "puntos": 5,
         "modificador": [
           "Carta Unida"
@@ -92,7 +92,7 @@
         "seccion": "Asedio"
       },
       {
-        "nombre": "Medico del Estandarte de Dun",
+        "nombre": "Medico",
         "puntos": 5,
         "modificador": [
           "Medico"
@@ -100,7 +100,7 @@
         "seccion": "Asedio"
       },
       {
-        "nombre": "Torre de Asedio",
+        "nombre": "Torre",
         "puntos": 6,
         "modificador": [],
         "seccion": "Asedio"
@@ -126,7 +126,7 @@
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Comando de Rayas Azules",
+        "nombre": "Comando",
         "puntos": 4,
         "modificador": [
           "Carta Unida"
@@ -134,7 +134,7 @@
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Blueboy Lugos",
+        "nombre": "Blueboy",
         "puntos": 6,
         "modificador": [],
         "seccion": "Cuerpo a Cuerpo"
@@ -146,19 +146,19 @@
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Fuerza de Defensa Bovina",
+        "nombre": "Defensa",
         "puntos": 8,
         "modificador": [],
         "seccion": "Cuerpo a Cuerpo"
       },
       {
-        "nombre": "Cahir Mawr Dyffryn aep Ceallach",
+        "nombre": "Cahir",
         "puntos": 6,
         "modificador": [],
         "seccion": "Rango"
       },
       {
-        "nombre": "Harpía Celaeno",
+        "nombre": "Harpía",
         "puntos": 2,
         "modificador": [
           "Agil"
@@ -174,7 +174,7 @@
         "seccion": "Rango"
       },
       {
-        "nombre": "Ciaran aep Easnillien",
+        "nombre": "Ciaran",
         "puntos": 3,
         "modificador": [
           "Agil"
@@ -182,7 +182,7 @@
         "seccion": "Cuerpo a Cuerpo, Rango"
       },
       {
-        "nombre": "Cirilla Fiona Elen Riannon",
+        "nombre": "Cirilla",
         "puntos": 15,
         "modificador": [
           "Legendaria"
@@ -190,7 +190,7 @@
         "seccion": "Rango"
       },
       {
-        "nombre": "Doncella Escudo del Clan Drummond",
+        "nombre": "Doncella",
         "puntos": 4,
         "modificador": [
           "Carta Unida"
@@ -198,19 +198,19 @@
         "seccion": "Asedio"
       },
       {
-        "nombre": "Skald del Clan Heymaey",
+        "nombre": "Skald",
         "puntos": 4,
         "modificador": [],
         "seccion": "Asedio"
       },
       {
-        "nombre": "Herrero del Clan Tordarroch",
+        "nombre": "Herrero",
         "puntos": 4,
         "modificador": [],
         "seccion": "Asedio"
       },
       {
-        "nombre": "Guerrero del Clan an Craite",
+        "nombre": "Guerrero",
         "puntos": 6,
         "modificador": [
           "Carta Unida"
@@ -218,7 +218,7 @@
         "seccion": "Asedio"
       },
       {
-        "nombre": "Crone: Brewess",
+        "nombre": "Brewess",
         "puntos": 6,
         "modificador": [],
         "seccion": "Asedio"

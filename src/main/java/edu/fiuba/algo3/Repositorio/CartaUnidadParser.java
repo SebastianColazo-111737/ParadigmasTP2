@@ -35,14 +35,12 @@ public class CartaUnidadParser {
 
     String nombreOriginal = (String) cartaJson.get("nombre");
     String nombreConEmoji = agregarEmojisPosicion(nombreOriginal, posiciones);
-    nombreConEmoji += "\n" + agregarEmojisModificador(modificadores);
 
     int puntos = Math.toIntExact((Long) cartaJson.get("puntos"));
     Puntaje puntaje = new Puntaje(puntos);
 
     String modificador = modificadores.isEmpty() ? "" : modificadores.get(0);
 
-    // Usar .equals(...) en vez de ==
     if (modificador.equals("Medico")) {
       carta = new Medico(nombreConEmoji, puntaje, posiciones.get(0));
     } else if (modificador.equals("Legendaria")) {
@@ -76,34 +74,6 @@ public class CartaUnidadParser {
       }
     }
 
-    return sb.toString().trim();
-  }
-
-  private static String agregarEmojisModificador(List<String> modificadores ){
-    StringBuilder sb = new StringBuilder();
-
-    for(String mod : modificadores) {
-      switch (mod) {
-        case "Medico":
-          sb.append("➀");
-          break;
-        case "Legendaria":
-          sb.append("②");
-          break;
-        case "Carta Unida":
-          sb.append("③");
-          break;
-        case "Morale Boost":
-          sb.append("④");
-          break;
-        case "Agil":
-          sb.append("⑤");
-          break;
-        case "Espia":
-          sb.append("⑥");
-          break;
-      }
-    }
     return sb.toString().trim();
   }
 
