@@ -19,4 +19,7 @@ public class Legendaria extends Unidad {
     return this.nombre;
   }
 
+  public String colorHex() {
+    return "#FFD700";
+  }
 }

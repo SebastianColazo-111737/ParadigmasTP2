@@ -30,4 +30,7 @@ public class Medico extends Unidad {
     return this.nombre;
   }
 
+  public String colorHex() {
+    return "#8FBC8F";
+  }
 }

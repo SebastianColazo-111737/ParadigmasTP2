@@ -19,4 +19,8 @@ public class Espia extends Unidad {
   public String nombre() {
     return this.nombre;
   }
+
+  public String colorHex() {
+    return "#A9A9A9";
+  }
 }

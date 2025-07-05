@@ -19,4 +19,8 @@ public class Animador extends Unidad {
   public String nombre() {
     return this.nombre;
   }
+
+  public String colorHex() {
+    return "#FFA07A";
+  }
 }

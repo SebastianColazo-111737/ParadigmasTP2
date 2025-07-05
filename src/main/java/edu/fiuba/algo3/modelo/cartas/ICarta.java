@@ -10,4 +10,9 @@ public interface ICarta {
   List<Posicion> getTipo();
 
   String nombre();
+
+  default String colorHex() {
+    return "FFF8DC";
+  }
+
 }

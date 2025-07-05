@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vistas.Individuales;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.unidades.*;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import java.util.function.Consumer;
@@ -14,10 +15,15 @@ import javafx.scene.paint.Color;
 public class VistaCarta extends Button {
     public static VistaCarta cartaSeleccionada;
     private final ICarta cartaModelo;
+    private final String colorDeFondo;
 
     public VistaCarta(ICarta cartaModelo, Consumer<VistaCarta> oneSeleccionar) {
         super(cartaModelo.nombre());
         this.cartaModelo = cartaModelo;
+
+        this.colorDeFondo = cartaModelo.colorHex();
+
+        this.setStyle("-fx-background-color: " + colorDeFondo + "; -fx-border-color: black; -fx-border-width: 1; -fx-font-weight: bold;");
 
         this.setPrefSize(70, 90);
         this.deseleccionar();
@@ -29,12 +35,12 @@ public class VistaCarta extends Button {
         return cartaModelo;
     }
 
-    public void seleccionar(){
-        this.setStyle("-fx-background-color: white; -fx-border-color: red; -fx-border-width: 2; -fx-font-weight: bold;");
+    public void seleccionar() {
+        this.setStyle("-fx-background-color: " + colorDeFondo + "; -fx-border-color: red; -fx-border-width: 2; -fx-font-weight: bold;");
     }
 
-    public void deseleccionar(){
-        this.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1; -fx-font-weight: bold;");
+    public void deseleccionar() {
+        this.setStyle("-fx-background-color: " + colorDeFondo + "; -fx-border-color: black; -fx-border-width: 1; -fx-font-weight: bold;");
     }
 
     private void moverCarta(){
