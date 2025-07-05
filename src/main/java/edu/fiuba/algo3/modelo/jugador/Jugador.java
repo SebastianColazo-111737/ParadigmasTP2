@@ -98,14 +98,18 @@ public class Jugador {
     return Optional.empty();
   }
 
-  public Atril atril() {
-    return this.atril;
-  }
 
   public void limpiarTodo() {
     List<ICarta> descartadas = this.atril.descartarCartas();
     this.descarte.agregarCarta(descartadas);
 
+  }
+  public Atril atril() {
+    return this.atril;
+  }
+
+  public Descarte descarte(){
+    return this.descarte;
   }
 
   public Mano mano() {

@@ -26,8 +26,8 @@ public class Lienzo extends StackPane {
         //Creacion de VistaTurnos
         VistaTurnos vistaTurnos = new VistaTurnos(juego, jugador1,jugador2, vistaManoJugador1, vistaManoJugador2, controladorTurnos);
 
-        VistaDescarte vistaDescarteJ1 = new VistaDescarte("Descarte Jugador1", jugador1);
-        VistaDescarte vistaDescarteJ2 = new VistaDescarte("Descarte Jugador1",jugador2);
+        VistaDescarte vistaDescarteJ1 = new VistaDescarte("Descarte\n Jugador1", jugador1);
+        VistaDescarte vistaDescarteJ2 = new VistaDescarte("Descarte\n Jugador2",jugador2);
 
         //Creacion de los VistaAtril
         VistaAtril vistaAtrilJugador2 = new VistaAtril(jugador2.atril(), true, jugador2, vistaManoJugador2, vistaTurnos, controladorTurnos, vistaDescarteJ2);
