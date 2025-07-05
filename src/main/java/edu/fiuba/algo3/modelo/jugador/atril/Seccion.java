@@ -119,6 +119,7 @@ public class Seccion {
     }
     this.debuff = false;
     this.duplicadores = 1;
+    notificar();
     return descartadas;
   }
 

@@ -15,8 +15,11 @@ import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
 import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.*;
@@ -26,6 +29,8 @@ import javafx.geometry.Pos;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
+
 import java.util.Optional;
 
 public class VistaSeccion extends HBox {
@@ -152,14 +157,32 @@ public class VistaSeccion extends HBox {
   }
 
   public void actualizar(){
-    cartasApoyadas.getChildren().clear();
-
-    for (Unidad unidad : seccionModelo.getUnidadesColocadas()) {
-      VistaCarta vistaCarta = new VistaCarta(unidad, vista -> {});
-      cartasApoyadas.getChildren().add(vistaCarta);
+    for (Node nodo : cartasApoyadas.getChildren()) {
+      FadeTransition fadeOut = new FadeTransition(Duration.millis(200), nodo);
+      fadeOut.setFromValue(1.0);
+      fadeOut.setToValue(0.0);
+      fadeOut.setOnFinished(e -> cartasApoyadas.getChildren().remove(nodo));
+      fadeOut.play();
     }
 
-    vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
+    PauseTransition espera = new PauseTransition(Duration.millis(200));
+    espera.setOnFinished(e -> {
+      cartasApoyadas.getChildren().clear();
+      for (Unidad unidad : seccionModelo.getUnidadesColocadas()) {
+        VistaCarta vistaCarta = new VistaCarta(unidad, vista -> {});
+
+        vistaCarta.setOpacity(0);
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(50), vistaCarta);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        fadeIn.play();
+
+        cartasApoyadas.getChildren().add(vistaCarta);
+      }
+
+      vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
+    });
+    espera.play();
   }
 
   private String nombreDesdePos(Seccion seccion) {
