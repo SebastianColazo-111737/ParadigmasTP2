@@ -48,12 +48,12 @@ public class VistaCarta extends Button {
         String emojis = partes.length > 1 ? partes[1] : "";
 
         Label nombreLabel = new Label(cartaModelo.nombre());
-        nombreLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 9));
+        nombreLabel.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
         nombreLabel.setWrapText(true);
         nombreLabel.setTextAlignment(TextAlignment.CENTER);
 
         Label emojiLabel = new Label(emojis);
-        emojiLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        emojiLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         emojiLabel.setTextAlignment(TextAlignment.CENTER);
 
         contenido.getChildren().addAll(nombreLabel,emojiLabel);

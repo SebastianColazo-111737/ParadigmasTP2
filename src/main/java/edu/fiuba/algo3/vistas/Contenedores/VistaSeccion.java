@@ -31,7 +31,10 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class VistaSeccion extends HBox {
 
@@ -156,33 +159,39 @@ public class VistaSeccion extends HBox {
     }
   }
 
-  public void actualizar(){
+  public void actualizar() {
+    List<ICarta> cartasModelo = seccionModelo.getUnidadesColocadas().stream()
+            .map(c -> (ICarta) c)
+            .collect(Collectors.toList());
+
+    List<Node> nodosAEliminar = new ArrayList<>();
     for (Node nodo : cartasApoyadas.getChildren()) {
-      FadeTransition fadeOut = new FadeTransition(Duration.millis(200), nodo);
+      VistaCarta vista = (VistaCarta) nodo;
+      if (!cartasModelo.contains(vista.getCartaModelo())) {
+        nodosAEliminar.add(nodo);
+      }
+    }
+
+    for (Node nodo : nodosAEliminar) {
+      FadeTransition fadeOut = new FadeTransition(Duration.millis(300), nodo);
       fadeOut.setFromValue(1.0);
       fadeOut.setToValue(0.0);
       fadeOut.setOnFinished(e -> cartasApoyadas.getChildren().remove(nodo));
       fadeOut.play();
     }
 
-    PauseTransition espera = new PauseTransition(Duration.millis(200));
-    espera.setOnFinished(e -> {
-      cartasApoyadas.getChildren().clear();
-      for (Unidad unidad : seccionModelo.getUnidadesColocadas()) {
-        VistaCarta vistaCarta = new VistaCarta(unidad, vista -> {});
+    List<ICarta> cartasActuales = cartasApoyadas.getChildren().stream()
+            .map(n -> ((VistaCarta) n).getCartaModelo())
+            .collect(Collectors.toList());
 
-        vistaCarta.setOpacity(0);
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(50), vistaCarta);
-        fadeIn.setFromValue(0.0);
-        fadeIn.setToValue(1.0);
-        fadeIn.play();
-
-        cartasApoyadas.getChildren().add(vistaCarta);
+    for (ICarta carta : cartasModelo) {
+      if (!cartasActuales.contains(carta)) {
+        VistaCarta nuevaVista = new VistaCarta(carta, v -> {});
+        cartasApoyadas.getChildren().add(nuevaVista);
       }
+    }
 
-      vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
-    });
-    espera.play();
+    vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
   }
 
   private String nombreDesdePos(Seccion seccion) {
