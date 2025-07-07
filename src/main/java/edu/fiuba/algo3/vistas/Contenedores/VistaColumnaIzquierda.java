@@ -15,8 +15,9 @@ import javafx.scene.text.TextAlignment;
 public class VistaColumnaIzquierda extends VBox {
     private final VistaDatos infoJugador1;
     private final VistaDatos infoJugador2;
+    private final VistaSeccionEspecial vistaEspecial;
 
-    public VistaColumnaIzquierda(VistaTurnos vistaTurnos, VistaPuntosJugador puntosJ1, VistaPuntosJugador puntosJ2) {
+    public VistaColumnaIzquierda(VistaTurnos vistaTurnos, VistaPuntosJugador puntosJ1, VistaPuntosJugador puntosJ2, VistaSeccionEspecial vistaEspecial) {
         super(20);
         this.setAlignment(Pos.CENTER_LEFT);
         this.setPadding(new Insets(20));
@@ -24,8 +25,17 @@ public class VistaColumnaIzquierda extends VBox {
 
         this.infoJugador2 = new VistaDatos("Ogro", puntosJ2);
         this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
+        this.vistaEspecial = vistaEspecial;
 
-        this.getChildren().addAll(vistaTurnos,infoJugador2, infoJugador1,crearGuiaModificadores());
+        Label tituloEspeciales = new Label("Zona Especiales: ");
+        tituloEspeciales.setTextFill(Color.WHITE);
+        tituloEspeciales.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        VBox contenedorEspeciales = new VBox(10, tituloEspeciales, vistaEspecial);
+        contenedorEspeciales.setPadding(new Insets( 5));
+        contenedorEspeciales.setStyle("-fx-background-color: dodgerblue; -fx-border-color: black; -fx-border-width: 2;");
+
+
+        this.getChildren().addAll(vistaTurnos,infoJugador2, contenedorEspeciales,infoJugador1,crearGuiaModificadores());
     }
 
     private VBox crearGuiaModificadores() {
@@ -47,7 +57,7 @@ public class VistaColumnaIzquierda extends VBox {
 
         VBox infoColores = new VBox(14, titulo, itemsGuia);
         infoColores.setPadding(new Insets(10));
-        infoColores.setStyle("-fx-background-color: lightgray; -fx-border-color: black;");
+        infoColores.setStyle("-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 2;");
         infoColores.setMaxWidth(200);
 
         return infoColores;

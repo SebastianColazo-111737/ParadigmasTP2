@@ -28,7 +28,7 @@ public class VistaCarta extends Button {
         this.cartaModelo = cartaModelo;
         this.colorDeFondo = cartaModelo.colorHex();
 
-        this.setStyle("-fx-background-color: " + colorDeFondo + "; -fx-border-color: black; -fx-border-width: 1; -fx-font-weight: bold;");
+        this.setStyle("-fx-background-color: " + colorDeFondo + "; -fx-border-color: black; -fx-border-width: 2; -fx-font-weight: bold;");
         this.setPrefSize(70, 90);
         this.deseleccionar();
 
@@ -76,7 +76,7 @@ public class VistaCarta extends Button {
         this.setStyle("-fx-background-color: " + colorDeFondo + "; -fx-border-color: black; -fx-border-width: 1; -fx-font-weight: bold;");
     }
 
-    private void moverCarta(){
+    public void moverCarta(){
         this.setOnDragDetected(e->{
             VistaCarta.cartaSeleccionada = this;
 

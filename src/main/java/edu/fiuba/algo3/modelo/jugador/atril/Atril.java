@@ -29,6 +29,14 @@ public class Atril {
     this.especiales.agregarCarta(carta);
   }
 
+  public boolean hayCartaEspecialActiva(){
+    return !especiales.estaVacia();
+  }
+
+  public void limpiarCartaEspecial(){
+    especiales.limpiar();
+  }
+
   public ICarta quemarCartaMasFuerte() {
     ArrayList<Unidad> cartas = new ArrayList<>();
     Unidad fuerte = null;

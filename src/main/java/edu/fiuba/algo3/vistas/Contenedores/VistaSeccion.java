@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.especiales.BuffCartas;
 import edu.fiuba.algo3.modelo.cartas.unidades.Espia;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
@@ -29,6 +30,7 @@ import javafx.geometry.Pos;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -46,6 +48,9 @@ public class VistaSeccion extends HBox {
   private final ControladorTurnos controladorTurnos;
   private final VistaTurnos vistaTurnos;
   private final VistaMano vistaMano;
+  private Label buffLabel;
+  private Region espacioBuff;
+  private StackPane contenedorBuff;
 
 
   public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano, VistaTurnos vistaTurnos,
@@ -89,13 +94,19 @@ public class VistaSeccion extends HBox {
     this.cartasApoyadas.setPrefHeight(110);
     this.cartasApoyadas.setMinHeight(110);
 
-    this.getChildren().addAll(vistaPuntos, contenedorEmoji, cartasApoyadas);
-
     configurarDragYDrop();
     actualizar();
     this.setMinWidth(700);
 
+    espacioBuff = new Region();
+    espacioBuff.setPrefWidth(40);
+
+    contenedorBuff = new StackPane();
+    contenedorBuff.setPrefWidth(40);
+    contenedorBuff.setAlignment(Pos.TOP_RIGHT);
+
     seccionModelo.agregarObservador(()-> Platform.runLater(this::actualizar));
+    this.getChildren().addAll(vistaPuntos, contenedorEmoji, cartasApoyadas, contenedorBuff, espacioBuff);
   }
 
   private void configurarDragYDrop() {
@@ -133,6 +144,9 @@ public class VistaSeccion extends HBox {
 
     if (cartaModelo instanceof Medico) {
       manejarCartaMedico((Medico) cartaModelo);
+    }else if(cartaModelo instanceof BuffCartas){
+        this.activarBuff();
+        controladorTurnos.registrarSeccionBuffeada(this);
     }
 
     Jugador jugadorActual = controladorTurnos.jugadorActual();
@@ -172,6 +186,8 @@ public class VistaSeccion extends HBox {
       }
     }
 
+    //Esto es para el efecto de transicion al eliminar las cartas
+
     for (Node nodo : nodosAEliminar) {
       FadeTransition fadeOut = new FadeTransition(Duration.millis(300), nodo);
       fadeOut.setFromValue(1.0);
@@ -190,7 +206,6 @@ public class VistaSeccion extends HBox {
         cartasApoyadas.getChildren().add(nuevaVista);
       }
     }
-
     vistaPuntos.actualizarPuntaje(seccionModelo.calcularPuntajeActualUnidades().getPuntajeActual());
   }
 
@@ -204,4 +219,29 @@ public class VistaSeccion extends HBox {
       return "\uD83D\uDEE1\uFE0F";
     return "La seccion no existe";
   }
+
+  public void activarBuff() {
+    this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+    if (buffLabel == null) {
+      buffLabel = new Label("x2");
+      buffLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 16));
+      buffLabel.setTextFill(Color.WHITE);
+      buffLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.6); -fx-padding: 2 6 2 6;");
+
+      contenedorBuff.getChildren().add(buffLabel);
+    }
+  }
+
+  public void desactivarDebuff(){
+    this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+
+    if (buffLabel != null) {
+      contenedorBuff.getChildren().remove(buffLabel);
+      buffLabel = null;
+    }
+  }
+
+
+
 }

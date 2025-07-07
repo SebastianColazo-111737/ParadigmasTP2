@@ -53,6 +53,10 @@ public class Jugador {
     this.atril.limpiarDebuff(posicionesAfectadas);
   }
 
+  public void limpiarCartaEspecial(){
+    atril.limpiarCartaEspecial();
+  }
+
   public void agregarCartaALaMano(ICarta carta) {
     this.mano.agregarCarta(carta);
   }

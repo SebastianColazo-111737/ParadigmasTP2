@@ -2,12 +2,15 @@ package edu.fiuba.algo3.vistas.Contenedores;
 
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.especiales.CEspecial;
 import edu.fiuba.algo3.modelo.jugador.Mano;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
+import edu.fiuba.algo3.vistas.Individuales.VistaCartaEspecial;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,12 +57,18 @@ public class VistaMano extends HBox {
         this.getChildren().clear();
 
         for (ICarta carta : manoModelo.getCartas()) {
-            VistaCarta vistaCarta = new VistaCarta(carta, vista -> {
-                if (cartaSeleccionada != null) cartaSeleccionada.deseleccionar();
+            VistaCarta vistaCarta;
+
+            Consumer<VistaCarta> seleccionador = vista -> {
+                if(cartaSeleccionada != null) cartaSeleccionada.deseleccionar();
                 vista.seleccionar();
                 cartaSeleccionada = vista;
-            });
-
+            };
+            if(carta instanceof CEspecial){
+                vistaCarta = new VistaCartaEspecial(carta,seleccionador);
+            }else{
+                vistaCarta = new VistaCarta(carta,seleccionador);
+            }
             this.getChildren().add(vistaCarta);
         }
     }

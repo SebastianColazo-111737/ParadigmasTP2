@@ -12,8 +12,11 @@ public class Debuff extends CEspecial {
 
   @Override
   public void jugar(Jugador jugadorActual, Jugador jugadorSiguiente, Posicion posicion) {
+    if(jugadorActual.atril().hayCartaEspecialActiva()){
+      System.out.println("Ya hay una carta especial activa.");
+      return;
+    }
 
-    // Arreglar lo de posicion -> Luego checo
     jugadorActual.colocarCartaEspecial(this);
     jugadorActual.activarDebuff(this.posicionesAfectar);
     jugadorSiguiente.activarDebuff(this.posicionesAfectar);
@@ -23,4 +26,6 @@ public class Debuff extends CEspecial {
   public String nombre() {
     return this.nombre;
   }
+
+
 }

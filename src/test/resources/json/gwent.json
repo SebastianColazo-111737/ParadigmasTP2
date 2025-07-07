@@ -147,7 +147,7 @@
                 ]
             },
             {
-                "nombre": "Tormeta de Skellige",
+                "nombre": "Tormenta de Skellige",
                 "descripcion": "Establece la fuerza de todas las cartas de Combate Cuerpo a Cuerpo y Combate a Distancia en 1 para ambos jugadores.",
                 "tipo": "Clima",
                 "afectado": [

@@ -13,7 +13,7 @@ public class DeBuffCleaner extends CEspecial {
   @Override
   public void jugar(Jugador jugadorActual, Jugador jugadorSiguiente, Posicion posicion) {
 
-    // Arreglar lo de posicion -> Luego checo
+    jugadorActual.limpiarCartaEspecial();
     jugadorActual.colocarCartaEspecial(this);
     jugadorActual.limpiarDebuff(this.posicionesAfectar);
     jugadorSiguiente.limpiarDebuff(this.posicionesAfectar);
@@ -23,4 +23,5 @@ public class DeBuffCleaner extends CEspecial {
   public String nombre() {
     return this.nombre;
   }
+
 }

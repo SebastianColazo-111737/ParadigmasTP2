@@ -22,7 +22,12 @@ public abstract class CEspecial implements ICarta {
   }
 
   public List<Posicion> getTipo() {
-    return null;// Es especial luego lo creo;
+    return null;
+  }
+
+  @Override
+  public String colorHex() {
+    return "#4682B4";
   }
 
 }

@@ -18,7 +18,7 @@ public class MazoReaderTest {
   @BeforeEach
   void setUp() throws Exception {
     JSONParser parser = new JSONParser();
-    JSONObject root = (JSONObject) parser.parse(new FileReader("src/test/resources/json/gwent.json"));
+    JSONObject root = (JSONObject) parser.parse(new FileReader("src/test/resources/json/gwent3.json"));
 
     JSONObject mazoJson = (JSONObject) root.get("mazo_jugador_uno");
 

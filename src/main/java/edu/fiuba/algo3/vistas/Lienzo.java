@@ -8,6 +8,7 @@ import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Contenedores.VistaTurnos;
 import edu.fiuba.algo3.vistas.Individuales.VistaMazo;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
+import edu.fiuba.algo3.vistas.Individuales.VistaSeccionEspecial;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
@@ -41,8 +42,12 @@ public class Lienzo extends StackPane {
         VistaJugador vistaJugador2 = new VistaJugador(jugador2, true, vistaTurnos, controladorTurnos,vistaDescarteJ2);
         VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, vistaTurnos, controladorTurnos,vistaDescarteJ1);
 
+        //Creacion VistaSeccionEspeciales
+        VistaSeccionEspecial vistaSeccionEspecial = new VistaSeccionEspecial("La especial dura hasta que:\n °Termina la ronda\n °Se usa Tiempo Despejado");
+        vistaSeccionEspecial.recibirCartaEspecial(vistaManoJugador1, vistaManoJugador2,jugador1,jugador2, controladorTurnos, vistaTurnos);
+
         //Creacion de la columnaIzquierda
-        VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(vistaTurnos, puntosJugador1,puntosJugador2);
+        VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(vistaTurnos, puntosJugador1,puntosJugador2, vistaSeccionEspecial);
 
         controladorTurnos.setVistas(vistaAtrilJugador1, vistaAtrilJugador2, puntosJugador1, puntosJugador2);
 
@@ -66,6 +71,7 @@ public class Lienzo extends StackPane {
             if (clicFueraDeDescarte) VistaDescarte.limpiarSeccion();
         });
 
+        this.setStyle("-fx-background-color: #FFDAB9;");
         this.getChildren().add(contenedor);
         this.setPadding(new Insets(20));
     }

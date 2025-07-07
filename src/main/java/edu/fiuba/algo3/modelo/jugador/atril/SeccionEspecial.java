@@ -22,4 +22,8 @@ public class SeccionEspecial {
     return copia;
   }
 
+  public boolean estaVacia(){
+    return cartas.isEmpty();
+  }
+
 }

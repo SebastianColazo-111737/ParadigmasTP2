@@ -13,7 +13,11 @@ public class TierraArrasada extends CEspecial {
   @Override
   public void jugar(Jugador jugadorActual, Jugador jugadorSiguiente, Posicion posicion) {
 
-    // Arreglar lo de posicion -> Luego checo
+    if(jugadorActual.atril().hayCartaEspecialActiva()){
+      System.out.println("Ya hay una carta especial activa.");
+      return;
+    }
+
     jugadorActual.colocarCartaEspecial(this);
     jugadorActual.quemarCartaMasFuerte();
     jugadorSiguiente.quemarCartaMasFuerte();
@@ -22,4 +26,5 @@ public class TierraArrasada extends CEspecial {
   public String nombre() {
     return this.nombre;
   }
+
 }

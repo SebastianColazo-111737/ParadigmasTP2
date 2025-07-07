@@ -2,10 +2,16 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Contenedores.VistaAtril;
+import edu.fiuba.algo3.vistas.Contenedores.VistaSeccion;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorTurnos {
   private final Gwent juego;
@@ -13,8 +19,7 @@ public class ControladorTurnos {
   private  VistaAtril vistaAtril2;
   private  VistaPuntosJugador puntosJugador1;
   private  VistaPuntosJugador puntosJugador2;
-
-
+  private final List<VistaSeccion> seccionesBuffeadas = new ArrayList<>();
 
   public ControladorTurnos(Gwent juego){
     this.juego = juego;
@@ -67,6 +72,11 @@ public class ControladorTurnos {
         jugador.limpiarTodo();
       }
 
+      for(VistaSeccion seccion: seccionesBuffeadas){
+        seccion.desactivarDebuff();
+      }
+      seccionesBuffeadas.clear();
+
       juego.reiniciarRonda();
       vistaAtril1.actualizar();
       vistaAtril2.actualizar();
@@ -82,4 +92,12 @@ public class ControladorTurnos {
       alerta.showAndWait();
     });
   }
+
+  public void registrarSeccionBuffeada(VistaSeccion seccion){
+    if(!seccionesBuffeadas.contains(seccion)){
+      seccionesBuffeadas.add(seccion);
+    }
+  }
+
+
 }

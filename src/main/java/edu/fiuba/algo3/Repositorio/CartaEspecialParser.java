@@ -24,9 +24,6 @@ public class CartaEspecialParser {
       posiciones.add(new Distancia());
       posiciones.add(new Asedio());
 
-
-
-
       return new BuffCartas(nombre, posiciones);
     }
 

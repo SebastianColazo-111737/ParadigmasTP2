@@ -66,7 +66,7 @@ public class GeneradorJuego {
     private static Mazo generarMazo(String mazoString) throws Exception {
         Mazo mazo;
         JSONParser parser = new JSONParser();
-        JSONObject root = (JSONObject) parser.parse(new FileReader("src/test/resources/json/gwent2.json"));
+        JSONObject root = (JSONObject) parser.parse(new FileReader("src/test/resources/json/gwent3.json"));
 
         JSONObject mazoJson = (JSONObject) root.get(mazoString);
 
