@@ -33,12 +33,13 @@ public class GeneradorJuego {
 
 
             // Jugador 2
-            mazoJ2 = generarMazo("mazo_jugador_uno");
+            mazoJ2 = generarMazo("mazo_jugador_dos");
             manoJ2.agregarCarta(mazoJ2.darCartas(10));
 
         } catch (Exception e) {
-
-        }
+          e.printStackTrace();
+          throw new RuntimeException("Error al cargar el mazo: " + e.getMessage(), e);
+      }
         Seccion cuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
         Seccion distanciaJ1 = new Seccion(new Distancia());
         Seccion asedioJ1 = new Seccion(new Asedio());

@@ -48,7 +48,7 @@ public class CartaEspecialParser {
     }
 
     if (tipo.equals("Tierra arrasada")) {
-      return new TierraArrasada(nombre, null);
+      return new TierraArrasada(nombre, new ArrayList<>());
     }
 
     return null;

@@ -52,7 +52,9 @@ public class VistaCartaEspecial extends VistaCarta{
                 case "Cuerno":
                     return "🗡️ ⋙ \uD83D\uDEE1\uFE0F";
                 case "Quemar":
-                    return " \uD83D\uDD25";
+                    return "Ω";
+                case "Tiempo despejado":
+                    return "༄";
                 default:
                     return nombre;
             }
@@ -66,7 +68,7 @@ public class VistaCartaEspecial extends VistaCarta{
         } else if (carta instanceof Debuff) {
             return "Reduce a 1 la fuerza de una sección";
         } else if (carta instanceof TierraArrasada) {
-            return "Elimina la carta más fuerte de cada lado";
+            return "Elimina las cartas más fuertes";
         } else if (carta instanceof DeBuffCleaner) {
             return "Elimina todos los efectos de clima";
         }
