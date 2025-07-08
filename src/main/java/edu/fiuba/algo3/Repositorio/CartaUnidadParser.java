@@ -76,7 +76,4 @@ public class CartaUnidadParser {
 
     return sb.toString().trim();
   }
-
-
-
 }

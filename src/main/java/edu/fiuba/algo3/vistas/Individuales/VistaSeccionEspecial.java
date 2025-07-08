@@ -6,26 +6,34 @@ import edu.fiuba.algo3.modelo.cartas.especiales.DeBuffCleaner;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.vistas.Contenedores.VistaMano;
 import edu.fiuba.algo3.vistas.Contenedores.VistaTurnos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class VistaSeccionEspecial extends StackPane {
 
-    public VistaSeccionEspecial(String nombre){
-        Rectangle seccion = new Rectangle(160,100);
-        seccion.setFill(Color.STEELBLUE);
-        seccion.setStroke(Color.BLACK);
+    public VistaSeccionEspecial(String mensajeAyuda) {
+        Rectangle fondo = new Rectangle(190, 140);
+        fondo.setFill(Color.STEELBLUE);
+        fondo.setStroke(Color.BLACK);
 
-        Label etiqueta = new Label(nombre);
-        StackPane rectanguloConTexto = new StackPane(seccion, etiqueta);
+        Label etiqueta = new Label(mensajeAyuda);
+        etiqueta.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+        etiqueta.setTextFill(Color.WHITE);
+        etiqueta.setAlignment(Pos.CENTER);
+        etiqueta.setWrapText(true);
+        etiqueta.setMaxWidth(140);
 
-
-
-        this.getChildren().addAll(rectanguloConTexto);
+        this.getChildren().addAll(fondo, etiqueta);
+        this.setPadding(new Insets(5));
+        this.setAlignment(Pos.CENTER);
     }
 
     public void recibirCartaEspecial(VistaMano vistaMano1, VistaMano vistaMano2 ,Jugador jugador1 ,Jugador jugador2, ControladorTurnos controladorTurnos, VistaTurnos vistaTurnos) {
@@ -44,7 +52,7 @@ public class VistaSeccionEspecial extends StackPane {
     }
 
     private boolean esDragValido(DragEvent e, Jugador jugador, ControladorTurnos controladorTurnos) {
-        if(!(e.getGestureSource() instanceof VistaCarta)) return false; //Esto dsp chequear por si hago VistaCartaEspecial
+        if(!(e.getGestureSource() instanceof VistaCarta)) return false;
         if(VistaCarta.cartaSeleccionada == null) return false;
         if(!(VistaCarta.cartaSeleccionada.getCartaModelo() instanceof CEspecial)) return  false;
 

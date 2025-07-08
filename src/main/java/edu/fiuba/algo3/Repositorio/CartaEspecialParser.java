@@ -44,8 +44,6 @@ public class CartaEspecialParser {
         seccionFake.put("seccion", nombrePos);
         posiciones.addAll(PosicionParser.desdeJson(seccionFake));
       }
-
-
       return new Debuff(nombre, posiciones);
     }
 
@@ -55,7 +53,4 @@ public class CartaEspecialParser {
 
     return null;
   }
-
-
-
 }

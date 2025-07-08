@@ -26,6 +26,9 @@ public class Atril {
   }
 
   public void colocarEspecial(CEspecial carta) {
+    if(!especiales.estaVacia()){
+      throw new NoPermiteColocarEspecialSiYaHayUna("Ya hay una carta especial activa en esta ronda.");
+    }
     this.especiales.agregarCarta(carta);
   }
 

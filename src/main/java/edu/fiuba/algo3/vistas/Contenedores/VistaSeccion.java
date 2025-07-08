@@ -142,15 +142,15 @@ public class VistaSeccion extends HBox {
     VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
     ICarta cartaModelo = vistaCarta.getCartaModelo();
 
+    Jugador jugadorActual = controladorTurnos.jugadorActual();
+    jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
+
     if (cartaModelo instanceof Medico) {
       manejarCartaMedico((Medico) cartaModelo);
     }else if(cartaModelo instanceof BuffCartas){
-        this.activarBuff();
-        controladorTurnos.registrarSeccionBuffeada(this);
+      this.activarBuff();
+      controladorTurnos.registrarSeccionBuffeada(this);
     }
-
-    Jugador jugadorActual = controladorTurnos.jugadorActual();
-    jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
 
     vistaMano.removerVistaCarta(vistaCarta);
     controladorTurnos.AvanzarTurno();

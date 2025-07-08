@@ -43,7 +43,7 @@ public class Lienzo extends StackPane {
         VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, vistaTurnos, controladorTurnos,vistaDescarteJ1);
 
         //Creacion VistaSeccionEspeciales
-        VistaSeccionEspecial vistaSeccionEspecial = new VistaSeccionEspecial("La especial dura hasta que:\n °Termina la ronda\n °Se usa Tiempo Despejado");
+        VistaSeccionEspecial vistaSeccionEspecial = new VistaSeccionEspecial("Solo puede jugarse una especial por jugador en cada ronda");
         vistaSeccionEspecial.recibirCartaEspecial(vistaManoJugador1, vistaManoJugador2,jugador1,jugador2, controladorTurnos, vistaTurnos);
 
         //Creacion de la columnaIzquierda

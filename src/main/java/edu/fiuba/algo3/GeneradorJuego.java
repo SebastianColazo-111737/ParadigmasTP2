@@ -73,5 +73,4 @@ public class GeneradorJuego {
         mazo = MazoParser.desdeJson(mazoJson);
         return mazo;
     }
-
 }

@@ -27,7 +27,7 @@ public class VistaColumnaIzquierda extends VBox {
         this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
         this.vistaEspecial = vistaEspecial;
 
-        Label tituloEspeciales = new Label("Zona Especiales: ");
+        Label tituloEspeciales = new Label("Especiales: ");
         tituloEspeciales.setTextFill(Color.WHITE);
         tituloEspeciales.setFont(Font.font("Arial", FontWeight.BOLD, 16));
         VBox contenedorEspeciales = new VBox(10, tituloEspeciales, vistaEspecial);

@@ -23,7 +23,7 @@ public class VistaCartaEspecial extends VistaCarta{
         contenido.setAlignment(Pos.CENTER);
 
         Label nombreLabel = new Label(obtenerNombre(cartaModelo));
-        nombreLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 12px;");
+        nombreLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
         nombreLabel.setWrapText(true);
         nombreLabel.setTextAlignment(TextAlignment.CENTER);
 
@@ -40,7 +40,22 @@ public class VistaCartaEspecial extends VistaCarta{
 
     private String obtenerNombre(ICarta cartaModelo){
         if (cartaModelo instanceof CEspecial) {
-            return ((CEspecial) cartaModelo).nombre();
+            String nombre = ((CEspecial) cartaModelo).nombre();
+
+            switch(nombre){
+                case "Escarcha":
+                    return "🗡️";
+                case "Lluvia":
+                    return "🛡️";
+                case "Tormeta":
+                    return "🗡️ ⋙";
+                case "Cuerno":
+                    return "🗡️ ⋙ \uD83D\uDEE1\uFE0F";
+                case "Quemar":
+                    return " \uD83D\uDD25";
+                default:
+                    return nombre;
+            }
         }
         return "Especial";
     }
