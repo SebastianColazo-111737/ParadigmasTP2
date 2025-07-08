@@ -65,11 +65,12 @@ public class Seccion {
     return fuerte;
   }
 
-  public void removerCarta(Unidad carta) {
-    if (!this.contieneCarta(carta)) return;
-    this.unidadesColocadas.remove(carta);
-    notificar();
-  }
+    public void removerCarta(Unidad carta) {
+      if (!this.contieneCarta(carta)) return;
+      this.unidadesColocadas.remove(carta);
+      notificar();
+    }
+
 
   public Puntaje calcularPuntajeActualUnidades() {
     int puntajeTotal = 0;

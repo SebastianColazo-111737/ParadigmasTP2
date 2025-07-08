@@ -28,6 +28,15 @@ public class CartaEspecialParser {
     }
 
     if (tipo.equals("Clima")) {
+
+      if(nombre.equalsIgnoreCase("Tiempo despejado")){
+        ArrayList<Posicion> todasLasPosiciones = new ArrayList<>();
+        todasLasPosiciones.add(new CuerpoACuerpo());
+        todasLasPosiciones.add(new Distancia());
+        todasLasPosiciones.add(new Asedio());
+        return new DeBuffCleaner(nombre,todasLasPosiciones);
+      }
+
       JSONArray afectadoArray = (JSONArray) cartaJson.get("afectado");
       ArrayList<Posicion> posiciones = new ArrayList<>();
 
@@ -40,10 +49,12 @@ public class CartaEspecialParser {
           nombrePos = "Rango";
         else
           nombrePos = "Asedio";
+
         JSONObject seccionFake = new JSONObject();
         seccionFake.put("seccion", nombrePos);
         posiciones.addAll(PosicionParser.desdeJson(seccionFake));
       }
+
       return new Debuff(nombre, posiciones);
     }
 

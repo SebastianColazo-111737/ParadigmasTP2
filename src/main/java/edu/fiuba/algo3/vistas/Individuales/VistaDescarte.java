@@ -26,7 +26,7 @@ public class VistaDescarte extends StackPane{
         etiqueta.setStyle("-fx-font-weight: bold;");
         etiqueta.setTextFill(Color.WHITE);
 
-        contador = new Label("Cantidad: " + jugador.descarte().getCantidadCartas());
+        contador = new Label("Restantes: " + jugador.descarte().getCantidadCartas());
         contador.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;");
         contador.setTranslateY(35);
         etiqueta.setTranslateY(-30);

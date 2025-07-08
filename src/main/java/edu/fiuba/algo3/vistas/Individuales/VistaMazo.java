@@ -16,7 +16,7 @@ public class VistaMazo extends StackPane{
     public VistaMazo(String nombre, Mazo mazo){
         this.mazo = mazo;
 
-        fondo = new Rectangle(90,120);
+        fondo = new Rectangle(100,120);
         fondo.setFill(Color.SIENNA);
         fondo.setStroke(Color.BLACK);
         fondo.setStrokeWidth(2);

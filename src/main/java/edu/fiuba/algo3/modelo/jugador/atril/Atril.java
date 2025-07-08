@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.jugador.atril;
 
+import edu.fiuba.algo3.modelo.cartas.unidades.Legendaria;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.posiciones.*;
@@ -41,24 +42,24 @@ public class Atril {
   }
 
   public ICarta quemarCartaMasFuerte() {
-    ArrayList<Unidad> cartas = new ArrayList<>();
+
     Unidad fuerte = null;
+    Seccion seccionFuerte = null;
 
     for (Seccion seccion : this.secciones) {
       Unidad carta = seccion.tomarCartaMasFuerte();
-      if (carta != null)
-        cartas.add(seccion.tomarCartaMasFuerte());
+      if (carta != null && !(carta instanceof Legendaria)){
+        if(fuerte == null || carta.masFuerteQue(fuerte)){
+          fuerte = carta;
+          seccionFuerte = seccion;
+        }
+      }
     }
 
-    if (cartas.size() == 0) {
-      return fuerte;
+    if(fuerte != null && seccionFuerte != null){
+      seccionFuerte.removerCarta(fuerte);
+      this.descartarCarta(fuerte);
     }
-    fuerte = cartas.get(0);
-    for (Unidad carta : cartas) {
-      if (carta.masFuerteQue(fuerte))
-        fuerte = carta;
-    }
-    this.descartarCarta(fuerte);
     return fuerte;
   }
 

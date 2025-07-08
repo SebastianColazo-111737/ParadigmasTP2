@@ -1,7 +1,5 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.modelo.juego.Gwent;
-import edu.fiuba.algo3.modelo.jugador.Jugador;
 //import edu.fiuba.algo3.vistas.Contenedores.ContenedorMenuPrincipal;
 
 
@@ -44,13 +42,14 @@ public class App extends Application {
         tituloReglas.setFont(Font.font("Arial", FontWeight.BOLD, 30));
 
         Text item1 = new Text("• En cada turno se puede jugar una carta o terminar la participación.\n");
-        Text item2 = new Text("• Si se termina la participación, no se podrá volver a jugar en la ronda.\n");
-        Text item3 = new Text("• Gana la ronda aquel que tenga más puntos.\n");
-        Text item4 = new Text("• Gana el juego aquel que logre ganar dos rondas primero.\n");
+        Text item2 = new Text("• Solo puede haber una carta especial activa por jugador en cada ronda.\n");
+        Text item3 = new Text("• Si se termina la participación, no se podrá volver a jugar en la ronda.\n");
+        Text item4 = new Text("• Gana la ronda aquel que tenga más puntos.\n");
+        Text item5 = new Text("• Gana el juego aquel que logre ganar dos rondas primero.\n");
 
-        Stream.of(item1, item2, item3, item4).forEach(t -> t.setFont(Font.font("Arial", 16)));
+        Stream.of(item1, item2, item3, item4 ,item5).forEach(t -> t.setFont(Font.font("Arial", 16)));
 
-        TextFlow reglasFlow = new TextFlow(tituloReglas, item1, item2, item3, item4);
+        TextFlow reglasFlow = new TextFlow(tituloReglas, item1, item2, item3, item4 ,item5);
         reglasFlow.setMaxWidth(600);
 
         Button comenzar = new Button("¡Comenzar Juego!");

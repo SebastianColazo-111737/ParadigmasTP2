@@ -15,21 +15,21 @@ public class VistaCartaEspecial extends VistaCarta{
     public VistaCartaEspecial(ICarta cartaModelo, Consumer<VistaCarta> oneSeleccionar){
         super(cartaModelo, oneSeleccionar);
 
-        this.setStyle("-fx-background-color: steelblue; -fx-border-color: black; -fx-border-width: 2px;");
+        this.setStyle("-fx-background-color: deepskyblue; -fx-border-color: black; -fx-border-width: 2px;");
         this.setPadding(new Insets(5));
-        this.setPrefSize(70, 90);
+        this.setPrefSize(80, 110);
 
         VBox contenido = new VBox(2);
         contenido.setAlignment(Pos.CENTER);
 
         Label nombreLabel = new Label(obtenerNombre(cartaModelo));
-        nombreLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+        nombreLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 17px;");
         nombreLabel.setWrapText(true);
         nombreLabel.setTextAlignment(TextAlignment.CENTER);
 
         Label descripcionLabel = new Label(obtenerDescripcion(cartaModelo));
         descripcionLabel.setWrapText(true);
-        descripcionLabel.setStyle("-fx-font-size: 10px;");
+        descripcionLabel.setStyle("-fx-font-size: 12px;");
         descripcionLabel.setTextAlignment(TextAlignment.CENTER);
 
         contenido.getChildren().addAll(nombreLabel,descripcionLabel);
@@ -44,15 +44,15 @@ public class VistaCartaEspecial extends VistaCarta{
 
             switch(nombre){
                 case "Escarcha":
-                    return "🗡️";
+                    return "❆ ➞ 🗡️";
                 case "Lluvia":
-                    return "🛡️";
+                    return "☔ ➞ 🛡️";
                 case "Tormeta":
-                    return "🗡️ ⋙";
+                    return "⚡➞🗡️⋙";
                 case "Cuerno":
                     return "🗡️ ⋙ \uD83D\uDEE1\uFE0F";
                 case "Quemar":
-                    return "Ω";
+                    return "⛭";
                 case "Tiempo despejado":
                     return "༄";
                 default:
@@ -66,11 +66,11 @@ public class VistaCartaEspecial extends VistaCarta{
         if (carta instanceof BuffCartas) {
             return "Duplica la fuerza de una sección";
         } else if (carta instanceof Debuff) {
-            return "Reduce a 1 la fuerza de una sección";
+            return "Reduce a 1 las cartas de una sección";
         } else if (carta instanceof TierraArrasada) {
-            return "Elimina las cartas más fuertes";
+            return "Quema la carta más fuerte de cada atril";
         } else if (carta instanceof DeBuffCleaner) {
-            return "Elimina todos los efectos de clima";
+            return "Limpia todos los efectos de clima";
         }
         return "Carta especial.";
     }

@@ -27,7 +27,7 @@ public class VistaColumnaIzquierda extends VBox {
         this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
         this.vistaEspecial = vistaEspecial;
 
-        Label tituloEspeciales = new Label("Especiales: ");
+        Label tituloEspeciales = new Label("Especiales Activas: ");
         tituloEspeciales.setTextFill(Color.WHITE);
         tituloEspeciales.setFont(Font.font("Arial", FontWeight.BOLD, 16));
         VBox contenedorEspeciales = new VBox(10, tituloEspeciales, vistaEspecial);
@@ -47,7 +47,7 @@ public class VistaColumnaIzquierda extends VBox {
 
         itemsGuia.getChildren().addAll(
                 crearItemGuia("Legendaria", "#FFD700"),
-                crearItemGuia("Medico", "#8FBC8F"),
+                crearItemGuia("Medico\n(max 2 unidades)", "#8FBC8F"),
                 crearItemGuia("Carta Unida", "#2E8B57"),
                 crearItemGuia("Morale Boost", "#FFA07A"),
                 crearItemGuia("Agil", "#DDA0DD"),

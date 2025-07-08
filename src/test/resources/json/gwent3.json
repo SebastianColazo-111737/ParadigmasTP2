@@ -246,7 +246,7 @@
       {
         "nombre": "Herrero",
         "puntos": 4,
-        "modificador": [],
+        "modificador": ["Medico"],
         "seccion": "Asedio"
       },
       {
