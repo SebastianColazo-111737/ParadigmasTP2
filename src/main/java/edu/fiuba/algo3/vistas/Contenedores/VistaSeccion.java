@@ -3,21 +3,18 @@ package edu.fiuba.algo3.vistas.Contenedores;
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.especiales.BuffCartas;
-import edu.fiuba.algo3.modelo.cartas.unidades.Espia;
+import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
-import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
-import edu.fiuba.algo3.modelo.jugador.Descarte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.jugador.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
 import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posiciones.Distancia;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.vistas.Individuales.VistaCarta;
-import edu.fiuba.algo3.vistas.Individuales.VistaDescarte;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -30,7 +27,6 @@ import javafx.geometry.Pos;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -48,10 +44,9 @@ public class VistaSeccion extends HBox {
   private final ControladorTurnos controladorTurnos;
   private final VistaTurnos vistaTurnos;
   private final VistaMano vistaMano;
-  private Label buffLabel;
   private Region espacioBuff;
   private StackPane contenedorBuff;
-
+  private CambiosEspecialesSecciones efectosVisuales;
 
   public VistaSeccion(Seccion seccionModelo, Jugador jugador, VistaMano vistaMano, VistaTurnos vistaTurnos,
                       ControladorTurnos controladorTurnos) {
@@ -70,6 +65,7 @@ public class VistaSeccion extends HBox {
 
     this.setPrefHeight(100);
     this.setMinHeight(100);
+
 
     this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
     this.setBorder(new Border(new BorderStroke(
@@ -94,16 +90,18 @@ public class VistaSeccion extends HBox {
     this.cartasApoyadas.setPrefHeight(110);
     this.cartasApoyadas.setMinHeight(110);
 
+    this.espacioBuff = new Region();
+    this.espacioBuff.setPrefWidth(40);
+
+    this.contenedorBuff = new StackPane();
+    this.contenedorBuff.setPrefWidth(40);
+    this.contenedorBuff.setAlignment(Pos.TOP_RIGHT);
+
+    this.efectosVisuales = new CambiosEspecialesSecciones(contenedorBuff,espacioBuff,this);
+
     configurarDragYDrop();
     actualizar();
     this.setMinWidth(700);
-
-    espacioBuff = new Region();
-    espacioBuff.setPrefWidth(40);
-
-    contenedorBuff = new StackPane();
-    contenedorBuff.setPrefWidth(40);
-    contenedorBuff.setAlignment(Pos.TOP_RIGHT);
 
     seccionModelo.agregarObservador(()-> Platform.runLater(this::actualizar));
     this.getChildren().addAll(vistaPuntos, contenedorEmoji, cartasApoyadas, contenedorBuff, espacioBuff);
@@ -142,14 +140,33 @@ public class VistaSeccion extends HBox {
     VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
     ICarta cartaModelo = vistaCarta.getCartaModelo();
 
+    try{
+      seccionModelo.validarCartaEspecial(cartaModelo);
+    }catch (SeccionNoPermiteColocarUnidadesConPosicionIncompatible ex){
+      System.out.println("Carta especial colocada en sección incompatible: " + ex.getMessage());
+      return false;
+    }
+
     Jugador jugadorActual = controladorTurnos.jugadorActual();
     jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
 
+    //Ver como evito usar tantos if else's
     if (cartaModelo instanceof Medico) {
       manejarCartaMedico((Medico) cartaModelo);
     }else if(cartaModelo instanceof BuffCartas){
-      this.activarBuff();
+      efectosVisuales.activarBuff();
       controladorTurnos.registrarSeccionBuffeada(this);
+    }else if(cartaModelo instanceof Debuff){
+      String nombreCarta = cartaModelo.nombre();
+
+      if(nombreCarta.equalsIgnoreCase("Escarcha")){
+        efectosVisuales.activarDebuffEscarcha();
+      } else if (nombreCarta.equalsIgnoreCase("Lluvia")) {
+        efectosVisuales.activarDebuffLluvia();
+      }else if(nombreCarta.equalsIgnoreCase("Tormeta")){
+        efectosVisuales.activarDebuffTormenta();
+      }
+      controladorTurnos.registrarSeccionDebuffeada(this);
     }
 
     vistaMano.removerVistaCarta(vistaCarta);
@@ -220,28 +237,8 @@ public class VistaSeccion extends HBox {
     return "La seccion no existe";
   }
 
-  public void activarBuff() {
-    this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
-
-    if (buffLabel == null) {
-      buffLabel = new Label("x2");
-      buffLabel.setFont(Font.font("Verdana", FontWeight.EXTRA_BOLD, 16));
-      buffLabel.setTextFill(Color.WHITE);
-      buffLabel.setStyle("-fx-background-color: rgba(0, 0, 0, 0.6); -fx-padding: 2 6 2 6;");
-
-      contenedorBuff.getChildren().add(buffLabel);
-    }
-  }
-
   public void desactivarDebuff(){
-    this.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-
-    if (buffLabel != null) {
-      contenedorBuff.getChildren().remove(buffLabel);
-      buffLabel = null;
-    }
+    efectosVisuales.limpiar();
   }
-
-
 
 }

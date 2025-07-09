@@ -29,7 +29,7 @@ public class VistaCartaEspecial extends VistaCarta{
 
         Label descripcionLabel = new Label(obtenerDescripcion(cartaModelo));
         descripcionLabel.setWrapText(true);
-        descripcionLabel.setStyle("-fx-font-size: 12px;");
+        descripcionLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
         descripcionLabel.setTextAlignment(TextAlignment.CENTER);
 
         contenido.getChildren().addAll(nombreLabel,descripcionLabel);
@@ -66,7 +66,7 @@ public class VistaCartaEspecial extends VistaCarta{
         if (carta instanceof BuffCartas) {
             return "Duplica la fuerza de una sección";
         } else if (carta instanceof Debuff) {
-            return "Reduce a 1 las cartas de una sección";
+            return "Reduce a 1 las cartas de ambas secciones";
         } else if (carta instanceof TierraArrasada) {
             return "Quema la carta más fuerte de cada atril";
         } else if (carta instanceof DeBuffCleaner) {

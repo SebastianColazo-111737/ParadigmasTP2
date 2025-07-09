@@ -4,6 +4,7 @@ package edu.fiuba.algo3.modelo.cartas.especiales;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Debuff extends CEspecial {
   public Debuff(String nombre, ArrayList<Posicion> posicionAfectar) {
@@ -22,5 +23,7 @@ public class Debuff extends CEspecial {
     return this.nombre;
   }
 
-
+  public List<Posicion> getPosicionAfectar(){
+    return this.posicionesAfectar;
+  }
 }

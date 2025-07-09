@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.jugador.atril;
 
+import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
 import edu.fiuba.algo3.modelo.cartas.unidades.Animador;
 import edu.fiuba.algo3.modelo.cartas.unidades.Legendaria;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
@@ -134,6 +136,20 @@ public class Seccion {
 
   public Posicion getPosicion() {
     return this.posicion;
+  }
+
+  public void validarCartaEspecial(ICarta carta) {
+    if (carta instanceof Debuff) {
+      Debuff debuff = (Debuff) carta;
+      boolean afectaEstaPosicion = debuff.getPosicionAfectar().stream()
+              .anyMatch(pos -> pos.esCompatible(this.posicion));
+
+      if (!afectaEstaPosicion) {
+        throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible(
+                "La carta " + debuff.nombre() + " no puede colocarse en esta sección."
+        );
+      }
+    }
   }
 
 }

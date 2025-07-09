@@ -1,8 +1,10 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
+import edu.fiuba.algo3.modelo.jugador.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
 import edu.fiuba.algo3.modelo.posiciones.*;
 import java.util.ArrayList;
 import java.util.List;

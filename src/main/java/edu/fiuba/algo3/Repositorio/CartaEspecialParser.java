@@ -43,12 +43,17 @@ public class CartaEspecialParser {
       for (Object o : afectadoArray) {
         String nombrePos = ((String) o).trim();
 
-        if (nombrePos.equals("Combate Cuerpo a Cuerpo"))
+        String nombreNormalizado = nombrePos.toLowerCase();
+
+        if (nombreNormalizado.contains("cuerpo")) {
           nombrePos = "Cuerpo a Cuerpo";
-        else if (nombrePos.equals("Combate a Distancia"))
+        } else if (nombreNormalizado.contains("distancia")) {
           nombrePos = "Rango";
-        else
+        } else if (nombreNormalizado.contains("asedio")) {
           nombrePos = "Asedio";
+        } else {
+          throw new IllegalArgumentException("Nombre de posición no reconocido: " + nombrePos);
+        }
 
         JSONObject seccionFake = new JSONObject();
         seccionFake.put("seccion", nombrePos);
