@@ -226,7 +226,7 @@ public class VistaSeccion extends HBox implements IEfectoVisual{
     return "La seccion no existe";
   }
 
-  public void desactivarDebuff(){
+  public void desactivarDebuff(){ //Tambien sirve para desactivar visualmente Buffs, es lo mismo
     efectosVisuales.limpiar();
   }
 

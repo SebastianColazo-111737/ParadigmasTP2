@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vistas.Contenedores;
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.especiales.BuffCartas;
+import edu.fiuba.algo3.modelo.cartas.especiales.DeBuffCleaner;
 import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
 
 public class EfectosEspecialesDispatcher {
@@ -17,6 +18,8 @@ public class EfectosEspecialesDispatcher {
             else if (nombre.equals("tormeta")) vista.activarDebuffTormenta();
 
             controlador.registrarSeccionDebuffeada(seccion);
+        }else if(carta instanceof DeBuffCleaner){
+            controlador.activarTiempoDespejado();
         }
     }
 }

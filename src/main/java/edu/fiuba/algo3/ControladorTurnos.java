@@ -112,6 +112,13 @@ public class ControladorTurnos {
     seccionesDebuffeadas.add(seccion);
   }
 
+  //Hago este metodo aca porque afecta a todo el tablero el TiempoDespejado
+  public void activarTiempoDespejado(){
+    for(VistaSeccion seccion : seccionesDebuffeadas){
+      seccion.desactivarDebuff();
+    }
+    seccionesDebuffeadas.clear();
+  }
 
 
 }
