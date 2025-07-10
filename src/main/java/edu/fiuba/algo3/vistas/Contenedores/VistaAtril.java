@@ -51,5 +51,4 @@ public class VistaAtril extends VBox {
     public Atril getAtril() {
         return this.atril;
     }
-
 }

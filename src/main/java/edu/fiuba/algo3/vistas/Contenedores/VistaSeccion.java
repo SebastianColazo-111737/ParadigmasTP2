@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vistas.Contenedores;
 import edu.fiuba.algo3.ControladorTurnos;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.especiales.BuffCartas;
+import edu.fiuba.algo3.modelo.cartas.especiales.DeBuffCleaner;
 import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -30,11 +31,12 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class VistaSeccion extends HBox {
+public class VistaSeccion extends HBox implements IEfectoVisual{
 
   private final Seccion seccionModelo;
   private final Jugador jugador;
@@ -150,23 +152,10 @@ public class VistaSeccion extends HBox {
     Jugador jugadorActual = controladorTurnos.jugadorActual();
     jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
 
-    //Ver como evito usar tantos if else's
     if (cartaModelo instanceof Medico) {
       manejarCartaMedico((Medico) cartaModelo);
-    }else if(cartaModelo instanceof BuffCartas){
-      efectosVisuales.activarBuff();
-      controladorTurnos.registrarSeccionBuffeada(this);
-    }else if(cartaModelo instanceof Debuff){
-      String nombreCarta = cartaModelo.nombre();
-
-      if(nombreCarta.equalsIgnoreCase("Escarcha")){
-        efectosVisuales.activarDebuffEscarcha();
-      } else if (nombreCarta.equalsIgnoreCase("Lluvia")) {
-        efectosVisuales.activarDebuffLluvia();
-      }else if(nombreCarta.equalsIgnoreCase("Tormeta")){
-        efectosVisuales.activarDebuffTormenta();
-      }
-      controladorTurnos.registrarSeccionDebuffeada(this);
+    }else{
+      EfectosEspecialesDispatcher.aplicar(cartaModelo,this,controladorTurnos,this);
     }
 
     vistaMano.removerVistaCarta(vistaCarta);
@@ -241,4 +230,27 @@ public class VistaSeccion extends HBox {
     efectosVisuales.limpiar();
   }
 
+  public Posicion getPosicion(){
+    return seccionModelo.getPosicion();
+  }
+
+  @Override
+  public void activarBuff(){
+    efectosVisuales.activarBuff();
+  }
+
+  @Override
+  public void activarDebuffEscarcha() {
+    efectosVisuales.activarDebuffEscarcha();
+  }
+
+  @Override
+  public void activarDebuffLluvia() {
+    efectosVisuales.activarDebuffLluvia();
+  }
+
+  @Override
+  public void activarDebuffTormenta() {
+    efectosVisuales.activarDebuffTormenta();
+  }
 }

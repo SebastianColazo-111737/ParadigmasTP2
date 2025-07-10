@@ -4,6 +4,7 @@ package edu.fiuba.algo3.modelo.cartas.especiales;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DeBuffCleaner extends CEspecial {
   public DeBuffCleaner(String nombre, ArrayList<Posicion> posicionAfectar) {
@@ -18,6 +19,10 @@ public class DeBuffCleaner extends CEspecial {
     jugadorActual.limpiarDebuff(this.posicionesAfectar);
     jugadorSiguiente.limpiarDebuff(this.posicionesAfectar);
 
+  }
+
+  public List<Posicion> getPosicionAfectar(){
+    return this.posicionesAfectar;
   }
 
   public String nombre() {
