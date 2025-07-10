@@ -43,8 +43,7 @@ public class Lienzo extends StackPane {
         VistaJugador vistaJugador1 = new VistaJugador(jugador1, false, vistaTurnos, controladorTurnos,vistaDescarteJ1);
 
         //Creacion VistaSeccionEspeciales
-        VistaSeccionEspecial vistaSeccionEspecial = new VistaSeccionEspecial("Aca despues quiero agregar info de las especiales activas");
-        vistaSeccionEspecial.recibirCartaEspecial(vistaManoJugador1, vistaManoJugador2,jugador1,jugador2, controladorTurnos, vistaTurnos);
+        VistaSeccionEspecial vistaSeccionEspecial = new VistaSeccionEspecial("Especiales Activas:",jugador1.atril(),jugador2.atril());
 
         //Creacion de la columnaIzquierda
         VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(vistaTurnos, puntosJugador1,puntosJugador2, vistaSeccionEspecial);

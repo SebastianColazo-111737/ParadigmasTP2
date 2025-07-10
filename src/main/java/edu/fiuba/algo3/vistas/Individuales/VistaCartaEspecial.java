@@ -49,7 +49,7 @@ public class VistaCartaEspecial extends VistaCarta{
                     return "☔ ➞ 🛡️";
                 case "Tormeta":
                     return "⚡➞🗡️⋙";
-                case "Cuerno":
+                case "Cuerno de poder":
                     return "🗡️ ⋙ \uD83D\uDEE1\uFE0F";
                 case "Quemar":
                     return "⛭";

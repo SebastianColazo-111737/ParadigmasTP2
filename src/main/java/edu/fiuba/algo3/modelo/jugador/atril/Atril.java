@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.cartas.unidades.Legendaria;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.posiciones.*;
+
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,10 @@ public class Atril {
 
   public List<Seccion> getSecciones() {
     return this.secciones;
+  }
+
+  public SeccionEspecial getSeccionEspecial() {
+    return especiales;
   }
 
   public void colocarEspecial(CEspecial carta) {
@@ -125,6 +131,12 @@ public class Atril {
     }
     cartasDescarte.addAll(this.especiales.limpiar());
     return cartasDescarte;
+  }
+
+  public Optional<String> nombreCartaEspecialActiva(){
+    if(especiales.estaVacia()) return Optional.empty();
+    CEspecial carta = especiales.getUltimaCarta();
+    return Optional.of(carta.nombre());
   }
 
 }

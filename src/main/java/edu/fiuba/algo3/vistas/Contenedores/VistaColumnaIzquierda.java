@@ -27,9 +27,9 @@ public class VistaColumnaIzquierda extends VBox {
         this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
         this.vistaEspecial = vistaEspecial;
 
-        Label tituloEspeciales = new Label("Especiales Activas: ");
+        Label tituloEspeciales = new Label("Los simbolos 🗡️/⋙/\uD83D\uDEE1\uFE0F\nindican a que sección afectan");
         tituloEspeciales.setTextFill(Color.WHITE);
-        tituloEspeciales.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        tituloEspeciales.setFont(Font.font("Arial", FontWeight.BOLD, 13));
         VBox contenedorEspeciales = new VBox(10, tituloEspeciales, vistaEspecial);
         contenedorEspeciales.setPadding(new Insets( 5));
         contenedorEspeciales.setStyle("-fx-background-color: dodgerblue; -fx-border-color: black; -fx-border-width: 2;");

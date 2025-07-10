@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.especiales.CEspecial;
 import edu.fiuba.algo3.modelo.cartas.especiales.DeBuffCleaner;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.vistas.Contenedores.VistaMano;
 import edu.fiuba.algo3.vistas.Contenedores.VistaTurnos;
 import javafx.geometry.Insets;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -19,7 +21,10 @@ import javafx.scene.text.FontWeight;
 
 public class VistaSeccionEspecial extends StackPane {
 
-    public VistaSeccionEspecial(String mensajeAyuda) {
+    private final Label infoEspecialActivaJ1 = new Label("J1: -");
+    private final Label infoEspecialActivaJ2 = new Label("J2: -");
+
+    public VistaSeccionEspecial(String mensajeAyuda, Atril atrilJ1, Atril atrilJ2) {
         Rectangle fondo = new Rectangle(190, 140);
         fondo.setFill(Color.STEELBLUE);
         fondo.setStroke(Color.BLACK);
@@ -31,75 +36,41 @@ public class VistaSeccionEspecial extends StackPane {
         etiqueta.setWrapText(true);
         etiqueta.setMaxWidth(140);
 
-        this.getChildren().addAll(fondo, etiqueta);
+        infoEspecialActivaJ1.setFont(Font.font("Verdana",15));
+        infoEspecialActivaJ1.setTextFill(Color.WHITE);
+
+        infoEspecialActivaJ2.setFont(Font.font("Verdana",15));
+        infoEspecialActivaJ2.setTextFill(Color.WHITE);
+
+        VBox contenido = new VBox(5,etiqueta,infoEspecialActivaJ2,infoEspecialActivaJ1);
+        contenido.setAlignment(Pos.CENTER);
+
+        this.getChildren().addAll(fondo, contenido);
         this.setPadding(new Insets(5));
         this.setAlignment(Pos.CENTER);
+
+        atrilJ1.getSeccionEspecial().agregarObservador(() -> actualizarJ1(atrilJ1));
+        atrilJ2.getSeccionEspecial().agregarObservador(() -> actualizarJ2(atrilJ2));
+
+        actualizarJ1(atrilJ1);
+        actualizarJ2(atrilJ2);
     }
 
-    public void recibirCartaEspecial(VistaMano vistaMano1, VistaMano vistaMano2 ,Jugador jugador1 ,Jugador jugador2, ControladorTurnos controladorTurnos, VistaTurnos vistaTurnos) {
-        this.setOnDragOver(e->{
-            if(esDragValido(e,controladorTurnos.jugadorActual(), controladorTurnos)){
-                e.acceptTransferModes(TransferMode.MOVE);
-            }
-            e.consume();
-        });
-
-        this.setOnDragDropped(e->{
-            boolean seMovio = procesarDrop(vistaMano1, vistaMano2,jugador1,jugador2,controladorTurnos,vistaTurnos);
-            e.setDropCompleted(seMovio);
-            e.consume();
-        });
+    private void actualizarJ1(Atril atril){
+        String nombre = atril.nombreCartaEspecialActiva().orElse(null);
+        setInfoEspecialActivaJ1(nombre);
     }
 
-    private boolean esDragValido(DragEvent e, Jugador jugador, ControladorTurnos controladorTurnos) {
-        if(!(e.getGestureSource() instanceof VistaCarta)) return false;
-        if(VistaCarta.cartaSeleccionada == null) return false;
-        if(!(VistaCarta.cartaSeleccionada.getCartaModelo() instanceof CEspecial)) return  false;
-
-        if(!controladorTurnos.jugadorActual().equals(jugador)) return false;
-
-        CEspecial especial = (CEspecial) VistaCarta.cartaSeleccionada.getCartaModelo();
-
-        if (especial instanceof DeBuffCleaner) {
-            this.getChildren().clear();
-        }
-
-        return !jugador.atril().hayCartaEspecialActiva() || especial instanceof DeBuffCleaner;
+    private void actualizarJ2(Atril atril){
+        String nombre = atril.nombreCartaEspecialActiva().orElse(null);
+        setInfoEspecialActivaJ2(nombre);
     }
 
-    private boolean procesarDrop(VistaMano mano1,VistaMano mano2, Jugador jugador1, Jugador jugador2, ControladorTurnos controladorTurnos, VistaTurnos vistaTurnos) {
-        VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
-
-        if (vistaCarta == null || !(vistaCarta.getCartaModelo() instanceof CEspecial)) return false;
-
-        Jugador jugadorActual = controladorTurnos.jugadorActual();
-        Jugador jugadorSiguiente = controladorTurnos.jugadorProximo();
-        VistaMano manoActual = jugadorActual.equals(jugador1) ? mano1 : mano2;
-
-        CEspecial cartaEspecial = (CEspecial) vistaCarta.getCartaModelo();
-
-        if(!puedeColocarEspecial(jugador1,jugador2,cartaEspecial)) return false;
-
-        jugadorActual.jugarCarta(cartaEspecial,jugadorSiguiente,null);
-        this.getChildren().add(vistaCarta);
-        manoActual.removerVistaCarta(vistaCarta);
-
-        ICarta cartaModelo = vistaCarta.getCartaModelo();
-
-        controladorTurnos.AvanzarTurno();
-        vistaTurnos.actualizarTurnos();
-
-        VistaCarta.cartaSeleccionada = null;
-        return true;
+    public void setInfoEspecialActivaJ1(String efecto){
+        this.infoEspecialActivaJ1.setText("J1: " + (efecto == null ? "-" : efecto));
     }
 
-    private boolean puedeColocarEspecial(Jugador J1, Jugador J2, CEspecial carta){
-        boolean existeEspecial = !J1.atril().hayCartaEspecialActiva() || !J2.atril().hayCartaEspecialActiva();
-
-        if(existeEspecial && !(carta instanceof DeBuffCleaner)){
-            return false;
-        }
-        return true;
+    public void setInfoEspecialActivaJ2(String efecto){
+        this.infoEspecialActivaJ2.setText("J2: " + (efecto == null ? "-" : efecto));
     }
-
 }
