@@ -20,6 +20,7 @@ public class VistaDatos extends StackPane {
 
         Label etiqueta = new Label(nombre);
         StackPane rectanguloConTexto = new StackPane(seccion, etiqueta);
+        rectanguloConTexto.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
 
         this.vistaPuntosJugador = vistaPuntosJugador;
 

@@ -1,6 +1,5 @@
 package edu.fiuba.algo3;
 
-//import edu.fiuba.algo3.vistas.Contenedores.ContenedorMenuPrincipal;
 
 
 import edu.fiuba.algo3.vistas.Lienzo;
@@ -10,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -26,6 +26,8 @@ import java.util.stream.Stream;
 public class App extends Application {
 
     private Stage primerStage;
+    private TextField campoName1;
+    private TextField campoName2;
 
     @Override
     public void start(Stage stage){
@@ -53,9 +55,12 @@ public class App extends Application {
         reglasFlow.setMaxWidth(600);
 
         Button comenzar = new Button("¡Comenzar Juego!");
+        comenzar.setDisable(true);
         comenzar.setOnAction(e -> iniciarJuego());
 
-        VBox contenedor = new VBox(30, titulo, reglasFlow, comenzar);
+        VBox formulario = crearCampoCargarNombres(comenzar);
+
+        VBox contenedor = new VBox(30, titulo, reglasFlow, formulario,comenzar);
         contenedor.setAlignment(Pos.CENTER);
         contenedor.setPadding(new Insets(40));
 
@@ -67,12 +72,37 @@ public class App extends Application {
 
     // Inicia el juego directamente
     private void iniciarJuego() {
-        // Crear el juego desde GeneradorJuego
-        Lienzo lienzo = GeneradorJuego.construirJuego();
+        String nomJ1 = campoName1.getText().trim();
+        String nomJ2 = campoName2.getText().trim();
+
+        Lienzo lienzo = GeneradorJuego.construirJuego(nomJ1,nomJ2);
         Scene escenaJuego = new Scene(lienzo, 1200, 1000);
 
         primerStage.setScene(escenaJuego);
         primerStage.setTitle("Gwent - Juego");
+    }
+
+    private VBox crearCampoCargarNombres(Button botonComenzar){
+        Label labelJ1 = new Label("Nombre para Jugador 1: ");
+        Label labelJ2 = new Label("Nombre para el Jugador 2: ");
+        labelJ1.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        labelJ2.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+
+        campoName1 = new TextField();
+        campoName2 = new TextField();
+
+        campoName1.textProperty().addListener((obs, oldVal, newVal) -> validarCampos(botonComenzar));
+        campoName2.textProperty().addListener((obs, oldVal, newVal) -> validarCampos(botonComenzar));
+
+        VBox formulario = new VBox(10,labelJ1,campoName1,labelJ2,campoName2);
+        formulario.setAlignment(Pos.CENTER);
+        return formulario;
+    }
+
+    private void validarCampos(Button botonComenzar){
+        boolean comenzarJuego = !campoName1.getText().trim().isEmpty() &&
+                !campoName2.getText().trim().isEmpty();
+        botonComenzar.setDisable(!comenzarJuego);
     }
 
     public static void main(String[] args) {

@@ -21,7 +21,7 @@ import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 
 public class GeneradorJuego {
 
-    public static Lienzo construirJuego() {
+    public static Lienzo construirJuego(String nomJ1, String nomJ2) {
         Mazo mazoJ1 = null;
         Mazo mazoJ2 = null;
         Mano manoJ1 = new Mano();
@@ -60,9 +60,9 @@ public class GeneradorJuego {
 
         // Inicializar juego
         Gwent juego = new Gwent(jugador1, jugador2);
-        ControladorTurnos controladorTurnos = new ControladorTurnos(juego);
+        ControladorTurnos controladorTurnos = new ControladorTurnos(juego, nomJ1,nomJ2);
 
-        return new Lienzo(jugador1, jugador2, juego, controladorTurnos);
+        return new Lienzo(nomJ1,nomJ2,jugador1, jugador2, juego, controladorTurnos);
     }
     private static Mazo generarMazo(String mazoString) throws Exception {
         Mazo mazo;

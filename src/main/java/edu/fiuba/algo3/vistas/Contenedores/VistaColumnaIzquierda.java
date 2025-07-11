@@ -17,14 +17,14 @@ public class VistaColumnaIzquierda extends VBox {
     private final VistaDatos infoJugador2;
     private final VistaSeccionEspecial vistaEspecial;
 
-    public VistaColumnaIzquierda(VistaTurnos vistaTurnos, VistaPuntosJugador puntosJ1, VistaPuntosJugador puntosJ2, VistaSeccionEspecial vistaEspecial) {
+    public VistaColumnaIzquierda(String nomJ1, String nomJ2 ,VistaTurnos vistaTurnos, VistaPuntosJugador puntosJ1, VistaPuntosJugador puntosJ2, VistaSeccionEspecial vistaEspecial) {
         super(20);
         this.setAlignment(Pos.CENTER_LEFT);
         this.setPadding(new Insets(20));
         this.setMaxWidth(180);
 
-        this.infoJugador2 = new VistaDatos("Ogro", puntosJ2);
-        this.infoJugador1 = new VistaDatos("Guerrero", puntosJ1);
+        this.infoJugador2 = new VistaDatos(nomJ2, puntosJ2);
+        this.infoJugador1 = new VistaDatos(nomJ1, puntosJ1);
         this.vistaEspecial = vistaEspecial;
 
         Label tituloEspeciales = new Label("Los simbolos 🗡️/⋙/\uD83D\uDEE1\uFE0F\nindican a que sección afectan");

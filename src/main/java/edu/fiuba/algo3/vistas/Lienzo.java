@@ -18,7 +18,7 @@ import javafx.scene.Node;
 
 public class Lienzo extends StackPane {
 
-    public Lienzo(Jugador jugador1, Jugador jugador2, Gwent juego, ControladorTurnos controladorTurnos) {
+    public Lienzo(String nomJ1, String nomJ2,Jugador jugador1, Jugador jugador2, Gwent juego, ControladorTurnos controladorTurnos) {
 
         //Creacion de las VistasMano
         VistaMano vistaManoJugador1 = new VistaMano(jugador1.mano(), jugador1.mano().getCartas());
@@ -46,7 +46,7 @@ public class Lienzo extends StackPane {
         VistaSeccionEspecial vistaSeccionEspecial = new VistaSeccionEspecial("Especiales Activas:",jugador1.atril(),jugador2.atril());
 
         //Creacion de la columnaIzquierda
-        VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(vistaTurnos, puntosJugador1,puntosJugador2, vistaSeccionEspecial);
+        VistaColumnaIzquierda columnaIzquierda = new VistaColumnaIzquierda(nomJ1,nomJ2,vistaTurnos, puntosJugador1,puntosJugador2, vistaSeccionEspecial);
 
         controladorTurnos.setVistas(vistaAtrilJugador1, vistaAtrilJugador2, puntosJugador1, puntosJugador2);
 

@@ -21,11 +21,15 @@ public class ControladorTurnos {
   private  VistaAtril vistaAtril2;
   private  VistaPuntosJugador puntosJugador1;
   private  VistaPuntosJugador puntosJugador2;
+  private final String nomJ1;
+  private final String nomJ2;
   private final List<VistaSeccion> seccionesBuffeadas = new ArrayList<>();
   private final ArrayList<VistaSeccion> seccionesDebuffeadas = new ArrayList<>();
 
-  public ControladorTurnos(Gwent juego){
+  public ControladorTurnos(Gwent juego, String nomJ1, String nomJ2){
     this.juego = juego;
+    this.nomJ1 = nomJ1;
+    this.nomJ2 = nomJ2;
   }
 
   public void setVistas(VistaAtril atrilJugador1, VistaAtril atrilJugador2,
@@ -66,9 +70,9 @@ public class ControladorTurnos {
       }
 
       if (puntosJugador1.getRondasGanadas() == 2) {
-        mostrarGanador("¡EL GUERRERO GANA!");
+        mostrarGanador("¡" + nomJ1.toUpperCase()+"GANA!");
       } else if (puntosJugador2.getRondasGanadas() == 2) {
-        mostrarGanador("¡EL OGRO GANA!");
+        mostrarGanador("¡" + nomJ2.toUpperCase()+"GANA!");
       }
 
       for (Jugador jugador : juego.getJugadores()) {
