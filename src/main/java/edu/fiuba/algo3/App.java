@@ -1,7 +1,5 @@
 package edu.fiuba.algo3;
 
-
-
 import edu.fiuba.algo3.vistas.Lienzo;
 import javafx.application.Application;
 import javafx.geometry.Insets;

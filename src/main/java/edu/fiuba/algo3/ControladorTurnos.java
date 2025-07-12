@@ -2,10 +2,6 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.modelo.juego.Gwent;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
-import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
-import edu.fiuba.algo3.modelo.posiciones.Posicion;
-import edu.fiuba.algo3.vistas.Contenedores.CambiosEspecialesSecciones;
 import edu.fiuba.algo3.vistas.Contenedores.VistaAtril;
 import edu.fiuba.algo3.vistas.Contenedores.VistaSeccion;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
@@ -70,9 +66,9 @@ public class ControladorTurnos {
       }
 
       if (puntosJugador1.getRondasGanadas() == 2) {
-        mostrarGanador("¡" + nomJ1.toUpperCase()+"GANA!");
+        mostrarGanador("¡" + nomJ1.toUpperCase()+" GANA!");
       } else if (puntosJugador2.getRondasGanadas() == 2) {
-        mostrarGanador("¡" + nomJ2.toUpperCase()+"GANA!");
+        mostrarGanador("¡" + nomJ2.toUpperCase()+" GANA!");
       }
 
       for (Jugador jugador : juego.getJugadores()) {

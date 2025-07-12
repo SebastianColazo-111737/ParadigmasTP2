@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vistas.Contenedores;
 
-import edu.fiuba.algo3.vistas.Individuales.VistaPuntos;
 import edu.fiuba.algo3.vistas.Individuales.VistaPuntosJugador;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

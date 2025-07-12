@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.cartas.especiales.DeBuffCleaner;
 import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.jugador.atril.NoPermiteColocarEspecialSiYaHayUna;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
 import edu.fiuba.algo3.modelo.posiciones.Asedio;
@@ -142,28 +143,29 @@ public class VistaSeccion extends HBox implements IEfectoVisual{
     VistaCarta vistaCarta = VistaCarta.cartaSeleccionada;
     ICarta cartaModelo = vistaCarta.getCartaModelo();
 
-    try{
+    try {
       seccionModelo.validarCartaEspecial(cartaModelo);
-    }catch (SeccionNoPermiteColocarUnidadesConPosicionIncompatible ex){
-      System.out.println("Carta especial colocada en sección incompatible: " + ex.getMessage());
+
+      Jugador jugadorActual = controladorTurnos.jugadorActual();
+      jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
+
+      if (cartaModelo instanceof Medico) {
+        manejarCartaMedico((Medico) cartaModelo);
+      } else {
+        EfectosEspecialesDispatcher.aplicar(cartaModelo, this, controladorTurnos, this);
+      }
+
+      vistaMano.removerVistaCarta(vistaCarta);
+      controladorTurnos.AvanzarTurno();
+      vistaTurnos.actualizarTurnos();
+      this.actualizar();
+
+      System.out.println("Carta jugada: " + cartaModelo.getClass().getSimpleName());
+
+    } catch (SeccionNoPermiteColocarUnidadesConPosicionIncompatible | NoPermiteColocarEspecialSiYaHayUna ex) {
+      System.out.println(ex.getMessage());
       return false;
     }
-
-    Jugador jugadorActual = controladorTurnos.jugadorActual();
-    jugadorActual.jugarCarta(cartaModelo, controladorTurnos.jugadorProximo(), seccionModelo.getPosicion());
-
-    if (cartaModelo instanceof Medico) {
-      manejarCartaMedico((Medico) cartaModelo);
-    }else{
-      EfectosEspecialesDispatcher.aplicar(cartaModelo,this,controladorTurnos,this);
-    }
-
-    vistaMano.removerVistaCarta(vistaCarta);
-    controladorTurnos.AvanzarTurno();
-    vistaTurnos.actualizarTurnos();
-    this.actualizar();
-
-    System.out.println("Carta jugada: " + cartaModelo.getClass().getSimpleName());
 
     return true;
   }

@@ -46,7 +46,7 @@ public class Seccion {
 
   public void colocarUnidad(Unidad unidad) {
     if (!unidad.sePuedeColocar(posicion)) {
-      throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("");
+      throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("Las cartas se deben colocar en la seccion que le corresponden");
     }
     unidadesColocadas.add(unidad);
     notificar();
