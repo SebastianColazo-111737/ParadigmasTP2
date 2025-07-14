@@ -74,6 +74,16 @@ public class App extends Application {
         String nomJ2 = campoName2.getText().trim();
 
         Lienzo lienzo = GeneradorJuego.construirJuego(nomJ1,nomJ2);
+
+        //Por si no se llega a ver completo en la pantalla
+        //Activar esta opcion de escalas:
+
+        /*
+        double escala_mas_chicaX = 0.80;
+        double escala_mas_chicaY = 0.75;
+        lienzo.setScaleX(escala_mas_chicaX);
+        lienzo.setScaleY(escala_mas_chicaY);*/
+
         Scene escenaJuego = new Scene(lienzo, 1200, 1000);
 
         primerStage.setScene(escenaJuego);
