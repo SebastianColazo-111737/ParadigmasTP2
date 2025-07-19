@@ -8,8 +8,12 @@ public class EfectoBoost implements Efecto{
     }
 
     @Override
-    public void aplicar(Puntaje puntaje) {
-        int nuevoPuntaje = puntaje.getPuntajeActual() * multiplicador;
-        puntaje.setPuntajeActual(nuevoPuntaje);
+    public int aplicar(int puntaje) {
+        return puntaje * multiplicador;
+    }
+
+    @Override
+    public Prioridad getPrioridad() {
+        return Prioridad.BAJA;
     }
 }

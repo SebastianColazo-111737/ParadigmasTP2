@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.modelo.jugador;
 
 import edu.fiuba.algo3.modelo.carta.Carta;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mano;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mazo;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
+import edu.fiuba.algo3.modelo.jugador.Atril.Descarte;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 
 import java.util.List;
@@ -43,13 +46,11 @@ public class Jugador {
     public void jugarCarta(Carta carta, Jugador oponenete, Posicion posicionElegida){
 
         //puede lanzar exepcion
-        mano.removerCarta(carta);
+        removerCartaDeLaMano(carta);
 
         try {
             carta.jugarCarta(this, oponenete, posicionElegida);
-
         } catch (Exception e) {
-
             // le vuelvo a agregar la carta
             mano.agregarCarta(carta);
             throw new RuntimeException(e);
@@ -58,4 +59,11 @@ public class Jugador {
     }
 
     public Atril getAtril(){return this.atril;}
+
+    public int getPuntaje(){return this.atril.getPuntajeActual();}
+
+    // lo agrego para la vista de borrador
+    public Descarte descarte(){return this.atril.getDescarte();}
+    public Mano mano(){return this.mano;}
+    public Mazo mazo(){return this.mazo;}
 }

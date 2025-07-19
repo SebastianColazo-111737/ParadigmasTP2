@@ -24,4 +24,6 @@ public class Descarte {
     public List<Unidad> getUnidadesDescartadas(){
         return this.unidadesDescartadas;
     }
+
+    public int getCantidadDeCartas(){return this.unidadesDescartadas.size();}
 }

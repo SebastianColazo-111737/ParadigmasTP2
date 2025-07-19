@@ -1,5 +1,13 @@
 package edu.fiuba.algo3.modelo.carta.unidad.puntaje;
 
 public interface Efecto {
-    void aplicar(Puntaje puntaje);
+
+    enum Prioridad {
+        ALTA,
+        MEDIA,
+        BAJA
+    }
+    Prioridad getPrioridad();
+
+    int aplicar(int puntaje);
 }

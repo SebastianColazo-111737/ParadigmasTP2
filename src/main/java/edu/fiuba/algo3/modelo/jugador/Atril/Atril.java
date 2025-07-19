@@ -40,17 +40,16 @@ public class Atril {
         seccion.removerEfecto(tipoDeEfecto);
     }
 
-    public void removerUnidadesConPuntaje(int puntaje){
-        List<Unidad> descartadas = new ArrayList<>();
+    public void descartarUnidadesIguales(List<Unidad> descartar){
         for (Seccion seccion : this.secciones.values()) {
-            descartadas.addAll(seccion.descartarUnidadesConPuntaje(puntaje));
+            seccion.removerUnidadesIguales(descartar);
         }
-        this.descarte.descartarUnidad(descartadas);
+        this.descarte.descartarUnidad(descartar);
     }
 
     public void descartarUnidadesJugadas() {
         for (Seccion seccion : this.secciones.values()) {
-            descarte.descartarUnidad(seccion.removerUnidadesJugadas());
+            descarte.descartarUnidad(seccion.descartarUnidadesJugadas());
             seccion.limpiarEfectos();
         }
     }
@@ -71,4 +70,12 @@ public class Atril {
         return puntajeActual;
     }
 
+
+    public Descarte getDescarte(){return descarte;}
+
+    //Lo agrego para la vista
+    public List<Seccion> getSecciones(){
+        List<Seccion> listaSecciones = new ArrayList<>(secciones.values());
+        return listaSecciones;
+    }
 }

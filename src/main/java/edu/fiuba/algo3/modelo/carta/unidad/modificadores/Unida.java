@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.carta.unidad.modificadores;
 
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Efecto;
+import edu.fiuba.algo3.modelo.carta.unidad.puntaje.EfectoBoost;
+import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 
 
 import java.util.List;
@@ -13,16 +15,16 @@ public class Unida extends UnidadModificada {
     }
 
     @Override
-    public void calcularPuntaje(List<Unidad> otrasUnidades, List<Efecto> efectos) {
-        super.calcularPuntaje(otrasUnidades, efectos);
+    public void calcularPuntaje(List<Unidad> Unidades, List<Efecto> efectos) {
+        super.calcularPuntaje(Unidades, efectos);
+        Puntaje puntajeUnidad = super.getPuntaje();
 
         int unidadesIguales = 0;
-        for (Unidad unidad : otrasUnidades) {
+        for (Unidad unidad : Unidades) {
             if (unidad.getNombre().equals(this.getNombre())) {
                 unidadesIguales++;
             }
         }
-        int nuevoPuntaje = this.getPuntajeActual() * (unidadesIguales + 1);
-        this.setPuntajeActual(nuevoPuntaje);
+        puntajeUnidad.aplicarEfecto(new EfectoBoost(unidadesIguales));
     }
 }

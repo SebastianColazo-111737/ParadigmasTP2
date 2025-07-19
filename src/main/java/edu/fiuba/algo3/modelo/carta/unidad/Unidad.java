@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.carta.unidad;
 
 
 import edu.fiuba.algo3.modelo.carta.Carta;
+import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
@@ -15,9 +16,7 @@ import java.util.List;
 
 public interface Unidad extends Carta {
 
-    int getPuntajeActual();
-    void setPuntajeActual(int puntajeActual);
-    void resetearPuntaje();
+    Puntaje getPuntaje();
     void calcularPuntaje(List<Unidad> unidades, List<Efecto> efectos);
 
     @Override
@@ -25,12 +24,12 @@ public interface Unidad extends Carta {
         if(!sePuedeColocar(posicionElegida)){
             throw new UnidadNoPuedeSerJugadaEnEsaPosicion("");
         }
-        Atril atril = atrilDestino(jugador, oponente);
-        atril.colocarUnidad(this, posicionElegida);
+        Atril atrilDestino = atrilDestino(jugador, oponente);
+        atrilDestino.colocarUnidad(this, posicionElegida);
 
-        realizarAccionAdicional(jugador, oponente);
+        realizarAccionAdicional(jugador, oponente, atrilDestino, posicionElegida);
     }
     boolean sePuedeColocar(Posicion posicion);
     Atril atrilDestino(Jugador jugador, Jugador oponente);
-    void realizarAccionAdicional(Jugador jugador, Jugador oponente);
+    void realizarAccionAdicional(Jugador jugador, Jugador oponente, Atril atrilDestino, Posicion posicionElegida);
 }

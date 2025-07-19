@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.SystemInfo;
 import javafx.application.Application;
@@ -20,6 +20,7 @@ public class App extends Application {
         var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
         var scene = new Scene(new StackPane(label), 640, 480);
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
     }
 

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.carta.unidad.modificadores;
 
 
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
+import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
@@ -22,16 +23,12 @@ public abstract class UnidadModificada implements Unidad {
     }
 
     @Override
-    public int getPuntajeActual(){ return unidad.getPuntajeActual();}
-    @Override
-    public void setPuntajeActual(int puntajeActual){unidad.setPuntajeActual(puntajeActual);}
-    @Override
-    public void resetearPuntaje(){ this.unidad.resetearPuntaje();}
+    public Puntaje getPuntaje(){ return unidad.getPuntaje();}
+
     @Override
     public void calcularPuntaje(List<Unidad> unidades, List<Efecto> efectos) {
         unidad.calcularPuntaje(unidades, efectos);
     }
-
 
     @Override
     public boolean sePuedeColocar(Posicion posicion){
@@ -42,8 +39,9 @@ public abstract class UnidadModificada implements Unidad {
         return unidad.atrilDestino(jugador, oponente);
     }
     @Override
-    public void realizarAccionAdicional(Jugador jugador, Jugador oponente){
-        unidad.realizarAccionAdicional(jugador, oponente);
+    public void realizarAccionAdicional(Jugador jugador, Jugador oponente,
+                                        Atril atrilDestino, Posicion posicionElegida){
+        unidad.realizarAccionAdicional(jugador, oponente, atrilDestino, posicionElegida);
     }
 
 }

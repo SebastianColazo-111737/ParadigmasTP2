@@ -3,8 +3,9 @@ package edu.fiuba.algo3.ModeloTest.gwentTest;
 
 
 
-import edu.fiuba.algo3.modelo.gwent.adminRondas.adminTurnos.AdminTurnos;
-import edu.fiuba.algo3.modelo.gwent.adminRondas.adminTurnos.AdminturnosTodosPasaronDeTurno;
+
+import edu.fiuba.algo3.modelo.gwent.AdminTurnos;
+import edu.fiuba.algo3.modelo.gwent.AdminturnosTodosPasaronDeTurno;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

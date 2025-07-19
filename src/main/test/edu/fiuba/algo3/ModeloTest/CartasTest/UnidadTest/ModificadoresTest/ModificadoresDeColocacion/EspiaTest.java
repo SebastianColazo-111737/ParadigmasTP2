@@ -1,20 +1,23 @@
 package edu.fiuba.algo3.ModeloTest.CartasTest.UnidadTest.ModificadoresTest.ModificadoresDeColocacion;
 
+import edu.fiuba.algo3.modelo.carta.unidad.UnidadFactory;
+import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
-import edu.fiuba.algo3.modelo.carta.unidad.modificadores.Agil;
-import edu.fiuba.algo3.modelo.carta.unidad.modificadores.Espia;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.Atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.Mano;
-import edu.fiuba.algo3.modelo.jugador.Mazo;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mano;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mazo;
 import edu.fiuba.algo3.modelo.posicion.Asedio;
 import edu.fiuba.algo3.modelo.posicion.CuerpoACuerpo;
 import edu.fiuba.algo3.modelo.posicion.Distancia;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -55,13 +58,13 @@ public class EspiaTest {
     public void elAtrilDestinoDeUnaUnidadEspiaEsElAtrilDelOponente() {
 
         // Arrange
-        Espia unidadEspia = new Espia(
-                new UnidadBasica(
-                        "espia",
-                        new Puntaje(0),
-                        new Distancia()
-                )
-        );
+
+        List<String> modificadores = new ArrayList<>();
+        modificadores.add("Espia");
+        List<String> posiciones = new ArrayList<>();
+        posiciones.add("Rango");
+
+        Unidad unidadEspia = UnidadFactory.crear("espia", 0, modificadores, posiciones);
 
         // Act
         Atril atrilDestino = unidadEspia.atrilDestino(jugador, oponente);
@@ -75,13 +78,10 @@ public class EspiaTest {
     public void elModificadorEspiaColocaLaUnidadEnElAtrilDelOponenteYLePermiteRobar2CartasAlJugador(){
 
         // Arrange
-        Agil cartaParaRobar1 = new Agil(
-                new UnidadBasica(
+        UnidadBasica cartaParaRobar1 = new UnidadBasica(
                         "UnidadParaRobar1",
                         new Puntaje(0),
-                        new CuerpoACuerpo()),
-                new Distancia()
-        );
+                        new CuerpoACuerpo());
 
         UnidadBasica cartaParaRobar2 = new UnidadBasica(
                 "UnidadParaRobar2",
@@ -89,13 +89,13 @@ public class EspiaTest {
                 new Distancia()
         );
 
-        Espia unidadEspia = new Espia(
-                new UnidadBasica(
-                        "espia",
-                        new Puntaje(0),
-                        new Distancia()
-                )
-        );
+        List<String> modificadores = new ArrayList<>();
+        modificadores.add("Espia");
+        List<String> posiciones = new ArrayList<>();
+        posiciones.add("Rango");
+
+        Unidad unidadEspia = UnidadFactory.crear("espia", 0, modificadores, posiciones);
+
 
         mazoJugador1.agregarCarta(cartaParaRobar1);
         mazoJugador1.agregarCarta(cartaParaRobar2);

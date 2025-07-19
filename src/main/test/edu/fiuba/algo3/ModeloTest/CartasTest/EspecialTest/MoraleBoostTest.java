@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.ModeloTest.CartasTest.EspecialTest;
 
 import edu.fiuba.algo3.modelo.carta.Especial.MoraleBoost;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mano;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mazo;
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;

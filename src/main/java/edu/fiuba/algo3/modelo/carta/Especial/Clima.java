@@ -6,15 +6,15 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.EfectoDebilitar;
 
+import java.util.List;
+
 public class Clima implements Carta {
     private String nombre;
-    private EfectoDebilitar efecto;
-    private Posicion posicionAfectada;
+    private List<Posicion> posicionesAfectadas;
 
-    public Clima(String nombre, Posicion posicionAfectada){
+    public Clima(String nombre, List<Posicion> posicionesAfectadas){
         this.nombre = nombre;
-        this.efecto = new EfectoDebilitar();
-        this.posicionAfectada = posicionAfectada;
+        this.posicionesAfectadas = posicionesAfectadas;
     }
 
     @Override
@@ -27,8 +27,9 @@ public class Clima implements Carta {
         Atril atrilJugador = jugador.getAtril();
         Atril atrilOponente = oponente.getAtril();
 
-        atrilJugador.agregarEfecto(this.efecto , this.posicionAfectada);
-        atrilOponente.agregarEfecto(this.efecto, this.posicionAfectada);
+        for(Posicion posicion: this.posicionesAfectadas){
+            atrilJugador.agregarEfecto(new EfectoDebilitar() , posicion);
+            atrilOponente.agregarEfecto(new EfectoDebilitar(), posicion);
+        }
     }
-
 }

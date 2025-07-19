@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.jugador;
+package edu.fiuba.algo3.modelo.carta.coleccionDeCartas;
 
 public class ManoNoContieneCartaException extends RuntimeException {
     public ManoNoContieneCartaException(String message) {

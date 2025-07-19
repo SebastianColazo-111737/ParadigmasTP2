@@ -1,4 +1,5 @@
-package edu.fiuba.algo3.modelo.gwent.adminRondas.adminTurnos;
+package edu.fiuba.algo3.modelo.gwent;
+
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,6 +26,10 @@ public class AdminTurnos<T> {
 
     public T getJugadorActual(){
         return this.jugadores.get(indiceJugadorActual);
+    }
+
+    public T getJugadorProximo() {
+        return this.jugadores.get((indiceJugadorActual + 1)%jugadores.size());
     }
 
     public void setJugadorActual(T jugador){

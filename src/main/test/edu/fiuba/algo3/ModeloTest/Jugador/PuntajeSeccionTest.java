@@ -1,10 +1,11 @@
-package edu.fiuba.algo3.ModeloTest.CartasTest.UnidadTest.ModificadoresTest.ModificadoresDePuntaje;
+package edu.fiuba.algo3.ModeloTest.Jugador;
 
 
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
 import edu.fiuba.algo3.modelo.carta.unidad.modificadores.Animador;
 import edu.fiuba.algo3.modelo.carta.unidad.modificadores.Legendaria;
 import edu.fiuba.algo3.modelo.carta.unidad.modificadores.Unida;
+import edu.fiuba.algo3.modelo.carta.unidad.puntaje.EfectoAumentar;
 import edu.fiuba.algo3.modelo.jugador.Atril.Seccion;
 import edu.fiuba.algo3.modelo.posicion.*;
 
@@ -137,7 +138,10 @@ public class PuntajeSeccionTest {
         seccion.colocarUnidad(unidadBasica2);
         seccion.colocarUnidad(animador);
 
-        int puntajeEsperado = (4 + 1) + (6 + 1) + 2;
+        int aumentoAnimador = 1;
+        seccion.agregarEfecto(new EfectoAumentar(aumentoAnimador));
+
+        int puntajeEsperado = (4 + aumentoAnimador) + (6 + aumentoAnimador) + (2 + aumentoAnimador);
 
         // Act
         int puntajeSeccion = seccion.getPuntaje();
@@ -169,8 +173,10 @@ public class PuntajeSeccionTest {
 
         seccion.colocarUnidad(legendaria);
         seccion.colocarUnidad(animador);
+        int aumentoAnimador = 1;
+        seccion.agregarEfecto(new EfectoAumentar(aumentoAnimador));
 
-        int puntajeEsperado = 15 + 2;
+        int puntajeEsperado = 15 + (2 + aumentoAnimador);
 
         // Act
         int puntajeSeccion = seccion.getPuntaje();
@@ -336,18 +342,21 @@ public class PuntajeSeccionTest {
 
         int multiplicador = 2;
         int debilitado = 1;
+        int aumentoAnimador = 1;
+
+        seccion.agregarEfecto(new EfectoAumentar(aumentoAnimador));
         // Act
 
-        int puntajeEsperado0 = 15 + (8 * 2 + 1) + (8 * 2 + 1) + (5 + 1) + (2);
+        int puntajeEsperado0 = 15 + ((8+aumentoAnimador) * 2) + ((8+aumentoAnimador) * 2) + (5+aumentoAnimador) + (2+aumentoAnimador);
         int puntajeSeccion0 = seccion.getPuntaje();
 
         seccion.agregarEfecto(new EfectoDebilitar());
-        int puntajeEsperado1 = 15 + (debilitado * 2 + 1) + (debilitado * 2 + 1) + (debilitado + 1) + (debilitado);
+        int puntajeEsperado1 = 15 + ((debilitado + aumentoAnimador) * 2 ) + ((debilitado + aumentoAnimador) * 2 ) + (debilitado + aumentoAnimador) + (debilitado + aumentoAnimador);
         int puntajeSeccion1 = seccion.getPuntaje();
 
         seccion.agregarEfecto(new EfectoBoost(multiplicador));
-        int puntajeEsperado2 = 15 + (debilitado * multiplicador * 2 + 1) + (debilitado * multiplicador * 2 + 1)
-                                    + (debilitado * multiplicador + 1) + (debilitado * multiplicador);
+        int puntajeEsperado2 = 15 + ((debilitado + aumentoAnimador)* multiplicador * 2 ) + ((debilitado + aumentoAnimador )* multiplicador * 2 )
+                                    + ((debilitado + aumentoAnimador) * multiplicador) + ((debilitado + aumentoAnimador) * multiplicador);
         int puntajeSeccion2 = seccion.getPuntaje();
 
 

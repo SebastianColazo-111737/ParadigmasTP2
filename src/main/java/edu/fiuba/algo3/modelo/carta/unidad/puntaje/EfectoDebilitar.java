@@ -3,8 +3,12 @@ package edu.fiuba.algo3.modelo.carta.unidad.puntaje;
 public class EfectoDebilitar implements Efecto{
 
     @Override
-    public void aplicar(Puntaje puntaje) {
-        int nuevoPuntaje = 1;
-        puntaje.setPuntajeActual(nuevoPuntaje);
+    public int aplicar(int puntaje) {
+        return 1;
+    }
+
+    @Override
+    public Prioridad getPrioridad() {
+        return Prioridad.ALTA;
     }
 }

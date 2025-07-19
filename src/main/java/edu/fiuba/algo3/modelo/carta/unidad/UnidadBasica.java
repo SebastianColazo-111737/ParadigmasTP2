@@ -26,19 +26,16 @@ public class UnidadBasica implements Unidad {
     }
 
     @Override
-    public int getPuntajeActual(){ return this.puntaje.getPuntajeActual();}
-    @Override
-    public void setPuntajeActual(int puntajeActual){this.puntaje.setPuntajeActual(puntajeActual);}
-    @Override
-    public void resetearPuntaje(){ this.puntaje.resetearPuntaje();}
+    public Puntaje getPuntaje(){ return this.puntaje;}
 
     @Override
     public void calcularPuntaje(List<Unidad> otrasUnidades, List<Efecto> efectos) {
+        puntaje.resetearPuntaje();
+
         for(Efecto efecto: efectos){
-            efecto.aplicar(this.puntaje);
+            puntaje.aplicarEfecto(efecto);
         }
     }
-
 
     @Override
     public boolean sePuedeColocar(Posicion posicion){
@@ -51,7 +48,9 @@ public class UnidadBasica implements Unidad {
     }
 
     @Override
-    public void realizarAccionAdicional(Jugador jugador, Jugador oponente){
+    public void realizarAccionAdicional(Jugador jugador, Jugador oponente,
+            Atril atril, Posicion posicionElegida){
+        //La unidad Basica no realiza una accion adicional
         return;
     }
 

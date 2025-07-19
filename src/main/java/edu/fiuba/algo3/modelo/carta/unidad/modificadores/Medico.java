@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.carta.unidad.modificadores;
 
 
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
+import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 
@@ -21,8 +22,8 @@ public class Medico extends UnidadModificada {
     }
 
     @Override
-    public void realizarAccionAdicional(Jugador jugador, Jugador oponente){
-
+    public void realizarAccionAdicional(Jugador jugador, Jugador oponente,
+                                        Atril atril, Posicion posicionElegida){
         // segunda opcion
         //Unidad unidadParaRevivir = selectorUnidadParaRevivir.getUnidad();
         //Posicion posicionParaRevivir = selectorUnidadParaRevivir.getPosicion();
@@ -32,7 +33,7 @@ public class Medico extends UnidadModificada {
         }
 
         //continuar la cadena
-        super.unidad.realizarAccionAdicional(jugador, oponente);
+        super.unidad.realizarAccionAdicional(jugador, oponente, atril, posicionElegida);
     }
 
 }

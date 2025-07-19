@@ -9,6 +9,11 @@ public class Puntaje {
         this.puntajeActual = puntajeBase;
     }
 
+    public void aplicarEfecto(Efecto efecto){
+        int nuevoPuntaje = efecto.aplicar(this.puntajeActual);
+        this.puntajeActual = nuevoPuntaje;
+    }
+
     public void resetearPuntaje(){
         this.puntajeActual = this.puntajeBase;
     }
@@ -16,7 +21,5 @@ public class Puntaje {
     public int getPuntajeActual(){
         return this.puntajeActual;
     }
-    public void setPuntajeActual(int nuevoPuntaje){
-        this.puntajeActual = nuevoPuntaje;
-    }
+
 }

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.jugador;
+package edu.fiuba.algo3.modelo.carta.coleccionDeCartas;
 
 import edu.fiuba.algo3.modelo.carta.Carta;
 
@@ -27,8 +27,6 @@ public class Mano {
         }
         this.cartas.remove(carta);
     }
-
-
 
     public List<Carta> getCartas(){
         return this.cartas;

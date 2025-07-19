@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.ModeloTest.CartasTest.UnidadTest.ModificadoresTest.ModificadoresDeColocacion;
 
-import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
-import edu.fiuba.algo3.modelo.carta.unidad.modificadores.Agil;
-import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
+import edu.fiuba.algo3.modelo.carta.unidad.UnidadFactory;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mano;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mazo;
+import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.Atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.*;
@@ -10,6 +11,10 @@ import edu.fiuba.algo3.modelo.posicion.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class AgilTest {
@@ -44,15 +49,17 @@ public class AgilTest {
     public void elModificadorAgilPermiteColocarUnaUnidadEnUnaPosicionExtra(){
 
         // Arrange
-        Posicion posicionExtra = new CuerpoACuerpo();
-        Agil unidadAgil = new Agil(
-                new UnidadBasica(
-                        "Unidad",
-                        new Puntaje(0),
-                        new Distancia()
-                ),
-                posicionExtra
-        );
+        String posicionExtra = "cuerpo a cuerpo";
+
+        List<String> modificadores = new ArrayList<>();
+        modificadores.add("Agil");
+
+        List<String> posiciones = new ArrayList<>();
+        posiciones.add("rango");
+        posiciones.add(posicionExtra);
+
+        Unidad unidadAgil = UnidadFactory.crear("UnidadAgil", 6, modificadores, posiciones);
+
 
         // Act
         boolean sePuedeColocarEnCuerpoACuerpo = unidadAgil.sePuedeColocar(new CuerpoACuerpo());
@@ -74,23 +81,17 @@ public class AgilTest {
 
         //utilizo 2 cartas diferentes con los mismos parametros para mostrar las 2 posibilidades
 
-        Agil unidadAgil1 = new Agil(
-                new UnidadBasica(
-                        "Unidad",
-                        new Puntaje(0),
-                        new Distancia()
-                ),
-                new Asedio()
-        );
+        String posicionExtra = "asedio";
 
-        Agil unidadAgil2 = new Agil(
-                new UnidadBasica(
-                        "Unidad",
-                        new Puntaje(0),
-                        new Distancia()
-                ),
-                new Asedio()
-        );
+        List<String> modificadores = new ArrayList<>();
+        modificadores.add("Agil");
+
+        List<String> posiciones = new ArrayList<>();
+        posiciones.add("rango");
+        posiciones.add(posicionExtra);
+
+        Unidad unidadAgil1 = UnidadFactory.crear("UnidadAgil", 6, modificadores, posiciones);
+        Unidad unidadAgil2 = UnidadFactory.crear("UnidadAgil", 6, modificadores, posiciones);
 
         int cantidadDeUnidadesColocadasDistanciaInicial = distancia.getUnidadesColocadas().size();
         int cantidadDeUnidadesColocadasAsedioInicial = asedio.getUnidadesColocadas().size();

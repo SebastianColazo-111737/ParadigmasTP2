@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.modelo.gwent.adminRondas.reglaDeCierre;
+package edu.fiuba.algo3.modelo.gwent.reglaDeCierre;
 
-import edu.fiuba.algo3.modelo.gwent.adminRondas.Ronda;
+import edu.fiuba.algo3.modelo.gwent.Resultado;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 import java.util.Hashtable;
@@ -12,13 +12,12 @@ public class MejorDe3 implements ReglaDeCierre {
     public MejorDe3(){
         this.ganador = null;
     }
-
     @Override
-    public boolean terminoElJuego(List<Ronda> rondas) {
+    public boolean terminoElJuego(List<Resultado> resultados) {
         Hashtable<Jugador, Integer> rondasGanadas = new Hashtable<>();
 
-        for (Ronda ronda: rondas) {
-            Jugador ganadorRonda = ronda.getGanador();
+        for (Resultado resultado: resultados) {
+            Jugador ganadorRonda = resultado.getGanador();
             rondasGanadas.put(
                     ganadorRonda,
                     rondasGanadas.getOrDefault(ganadorRonda, 0) + 1
@@ -33,6 +32,9 @@ public class MejorDe3 implements ReglaDeCierre {
 
     @Override
     public Jugador getGanador() {
+        if(this.ganador == null){
+            throw new NoSePudoDefinirUnGanadorError("Con los ultimos resultados no se definio un ganador");
+        }
         return this.ganador;
     }
 }

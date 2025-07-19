@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.jugador;
+package edu.fiuba.algo3.modelo.carta.coleccionDeCartas;
 
 import edu.fiuba.algo3.modelo.carta.Carta;
 
@@ -27,7 +27,6 @@ public class Mazo {
         int indiceAleatorio = this.random.nextInt(this.cartas.size());
         return this.cartas.remove(indiceAleatorio);
     }
-
     public List<Carta> darCartas(int cantidad){
         List<Carta> cartasParaDar = new ArrayList<>();
         for (int i = 0; i < cantidad && !this.cartas.isEmpty(); i++) {
@@ -41,8 +40,6 @@ public class Mazo {
         agregarCarta(carta);
         return cartaDelMazo;
     }
-
-
 
     public int getCantidadCartas(){
         return this.cartas.size();

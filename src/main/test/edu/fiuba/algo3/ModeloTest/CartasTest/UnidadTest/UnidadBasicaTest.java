@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.ModeloTest.CartasTest.UnidadTest;
 
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mano;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mazo;
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadNoPuedeSerJugadaEnEsaPosicion;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
@@ -23,10 +25,8 @@ public class UnidadBasicaTest {
     private Seccion distancia;
     private Seccion asedio;
 
-
     @BeforeEach
     void setUp() {
-
 
         atrilJugador = new Atril();
         cuerpoACuerpo = new Seccion(new CuerpoACuerpo());
@@ -35,7 +35,6 @@ public class UnidadBasicaTest {
         atrilJugador.agregarSeccion(cuerpoACuerpo);
         atrilJugador.agregarSeccion(distancia);
         atrilJugador.agregarSeccion(asedio);
-
 
         jugador = new Jugador(new Mazo(), new Mano(), atrilJugador);
         oponente = new Jugador(new Mazo(), new Mano(), new Atril());

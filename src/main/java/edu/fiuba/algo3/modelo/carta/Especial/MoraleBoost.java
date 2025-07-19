@@ -8,12 +8,10 @@ import edu.fiuba.algo3.modelo.carta.unidad.puntaje.EfectoBoost;
 
 public class MoraleBoost implements Carta {
     private String nombre;
-    private EfectoBoost efecto;
     private final static int multiplicador = 2;
 
     public MoraleBoost(String nombre){
         this.nombre = nombre;
-        this.efecto = new EfectoBoost(multiplicador);
     }
     @Override
     public String getNombre() {
@@ -23,8 +21,7 @@ public class MoraleBoost implements Carta {
     @Override
     public void jugarCarta(Jugador jugador, Jugador oponente, Posicion posicionElegida) {
         Atril atrilJugador = jugador.getAtril();
-        atrilJugador.agregarEfecto(this.efecto , posicionElegida);
+        atrilJugador.agregarEfecto(new EfectoBoost(multiplicador) , posicionElegida);
     }
-
 
 }

@@ -3,7 +3,7 @@ package edu.fiuba.algo3.ModeloTest.Jugador;
 import edu.fiuba.algo3.modelo.carta.Carta;
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
-import edu.fiuba.algo3.modelo.jugador.Mazo;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mazo;
 import edu.fiuba.algo3.modelo.posicion.CuerpoACuerpo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

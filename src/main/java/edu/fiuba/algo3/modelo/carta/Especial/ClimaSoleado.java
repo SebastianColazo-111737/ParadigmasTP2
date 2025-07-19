@@ -11,14 +11,11 @@ import java.util.List;
 
 public class ClimaSoleado implements Carta {
     private String nombre;
-    private List<Posicion> posicionAfectada;
-    private EfectoDebilitar efectoPararemover;
+    private List<Posicion> posicionesAfectadas;
 
-    public ClimaSoleado(String nombre, List<Posicion> posicionAfectada){
+    public ClimaSoleado(String nombre, List<Posicion> posicionesAfectadas){
         this.nombre = nombre;
-        this.efectoPararemover = new EfectoDebilitar();
-
-        this.posicionAfectada = posicionAfectada;
+        this.posicionesAfectadas = posicionesAfectadas;
     }
 
     @Override
@@ -31,9 +28,9 @@ public class ClimaSoleado implements Carta {
         Atril atrilJugador = jugador.getAtril();
         Atril atrilOponente = oponente.getAtril();
 
-        for(Posicion posicion: this.posicionAfectada){
-            atrilJugador.removerEfecto(this.efectoPararemover, posicion);
-            atrilOponente.removerEfecto(this.efectoPararemover, posicion);
+        for(Posicion posicion: this.posicionesAfectadas){
+            atrilJugador.removerEfecto(new EfectoDebilitar(), posicion);
+            atrilOponente.removerEfecto(new EfectoDebilitar(), posicion);
         }
     }
 

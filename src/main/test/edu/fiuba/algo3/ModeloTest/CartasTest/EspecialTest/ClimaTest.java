@@ -2,6 +2,8 @@ package edu.fiuba.algo3.ModeloTest.CartasTest.EspecialTest;
 
 import edu.fiuba.algo3.modelo.carta.Especial.Clima;
 import edu.fiuba.algo3.modelo.carta.Especial.ClimaSoleado;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mano;
+import edu.fiuba.algo3.modelo.carta.coleccionDeCartas.Mazo;
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
@@ -61,8 +63,9 @@ public class ClimaTest {
         cuerpoACuerpoJugador.colocarUnidad(unidad1);
         cuerpoACuerpoOponente.colocarUnidad(unidad2);
 
-        Posicion posicionAfectada = new CuerpoACuerpo();
-        Clima clima = new Clima("Nieve", posicionAfectada);
+        List<Posicion> posicionesAfectadas = new ArrayList<>();
+        posicionesAfectadas.add(new CuerpoACuerpo());
+        Clima clima = new Clima("Nieve", posicionesAfectadas);
 
 
         int puntajeInicialJugador = cuerpoACuerpoJugador.getPuntaje();
@@ -102,12 +105,13 @@ public class ClimaTest {
         cuerpoACuerpoJugador.colocarUnidad(unidad1);
         cuerpoACuerpoOponente.colocarUnidad(unidad2);
 
-        Posicion posicionAfectada = new CuerpoACuerpo();
-        Clima clima = new Clima("Nieve", posicionAfectada);
+        List<Posicion> posicionesAfectadas1 = new ArrayList<>();
+        posicionesAfectadas1.add(new CuerpoACuerpo());
+        Clima clima = new Clima("Nieve", posicionesAfectadas1);
 
-        List<Posicion> posicionesAfectadas = new ArrayList<>();
-        posicionesAfectadas.add(new CuerpoACuerpo());
-        ClimaSoleado soleado = new ClimaSoleado("Sol", posicionesAfectadas);
+        List<Posicion> posicionesAfectadas2 = new ArrayList<>();
+        posicionesAfectadas2.add(new CuerpoACuerpo());
+        ClimaSoleado soleado = new ClimaSoleado("Sol", posicionesAfectadas2);
 
         int puntajeSinClimaJugador = cuerpoACuerpoJugador.getPuntaje();
         int puntajeSinClimaOponente = cuerpoACuerpoOponente.getPuntaje();
