@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista.Cartas.Especiales;
 
 import edu.fiuba.algo3.modelo.carta.Carta;
+import edu.fiuba.algo3.vista.Cartas.VistaCarta;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -8,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class VistaCartaEspecial extends StackPane {
+public class VistaCartaEspecial extends VistaCarta {
     private Carta especialModelo;
 
     public VistaCartaEspecial(Carta especial, String descripcion, String tipo, List<String> posiciones) {

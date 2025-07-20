@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista.Cartas.Unidades;
 
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
+import edu.fiuba.algo3.vista.Cartas.VistaCarta;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -8,7 +9,7 @@ import javafx.scene.text.TextFlow;
 
 import java.util.List;
 
-public class VistaCartaUnidad extends StackPane {
+public class VistaCartaUnidad extends VistaCarta {
 
     private Unidad unidadModelo;
 
