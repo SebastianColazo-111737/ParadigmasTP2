@@ -7,6 +7,9 @@ import edu.fiuba.algo3.modelo.carta.Especial.MoraleBoost;
 import edu.fiuba.algo3.modelo.carta.Especial.TierraArrasada;
 
 import edu.fiuba.algo3.modelo.posicion.Posicion;
+
+import edu.fiuba.algo3.vista.Cartas.CacheEstilosVistaCarta;
+import edu.fiuba.algo3.vista.Cartas.Especiales.EstiloCartaEspecial;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -23,8 +26,8 @@ public class CartaEspecialParser {
         List<Posicion> posiciones = new ArrayList<>();
 
         JSONArray posicionesAfectadasJson = (JSONArray) especialJson.get("afectado");
+        List<String> posicionesTexto = new ArrayList<>();
         if(posicionesAfectadasJson != null){
-            List<String> posicionesTexto = new ArrayList<>();
             for (Object mod : posicionesAfectadasJson){
                 posicionesTexto.add((String) mod);
             }
@@ -40,6 +43,13 @@ public class CartaEspecialParser {
                         new ClimaSoleado(nombre, posiciones):
                         new Clima(nombre, posiciones); break;
         }
+
+        // si es una nueva carta cargo su estilo
+        if (nuevaEspecial != null && !CacheEstilosVistaCarta.getInstancia().contieneEstilo(nombre)){
+            EstiloCartaEspecial nuevoEstilo = new EstiloCartaEspecial(descripcion, tipo, posicionesTexto);
+            CacheEstilosVistaCarta.getInstancia().agregarEstilo(nombre, nuevoEstilo);
+        }
+
         return nuevaEspecial;
     }
 }

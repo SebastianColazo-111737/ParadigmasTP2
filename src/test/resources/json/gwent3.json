@@ -154,7 +154,7 @@
         "tipo": "Clima",
         "afectado": [
           "Cuerpo a Cuerpo",
-          "Combate a Distancia"
+          "Rango"
         ]
       }
     ]

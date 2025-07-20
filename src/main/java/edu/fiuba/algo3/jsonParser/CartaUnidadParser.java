@@ -3,6 +3,9 @@ package edu.fiuba.algo3.jsonParser;
 
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadFactory;
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
+
+import edu.fiuba.algo3.vista.Cartas.CacheEstilosVistaCarta;
+import edu.fiuba.algo3.vista.Cartas.Unidades.EstiloCartaUnidad;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -26,6 +29,14 @@ public class CartaUnidadParser {
         String posicionesTexto = (String) unidadJson.get("seccion");
         List<String> posiciones = List.of(posicionesTexto.split(",\\s*"));
 
-        return UnidadFactory.crear(nombre, puntos, modificadores, posiciones);
+        Unidad nuevaUnidad = UnidadFactory.crear(nombre, puntos, modificadores, posiciones);
+
+        // si es una nueva carta cargo su estilo
+        if (!CacheEstilosVistaCarta.getInstancia().contieneEstilo(nombre)) {
+            EstiloCartaUnidad nuevoEstilo = new EstiloCartaUnidad(modificadores, posiciones);
+            CacheEstilosVistaCarta.getInstancia().agregarEstilo(nombre, nuevoEstilo);
+        }
+
+        return nuevaUnidad;
     }
 }
