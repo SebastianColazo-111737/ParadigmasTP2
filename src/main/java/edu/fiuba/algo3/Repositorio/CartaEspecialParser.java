@@ -17,24 +17,23 @@ public class CartaEspecialParser {
     String nombre = (String) cartaJson.get("nombre");
     String descripcion = (String) cartaJson.get("descripcion");
     String tipo = (String) cartaJson.get("tipo");
-
     if (tipo.equals("Morale boost")) {
       ArrayList<Posicion> posiciones = new ArrayList<>();
       posiciones.add(new CuerpoACuerpo());
       posiciones.add(new Distancia());
       posiciones.add(new Asedio());
 
-      return new BuffCartas(nombre, posiciones);
+      return new BuffCartas(nombre, posiciones, descripcion);
     }
 
     if (tipo.equals("Clima")) {
 
-      if(nombre.equalsIgnoreCase("Tiempo despejado")){
+      if (nombre.equalsIgnoreCase("Tiempo despejado")) {
         ArrayList<Posicion> todasLasPosiciones = new ArrayList<>();
         todasLasPosiciones.add(new CuerpoACuerpo());
         todasLasPosiciones.add(new Distancia());
         todasLasPosiciones.add(new Asedio());
-        return new DeBuffCleaner(nombre,todasLasPosiciones);
+        return new DeBuffCleaner(nombre, todasLasPosiciones, descripcion);
       }
 
       JSONArray afectadoArray = (JSONArray) cartaJson.get("afectado");
@@ -60,11 +59,11 @@ public class CartaEspecialParser {
         posiciones.addAll(PosicionParser.desdeJson(seccionFake));
       }
 
-      return new Debuff(nombre, posiciones);
+      return new Debuff(nombre, posiciones, descripcion);
     }
 
     if (tipo.equals("Tierra arrasada")) {
-      return new TierraArrasada(nombre, new ArrayList<>());
+      return new TierraArrasada(nombre, new ArrayList<>(), descripcion);
     }
 
     return null;

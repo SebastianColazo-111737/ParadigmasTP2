@@ -6,8 +6,8 @@ import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import java.util.ArrayList;
 
 public class BuffCartas extends CEspecial {
-  public BuffCartas(String nombre, ArrayList<Posicion> posicionAfectar) {
-    super(nombre, posicionAfectar);
+  public BuffCartas(String nombre, ArrayList<Posicion> posicionAfectar, String descripcion) {
+    super(nombre, posicionAfectar, descripcion);
   }
 
   @Override
@@ -19,6 +19,5 @@ public class BuffCartas extends CEspecial {
   public String nombre() {
     return this.nombre;
   }
-
 
 }

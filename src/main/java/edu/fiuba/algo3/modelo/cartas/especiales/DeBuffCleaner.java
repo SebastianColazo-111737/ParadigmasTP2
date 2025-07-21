@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeBuffCleaner extends CEspecial {
-  public DeBuffCleaner(String nombre, ArrayList<Posicion> posicionAfectar) {
-    super(nombre, posicionAfectar);
+  public DeBuffCleaner(String nombre, ArrayList<Posicion> posicionAfectar, String descripcion) {
+    super(nombre, posicionAfectar, descripcion);
   }
 
   @Override
@@ -21,7 +21,7 @@ public class DeBuffCleaner extends CEspecial {
 
   }
 
-  public List<Posicion> getPosicionAfectar(){
+  public List<Posicion> getPosicionAfectar() {
     return this.posicionesAfectar;
   }
 

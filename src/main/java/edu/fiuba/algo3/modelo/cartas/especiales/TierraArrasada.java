@@ -6,8 +6,8 @@ import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import java.util.ArrayList;
 
 public class TierraArrasada extends CEspecial {
-  public TierraArrasada(String nombre, ArrayList<Posicion> posicionAfectar) {
-    super(nombre, posicionAfectar);
+  public TierraArrasada(String nombre, ArrayList<Posicion> posicionAfectar, String descripcion) {
+    super(nombre, posicionAfectar, descripcion);
   }
 
   @Override

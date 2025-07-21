@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Debuff extends CEspecial {
-  public Debuff(String nombre, ArrayList<Posicion> posicionAfectar) {
-    super(nombre, posicionAfectar);
+  public Debuff(String nombre, ArrayList<Posicion> posicionAfectar, String descripcion) {
+    super(nombre, posicionAfectar, descripcion);
   }
 
   @Override
@@ -23,7 +23,7 @@ public class Debuff extends CEspecial {
     return this.nombre;
   }
 
-  public List<Posicion> getPosicionAfectar(){
+  public List<Posicion> getPosicionAfectar() {
     return this.posicionesAfectar;
   }
 }

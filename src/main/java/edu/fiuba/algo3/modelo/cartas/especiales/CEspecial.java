@@ -11,10 +11,12 @@ public abstract class CEspecial implements ICarta {
 
   protected String nombre;
   protected ArrayList<Posicion> posicionesAfectar;
+  protected String descripcion;
 
-  public CEspecial(String nombre, ArrayList<Posicion> posicionAfectar) {
+  public CEspecial(String nombre, ArrayList<Posicion> posicionAfectar, String descripcion) {
     this.nombre = nombre;
     this.posicionesAfectar = new ArrayList<>(posicionAfectar);
+    this.descripcion = descripcion;
   }
 
   public boolean sePuedeColocar(Posicion posicion) {
@@ -27,4 +29,7 @@ public abstract class CEspecial implements ICarta {
     return t;
   }
 
+  public String descripcion() {
+    return this.descripcion;
+  }
 }
