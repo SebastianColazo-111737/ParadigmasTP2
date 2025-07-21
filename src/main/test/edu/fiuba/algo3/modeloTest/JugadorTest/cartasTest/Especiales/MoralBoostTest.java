@@ -1,6 +1,7 @@
 
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest.Especiales;
 
+import edu.fiuba.algo3.modelo.juego.AdminTurnos;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.especiales.BuffCartas;
 import edu.fiuba.algo3.modelo.cartas.especiales.CEspecial;
@@ -14,6 +15,7 @@ import edu.fiuba.algo3.modelo.jugador.atril.*;
 import edu.fiuba.algo3.modelo.posiciones.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -66,8 +68,8 @@ public class MoralBoostTest {
     atril2.agregarSeccion(distancia2);
     atril2.agregarSeccion(asedio2);
 
-    jugador = new Jugador(mazo, mano, atril);
-    jugador2 = new Jugador(mazo2, mano2, atril2);
+    jugador = new Jugador(mazo, mano, atril,"NombrePrueba");
+    jugador2 = new Jugador(mazo2, mano2, atril2,"NombrePrueba2");
   }
 
   @Test
@@ -76,7 +78,7 @@ public class MoralBoostTest {
     // Arrange
     ArrayList<Posicion> posicionesAfectar = new ArrayList<>();
     posicionesAfectar.add(new Distancia());
-    CEspecial moraleBoost = new BuffCartas("MoraleTEST", posicionesAfectar);
+    CEspecial moraleBoost = new BuffCartas("MoraleTEST", posicionesAfectar,"Descripcion");
     UnidadBasica unidad1 = new UnidadBasica(
         "Unidad",
         new Puntaje(3),
@@ -98,10 +100,10 @@ public class MoralBoostTest {
     mano.agregarCarta(moraleBoost);
 
     // Act
-    jugador.jugarCarta(unidad1, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(unidad2, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(unidad3, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(moraleBoost, jugador2, unidad1.getTipo().get(0));
+    jugador.jugarCarta(unidad1, jugador2, unidad1.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(unidad2, jugador2, unidad1.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(unidad3, jugador2, unidad1.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(moraleBoost, jugador2, unidad1.getTipo().get(0),mockTurnos);
     // Assert
     assertEquals(18, atril.getPuntajeActual());
   }
@@ -112,7 +114,7 @@ public class MoralBoostTest {
     // Arrange
     ArrayList<Posicion> posicionesAfectar = new ArrayList<>();
     posicionesAfectar.add(new Distancia());
-    CEspecial moraleBoost = new BuffCartas("MoraleTEST", posicionesAfectar);
+    CEspecial moraleBoost = new BuffCartas("MoraleTEST", posicionesAfectar,"Descripcion");
 
     Legendaria legendaria = new Legendaria(
         "Ashe",
@@ -140,12 +142,15 @@ public class MoralBoostTest {
     mano.agregarCarta(moraleBoost);
 
     // Act
-    jugador.jugarCarta(legendaria, jugador2, legendaria.getTipo().get(0));
-    jugador.jugarCarta(unidad1, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(unidad2, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(unidad3, jugador2, unidad1.getTipo().get(0));
-    jugador.jugarCarta(moraleBoost, jugador2, unidad1.getTipo().get(0));
+    jugador.jugarCarta(legendaria, jugador2, legendaria.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(unidad1, jugador2, unidad1.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(unidad2, jugador2, unidad1.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(unidad3, jugador2, unidad1.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(moraleBoost, jugador2, unidad1.getTipo().get(0),mockTurnos);
     // Assert
     assertEquals(38, atril.getPuntajeActual());
   }
+
+  AdminTurnos mockTurnos = Mockito.mock(AdminTurnos.class);
+
 }

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest.ColocarUnidades;
 
 import edu.fiuba.algo3.modelo.cartas.unidades.Agil;
+import edu.fiuba.algo3.modelo.juego.AdminTurnos;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.*;
 import edu.fiuba.algo3.modelo.jugador.atril.*;
@@ -8,6 +9,7 @@ import edu.fiuba.algo3.modelo.posiciones.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class UnidadAgilTest {
     atril.agregarSeccion(cuerpoACuerpoJ1);
     atril.agregarSeccion(distanciaJ1);
 
-    jugador = new Jugador(mazo, mano, atril);
+    jugador = new Jugador(mazo, mano, atril, "NombreDePrueba");
   }
 
   @Test
@@ -53,8 +55,8 @@ public class UnidadAgilTest {
     mano.agregarCarta(List.of(agil1, agil2));
 
     // Act
-    jugador.jugarCarta(agil1, null, agil1.getTipo().get(0));
-    jugador.jugarCarta(agil2, null, agil2.getTipo().get(1));
+    jugador.jugarCarta(agil1, null, agil1.getTipo().get(0),mockTurnos);
+    jugador.jugarCarta(agil2, null, agil2.getTipo().get(1),mockTurnos);
 
     // Assert
     assertEquals(1, cuerpoACuerpoJ1.getUnidadesColocadas().size());
@@ -63,4 +65,5 @@ public class UnidadAgilTest {
     assertTrue(distanciaJ1.getUnidadesColocadas().contains(agil2));
 
   }
+  AdminTurnos mockTurnos = Mockito.mock(AdminTurnos.class);
 }

@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest.ColocarUnidades;
 
 import edu.fiuba.algo3.modelo.cartas.unidades.Espia;
+import edu.fiuba.algo3.modelo.juego.AdminTurnos;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion;
@@ -10,6 +11,7 @@ import edu.fiuba.algo3.modelo.posiciones.CuerpoACuerpo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -30,8 +32,8 @@ public class UnidadEspiaTest {
     mazo = new Mazo();
     atril = new Atril();
 
-    jugador = new Jugador(mazo, mano, null);
-    jugador2 = new Jugador(new Mazo(), new Mano(), atril);
+    jugador = new Jugador(mazo, mano, null,"NombreDePrueba");
+    jugador2 = new Jugador(new Mazo(), new Mano(), atril,"NombreDePrueba2");
 
   }
 
@@ -59,7 +61,7 @@ public class UnidadEspiaTest {
     atril.agregarSeccion(seccionCuerpoAcuerpo);
     // Act
 
-    jugador.jugarCarta(jamesBond, jugador2, jamesBond.getTipo().get(0));
+    jugador.jugarCarta(jamesBond, jugador2, jamesBond.getTipo().get(0),mockTurnos);
 
     int cantidadDeCartasEnLaManoFinal = mano.getCantidadCartas();
     int cantidadDeCartasEnElMazoFinal = mazo.getCantidadCartas();
@@ -70,4 +72,6 @@ public class UnidadEspiaTest {
     assertEquals(2, cantidadDeCartasEnLaManoFinal);
     assertEquals(0, cantidadDeCartasEnElMazoFinal);
   }
+  AdminTurnos mockTurnos = Mockito.mock(AdminTurnos.class);
+
 }
