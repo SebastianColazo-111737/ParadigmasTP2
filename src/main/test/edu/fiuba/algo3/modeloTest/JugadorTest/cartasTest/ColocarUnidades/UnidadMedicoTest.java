@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest.ColocarUnidades;
 
+import edu.fiuba.algo3.modelo.juego.AdminTurnos;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
@@ -10,6 +11,7 @@ import edu.fiuba.algo3.modelo.posiciones.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -32,10 +34,10 @@ public class UnidadMedicoTest {
     seccionCuerpoACuerpoJ1 = new Seccion(new CuerpoACuerpo());
     seccionDistanciaJ1 = new Seccion(new Distancia());
 
-    jugador = new Jugador(mazo, mano, atril);
+    jugador = new Jugador(mazo, mano, atril, "NombreDePrueba");
   }
 
-  /*@Test
+  @Test
   public void alJugarseUnMedicoSeColocanEnElJuegoElMedicoYLaUnidadSeteadaParaRevivir() {
 
     // Arrange
@@ -57,7 +59,7 @@ public class UnidadMedicoTest {
 
     // Act
 
-    jugador.jugarCarta(medico, null, medico.getTipo().get(0));
+    jugador.jugarCarta(medico, null, medico.getTipo().get(0), mockTurnos);
 
     // Assert
 
@@ -65,7 +67,7 @@ public class UnidadMedicoTest {
     assertEquals(1, seccionDistanciaJ1.getUnidadesColocadas().size());
     assertTrue(seccionCuerpoACuerpoJ1.getUnidadesColocadas().contains(unidadBasica));
     assertTrue(seccionDistanciaJ1.getUnidadesColocadas().contains(medico));
-  }*/
+  }
 
   @Test
   public void alJugarseUnMedicoSinUnaCartaSeteadaParaRevivirSoloSeJuegaElMedico() {
@@ -82,7 +84,7 @@ public class UnidadMedicoTest {
 
     // Act
 
-    jugador.jugarCarta(medico, null, medico.getTipo().get(0));
+    jugador.jugarCarta(medico, null, medico.getTipo().get(0),mockTurnos);
 
     // Assert
 
@@ -91,4 +93,7 @@ public class UnidadMedicoTest {
     assertTrue(seccionCuerpoACuerpoJ1.getUnidadesColocadas().isEmpty());
     assertTrue(seccionDistanciaJ1.getUnidadesColocadas().contains(medico));
   }
+
+  AdminTurnos mockTurnos = Mockito.mock(AdminTurnos.class);
+
 }
