@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.cartas.unidades;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 
 public class Agil extends Unidad {
 

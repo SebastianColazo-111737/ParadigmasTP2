@@ -62,18 +62,7 @@ public class CartaUnidadParser {
 
   private static String agregarEmojisPosicion(String nombreOriginal, List<Posicion> posiciones) {
     StringBuilder sb = new StringBuilder(nombreOriginal);
-    sb.append("\n");
 
-    for (Posicion p : posiciones) {
-      if (p instanceof CuerpoACuerpo) {
-        sb.append("🗡️ ");
-      } else if (p instanceof Distancia) {
-        sb.append("⋙ ");
-      } else if (p instanceof Asedio) {
-        sb.append("🛡️ ");
-      }
-    }
-
-    return sb.toString().trim();
+    return nombreOriginal;
   }
 }

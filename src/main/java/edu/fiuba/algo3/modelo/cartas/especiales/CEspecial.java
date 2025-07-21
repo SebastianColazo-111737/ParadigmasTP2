@@ -2,10 +2,10 @@
 package edu.fiuba.algo3.modelo.cartas.especiales;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
+import edu.fiuba.algo3.modelo.posiciones.Especial;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class CEspecial implements ICarta {
 
@@ -21,13 +21,10 @@ public abstract class CEspecial implements ICarta {
     return true;
   }
 
-  public List<Posicion> getTipo() {
-    return null;
-  }
-
-  @Override
-  public String colorHex() {
-    return "#4682B4";
+  public ArrayList<Posicion> getTipo() {
+    ArrayList<Posicion> t = new ArrayList<>();
+    t.add(new Especial());
+    return t;
   }
 
 }

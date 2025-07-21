@@ -1,24 +1,58 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
-import edu.fiuba.algo3.modelo.jugador.atril.SeccionNoPermiteColocarUnidadesConPosicionIncompatible;
 import edu.fiuba.algo3.modelo.posiciones.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Gwent {
-  private AdminTurnos<Jugador> adminTurnos;
-  private List<Jugador> jugadores;
+  private AdminTurnos adminTurnos;
+  private ArrayList<Jugador> jugadores;
 
   public Gwent(Jugador jugador1, Jugador jugador2) {
     this.jugadores = new ArrayList<>();
     jugadores.add(jugador1);
     jugadores.add(jugador2);
 
-    this.adminTurnos = new AdminTurnos<>(this.jugadores);
+    this.adminTurnos = new AdminTurnos(this.jugadores);
+  }
+
+  private void reiniciarRonda() {
+    this.adminTurnos.reiniciarRonda();
+    if (this.getJugadorActual().puntajeTablero() < this.getJugadorProximo().puntajeTablero()) {
+      this.getJugadorActual().reducirVida();
+    } else {
+      this.getJugadorProximo().reducirVida();
+    }
+    for (Jugador j : this.jugadores) {
+      j.limpiarTodo();
+    }
+    // this.repartirCartasALosJugadores();
+  }
+
+  public boolean esFinDePartida() {
+    return !this.getJugadorActual().estaVivo() || !this.getJugadorProximo().estaVivo();
+  }
+
+  public Jugador getGanador() {
+    if (!this.esFinDePartida()) {
+      return null;
+    }
+    return this.getJugadorActual().estaVivo() ? this.getJugadorActual() : this.getJugadorProximo();
+  }
+
+  public void chequearEstadoRonda() {
+
+    if (this.adminTurnos.esFinRonda()) {
+      this.reiniciarRonda();
+      return;
+    }
+
+    if (this.getJugadorActual().manoVacia()) {
+      this.adminTurnos.finTurnoJugadorActual();
+
+    }
   }
 
   public void repartirCartasALosJugadores() {
@@ -35,44 +69,21 @@ public class Gwent {
     return this.adminTurnos.getJugadorProximo();
   }
 
-  public void setJugadorActual(Jugador jugador) {
-    this.adminTurnos.setJugadorActual(jugador);
-  }
-
   public List<Jugador> getJugadores() {
     return this.jugadores;
   }
 
-  public void pasarTurno(){
-    if(todosPasaron()){
-      throw new AdminturnosTodosPasaronDeTurno("Todos los jugadores pasaron de turno");
-    }
-    adminTurnos.proximoTurno();
-  }
-
   public void jugarCarta(ICarta carta, Posicion posicion) {
-    Jugador jugador = adminTurnos.getJugadorActual();
-    jugador.jugarCarta(carta, this.adminTurnos.getJugadorProximo(), posicion);
+    Jugador jugador = this.getJugadorActual();
+    jugador.jugarCarta(carta, this.getJugadorProximo(), posicion, this.adminTurnos);
   }
 
-  public boolean finalizarParticipacion(){
-    Jugador juego = adminTurnos.getJugadorActual();
-    adminTurnos.jugadorPasaTurno(juego);
-
-    boolean rondaTerminada = adminTurnos.todosPasaronTurno();
-    if(!rondaTerminada) adminTurnos.proximoTurno();
-    return rondaTerminada;
+  public void finalizarPariticipacionDelJugadorActual() {
+    this.adminTurnos.finTurnoJugadorActual();
   }
 
-  public boolean todosPasaron(){
-    return adminTurnos.todosPasaronTurno();
-  }
-
-  public void reiniciarRonda(){
-    adminTurnos.reiniciarAdminTurnos();
-    for (Jugador jugador : jugadores){
-      jugador.atril().descartarCartas();
-    }
+  public ArrayList<ICarta> getCartasDescarteJugadorActual() {
+    return this.getJugadorActual().descarte().getCartas();
   }
 
 }

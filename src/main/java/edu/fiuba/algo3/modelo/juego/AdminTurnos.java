@@ -1,73 +1,62 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
-public class AdminTurnos<T> {
-  private List<T> jugadores;
-  private int indiceJugadorActual;
-  private HashMap<T, Boolean> pasoDeTurno;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-  public AdminTurnos(List<T> jugadores) {
+public class AdminTurnos {
+  private int turno;
+  private ArrayList<Jugador> jugadores;
+  private boolean finTurnoJ1 = false;
+  private boolean finTurnoJ2 = false;
+
+  public AdminTurnos(ArrayList<Jugador> jugadores) {
+    this.turno = 0;
     this.jugadores = jugadores;
-    this.pasoDeTurno = new HashMap<>();
-
-    inicializarAdminTurnos();
   }
 
-  private void inicializarAdminTurnos() {
-    for (T jugador : jugadores) {
-      this.pasoDeTurno.put(jugador, false);
+  public void siguienteTurno() {
+    int proximo = getIndiceProximoJugador();
+    if ((proximo == 0 && finTurnoJ1) || (proximo == 1 && finTurnoJ2)) {
+      return;
     }
-    this.indiceJugadorActual = 0;
+    this.turno += 1;
   }
 
-  public T getJugadorActual() {
-    return this.jugadores.get(indiceJugadorActual);
+  public void reiniciarRonda() {
+    this.turno = 0;
+    this.finTurnoJ1 = false;
+    this.finTurnoJ2 = false;
   }
 
-  public T getJugadorProximo() {
-    return this.jugadores.get((indiceJugadorActual + 1)%jugadores.size());
+  public boolean esFinRonda() {
+    return this.finTurnoJ1 && this.finTurnoJ2;
   }
 
-  public void setJugadorActual(T jugador) {
-    this.indiceJugadorActual = jugadores.indexOf(jugador);
+  private int getIndiceDelJugadorActual() {
+    return this.turno % 2;
   }
 
-  public boolean esSuTurno(T jugador) {
-    return this.jugadores.get(indiceJugadorActual).equals(jugador);
+  private int getIndiceProximoJugador() {
+    return (this.turno + 1) % 2;
   }
 
-  public void jugadorPasaTurno(T jugador) {
-    this.pasoDeTurno.put(jugador, true);
+  public Jugador getJugadorActual() {
+    return this.jugadores.get(this.getIndiceDelJugadorActual());
   }
 
-  public boolean todosPasaronTurno() {
-    Collection<Boolean> pasoDeTurno = this.pasoDeTurno.values();
-    for (boolean pasoTurno : pasoDeTurno) {
-      if (!pasoTurno) {
-        return false;
-      }
+  public Jugador getJugadorProximo() {
+    return this.jugadores.get(this.getIndiceProximoJugador());
+  }
+
+  public void finTurnoJugadorActual() {
+    if (this.getIndiceDelJugadorActual() == 1) {
+      this.finTurnoJ2 = true;
+    } else {
+      this.finTurnoJ1 = true;
     }
-    return true;
-  }
+    this.siguienteTurno();
 
-  public void proximoTurno() {
-    if (todosPasaronTurno()) {
-      throw new AdminturnosTodosPasaronDeTurno("Todos los jugadores pasaron de turno");
-    }
-
-    int cantidadDeJugadores = jugadores.size();
-    T siguiente;
-    do {
-      this.indiceJugadorActual = (this.indiceJugadorActual + 1) % cantidadDeJugadores;
-      siguiente = jugadores.get(indiceJugadorActual);
-    } while (pasoDeTurno.get(siguiente));
-  }
-
-  public void reiniciarAdminTurnos() {
-    inicializarAdminTurnos();
   }
 
 }

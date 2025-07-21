@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Seccion {
   private Posicion posicion;
-  private List<Unidad> unidadesColocadas;
+  private ArrayList<Unidad> unidadesColocadas;
   private List<Runnable> observadores = new ArrayList<>();
   private Boolean debuff;
   private int duplicadores;
@@ -46,7 +46,8 @@ public class Seccion {
 
   public void colocarUnidad(Unidad unidad) {
     if (!unidad.sePuedeColocar(posicion)) {
-      throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible("Las cartas se deben colocar en la seccion que le corresponden");
+      throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible(
+          "Las cartas se deben colocar en la seccion que le corresponden");
     }
     unidadesColocadas.add(unidad);
     notificar();
@@ -67,12 +68,12 @@ public class Seccion {
     return fuerte;
   }
 
-    public void removerCarta(Unidad carta) {
-      if (!this.contieneCarta(carta)) return;
-      this.unidadesColocadas.remove(carta);
-      notificar();
-    }
-
+  public void removerCarta(Unidad carta) {
+    if (!this.contieneCarta(carta))
+      return;
+    this.unidadesColocadas.remove(carta);
+    notificar();
+  }
 
   public Puntaje calcularPuntajeActualUnidades() {
     int puntajeTotal = 0;
@@ -117,7 +118,7 @@ public class Seccion {
     while (!unidadesColocadas.isEmpty()) {
       Unidad carta = unidadesColocadas.remove(0);
       descartadas.add(carta);
-      System.out.println("Se descarto: "+ carta);
+      System.out.println("Se descarto: " + carta);
 
     }
     this.debuff = false;
@@ -142,14 +143,16 @@ public class Seccion {
     if (carta instanceof Debuff) {
       Debuff debuff = (Debuff) carta;
       boolean afectaEstaPosicion = debuff.getPosicionAfectar().stream()
-              .anyMatch(pos -> pos.esCompatible(this.posicion));
+          .anyMatch(pos -> pos.esCompatible(this.posicion));
 
       if (!afectaEstaPosicion) {
         throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible(
-                "La carta " + debuff.nombre() + " no puede colocarse en esta sección."
-        );
+            "La carta " + debuff.nombre() + " no puede colocarse en esta sección.");
       }
     }
   }
 
+  public ArrayList<Unidad> getCartas() {
+    return this.unidadesColocadas;
+  }
 }

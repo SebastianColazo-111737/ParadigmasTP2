@@ -6,13 +6,12 @@ import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Unidad implements ICarta {
 
   protected String nombre;
   protected Puntaje puntaje;
-  protected List<Posicion> posicionesDisponibles;
+  protected ArrayList<Posicion> posicionesDisponibles;
 
   public Unidad(String nombre, Puntaje puntaje, Posicion posicicon) {
     this.nombre = nombre;
@@ -31,7 +30,7 @@ public abstract class Unidad implements ICarta {
     return false;
   }
 
-  public List<Posicion> getTipo() {
+  public ArrayList<Posicion> getTipo() {
     return this.posicionesDisponibles;
   }
 

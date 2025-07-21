@@ -33,17 +33,18 @@ public class Atril {
   }
 
   public void colocarEspecial(CEspecial carta) {
-    if(!especiales.estaVacia()){
-      throw new NoPermiteColocarEspecialSiYaHayUna("Ya hay una carta especial activa en esta ronda.");
-    }
+    // if(!especiales.estaVacia()){
+    // throw new NoPermiteColocarEspecialSiYaHayUna("Ya hay una carta especial
+    // activa en esta ronda.");
+    // }
     this.especiales.agregarCarta(carta);
   }
 
-  public boolean hayCartaEspecialActiva(){
+  public boolean hayCartaEspecialActiva() {
     return !especiales.estaVacia();
   }
 
-  public void limpiarCartaEspecial(){
+  public void limpiarCartaEspecial() {
     especiales.limpiar();
   }
 
@@ -54,15 +55,15 @@ public class Atril {
 
     for (Seccion seccion : this.secciones) {
       Unidad carta = seccion.tomarCartaMasFuerte();
-      if (carta != null && !(carta instanceof Legendaria)){
-        if(fuerte == null || carta.masFuerteQue(fuerte)){
+      if (carta != null && !(carta instanceof Legendaria)) {
+        if (fuerte == null || carta.masFuerteQue(fuerte)) {
           fuerte = carta;
           seccionFuerte = seccion;
         }
       }
     }
 
-    if(fuerte != null && seccionFuerte != null){
+    if (fuerte != null && seccionFuerte != null) {
       seccionFuerte.removerCarta(fuerte);
       this.descartarCarta(fuerte);
     }
@@ -133,8 +134,9 @@ public class Atril {
     return cartasDescarte;
   }
 
-  public Optional<String> nombreCartaEspecialActiva(){
-    if(especiales.estaVacia()) return Optional.empty();
+  public Optional<String> nombreCartaEspecialActiva() {
+    if (especiales.estaVacia())
+      return Optional.empty();
     CEspecial carta = especiales.getUltimaCarta();
     return Optional.of(carta.nombre());
   }
