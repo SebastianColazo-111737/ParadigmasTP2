@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vistas.VentanaJugar;
 
+import java.util.ArrayList;
+
 import edu.fiuba.algo3.Controller.GameController;
 import edu.fiuba.algo3.modelo.cartas.ICarta;
 import edu.fiuba.algo3.modelo.cartas.especiales.CEspecial;
@@ -37,16 +39,18 @@ public class VentanaJugarCarta extends StackPane {
     modalContent.setAlignment(Pos.CENTER);
     modalContent.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;");
     modalContent.setMaxWidth(350);
-    modalContent.setMaxHeight(250);
+    modalContent.setMaxHeight(300);
 
-    // Título con nombre de la carta
     Label titulo = new Label(carta.nombre());
     titulo.setFont(new Font("Arial", 20));
     titulo.setTextFill(Color.DARKBLUE);
 
-    modalContent.getChildren().addAll(titulo);
+    Label tipo = new Label("Tipo: " + carta.getClass().getSimpleName());
+    tipo.setFont(new Font("Arial", 14));
+    tipo.setTextFill(Color.BLACK);
 
-    // Descripción lorem ipsum
+    modalContent.getChildren().addAll(titulo, tipo);
+
     if (carta instanceof CEspecial) {
       CEspecial ccarta = (CEspecial) carta;
 
@@ -54,11 +58,24 @@ public class VentanaJugarCarta extends StackPane {
       descripcion.setWrapText(true);
       descripcion.setTextAlignment(TextAlignment.CENTER);
       descripcion.setFont(new Font(12));
-      modalContent.getChildren().addAll(descripcion);
+      modalContent.getChildren().add(descripcion);
 
+      ArrayList<Posicion> posiciones = ccarta.posicionesAfectar();
+      if (posiciones != null) {
+        StringBuilder textoPosiciones = new StringBuilder("Posiciones: ");
+        for (Posicion posicion : posiciones) {
+          textoPosiciones.append(posicion.getClass().getSimpleName());
+          textoPosiciones.append(" ");
+        }
+        Label posicionesLabel = new Label(textoPosiciones.toString());
+        posicionesLabel.setFont(new Font(12));
+        posicionesLabel.setTextFill(Color.DARKGREEN);
+        posicionesLabel.setWrapText(true);
+        posicionesLabel.setTextAlignment(TextAlignment.CENTER);
+        modalContent.getChildren().add(posicionesLabel);
+      }
     }
 
-    // Botones
     HBox botones = new HBox(10);
     botones.setAlignment(Pos.CENTER);
 
@@ -87,10 +104,10 @@ public class VentanaJugarCarta extends StackPane {
     Button cerrarBtn = new Button("Salir");
     cerrarBtn.setOnAction(e -> onClose.run());
     botones.getChildren().add(cerrarBtn);
-    modalContent.getChildren().addAll(botones);
+
+    modalContent.getChildren().add(botones);
 
     this.getChildren().addAll(fondo, modalContent);
-
     this.setAlignment(Pos.CENTER);
   }
 }

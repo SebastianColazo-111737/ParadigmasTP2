@@ -12,8 +12,4 @@ public interface ICarta {
 
   String nombre();
 
-  default String colorHex() {
-    return "FFF8DC";
-  }
-
 }

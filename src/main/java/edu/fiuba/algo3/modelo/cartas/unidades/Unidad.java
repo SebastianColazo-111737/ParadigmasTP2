@@ -45,4 +45,8 @@ public abstract class Unidad implements ICarta {
   public int getPuntajeTotal(Seccion seccion) {
     return this.puntaje.getPuntajeActual();
   }
+
+  public boolean esLegendaria() {
+    return false;
+  }
 }

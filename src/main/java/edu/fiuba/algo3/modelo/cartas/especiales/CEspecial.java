@@ -32,4 +32,8 @@ public abstract class CEspecial implements ICarta {
   public String descripcion() {
     return this.descripcion;
   }
+
+  public ArrayList<Posicion> posicionesAfectar() {
+    return this.posicionesAfectar;
+  }
 }

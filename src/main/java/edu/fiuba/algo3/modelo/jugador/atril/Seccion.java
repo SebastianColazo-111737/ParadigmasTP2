@@ -47,7 +47,7 @@ public class Seccion {
     Unidad fuerte = null;
     for (Unidad unidad : this.unidadesColocadas) {
 
-      if (!(unidad instanceof Legendaria) && unidad.masFuerteQue(fuerte)) {
+      if (!(unidad.esLegendaria()) && unidad.masFuerteQue(fuerte)) {
         fuerte = unidad;
       }
 
@@ -66,7 +66,7 @@ public class Seccion {
 
     if (this.debuff) {
       for (Unidad unidad : unidadesColocadas) {
-        if (unidad instanceof Legendaria) {
+        if (unidad.esLegendaria()) {
           puntajeTotal += unidad.getPuntaje().getPuntajeActual();
         } else {
           puntajeTotal += 1;
