@@ -43,6 +43,9 @@ public class Gwent {
   }
 
   public void chequearEstadoRonda() {
+    if (this.esFinDePartida()) {
+      return;
+    }
 
     if (this.adminTurnos.esFinRonda()) {
       this.reiniciarRonda();
