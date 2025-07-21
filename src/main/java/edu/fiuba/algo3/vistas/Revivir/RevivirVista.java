@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class RevivirVista extends StackPane {
 
+  private Label cartaSeleccionadaLabel;
+
   public RevivirVista(Runnable onClose, ArrayList<ICarta> cartasRevivir, Medico medico) {
     Rectangle fondo = new Rectangle();
     fondo.setFill(Color.rgb(0, 0, 0, 0.5));
@@ -27,6 +29,9 @@ public class RevivirVista extends StackPane {
     Label titulo = new Label("Seleccioná una carta para revivir");
     titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
+    cartaSeleccionadaLabel = new Label("Seleccionado: -");
+    cartaSeleccionadaLabel.setStyle("-fx-font-size: 14px;");
+
     VBox listaCartas = new VBox(10);
     listaCartas.setAlignment(Pos.CENTER);
 
@@ -36,11 +41,14 @@ public class RevivirVista extends StackPane {
     for (ICarta carta : cartasRevivir) {
       CartaVista vistaCarta = new CartaVista(carta);
       StackPane cartaContainer = new StackPane(vistaCarta);
-      cartaContainer.setOnMouseClicked((MouseEvent e) -> mostrarVentanaPosiciones(carta, medico));
+      cartaContainer.setOnMouseClicked((MouseEvent e) -> {
+        cartaSeleccionadaLabel.setText("Seleccionado: " + medico.getNombreRevivir());
+        mostrarVentanaPosiciones(carta, medico);
+      });
       listaCartas.getChildren().add(cartaContainer);
     }
 
-    VBox contenido = new VBox(20, titulo, listaCartas, cerrarBtn);
+    VBox contenido = new VBox(15, titulo, cartaSeleccionadaLabel, listaCartas, cerrarBtn);
     contenido.setAlignment(Pos.CENTER);
     contenido.setPadding(new Insets(20));
     contenido.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
@@ -50,13 +58,11 @@ public class RevivirVista extends StackPane {
   }
 
   private void mostrarVentanaPosiciones(ICarta carta, Medico m) {
-    // Crear fondo modal
     Rectangle modalFondo = new Rectangle();
     modalFondo.setFill(Color.rgb(0, 0, 0, 0.7));
     modalFondo.widthProperty().bind(this.widthProperty());
     modalFondo.heightProperty().bind(this.heightProperty());
 
-    // Contenedor modal
     VBox modalContent = new VBox(15);
     modalContent.setPadding(new Insets(20));
     modalContent.setAlignment(Pos.CENTER);

@@ -34,4 +34,8 @@ public class Medico extends Unidad {
     return this.nombre;
   }
 
+  public String getNombreRevivir() {
+    return this.cartaParaRevivir != null ? this.cartaParaRevivir.nombre() : "";
+  }
+
 }
