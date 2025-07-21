@@ -15,7 +15,6 @@ public class EstadoJugadorVista extends StackPane {
 
   private Jugador jugador;
 
-  // Elementos que se van a actualizar
   private Text textoNombre;
   private Text textoDescarte;
   private Text textoMazo;

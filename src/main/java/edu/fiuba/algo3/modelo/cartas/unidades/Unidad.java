@@ -49,4 +49,8 @@ public abstract class Unidad implements ICarta {
   public boolean esLegendaria() {
     return false;
   }
+
+  public boolean esAnimator() {
+    return false;
+  }
 }

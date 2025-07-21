@@ -29,7 +29,4 @@ public class Unidas extends Unidad {
     return this.puntaje.getPuntajeActual() * (int) Math.pow(2, cantidadDeEstas - 1);
   }
 
-  public String colorHex() {
-    return "#2E8B57";
-  }
 }

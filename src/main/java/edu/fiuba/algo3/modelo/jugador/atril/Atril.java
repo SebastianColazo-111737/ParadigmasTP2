@@ -134,11 +134,4 @@ public class Atril {
     return cartasDescarte;
   }
 
-  public Optional<String> nombreCartaEspecialActiva() {
-    if (especiales.estaVacia())
-      return Optional.empty();
-    CEspecial carta = especiales.getUltimaCarta();
-    return Optional.of(carta.nombre());
-  }
-
 }

@@ -20,7 +20,8 @@ public class Animador extends Unidad {
     return this.nombre;
   }
 
-  public String colorHex() {
-    return "#FFA07A";
+  @Override
+  public boolean esAnimator() {
+    return true;
   }
 }

@@ -1,9 +1,5 @@
 package edu.fiuba.algo3.modelo.jugador.atril;
 
-import edu.fiuba.algo3.modelo.cartas.ICarta;
-import edu.fiuba.algo3.modelo.cartas.especiales.Debuff;
-import edu.fiuba.algo3.modelo.cartas.unidades.Animador;
-import edu.fiuba.algo3.modelo.cartas.unidades.Legendaria;
 import edu.fiuba.algo3.modelo.cartas.unidades.Unidad;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.posiciones.Posicion;
@@ -76,14 +72,14 @@ public class Seccion {
     }
 
     int cantAnimadoresEnSeccion = (int) unidadesColocadas.stream()
-        .filter(u -> u instanceof Animador)
+        .filter(u -> u.esAnimator())
         .count();
 
     for (Unidad unidad : unidadesColocadas) {
-      if (unidad instanceof Animador)
+      if (unidad.esAnimator())
         puntajeTotal += unidad.getPuntajeTotal(this) * this.duplicadores;
 
-      else if (unidad instanceof Legendaria)
+      else if (unidad.esLegendaria())
         puntajeTotal += unidad.getPuntajeTotal(this);
       else
         puntajeTotal += unidad.getPuntajeTotal(this) * this.duplicadores + cantAnimadoresEnSeccion;
@@ -122,19 +118,6 @@ public class Seccion {
 
   public Posicion getPosicion() {
     return this.posicion;
-  }
-
-  public void validarCartaEspecial(ICarta carta) {
-    if (carta instanceof Debuff) {
-      Debuff debuff = (Debuff) carta;
-      boolean afectaEstaPosicion = debuff.getPosicionAfectar().stream()
-          .anyMatch(pos -> pos.esCompatible(this.posicion));
-
-      if (!afectaEstaPosicion) {
-        throw new SeccionNoPermiteColocarUnidadesConPosicionIncompatible(
-            "La carta " + debuff.nombre() + " no puede colocarse en esta sección.");
-      }
-    }
   }
 
   public ArrayList<Unidad> getCartas() {

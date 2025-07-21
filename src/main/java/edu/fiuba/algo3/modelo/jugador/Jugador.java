@@ -7,6 +7,8 @@ import edu.fiuba.algo3.modelo.juego.AdminTurnos;
 import edu.fiuba.algo3.modelo.jugador.atril.Atril;
 import edu.fiuba.algo3.modelo.jugador.atril.Seccion;
 import edu.fiuba.algo3.modelo.posiciones.*;
+import javafx.geometry.Pos;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -94,22 +96,6 @@ public class Jugador {
   public void colocarCartaEspecial(CEspecial carta) {
     atril.colocarEspecial(carta);
 
-  }
-
-  public Optional<ICarta> revivirUltimaUnidadDescarte() {
-    List<ICarta> cartas = new ArrayList<>(this.descarte.getCartas());
-
-    ListIterator<ICarta> iterador = cartas.listIterator(cartas.size());
-
-    while (iterador.hasPrevious()) {
-      ICarta carta = iterador.previous();
-      if (carta instanceof Unidad) {
-        this.descarte.removerCarta(carta);
-        this.mano.agregarCarta(carta);
-        return Optional.of(carta);
-      }
-    }
-    return Optional.empty();
   }
 
   public void limpiarTodo() {
