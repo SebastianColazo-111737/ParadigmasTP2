@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modeloTest.JugadorTest.cartasTest;
 
+import edu.fiuba.algo3.modelo.juego.AdminTurnos;
 import edu.fiuba.algo3.modelo.jugador.Puntaje;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadBasica;
 import edu.fiuba.algo3.modelo.cartas.unidades.UnidadNoPuedeSerJugadaPorEseJugadorEnEsaSeccion;
@@ -9,6 +10,7 @@ import edu.fiuba.algo3.modelo.jugador.atril.*;
 import edu.fiuba.algo3.modelo.posiciones.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,7 +28,7 @@ public class UnidadBasicaTest {
     mazo = new Mazo();
     atril = new Atril();
 
-    jugador = new Jugador(mazo, mano, atril);
+    jugador = new Jugador(mazo, mano, atril,"NombrePrueba");
   }
 
   @Test
@@ -44,7 +46,7 @@ public class UnidadBasicaTest {
 
     // Act
     int cantidadDeCartasEnSeccionInicial = seccionDistanciaJ1.getUnidadesColocadas().size();
-    jugador.jugarCarta(unidadBasica, null, unidadBasica.getTipo().get(0));
+    jugador.jugarCarta(unidadBasica, null, unidadBasica.getTipo().get(0),mockTurnos);
     int cantidadDeCartasEnSeccionFInal = seccionDistanciaJ1.getUnidadesColocadas().size();
 
     // Assert
@@ -69,8 +71,9 @@ public class UnidadBasicaTest {
     // Assert
     assertFalse(mano.getCartas().contains(unidadBasica));
     assertThrows(ManoNoContieneCartaException.class, () -> {
-      jugador.jugarCarta(unidadBasica, null, unidadBasica.getTipo().get(0));
+      jugador.jugarCarta(unidadBasica, null, unidadBasica.getTipo().get(0),mockTurnos);
     });
   }
 
+  AdminTurnos mockTurnos = Mockito.mock(AdminTurnos.class);
 }

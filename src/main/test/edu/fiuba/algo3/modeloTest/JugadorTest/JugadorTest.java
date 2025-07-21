@@ -45,7 +45,7 @@ public class JugadorTest {
         atril.agregarSeccion(distanciaJ1);
         atril.agregarSeccion(asedioJ1);
 
-        jugador = new Jugador(mazo, mano, atril);
+        jugador = new Jugador(mazo, mano, atril,"NombreDePrueba");
     }
 
     @Test

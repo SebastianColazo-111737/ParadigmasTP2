@@ -75,8 +75,9 @@ public class Jugador {
 
   public void jugarCarta(ICarta carta, Jugador jugadorSiguiente, Posicion tipo, AdminTurnos turnos) {
     if (!mano.contieneA(carta)) {
-      System.out.print("no puede jugar una carta que no es suya");
-      return;
+      throw new ManoNoContieneCartaException("no puede jugar una carta que no es suya");
+      //System.out.print("no puede jugar una carta que no es suya");
+      //return;
     }
     try {
       carta.jugar(this, jugadorSiguiente, tipo);
