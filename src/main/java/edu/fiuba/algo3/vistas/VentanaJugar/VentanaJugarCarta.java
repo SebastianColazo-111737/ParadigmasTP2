@@ -19,10 +19,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import edu.fiuba.algo3.vistas.MusicaPlayer.*;
 
 public class VentanaJugarCarta extends StackPane {
 
-  public VentanaJugarCarta(ICarta carta, Jugador jugadorPerteneciente, GameController game, StackPane root,
+  public VentanaJugarCarta(MusicPlayer player, ICarta carta, Jugador jugadorPerteneciente, GameController game,
+      StackPane root,
       Runnable onClose) {
 
     if (!jugadorPerteneciente.equals(game.getJugadorActual())) {
@@ -111,6 +113,14 @@ public class VentanaJugarCarta extends StackPane {
               "-fx-border-radius: 5;");
       boton.setOnAction(e -> {
         game.jugar(carta, posicion);
+
+        try {
+          player.cargarAudio("src/main/resources/sounds/playcard.wav");
+          player.reproducir();
+        } catch (Exception a) {
+          a.printStackTrace();
+        }
+
         onClose.run();
       });
       botones.getChildren().add(boton);

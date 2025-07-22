@@ -6,17 +6,19 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.Controller.GameController;
 import edu.fiuba.algo3.vistas.Escenas.*;
+import edu.fiuba.algo3.vistas.MusicaPlayer.*;
 
 public class App extends Application {
 
   private Stage primaryStage;
   private double screenWidth;
   private double screenHeight;
+  private MusicPlayer music;
 
   @Override
   public void start(Stage stage) {
     this.primaryStage = stage;
-
+    music = new MusicPlayer();
     Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
     screenWidth = screenBounds.getWidth();
     screenHeight = screenBounds.getHeight();
@@ -31,6 +33,14 @@ public class App extends Application {
   }
 
   public void mostrarJuego() {
+    try {
+      this.music.cargarAudio("src/main/resources/sounds/ingame.wav");
+      this.music.reproducirConLoop();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     GameController gameController = new GameController();
     GameVista gameScene = new GameVista(this, gameController);
     primaryStage.setScene(gameScene.getScene());

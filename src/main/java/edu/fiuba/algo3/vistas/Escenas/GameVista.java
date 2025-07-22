@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
+import edu.fiuba.algo3.vistas.MusicaPlayer.*;
 
 public class GameVista {
   private Scene scene;
@@ -33,10 +34,11 @@ public class GameVista {
   private SeccionEspecialVista especialJ2;
   private SeccionEspecialVista especialJ1;
   private VentanaGanador ganador;
+  private MusicPlayer player;
 
   public GameVista(App app, GameController gameController) {
     this.game = gameController;
-
+    this.player = new MusicPlayer();
     Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
     double screenWidth = screenBounds.getWidth();
     double screenHeight = screenBounds.getHeight();
@@ -157,7 +159,7 @@ public class GameVista {
 
     final VentanaJugarCarta[] ventanaRef = new VentanaJugarCarta[1];
 
-    ventanaRef[0] = new VentanaJugarCarta(carta, jugadorPerteneciente, game, root, () -> {
+    ventanaRef[0] = new VentanaJugarCarta(player, carta, jugadorPerteneciente, game, root, () -> {
       root.getChildren().remove(ventanaRef[0]);
       ventanaRef[0] = null;
     });

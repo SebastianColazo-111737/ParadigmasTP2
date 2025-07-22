@@ -33,6 +33,12 @@
       <artifactId>javafx-controls</artifactId>
       <version>${javafx-version}</version>
     </dependency>
+    <!-- Agregado para soporte multimedia -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-media</artifactId>
+      <version>${javafx-version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -89,12 +95,12 @@
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
-	<version>${pitest-plugin-version}</version>
+        <version>${pitest-plugin-version}</version>
         <dependencies>
           <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-junit5-plugin</artifactId>
-	    <version>${pitest-junit5-plugin-version}</version>
+            <version>${pitest-junit5-plugin-version}</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -112,6 +118,7 @@
         <version>0.0.6</version>
         <configuration>
           <mainClass>${main-class}</mainClass>
+          <modules>javafx.controls,javafx.media</modules>
         </configuration>
       </plugin>
       <plugin>
@@ -164,3 +171,4 @@
     </plugins>
   </build>
 </project>
+
