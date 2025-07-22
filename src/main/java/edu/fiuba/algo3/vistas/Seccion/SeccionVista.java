@@ -30,7 +30,6 @@ public class SeccionVista extends StackPane {
   public SeccionVista(Seccion seccion) {
     this.seccion = seccion;
 
-    // Cargar imagen de fondo
     Image imagenFondo = new Image(getClass().getResourceAsStream("/images/seccion.jpg"));
     BackgroundImage backgroundImage = new BackgroundImage(
         imagenFondo,
@@ -41,14 +40,9 @@ public class SeccionVista extends StackPane {
             100, 100, true, true, false, true));
     this.setBackground(new Background(backgroundImage));
 
-    // Borde blanco de 2px sólido
     this.setStyle("-fx-border-color: grey; -fx-border-width: 1px;");
 
-    // Puntaje
     puntajeText = new Text();
-    // Si quieres, puedes agregar estilo para mejor visibilidad sobre fondo
-    // puntajeText.setStyle("-fx-font-weight: bold; -fx-font-size: 16px; -fx-fill:
-    // white;");
 
     javafx.scene.shape.Rectangle puntajeBg = new javafx.scene.shape.Rectangle(40, 40);
     puntajeBg.setFill(javafx.scene.paint.Color.GOLD);
@@ -59,7 +53,6 @@ public class SeccionVista extends StackPane {
 
     Posicion pos = this.seccion.getPosicion();
 
-    // Imagen según tipo de posición
     ImageView posicionImagenView = null;
     String rutaImagen = null;
 
@@ -79,7 +72,6 @@ public class SeccionVista extends StackPane {
       StackPane.setAlignment(posicionImagenView, Pos.CENTER);
     }
 
-    // Contenedor cartas
     contenedorCartas = new HBox(10);
     contenedorCartas.setAlignment(Pos.CENTER);
     contenedorCartas.setPadding(new Insets(5));
@@ -88,7 +80,6 @@ public class SeccionVista extends StackPane {
     contenedorCartas.setMaxWidth(Double.MAX_VALUE);
     HBox.setHgrow(contenedorCartas, Priority.ALWAYS);
 
-    // Layout principal
     HBox layoutPrincipal = new HBox(15);
     layoutPrincipal.setAlignment(Pos.CENTER_LEFT);
     layoutPrincipal.setPadding(new Insets(10));

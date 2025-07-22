@@ -14,13 +14,11 @@ public class VentanaGanador extends StackPane {
   private Label mensaje;
 
   public VentanaGanador(Runnable onCerrar) {
-    // Fondo semitransparente
     Rectangle fondo = new Rectangle();
     fondo.setFill(Color.rgb(0, 0, 0, 0.6));
     fondo.widthProperty().bind(this.widthProperty());
     fondo.heightProperty().bind(this.heightProperty());
 
-    // Contenido del modal
     VBox contenido = new VBox(15);
     contenido.setPadding(new Insets(25));
     contenido.setAlignment(Pos.CENTER);

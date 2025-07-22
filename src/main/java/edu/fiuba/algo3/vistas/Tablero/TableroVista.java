@@ -21,12 +21,11 @@ public class TableroVista extends StackPane {
     this.secciones = new ArrayList<>();
     this.secciones.addAll(secciones);
 
-    // Cambié el spacing de 2 a 10 para mayor separación vertical entre secciones
     seccionesC = new VBox(10);
     seccionesC.setAlignment(Pos.CENTER);
     seccionesC.setPadding(new Insets(2));
 
-    double alturaSecciones = (70 + 10) * 6; // Ajustar si quieres más separación visual
+    double alturaSecciones = (70 + 10) * 6;
     seccionesC.setPrefHeight(alturaSecciones);
     seccionesC.setMaxHeight(alturaSecciones);
 
@@ -51,8 +50,7 @@ public class TableroVista extends StackPane {
 
       seccionesC.getChildren().add(vista);
 
-      // Puedes dar un margen vertical para separarlas más aún
-      VBox.setMargin(vista, new Insets(5, 0, 5, 0)); // 5px arriba y abajo
+      VBox.setMargin(vista, new Insets(5, 0, 5, 0));
     }
   }
 }

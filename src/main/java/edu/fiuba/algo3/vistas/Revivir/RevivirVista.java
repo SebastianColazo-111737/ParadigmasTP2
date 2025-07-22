@@ -26,10 +26,8 @@ public class RevivirVista extends StackPane {
     fondoOscuro.heightProperty().bind(this.heightProperty());
     fondoOscuro.setFill(Color.rgb(0, 0, 0, 0.5));
 
-    // Cargar imagen de fondo para el modal
     Image bgImage = new Image(getClass().getResourceAsStream("/images/backgroundWindow.jpg"));
 
-    // Contenedor principal del modal con imagen de fondo
     VBox modalContent = new VBox(15);
     modalContent.setPadding(new Insets(20));
     modalContent.setAlignment(Pos.CENTER);
@@ -86,13 +84,11 @@ public class RevivirVista extends StackPane {
   }
 
   private void mostrarVentanaPosiciones(ICarta carta, Medico medico) {
-    // Fondo oscuro semitransparente para el modal de posiciones
     Rectangle modalFondo = new Rectangle();
     modalFondo.widthProperty().bind(this.widthProperty());
     modalFondo.heightProperty().bind(this.heightProperty());
     modalFondo.setFill(Color.rgb(0, 0, 0, 0.5));
 
-    // Imagen de fondo para el modal de posiciones
     Image bgImage = new Image(getClass().getResourceAsStream("/images/backgroundWindow.jpg"));
 
     VBox modalContent = new VBox(15);

@@ -28,16 +28,13 @@ public class VentanaJugarCarta extends StackPane {
     if (!jugadorPerteneciente.equals(game.getJugadorActual())) {
       return;
     }
-    // Fondo oscuro semitransparente detrás del modal
     Rectangle fondoOscuro = new Rectangle();
     fondoOscuro.widthProperty().bind(root.widthProperty());
     fondoOscuro.heightProperty().bind(root.heightProperty());
     fondoOscuro.setFill(Color.rgb(0, 0, 0, 0.5));
 
-    // Cargar la imagen de fondo
     Image bgImage = new Image(getClass().getResourceAsStream("/images/backgroundWindow.jpg"));
 
-    // Contenedor principal del modal con imagen de fondo
     VBox modalContent = new VBox(15);
     modalContent.setPadding(new Insets(20));
     modalContent.setAlignment(Pos.CENTER);
@@ -73,7 +70,6 @@ public class VentanaJugarCarta extends StackPane {
       modalContent.getChildren().add(danoLabel);
     }
 
-    // Descripción si es carta especial
     if (carta instanceof CEspecial) {
       CEspecial ccarta = (CEspecial) carta;
 
@@ -99,7 +95,6 @@ public class VentanaJugarCarta extends StackPane {
       }
     }
 
-    // Botones
     HBox botones = new HBox(10);
     botones.setAlignment(Pos.CENTER);
 
@@ -107,7 +102,7 @@ public class VentanaJugarCarta extends StackPane {
       String nombrePosicion = posicion.getClass().getSimpleName();
       Button boton = new Button(nombrePosicion);
       boton.setStyle(
-          "-fx-background-color: #A0522D;" + // sienna
+          "-fx-background-color: #A0522D;" +
               "-fx-text-fill: white;" +
               "-fx-font-weight: bold;" +
               "-fx-border-color: white;" +

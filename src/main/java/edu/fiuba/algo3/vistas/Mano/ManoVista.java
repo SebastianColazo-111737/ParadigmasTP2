@@ -29,7 +29,6 @@ public class ManoVista extends StackPane {
     this.jugadorPoseedor = jugadorPoseedor;
     this.cartasVistas = new ArrayList<>();
 
-    // Cargar imagen de fondo
     Image imagenFondo = new Image(getClass().getResourceAsStream("/images/mano.jpg"));
 
     fondo = new Rectangle(800, 80);
