@@ -33,7 +33,7 @@ public class Menu {
     layout.setAlignment(Pos.CENTER);
     layout.getChildren().addAll(logoView, btnJugar, btnSalir);
 
-    scene = new Scene(layout, 800, 600);
+    scene = new Scene(layout, app.getAncho(), app.getAlto());
 
     Image fondoImg = new Image(getClass().getResource("/images/gwentbg.jpg").toExternalForm());
     BackgroundImage fondo = new BackgroundImage(

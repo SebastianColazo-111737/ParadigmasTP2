@@ -20,17 +20,20 @@ public class InfoVista extends StackPane {
   public InfoVista() {
 
     Rectangle fondo = new Rectangle(180, 120);
-    fondo.setFill(Color.LIGHTGRAY);
-    fondo.setStroke(Color.BLACK);
+    fondo.setFill(Color.rgb(46, 29, 0, 0.7));
+    fondo.setStroke(Color.GREY);
+    fondo.setStrokeWidth(1);
 
     Text titulo = new Text("Información");
     titulo.setFont(Font.font("Arial", 15));
-    titulo.setFill(Color.DARKBLUE);
+    titulo.setFill(Color.BLUEVIOLET);
 
     this.textoVidaJ2 = new Text("Jugador 2:");
     this.textoTurno = new Text("Turno:");
     this.textoVidaJ1 = new Text("Jugador 1:");
-
+    this.textoTurno.setFill(Color.WHITESMOKE);
+    this.textoVidaJ1.setFill(Color.WHITESMOKE);
+    this.textoVidaJ2.setFill(Color.WHITESMOKE);
     VBox contenido = new VBox(6, textoVidaJ2, textoTurno, textoVidaJ1);
     contenido.setAlignment(Pos.CENTER);
 
@@ -39,6 +42,7 @@ public class InfoVista extends StackPane {
     VBox.setMargin(titulo, new Insets(5, 0, 10, 0));
 
     this.setPrefSize(180, 120);
+    this.setMaxHeight(120);
     this.getChildren().addAll(fondo, layout);
   }
 

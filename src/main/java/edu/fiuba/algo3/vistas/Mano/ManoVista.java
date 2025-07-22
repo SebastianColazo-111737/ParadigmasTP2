@@ -4,6 +4,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 import java.util.ArrayList;
 
@@ -26,17 +28,22 @@ public class ManoVista extends StackPane {
     this.mano = mano;
     this.jugadorPoseedor = jugadorPoseedor;
     this.cartasVistas = new ArrayList<>();
-    fondo = new Rectangle(800, 90);
-    fondo.setFill(Color.WHITE);
-    fondo.setStroke(Color.BLACK);
+
+    // Cargar imagen de fondo
+    Image imagenFondo = new Image(getClass().getResourceAsStream("/images/mano.jpg"));
+
+    fondo = new Rectangle(800, 80);
+    fondo.setFill(new ImagePattern(imagenFondo));
+    fondo.setStroke(Color.YELLOW);
+    fondo.setStrokeWidth(1);
 
     contenedorCartas = new HBox(20);
     contenedorCartas.setAlignment(Pos.CENTER);
     contenedorCartas.setMinSize(800, 150);
     contenedorCartas.setMaxSize(800, 150);
 
-    this.setMinSize(800, 150);
-    this.setMaxSize(800, 150);
+    this.setMinSize(800, 80);
+    this.setMaxSize(800, 80);
     this.getChildren().addAll(fondo, contenedorCartas);
   }
 
@@ -73,7 +80,14 @@ public class ManoVista extends StackPane {
     }
   }
 
-  public void actualizarVista(GameVista view) {
+  public void actualizarVista(GameVista view, Jugador jugadorActual) {
+    if (this.jugadorPoseedor.equals(jugadorActual)) {
+      fondo.setStroke(Color.YELLOW);
+      fondo.setStrokeWidth(1);
+    } else {
+      fondo.setStroke(Color.GREY);
+      fondo.setStrokeWidth(1);
+    }
     this.actualizarLista();
     this.addCartaVista(view);
   }

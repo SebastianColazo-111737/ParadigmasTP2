@@ -2,7 +2,6 @@ package edu.fiuba.algo3.vistas.Tablero;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,11 +20,13 @@ public class TableroVista extends StackPane {
 
     this.secciones = new ArrayList<>();
     this.secciones.addAll(secciones);
-    seccionesC = new VBox(2);
+
+    // Cambié el spacing de 2 a 10 para mayor separación vertical entre secciones
+    seccionesC = new VBox(10);
     seccionesC.setAlignment(Pos.CENTER);
     seccionesC.setPadding(new Insets(2));
 
-    double alturaSecciones = (70 + 10) * 6;
+    double alturaSecciones = (70 + 10) * 6; // Ajustar si quieres más separación visual
     seccionesC.setPrefHeight(alturaSecciones);
     seccionesC.setMaxHeight(alturaSecciones);
 
@@ -47,8 +48,11 @@ public class TableroVista extends StackPane {
     for (Seccion s : this.secciones) {
       SeccionVista vista = new SeccionVista(s);
       vista.actualizarVista();
+
       seccionesC.getChildren().add(vista);
-      VBox.setMargin(vista, new Insets(0));
+
+      // Puedes dar un margen vertical para separarlas más aún
+      VBox.setMargin(vista, new Insets(5, 0, 5, 0)); // 5px arriba y abajo
     }
   }
 }

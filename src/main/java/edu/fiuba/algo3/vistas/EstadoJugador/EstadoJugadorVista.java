@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import edu.fiuba.algo3.Controller.GameController;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -34,24 +35,49 @@ public class EstadoJugadorVista extends StackPane {
   }
 
   private void construirVista() {
-    Rectangle fondo = new Rectangle(180, 250);
-    fondo.setFill(Color.LIGHTGRAY);
-    fondo.setStroke(Color.BLACK);
+    // Fondo semitransparente marrón claro
+    Rectangle fondo = new Rectangle(160, 300);
+    fondo.setArcWidth(20);
+    fondo.setArcHeight(20);
+    fondo.setFill(Color.rgb(46, 29, 0, 0.7));
+    fondo.setStroke(Color.GRAY);
+    fondo.setStrokeWidth(2);
 
+    // Textos en blanco
     textoNombre = new Text(jugador.nombre());
     textoNombre.setFont(Font.font(18));
+    textoNombre.setFill(Color.WHITE);
 
     textoDescarte = new Text();
+    textoDescarte.setFill(Color.WHITE);
+
     textoMazo = new Text();
+    textoMazo.setFill(Color.WHITE);
+
     textoMano = new Text();
+    textoMano.setFill(Color.WHITE);
+
     textoPuntajeActual = new Text();
-    botonFinalizar = new Button("Finalizar");
+    textoPuntajeActual.setFill(Color.WHITE);
+
+    botonFinalizar = new Button("FIN");
+    botonFinalizar.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+    botonFinalizar.setStyle(
+        "-fx-background-color: red;" +
+            "-fx-text-fill: white;" +
+            "-fx-border-color: white;" +
+            "-fx-border-width: 1;" +
+            "-fx-background-radius: 5;" +
+            "-fx-border-radius: 5;");
 
     VBox contenedorTexto = new VBox(10, textoNombre, textoDescarte, textoMazo, textoMano, textoPuntajeActual,
         botonFinalizar);
     contenedorTexto.setAlignment(Pos.CENTER);
 
-    this.getChildren().addAll(fondo, contenedorTexto);
+    StackPane panelInterior = new StackPane(fondo, contenedorTexto);
+    panelInterior.setAlignment(Pos.CENTER);
+
+    this.getChildren().addAll(panelInterior);
   }
 
   public void actualizarVista(GameController game) {

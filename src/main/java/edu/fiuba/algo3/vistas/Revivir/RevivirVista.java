@@ -8,11 +8,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import edu.fiuba.algo3.modelo.cartas.unidades.Medico;
+
 import java.util.ArrayList;
 
 public class RevivirVista extends StackPane {
@@ -20,23 +21,42 @@ public class RevivirVista extends StackPane {
   private Label cartaSeleccionadaLabel;
 
   public RevivirVista(Runnable onClose, ArrayList<ICarta> cartasRevivir, Medico medico) {
-    Rectangle fondo = new Rectangle();
-    fondo.setFill(Color.rgb(0, 0, 0, 0.5));
-    fondo.setMouseTransparent(false);
-    fondo.widthProperty().bind(this.widthProperty());
-    fondo.heightProperty().bind(this.heightProperty());
+    Rectangle fondoOscuro = new Rectangle();
+    fondoOscuro.widthProperty().bind(this.widthProperty());
+    fondoOscuro.heightProperty().bind(this.heightProperty());
+    fondoOscuro.setFill(Color.rgb(0, 0, 0, 0.5));
+
+    // Cargar imagen de fondo para el modal
+    Image bgImage = new Image(getClass().getResourceAsStream("/images/backgroundWindow.jpg"));
+
+    // Contenedor principal del modal con imagen de fondo
+    VBox modalContent = new VBox(15);
+    modalContent.setPadding(new Insets(20));
+    modalContent.setAlignment(Pos.CENTER);
+    modalContent.setMaxWidth(400);
+    modalContent.setMaxHeight(350);
+    modalContent.setBackground(new Background(new BackgroundImage(
+        bgImage,
+        BackgroundRepeat.REPEAT,
+        BackgroundRepeat.REPEAT,
+        BackgroundPosition.CENTER,
+        new BackgroundSize(400, 350, true, true, true, false))));
+    modalContent.setBorder(new Border(new BorderStroke(
+        Color.BEIGE,
+        BorderStrokeStyle.SOLID,
+        new CornerRadii(10),
+        new BorderWidths(3))));
 
     Label titulo = new Label("Seleccioná una carta para revivir");
-    titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+    titulo.setFont(javafx.scene.text.Font.font("Georgia", 20));
+    titulo.setTextFill(Color.WHITE);
 
     cartaSeleccionadaLabel = new Label("Seleccionado: -");
-    cartaSeleccionadaLabel.setStyle("-fx-font-size: 14px;");
+    cartaSeleccionadaLabel.setFont(javafx.scene.text.Font.font("Arial", 14));
+    cartaSeleccionadaLabel.setTextFill(Color.BEIGE);
 
     VBox listaCartas = new VBox(10);
     listaCartas.setAlignment(Pos.CENTER);
-
-    Button cerrarBtn = new Button("Cancelar");
-    cerrarBtn.setOnAction(e -> onClose.run());
 
     for (ICarta carta : cartasRevivir) {
       CartaVista vistaCarta = new CartaVista(carta);
@@ -48,38 +68,69 @@ public class RevivirVista extends StackPane {
       listaCartas.getChildren().add(cartaContainer);
     }
 
-    VBox contenido = new VBox(15, titulo, cartaSeleccionadaLabel, listaCartas, cerrarBtn);
-    contenido.setAlignment(Pos.CENTER);
-    contenido.setPadding(new Insets(20));
-    contenido.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;");
+    Button cerrarBtn = new Button("Cancelar");
+    cerrarBtn.setStyle(
+        "-fx-background-color: darkred;" +
+            "-fx-text-fill: white;" +
+            "-fx-font-weight: bold;" +
+            "-fx-border-color: white;" +
+            "-fx-border-width: 2;" +
+            "-fx-background-radius: 5;" +
+            "-fx-border-radius: 5;");
+    cerrarBtn.setOnAction(e -> onClose.run());
 
-    this.getChildren().addAll(fondo, contenido);
+    modalContent.getChildren().addAll(titulo, cartaSeleccionadaLabel, listaCartas, cerrarBtn);
+
+    this.getChildren().addAll(fondoOscuro, modalContent);
     this.setAlignment(Pos.CENTER);
   }
 
-  private void mostrarVentanaPosiciones(ICarta carta, Medico m) {
+  private void mostrarVentanaPosiciones(ICarta carta, Medico medico) {
+    // Fondo oscuro semitransparente para el modal de posiciones
     Rectangle modalFondo = new Rectangle();
-    modalFondo.setFill(Color.rgb(0, 0, 0, 0.7));
     modalFondo.widthProperty().bind(this.widthProperty());
     modalFondo.heightProperty().bind(this.heightProperty());
+    modalFondo.setFill(Color.rgb(0, 0, 0, 0.5));
+
+    // Imagen de fondo para el modal de posiciones
+    Image bgImage = new Image(getClass().getResourceAsStream("/images/backgroundWindow.jpg"));
 
     VBox modalContent = new VBox(15);
     modalContent.setPadding(new Insets(20));
     modalContent.setAlignment(Pos.CENTER);
-    modalContent.setStyle("-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2px;");
-    modalContent.setMaxWidth(350);
+    modalContent.setMaxWidth(400);
     modalContent.setMaxHeight(300);
+    modalContent.setBackground(new Background(new BackgroundImage(
+        bgImage,
+        BackgroundRepeat.REPEAT,
+        BackgroundRepeat.REPEAT,
+        BackgroundPosition.CENTER,
+        new BackgroundSize(400, 300, true, true, true, false))));
+    modalContent.setBorder(new Border(new BorderStroke(
+        Color.BEIGE,
+        BorderStrokeStyle.SOLID,
+        new CornerRadii(10),
+        new BorderWidths(3))));
 
     Label titulo = new Label("Posiciones para: " + carta.getClass().getSimpleName());
-    titulo.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+    titulo.setFont(javafx.scene.text.Font.font("Georgia", 18));
+    titulo.setTextFill(Color.WHITE);
 
     VBox botonesPosiciones = new VBox(10);
     botonesPosiciones.setAlignment(Pos.CENTER);
 
     for (Posicion pos : carta.getTipo()) {
       Button btnPos = new Button(pos.getClass().getSimpleName());
+      btnPos.setStyle(
+          "-fx-background-color: #A0522D;" +
+              "-fx-text-fill: white;" +
+              "-fx-font-weight: bold;" +
+              "-fx-border-color: white;" +
+              "-fx-border-width: 1.5;" +
+              "-fx-background-radius: 5;" +
+              "-fx-border-radius: 5;");
       btnPos.setOnAction(e -> {
-        m.setUnidadParaRevivir(carta, pos);
+        medico.setUnidadParaRevivir(carta, pos);
         this.getChildren().removeAll(modalFondo, modalContent);
       });
       botonesPosiciones.getChildren().add(btnPos);

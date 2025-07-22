@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.vistas.Seccion;
 
 import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
@@ -20,8 +21,9 @@ public class SeccionEspecialVista extends StackPane {
 
   public SeccionEspecialVista() {
 
-    Rectangle fondo = new Rectangle(150, 80, Color.SKYBLUE);
-    fondo.setStroke(Color.DARKBLUE);
+    Rectangle fondo = new Rectangle(250, 80);
+    fondo.setStroke(Color.BROWN);
+    fondo.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("/images/seccion.jpg"))));
     fondo.setArcWidth(20);
     fondo.setArcHeight(20);
 
@@ -40,7 +42,8 @@ public class SeccionEspecialVista extends StackPane {
     VBox.setVgrow(fondoConCartas, Priority.ALWAYS);
 
     this.getChildren().addAll(layoutVertical);
-    this.setPrefSize(150, 300);
+    this.setPrefSize(250, 300);
+    this.setMaxWidth(250);
   }
 
   public void actualizarVista(SeccionEspecial seccion) {

@@ -14,8 +14,11 @@ import edu.fiuba.algo3.vistas.VentanaJugar.VentanaJugarCarta;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 
 public class GameVista {
   private Scene scene;
@@ -33,6 +36,11 @@ public class GameVista {
 
   public GameVista(App app, GameController gameController) {
     this.game = gameController;
+
+    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+    double screenWidth = screenBounds.getWidth();
+    double screenHeight = screenBounds.getHeight();
+
     this.tableroVista = new TableroVista(this.game.getTodasLasSecciones());
     this.mano1 = new ManoVista(this.game.getManoJ1(), this.game.getJugador1());
     this.mano2 = new ManoVista(this.game.getManoJ2(), this.game.getJugador2());
@@ -43,8 +51,8 @@ public class GameVista {
     });
 
     this.especialJ2 = new SeccionEspecialVista();
-
     this.especialJ1 = new SeccionEspecialVista();
+
     VBox infoConTestIzquierda = new VBox(20, especialJ2, info, this.especialJ1);
     infoConTestIzquierda.setAlignment(Pos.CENTER);
     infoConTestIzquierda.setPadding(new Insets(30));
@@ -59,20 +67,55 @@ public class GameVista {
     testDerecha.setPadding(new Insets(10));
     testDerecha.setPrefWidth(150);
 
-    VBox layoutCentro = new VBox(20, mano2, tableroVista, mano1);
+    VBox layoutCentro = new VBox(5, mano2, tableroVista, mano1);
     layoutCentro.setAlignment(Pos.CENTER);
-    layoutCentro.setPadding(new Insets(20));
-    layoutCentro.setMaxWidth(600);
+    layoutCentro.setPadding(new Insets(5));
+    layoutCentro.setMaxWidth(Double.MAX_VALUE);
     layoutCentro.setPrefSize(600, 400);
 
-    HBox layoutComplete = new HBox(40, infoConTestIzquierda, layoutCentro, testDerecha);
+    HBox layoutComplete = new HBox(1, infoConTestIzquierda, layoutCentro, testDerecha);
     layoutComplete.setAlignment(Pos.CENTER);
     layoutComplete.setPadding(new Insets(20));
-    layoutComplete.setMaxWidth(app.getAncho());
-    layoutComplete.setPrefSize(app.getAncho(), app.getAlto());
+    layoutComplete.setMaxWidth(Double.MAX_VALUE);
+    layoutComplete.setPrefSize(screenWidth, screenHeight);
 
-    this.root = new StackPane(layoutComplete);
-    this.scene = new Scene(root, app.getAncho(), app.getAlto());
+    Image bgImage = new Image(getClass().getResource("/images/backgroundGame.jpg").toExternalForm());
+
+    BackgroundSize backgroundSize = new BackgroundSize(
+        100, 100, true, true, true, true);
+
+    BackgroundImage fondo = new BackgroundImage(
+        bgImage,
+        BackgroundRepeat.NO_REPEAT,
+        BackgroundRepeat.NO_REPEAT,
+        BackgroundPosition.CENTER,
+        backgroundSize);
+
+    this.root = new StackPane();
+    root.setBackground(new Background(fondo));
+    StackPane.setAlignment(layoutComplete, Pos.CENTER);
+    StackPane.setMargin(layoutComplete, new Insets(0));
+    root.getChildren().add(layoutComplete);
+
+    this.scene = new Scene(root, screenWidth, screenHeight);
+
+    scene.widthProperty().addListener((obs, oldVal, newVal) -> {
+      root.setBackground(new Background(
+          new BackgroundImage(bgImage,
+              BackgroundRepeat.NO_REPEAT,
+              BackgroundRepeat.NO_REPEAT,
+              BackgroundPosition.CENTER,
+              new BackgroundSize(100, 100, true, true, true, true))));
+    });
+
+    scene.heightProperty().addListener((obs, oldVal, newVal) -> {
+      root.setBackground(new Background(
+          new BackgroundImage(bgImage,
+              BackgroundRepeat.NO_REPEAT,
+              BackgroundRepeat.NO_REPEAT,
+              BackgroundPosition.CENTER,
+              new BackgroundSize(100, 100, true, true, true, true))));
+    });
 
     this.ganador.setVisible(false);
     root.getChildren().add(this.ganador);
@@ -83,15 +126,14 @@ public class GameVista {
       public void handle(long now) {
         game.chequearEstado();
         tableroVista.actualizarVista();
-        mano1.actualizarVista(self);
-        mano2.actualizarVista(self);
+        mano1.actualizarVista(self, game.getJugadorActual());
+        mano2.actualizarVista(self, game.getJugadorActual());
         info.actualizarVista(game);
         vistaJ1.actualizarVista(game);
         vistaJ2.actualizarVista(game);
         especialJ2.actualizarVista(game.getJugador2().atril().getSeccionEspecial());
         especialJ1.actualizarVista(game.getJugador1().atril().getSeccionEspecial());
         self.mostrarVentanaGanador();
-
       }
     };
     gameLoop.start();
@@ -122,5 +164,4 @@ public class GameVista {
 
     root.getChildren().add(ventanaRef[0]);
   }
-
 }
