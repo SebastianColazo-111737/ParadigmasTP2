@@ -4,8 +4,9 @@ package edu.fiuba.algo3.jsonParser;
 import edu.fiuba.algo3.modelo.carta.unidad.UnidadFactory;
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
 
-import edu.fiuba.algo3.vista.Cartas.CacheEstilosVistaCarta;
-import edu.fiuba.algo3.vista.Cartas.Unidades.EstiloCartaUnidad;
+
+import edu.fiuba.algo3.vista.vistas.cartas.CacheEstilosVistaCarta;
+import edu.fiuba.algo3.vista.vistas.cartas.Unidades.EstiloCartaUnidad;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

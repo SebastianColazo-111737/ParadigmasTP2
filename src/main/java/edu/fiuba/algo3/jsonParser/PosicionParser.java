@@ -10,12 +10,18 @@ public class PosicionParser {
     public static List<Posicion> crearPosiciones(List<String> posicionesTexto){
         List<Posicion> posiciones = new ArrayList<>();
         for(String posicion: posicionesTexto){
-            switch (posicion.toLowerCase()){
-                case "cuerpo a cuerpo": posiciones.add(new CuerpoACuerpo()); break;
-                case "rango": posiciones.add(new Distancia()); break;
-                case "asedio": posiciones.add(new Asedio()); break;
-            }
+            posiciones.add(crearPosicion(posicion));
         }
         return posiciones;
+    }
+
+    public static Posicion crearPosicion(String posicionTexto){
+        Posicion posicion = null;
+        switch (posicionTexto.toLowerCase()){
+            case "cuerpo a cuerpo": posicion = new CuerpoACuerpo(); break;
+            case "rango": posicion = new Distancia(); break;
+            case "asedio": posicion = new Asedio(); break;
+        }
+        return posicion;
     }
 }

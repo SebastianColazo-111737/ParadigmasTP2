@@ -41,7 +41,7 @@ public class UnidadFactory {
                 case "espia": unidadModificada = new Espia(unidadModificada);  break;
                 case "impulso de moral": unidadModificada = new Animador(unidadModificada);  break;
                 case "agil": unidadModificada = new Agil(unidadModificada, posiciones.get(1));  break;
-                case "medico": unidadModificada = new Medico(unidadModificada, null, null); break; // falta terminar medico
+                case "medico": unidadModificada = new Medico(unidadModificada); break;
             }
         }
         return unidadModificada;

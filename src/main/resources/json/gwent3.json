@@ -1,0 +1,394 @@
+{
+  "mazo_jugador_uno": {
+    "unidades": [
+      {
+        "nombre": "Birna",
+        "puntos": 2,
+        "modificador": [
+          "Medico"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Geralt",
+        "puntos": 15,
+        "modificador": [
+          "Legendaria"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Guerrero",
+        "puntos": 6,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Guerrero",
+        "puntos": 6,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Guerrero",
+        "puntos": 6,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Jaskier",
+        "puntos": 2,
+        "modificador": [
+          "impulso de moral"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Vampiro",
+        "puntos": 5,
+        "modificador": [],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Barclay",
+        "puntos": 6,
+        "modificador": [
+          "Agil"
+        ],
+        "seccion": "Cuerpo a Cuerpo, Rango"
+      },
+      {
+        "nombre": "Celaeno",
+        "puntos": 2,
+        "modificador": [
+          "Agil"
+        ],
+        "seccion": "Cuerpo a Cuerpo, Rango"
+      },
+      {
+        "nombre": "Arquero",
+        "puntos": 10,
+        "modificador": [],
+        "seccion": "Rango"
+      },
+      {
+        "nombre": "Cazadores",
+        "puntos": 5,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Rango"
+      },
+      {
+        "nombre": "Cazadores",
+        "puntos": 5,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Rango"
+      },
+      {
+        "nombre": "Cazadores",
+        "puntos": 5,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Rango"
+      },
+      {
+        "nombre": "Catapulta",
+        "puntos": 8,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Catapulta",
+        "puntos": 8,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Ballesta",
+        "puntos": 6,
+        "modificador": [],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Ballesta",
+        "puntos": 6,
+        "modificador": [],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Medico",
+        "puntos": 5,
+        "modificador": [
+          "Medico"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Thaler",
+        "puntos": 1,
+        "modificador": [
+          "Espia"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Thaler",
+        "puntos": 1,
+        "modificador": [
+          "Espia"
+        ],
+        "seccion": "Asedio"
+      }
+    ],
+    "especiales": [
+      {
+        "nombre": "Cuerno de poder",
+        "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+        "tipo": "Morale boost"
+      },
+      {
+        "nombre": "Cuerno de poder",
+        "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+        "tipo": "Morale boost"
+      },
+      {
+        "nombre": "Cuerno de poder",
+        "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+        "tipo": "Morale boost"
+      },
+      {
+        "nombre": "Escarcha",
+        "descripcion": "Establece la fuerza de todas las cartas de Combate Cuerpo a Cuerpo en 1 para ambos jugadores.",
+        "tipo": "Clima",
+        "afectado": [
+          "Cuerpo a Cuerpo"
+        ]
+      },
+      {
+        "nombre": "Lluvia",
+        "descripcion": "Establece la fuerza de todas las cartas de Asedio en 1 para ambos jugadores.",
+        "tipo": "Clima",
+        "afectado": [
+          "Asedio"
+        ]
+      },
+      {
+        "nombre": "Tormeta",
+        "descripcion": "Establece la fuerza de todas las cartas de Combate Cuerpo a Cuerpo y Combate a Distancia en 1 para ambos jugadores.",
+        "tipo": "Clima",
+        "afectado": [
+          "Cuerpo a Cuerpo",
+          "Rango"
+        ]
+      }
+    ]
+  },
+  "mazo_jugador_dos": {
+    "unidades": [
+      {
+        "nombre": "Comando",
+        "puntos": 4,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Comando",
+        "puntos": 4,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Comando",
+        "puntos": 4,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Botchling",
+        "puntos": 4,
+        "modificador": [],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Defensa",
+        "puntos": 8,
+        "modificador": [],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Cahir",
+        "puntos": 6,
+        "modificador": [],
+        "seccion": "Rango"
+      },
+      {
+        "nombre": "Harpia",
+        "puntos": 2,
+        "modificador": [
+          "Agil"
+        ],
+        "seccion": "Cuerpo a Cuerpo, Rango"
+      },
+      {
+        "nombre": "Cerys",
+        "puntos": 10,
+        "modificador": [
+          "Legendaria"
+        ],
+        "seccion": "Rango"
+      },
+      {
+        "nombre": "Ciaran",
+        "puntos": 3,
+        "modificador": [
+          "Agil"
+        ],
+        "seccion": "Cuerpo a Cuerpo, Rango"
+      },
+      {
+        "nombre": "Thaler",
+        "puntos": 1,
+        "modificador": [
+          "Espia"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Cirilla",
+        "puntos": 15,
+        "modificador": [
+          "Legendaria"
+        ],
+        "seccion": "Rango"
+      },
+      {
+        "nombre": "Doncella",
+        "puntos": 4,
+        "modificador": [
+          "impulso de moral"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Doncella",
+        "puntos": 4,
+        "modificador": [
+          "impulso de moral"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Skald",
+        "puntos": 4,
+        "modificador": [],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Herrero",
+        "puntos": 4,
+        "modificador": ["Medico"],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Herrero",
+        "puntos": 4,
+        "modificador": ["Medico"],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Guerrero",
+        "puntos": 6,
+        "modificador": [
+          "Carta Unida"
+        ],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Crone",
+        "puntos": 6,
+        "modificador": [],
+        "seccion": "Asedio"
+      }
+    ],
+    "especiales": [
+      {
+        "nombre": "Quemar",
+        "descripcion": "Elimina las cartas más fuertes del campo de batalla.",
+        "tipo": "Tierra arrasada"
+      },
+      {
+        "nombre": "Quemar",
+        "descripcion": "Elimina las cartas más fuertes del campo de batalla.",
+        "tipo": "Tierra arrasada"
+      },
+      {
+        "nombre": "Tiempo despejado",
+        "descripcion": "Elimina todos los efectos de clima en el tablero.",
+        "tipo": "Clima",
+        "afectado": [
+          "Cuerpo a Cuerpo",
+          "Rango",
+          "Asedio"
+        ]
+      },
+      {
+        "nombre": "Tiempo despejado",
+        "descripcion": "Elimina todos los efectos de clima en el tablero.",
+        "tipo": "Clima",
+        "afectado": [
+          "Cuerpo a Cuerpo",
+          "Rango",
+          "Asedio"
+        ]
+      },
+      {
+        "nombre": "Tiempo despejado",
+        "descripcion": "Elimina todos los efectos de clima en el tablero.",
+        "tipo": "Clima",
+        "afectado": [
+          "Cuerpo a Cuerpo",
+          "Rango",
+          "Asedio"
+        ]
+      },
+      {
+        "nombre": "Lluvia",
+        "descripcion": "Establece la fuerza de todas las cartas de Asedio en 1 para ambos jugadores.",
+        "tipo": "Clima",
+        "afectado": [
+          "Asedio"
+        ]
+      },
+      {
+        "nombre": "Cuerno de poder",
+        "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+        "tipo": "Morale boost"
+      },
+      {
+        "nombre": "Cuerno de poder",
+        "descripcion": "Duplica la fuerza de todas las cartas de una sección específica.",
+        "tipo": "Morale boost"
+      }
+    ]
+  }
+}

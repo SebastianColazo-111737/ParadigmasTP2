@@ -22,4 +22,7 @@ public class Puntaje {
         return this.puntajeActual;
     }
 
+    public int getPuntajeBase(){
+        return this.puntajeBase;
+    }
 }

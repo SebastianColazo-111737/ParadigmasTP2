@@ -8,8 +8,9 @@ import edu.fiuba.algo3.modelo.carta.Especial.TierraArrasada;
 
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 
-import edu.fiuba.algo3.vista.Cartas.CacheEstilosVistaCarta;
-import edu.fiuba.algo3.vista.Cartas.Especiales.EstiloCartaEspecial;
+
+import edu.fiuba.algo3.vista.vistas.cartas.CacheEstilosVistaCarta;
+import edu.fiuba.algo3.vista.vistas.cartas.Especiales.EstiloCartaEspecial;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

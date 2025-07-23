@@ -8,12 +8,15 @@ public class Resultado {
 
     private HashMap<Jugador, Integer> puntuacion;
     private Jugador ganador;
+    private Jugador perdedor;
 
     public Resultado(List<Jugador> jugadores){
         this.puntuacion = new HashMap<>();
         this.ganador = null;
 
         int maxPuntaje = Integer.MIN_VALUE;
+        int minPuntaje = Integer.MAX_VALUE;
+
         for (Jugador jugador : jugadores) {
             int puntaje = jugador.getPuntaje();
             puntuacion.put(jugador, puntaje);
@@ -22,9 +25,15 @@ public class Resultado {
                 maxPuntaje = puntaje;
                 ganador = jugador;
             }
+
+            if (puntaje < minPuntaje) {
+                minPuntaje = puntaje;
+                perdedor = jugador;
+            }
         }
     }
 
     public Jugador getGanador(){return this.ganador;}
+    public Jugador getPerdedor(){return this.perdedor;}
     public HashMap<Jugador, Integer> getPuntuacion(){return this.puntuacion;}
 }
