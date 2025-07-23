@@ -13,7 +13,15 @@
         "nombre": "Geralt",
         "puntos": 15,
         "modificador": [
-          "Legendaria"
+          "impulso de moral","Legendaria"
+        ],
+        "seccion": "Cuerpo a Cuerpo"
+      },
+      {
+        "nombre": "Dudu",
+        "puntos": 0,
+        "modificador": [
+          "Espia","Legendaria"
         ],
         "seccion": "Cuerpo a Cuerpo"
       },
@@ -139,7 +147,7 @@
       },
       {
         "nombre": "Thaler",
-        "puntos": 1,
+        "puntos": 3,
         "modificador": [
           "Espia"
         ],
@@ -147,7 +155,7 @@
       },
       {
         "nombre": "Thaler",
-        "puntos": 1,
+        "puntos": 3,
         "modificador": [
           "Espia"
         ],
@@ -232,7 +240,9 @@
       {
         "nombre": "Defensa",
         "puntos": 8,
-        "modificador": [],
+        "modificador": [
+          "impulso de moral"
+        ],
         "seccion": "Cuerpo a Cuerpo"
       },
       {
@@ -253,7 +263,7 @@
         "nombre": "Cerys",
         "puntos": 10,
         "modificador": [
-          "Legendaria"
+          "Medico","Legendaria"
         ],
         "seccion": "Rango"
       },
@@ -267,7 +277,7 @@
       },
       {
         "nombre": "Thaler",
-        "puntos": 1,
+        "puntos": 3,
         "modificador": [
           "Espia"
         ],
@@ -277,25 +287,25 @@
         "nombre": "Cirilla",
         "puntos": 15,
         "modificador": [
-          "Legendaria"
+          "Agil","Legendaria"
         ],
-        "seccion": "Rango"
+        "seccion": "Rango, Asedio"
       },
       {
         "nombre": "Doncella",
         "puntos": 4,
         "modificador": [
-          "impulso de moral"
+          "impulso de moral","Agil"
         ],
-        "seccion": "Asedio"
+        "seccion": "Rango, Asedio"
       },
       {
         "nombre": "Doncella",
         "puntos": 4,
         "modificador": [
-          "impulso de moral"
+          "impulso de moral","Agil"
         ],
-        "seccion": "Asedio"
+        "seccion": "Rango, Asedio"
       },
       {
         "nombre": "Skald",
@@ -321,7 +331,7 @@
         "modificador": [
           "Carta Unida"
         ],
-        "seccion": "Asedio"
+        "seccion": "Cuerpo a Cuerpo"
       },
       {
         "nombre": "Crone",

@@ -4,9 +4,11 @@ import edu.fiuba.algo3.jsonParser.PosicionParser;
 import edu.fiuba.algo3.modelo.carta.Carta;
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
+import edu.fiuba.algo3.vista.vistas.cartas.VistaCarta;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,12 +23,16 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 
-public class VistaCartaUnidad extends StackPane {
+public class VistaCartaUnidad extends VistaCarta {
 
     private Unidad unidadModelo;
     private String nombreUnidad;
     private Image imagenUnidad;
+    private List<String> modificadores;
+    private List<String> posiciones;
+
     private BiConsumer<Carta, Posicion> eventoJugarCarta;
+
 
     public VistaCartaUnidad(Unidad unidad, List<String> modificadores, List<String> posiciones, BiConsumer<Carta, Posicion> eventoJugarCarta) {
         this.unidadModelo = unidad;
@@ -34,6 +40,8 @@ public class VistaCartaUnidad extends StackPane {
         String nombreLimpio = this.nombreUnidad.toLowerCase().replaceAll("\\s+", "");
         this.imagenUnidad = new Image(getClass().getResource("/imagenes/cartas/unidades/" + nombreLimpio + ".png").toExternalForm());
         this.eventoJugarCarta = eventoJugarCarta;
+        this.posiciones = posiciones;
+        this.modificadores = modificadores;
 
         BackgroundImage bgImage = new BackgroundImage(
                 this.imagenUnidad,
@@ -81,13 +89,22 @@ public class VistaCartaUnidad extends StackPane {
 
         this.getChildren().add(capaTransparente);
 
-        this.setOnMouseClicked(e -> mostrarVentanaDetalle(unidad, modificadores, posiciones));
+        this.setOnMouseClicked(e -> {
+            StackPane vistaDetalle = getVentanaDetalle(true);
+            Stage popup = new Stage();
+            popup.setTitle(nombreUnidad);
+            popup.setScene(new Scene(vistaDetalle, 300, 450));
+            popup.setResizable(false);
+            popup.show();
+        });
     }
 
-    private void mostrarVentanaDetalle(Unidad unidad, List<String> modificadoresTexto, List<String> posicionesTexto) {
-        Stage popup = new Stage();
-        popup.setTitle(this.nombreUnidad);
+    @Override
+    public StackPane getVentanaDetalle(Boolean sePuedeJugar){
+        return crearVistaDetalles(sePuedeJugar);
+    }
 
+    public StackPane crearVistaDetalles(boolean sePuedeJugar) {
         Region fondo = new Region();
         fondo.setPrefSize(300, 450);
         fondo.setBackground(new Background(new BackgroundImage(
@@ -104,7 +121,7 @@ public class VistaCartaUnidad extends StackPane {
         Circle circuloPuntaje = new Circle(16);
         circuloPuntaje.setFill(Color.WHITE);
 
-        Text textoPuntaje = new Text(String.valueOf(unidad.getPuntaje().getPuntajeActual()));
+        Text textoPuntaje = new Text(String.valueOf(unidadModelo.getPuntaje().getPuntajeActual()));
         textoPuntaje.setFill(Color.BLACK);
         textoPuntaje.setFont(Font.font(18));
 
@@ -114,25 +131,30 @@ public class VistaCartaUnidad extends StackPane {
         HBox nombreYPuntaje = new HBox(10, nombreLabel, circuloConTexto);
         nombreYPuntaje.setAlignment(Pos.CENTER_LEFT);
 
-        HBox iconosModificadores = crearIconosModificadores(modificadoresTexto);
+        HBox iconosModificadores = crearIconosModificadores(modificadores);
 
         HBox botonesPosiciones = new HBox(10);
-        botonesPosiciones.setAlignment(Pos.CENTER_LEFT);
+        botonesPosiciones.setAlignment(Pos.CENTER);
 
+        if (sePuedeJugar) {
+            for (String posicionTexto : posiciones) {
+                Posicion pos = PosicionParser.crearPosicion(posicionTexto);
 
-        for (String posicionTexto : posicionesTexto) {
-            Posicion pos = PosicionParser.crearPosicion(posicionTexto);
+                Button botonPosicion = new Button(posicionTexto);
+                botonPosicion.setStyle(super.estiloBotonNormal());
+                botonPosicion.setOnMouseEntered(e -> botonPosicion.setStyle(super.estiloBotonHover()));
+                botonPosicion.setOnMouseExited(e -> botonPosicion.setStyle(super.estiloBotonNormal()));
 
-            javafx.scene.control.Button btnPos = new javafx.scene.control.Button(posicionTexto);
-            btnPos.setOnAction(e -> {
-                if (eventoJugarCarta != null) {
-                    eventoJugarCarta.accept(unidadModelo, pos);
-                }
-                Stage stage = (Stage) btnPos.getScene().getWindow();
-                stage.close();
-            });
+                botonPosicion.setOnAction(e -> {
+                    if (eventoJugarCarta != null) {
+                        eventoJugarCarta.accept(unidadModelo, pos);
+                    }
+                    Stage stage = (Stage) botonPosicion.getScene().getWindow();
+                    stage.close();
+                });
 
-            botonesPosiciones.getChildren().add(btnPos);
+                botonesPosiciones.getChildren().add(botonPosicion);
+            }
         }
 
         VBox infoBox = new VBox(8, nombreYPuntaje, iconosModificadores, botonesPosiciones);
@@ -145,19 +167,17 @@ public class VistaCartaUnidad extends StackPane {
         capaInferior.setMaxHeight(160);
         StackPane.setAlignment(capaInferior, Pos.BOTTOM_CENTER);
 
-        StackPane root = new StackPane();
-        root.getChildren().addAll(fondo, capaInferior);
+//        popup.focusedProperty().addListener((obs, oldVal, newVal) -> {
+//            if (!newVal) popup.close();
+//        });
 
-        Scene scene = new Scene(root, 300, 450);
-        popup.setScene(scene);
-        popup.setResizable(false);
-
-        popup.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) popup.close();
-        });
-
-        popup.show();
+        StackPane root = new StackPane(fondo, capaInferior);
+        root.setPrefSize(300, 450);
+        return root;
     }
+
+
+
 
     private HBox crearIconosModificadores(List<String> modificadores) {
         HBox contenedor = new HBox(5);
@@ -172,8 +192,8 @@ public class VistaCartaUnidad extends StackPane {
                 continue;
             }
             ImageView iv = new ImageView(imagenMod);
-            iv.setFitWidth(50);
-            iv.setFitHeight(50);
+            iv.setFitWidth(40);
+            iv.setFitHeight(40);
             iv.setPreserveRatio(true);
             contenedor.getChildren().add(iv);
         }

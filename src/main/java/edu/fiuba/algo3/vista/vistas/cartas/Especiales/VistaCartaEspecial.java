@@ -3,6 +3,7 @@ package edu.fiuba.algo3.vista.vistas.cartas.Especiales;
 import edu.fiuba.algo3.jsonParser.PosicionParser;
 import edu.fiuba.algo3.modelo.carta.Carta;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
+import edu.fiuba.algo3.vista.vistas.cartas.VistaCarta;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,18 +13,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class VistaCartaEspecial extends StackPane {
+public class VistaCartaEspecial extends VistaCarta {
 
     private Carta especialModelo;
     private String nombreCarta;
     private Image imagenCarta;
     private BiConsumer<Carta, Posicion> eventoJugarCarta;
+    private String descripcion;
+    private String tipo;
 
     public VistaCartaEspecial(Carta especial, String descripcion, String tipo, List<String> posiciones, BiConsumer<Carta, Posicion> eventoJugarCarta) {
         this.especialModelo = especial;
@@ -31,6 +36,8 @@ public class VistaCartaEspecial extends StackPane {
         String nombreLimpio = this.nombreCarta.toLowerCase().replaceAll("\\s+", "");
         this.imagenCarta = new Image(getClass().getResource("/imagenes/cartas/especiales/" + nombreLimpio + ".png").toExternalForm());
         this.eventoJugarCarta = eventoJugarCarta;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
 
         ImageView vistaImagen = new ImageView(imagenCarta);
         vistaImagen.setPreserveRatio(false);
@@ -46,13 +53,21 @@ public class VistaCartaEspecial extends StackPane {
 
         this.getChildren().add(vistaImagen);
 
-        this.setOnMouseClicked(e -> mostrarVentanaDetalle(descripcion, tipo, posiciones));
+        this.setOnMouseClicked(e -> {
+            StackPane detalle = getVentanaDetalle(true);
+            Stage popup = new Stage();
+            popup.setScene(new Scene(detalle, 300, 450));
+            popup.setResizable(false);
+            popup.show();
+        });
     }
 
-    private void mostrarVentanaDetalle(String descripcion, String tipo, List<String> posicionesTexto) {
-        Stage popup = new Stage();
-        popup.setTitle(this.nombreCarta);
+    @Override
+    public StackPane getVentanaDetalle(Boolean sePuedeJugar){
+        return crearVistaDetalle(this.descripcion, this.tipo, sePuedeJugar);
+    }
 
+    private StackPane crearVistaDetalle(String descripcion, String tipo, Boolean sePuedeJugar) {
         Region fondo = new Region();
         fondo.setPrefSize(300, 450);
         fondo.setBackground(new Background(new BackgroundImage(
@@ -64,48 +79,55 @@ public class VistaCartaEspecial extends StackPane {
         )));
 
         Label nombreLabel = new Label(this.nombreCarta);
-        nombreLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: white;");
+        nombreLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: white;");
 
         Label tipoLabel = new Label("Tipo: " + tipo);
-        tipoLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: lightgray;");
+        tipoLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: lightgray;");
 
-        Label descripcionLabel = new Label(descripcion);
-        descripcionLabel.setWrapText(true);
-        descripcionLabel.setMaxWidth(280);
-        descripcionLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: white;");
+        Text descripcionTexto = new Text(descripcion);
+        descripcionTexto.setStyle("-fx-font-size: 18px; -fx-fill: white;");
+
+        TextFlow descripcionFlow = new TextFlow(descripcionTexto);
+        descripcionFlow.setMaxWidth(260);
+        descripcionFlow.setLineSpacing(5);
 
         HBox botones = new HBox(10);
-        botones.setAlignment(Pos.CENTER_LEFT);
-
-        if (tipo.equalsIgnoreCase("Morale boost")) {
-            List<String> posicionesParaMostrar = new ArrayList<>();
-            posicionesParaMostrar.add("cuerpo a cuerpo");
-            posicionesParaMostrar.add("rango");
-            posicionesParaMostrar.add("asedio");
-
-            for (String posicionTexto : posicionesParaMostrar) {
-                Posicion pos = PosicionParser.crearPosicion(posicionTexto);
-                Button btnPos = new Button(posicionTexto);
-                btnPos.setOnAction(e -> {
-                    if (eventoJugarCarta != null) {
-                        eventoJugarCarta.accept(this.especialModelo, pos);
-                    }
-                    popup.close();
-                });
-                botones.getChildren().add(btnPos);
-            }
-        } else {
-            Button jugarBtn = new Button("Jugar");
-            jugarBtn.setOnAction(e -> {
-                if (eventoJugarCarta != null) {
-                    eventoJugarCarta.accept(this.especialModelo, null);
+        botones.setAlignment(Pos.CENTER);
+        if(sePuedeJugar){
+            if (tipo.equalsIgnoreCase("Morale boost")) {
+                List<String> posicionesParaMostrar = List.of("cuerpo a cuerpo", "rango", "asedio");
+                for (String posicionTexto : posicionesParaMostrar) {
+                    Posicion pos = PosicionParser.crearPosicion(posicionTexto);
+                    Button botonPosicion = new Button(posicionTexto);
+                    botonPosicion.setStyle(estiloBotonNormal());
+                    botonPosicion.setOnMouseEntered(e -> botonPosicion.setStyle(estiloBotonHover()));
+                    botonPosicion.setOnMouseExited(e -> botonPosicion.setStyle(estiloBotonNormal()));
+                    botonPosicion.setOnAction(e -> {
+                        if (eventoJugarCarta != null) {
+                            eventoJugarCarta.accept(this.especialModelo, pos);
+                        }
+                        Stage stage = (Stage) botonPosicion.getScene().getWindow();
+                        stage.close();
+                    });
+                    botones.getChildren().add(botonPosicion);
                 }
-                popup.close();
-            });
-            botones.getChildren().add(jugarBtn);
+            } else {
+                Button botonJugar = new Button("Jugar");
+                botonJugar.setStyle(estiloBotonNormal());
+                botonJugar.setOnMouseEntered(e -> botonJugar.setStyle(estiloBotonHover()));
+                botonJugar.setOnMouseExited(e -> botonJugar.setStyle(estiloBotonNormal()));
+                botonJugar.setOnAction(e -> {
+                    if (eventoJugarCarta != null) {
+                        eventoJugarCarta.accept(this.especialModelo, null);
+                    }
+                    Stage stage = (Stage) botonJugar.getScene().getWindow();
+                    stage.close();
+                });
+                botones.getChildren().add(botonJugar);
+            }
         }
 
-        VBox infoBox = new VBox(6, nombreLabel, tipoLabel, descripcionLabel, botones);
+        VBox infoBox = new VBox(6, nombreLabel, tipoLabel, descripcionFlow, botones);
         infoBox.setPadding(new Insets(10));
         infoBox.setAlignment(Pos.CENTER_LEFT);
 
@@ -116,17 +138,8 @@ public class VistaCartaEspecial extends StackPane {
         StackPane.setAlignment(capaInferior, Pos.BOTTOM_CENTER);
 
         StackPane root = new StackPane(fondo, capaInferior);
-
-        Scene scene = new Scene(root, 300, 450);
-        popup.setScene(scene);
-        popup.setResizable(false);
-
-        popup.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) popup.close();
-        });
-
-        popup.show();
+        root.setPrefSize(300, 450);
+        return root;
     }
-
 
 }

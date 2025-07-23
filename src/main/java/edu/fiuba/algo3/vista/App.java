@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.vista.controlador.MusicJuego;
 import edu.fiuba.algo3.vista.pantallas.PantallaInicial;
-import edu.fiuba.algo3.vista.pantallas.PantallaJuego;
 import javafx.application.Application;
 
-import javafx.scene.image.Image;
+
 import javafx.stage.Stage;
 
 
@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage stage) {
+        new MusicJuego("src/main/resources/sounds/ingame.wav");
         new PantallaInicial(stage);
     }
 

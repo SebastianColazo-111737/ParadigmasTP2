@@ -32,6 +32,10 @@ public class MusicJuego {
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(rutaArchivo));
         clip = AudioSystem.getClip();
         clip.open(audioIn);
+
+        FloatControl volumen = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volumen.setValue(-10.0f);
+
         enLoop = false;
     }
 

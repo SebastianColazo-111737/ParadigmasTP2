@@ -50,7 +50,7 @@ public class VistaDescarte extends StackPane implements Observador {
             String nombreCarta = ultimaCarta.getNombre();
             EstiloVistaCarta estilo = CacheEstilosVistaCarta.getInstancia().getEstiloVistaCarta(nombreCarta);
             vistaCarta = estilo.construir(ultimaCarta, null);
-
+            vistaCarta.setDisable(true);
             vistaCarta.setStyle(vistaCarta.getStyle() + "; -fx-border-color: black;");
             this.getChildren().add(vistaCarta);
         }

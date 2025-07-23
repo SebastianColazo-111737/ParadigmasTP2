@@ -7,8 +7,10 @@ import edu.fiuba.algo3.modelo.gwent.Gwent;
 import edu.fiuba.algo3.modelo.gwent.Resultado;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
+import edu.fiuba.algo3.vista.pantallas.PantallaCambiarCartas;
 
 import java.util.List;
+import java.util.Random;
 
 public class ControladorJuego {
 
@@ -16,9 +18,8 @@ public class ControladorJuego {
     private Jugador jugador1;
     private Jugador jugador2;
 
-    private MusicJuego musica;
 
-    public ControladorJuego(MusicJuego musicJuego){
+    public ControladorJuego(){
 
         try {
             this.juego = GeneradorDeGwent.construirGwent("src/main/resources/json/gwent3.json");
@@ -27,8 +28,6 @@ public class ControladorJuego {
         }
         this.jugador1 = this.juego.getJugadorActual();
         this.jugador2 = this.juego.getJugadorProximo();
-
-        this.musica = musicJuego;
     }
 
     public Jugador getJugador1() {
@@ -45,8 +44,14 @@ public class ControladorJuego {
     }
 
 
-    public void repartirCartas(){
+    public void iniciarJuego(){
         this.juego.repartirCartasALosJugadores();
+
+        Random random = new Random();
+        Jugador moneda = random.nextBoolean()? jugador1: jugador2;
+        this.juego.setJugadorActual(moneda);
+
+        new PantallaCambiarCartas(jugador1, jugador2);
     }
 
     public void jugarCarta(Carta carta, Posicion posicion){

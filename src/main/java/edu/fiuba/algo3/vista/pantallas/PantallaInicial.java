@@ -23,21 +23,20 @@ public class PantallaInicial {
         logoView.setFitWidth(400);
 
         Button btnJugar = new Button("Jugar");
-        btnJugar.setFont(Font.font(18));
-        btnJugar.setStyle(controlador.botonEstiloNormal());
+        btnJugar.setPrefWidth(300);
+        btnJugar.setPrefHeight(70);
+        btnJugar.setStyle(estiloBotonNormal());
         btnJugar.setOnAction(e -> controlador.iniciarPartida());
-
-        // Hover efecto
-        btnJugar.setOnMouseEntered(e -> btnJugar.setStyle(controlador.botonEstiloHover()));
-        btnJugar.setOnMouseExited(e -> btnJugar.setStyle(controlador.botonEstiloNormal()));
+        btnJugar.setOnMouseEntered(e -> btnJugar.setStyle(estiloBotonHover()));
+        btnJugar.setOnMouseExited(e -> btnJugar.setStyle(estiloBotonNormal()));
 
         Button btnSalir = new Button("Salir");
-        btnSalir.setFont(Font.font(18));
-        btnSalir.setStyle(controlador.botonEstiloNormal());
+        btnSalir.setPrefWidth(300);
+        btnSalir.setPrefHeight(70);
+        btnSalir.setStyle(estiloBotonNormal());
         btnSalir.setOnAction(e -> System.exit(0));
-
-        btnSalir.setOnMouseEntered(e -> btnSalir.setStyle(controlador.botonEstiloHover()));
-        btnSalir.setOnMouseExited(e -> btnSalir.setStyle(controlador.botonEstiloNormal()));
+        btnSalir.setOnMouseEntered(e -> btnSalir.setStyle(estiloBotonHover()));
+        btnSalir.setOnMouseExited(e -> btnSalir.setStyle(estiloBotonNormal()));
 
         VBox layout = new VBox(30);
         layout.setAlignment(Pos.CENTER);
@@ -51,20 +50,38 @@ public class PantallaInicial {
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
-                new BackgroundSize(100, 100, true, true, true, true));
+                new BackgroundSize(100, 100, true, true, true, true)
+        );
         layout.setBackground(new Background(fondo));
 
-        scene.widthProperty().addListener((obs, oldVal, newVal) -> {
-            double nuevoAncho = newVal.doubleValue() * 0.5;
-            logoView.setFitWidth(nuevoAncho);
-        });
-
-        scene.heightProperty().addListener((obs, oldVal, newVal) -> {
-            layout.setBackground(new Background(fondo));
-        });
-
         stage.setScene(scene);
-        stage.setFullScreen(true); // 👈 Pantalla completa
+        stage.setFullScreen(true);
         stage.show();
+    }
+
+    private String estiloBotonNormal() {
+        return "-fx-background-color: #333333;" +
+                "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-family: 'Georgia';" +
+                "-fx-font-size: 24px;" +
+                "-fx-background-radius: 12;" +
+                "-fx-border-radius: 12;" +
+                "-fx-border-color: gold;" +
+                "-fx-border-width: 3px;" +
+                "-fx-effect: dropshadow(gaussian, black, 10, 0.5, 0, 2);";
+    }
+
+    private String estiloBotonHover() {
+        return "-fx-background-color: #555555;" +
+                "-fx-text-fill: gold;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-family: 'Georgia';" +
+                "-fx-font-size: 24px;" +
+                "-fx-background-radius: 12;" +
+                "-fx-border-radius: 12;" +
+                "-fx-border-color: gold;" +
+                "-fx-border-width: 3px;" +
+                "-fx-effect: dropshadow(gaussian, gold, 12, 0.6, 0, 0);";
     }
 }

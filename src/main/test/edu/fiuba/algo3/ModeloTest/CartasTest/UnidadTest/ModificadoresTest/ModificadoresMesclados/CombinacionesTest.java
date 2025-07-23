@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.carta.unidad.puntaje.EfectoBoost;
 
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
+import edu.fiuba.algo3.modelo.jugador.Atril.Descarte;
 import edu.fiuba.algo3.modelo.jugador.Atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
@@ -130,16 +131,15 @@ public class CombinacionesTest {
                 new CuerpoACuerpo()
         );
         Unidad unidadParaRevivirModificada = new Animador(unidadParaRevirir);
-        Posicion posicionParaRevivir = new CuerpoACuerpo();
+        Descarte descarte = atrilJugador.getDescarte();
+        descarte.descartarUnidad(unidadParaRevivirModificada);
 
         Unidad medico = new Medico(
                 new UnidadBasica(
                         "medico",
                         new Puntaje(2),
                         new Distancia()
-                ),
-                unidadParaRevivirModificada,
-                posicionParaRevivir
+                )
         );
 
         Unidad medicoAgil = new Agil(medico, new CuerpoACuerpo());

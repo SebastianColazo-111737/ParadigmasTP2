@@ -16,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -161,12 +164,23 @@ public class VistaJugador extends StackPane {
             int p1 = puntuacion.get(jugadores[0]);
             int p2 = puntuacion.get(jugadores[1]);
 
-            Label puntosLabel = new Label(p1 + " - " + p2);
-            puntosLabel.setMinWidth(120);
-            puntosLabel.setAlignment(Pos.CENTER);
-            puntosLabel.setStyle("-fx-text-fill: white; -fx-font-size: 18px;"
-                    + "-fx-border-color: silver; -fx-border-width: 1; -fx-padding: 10;");
-            filaPuntos.getChildren().add(puntosLabel);
+            String colorP1 = (p1 > p2) ? "gold" : "white";
+            String colorP2 = (p2 > p1) ? "gold" : "white";
+
+            Text textP1 = new Text(String.valueOf(p1));
+            textP1.setStyle("-fx-fill: " + colorP1 + "; -fx-font-size: 18px; -fx-font-weight: bold;");
+
+            Text separador = new Text(" - ");
+            separador.setStyle("-fx-fill: white; -fx-font-size: 18px;");
+
+            Text textP2 = new Text(String.valueOf(p2));
+            textP2.setStyle("-fx-fill: " + colorP2 + "; -fx-font-size: 18px; -fx-font-weight: bold;");
+
+            TextFlow flow = new TextFlow(textP1, separador, textP2);
+            flow.setMinWidth(120);
+            flow.setTextAlignment(TextAlignment.CENTER);
+            flow.setStyle("-fx-border-color: silver; -fx-border-width: 1; -fx-padding: 10;");
+            filaPuntos.getChildren().add(flow);
         }
 
         tablaResultados.getChildren().addAll(filaRondas, filaPuntos);

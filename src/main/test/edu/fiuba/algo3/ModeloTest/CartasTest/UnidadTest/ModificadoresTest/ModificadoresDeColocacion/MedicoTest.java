@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.carta.unidad.UnidadBasica;
 import edu.fiuba.algo3.modelo.carta.unidad.modificadores.Medico;
 import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.jugador.Atril.Atril;
+import edu.fiuba.algo3.modelo.jugador.Atril.Descarte;
 import edu.fiuba.algo3.modelo.jugador.Atril.Seccion;
 import edu.fiuba.algo3.modelo.jugador.*;
 import edu.fiuba.algo3.modelo.posicion.*;
@@ -46,7 +47,7 @@ public class MedicoTest {
 
 
     @Test
-    public void elModificadorMedicoPermiteJugarUnaSegundaUnidadAlSerJugada(){
+    public void elModificadorMedicoJuegaLaUltimaCartaQueSeAgregoAlDescarte(){
 
         // Arrange
         UnidadBasica unidadParaRevirir = new UnidadBasica(
@@ -55,17 +56,17 @@ public class MedicoTest {
                 new CuerpoACuerpo()
         );
 
-        Posicion posicionParaRevivir = new CuerpoACuerpo();
 
         Medico medico = new Medico(
                 new UnidadBasica(
                         "medico",
                         new Puntaje(2),
                         new Distancia()
-                ),
-                unidadParaRevirir,
-                posicionParaRevivir
+                )
         );
+
+        Descarte descateJugador = atrilJugador.getDescarte();
+        descateJugador.descartarUnidad(unidadParaRevirir);
 
         // Act
         medico.jugarCarta(jugador, oponente, new Distancia());

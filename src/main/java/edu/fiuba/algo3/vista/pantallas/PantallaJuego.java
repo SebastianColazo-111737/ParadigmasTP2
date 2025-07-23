@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.vista.pantallas;
 
 import edu.fiuba.algo3.modelo.carta.Carta;
-import edu.fiuba.algo3.modelo.gwent.Resultado;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 import edu.fiuba.algo3.vista.controlador.ControladorJuego;
-import edu.fiuba.algo3.vista.controlador.MusicJuego;
 import edu.fiuba.algo3.vista.vistas.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,6 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.function.BiConsumer;
 
 public class PantallaJuego {
@@ -36,9 +37,7 @@ public class PantallaJuego {
     public PantallaJuego(Stage stage, String nombreJ1, Image imagenJ1,
                          String nombreJ2, Image imagenJ2) {
 
-        MusicJuego musica = new MusicJuego("src/main/resources/sounds/ingame.wav");
-        this.controlador = new ControladorJuego(musica);
-
+        this.controlador = new ControladorJuego();
         this.jugador1 = new VistaJugador(controlador.getJugador1(), nombreJ1, imagenJ1);
         this.jugador2 = new VistaJugador(controlador.getJugador2(), nombreJ2, imagenJ2);
 
@@ -48,6 +47,8 @@ public class PantallaJuego {
         BiConsumer<Carta, Posicion> eventoJugarCarta = (carta, posicion) -> {
             controlador.jugarCarta(carta, posicion);
             actualizarCambioDeTurno();
+            emitirSonidoDeCarta();
+
         };
         this.manoJ1 = new VistaMano(controlador.getJugador1().getMano(), eventoJugarCarta);
         this.manoJ2 = new VistaMano(controlador.getJugador2().getMano(), eventoJugarCarta);
@@ -82,13 +83,16 @@ public class PantallaJuego {
         contenedorCentro.setMaxWidth(Double.MAX_VALUE);
 
 
-        Button botonPasarTurno = new Button("Pasar Turno");
+        Button botonPasarTurno = new Button("Pasar");
         botonPasarTurno.setPrefWidth(150);
-        botonPasarTurno.setStyle("-fx-font-size: 16px; -fx-background-color: #555; -fx-text-fill: white;");
+        botonPasarTurno.setStyle(estiloBotonNormal());
         botonPasarTurno.setOnAction(e -> {
             controlador.pasarTurno();
             actualizarCambioDeTurno();
         });
+        botonPasarTurno.setOnMouseEntered(e -> botonPasarTurno.setStyle(estiloBotonHover()));
+        botonPasarTurno.setOnMouseExited(e -> botonPasarTurno.setStyle(estiloBotonNormal()));
+
         VBox.setMargin(botonPasarTurno, new Insets(270, 0, 270, 0));
 
         VBox contenedorDerecha = new VBox(20);
@@ -150,8 +154,9 @@ public class PantallaJuego {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+        stage.setTitle("Gwent");
 
-        controlador.repartirCartas();
+        controlador.iniciarJuego();
         actualizarCambioDeTurno();
     }
 
@@ -189,5 +194,42 @@ public class PantallaJuego {
         controlador.iniciarNuevaRonda();
     }
 
+    private void emitirSonidoDeCarta(){
+        try {
+            File archivoSonido = new File("src/main/resources/sounds/playcard.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(archivoSonido);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String estiloBotonNormal() {
+        return "-fx-background-color: #333333;" +
+                "-fx-text-fill: gold;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-family: 'Georgia';" +
+                "-fx-font-size: 22px;" +
+                "-fx-background-radius: 12;" +
+                "-fx-border-radius: 12;" +
+                "-fx-border-color: gold;" +
+                "-fx-border-width: 3px;" +
+                "-fx-effect: dropshadow(gaussian, gold, 10, 0.4, 0, 0);";
+    }
+
+    private String estiloBotonHover() {
+        return "-fx-background-color: #555555;" +
+                "-fx-text-fill: gold;" +
+                "-fx-font-weight: bold;" +
+                "-fx-font-family: 'Georgia';" +
+                "-fx-font-size: 22px;" +
+                "-fx-background-radius: 12;" +
+                "-fx-border-radius: 12;" +
+                "-fx-border-color: gold;" +
+                "-fx-border-width: 3px;" +
+                "-fx-effect: dropshadow(gaussian, gold, 12, 0.6, 0, 0);";
+    }
 }
 
