@@ -73,7 +73,7 @@
       },
       {
         "nombre": "Celaeno",
-        "puntos": 2,
+        "puntos": 5,
         "modificador": [
           "Agil"
         ],
@@ -253,7 +253,7 @@
       },
       {
         "nombre": "Harpia",
-        "puntos": 2,
+        "puntos": 6,
         "modificador": [
           "Agil"
         ],
@@ -269,7 +269,7 @@
       },
       {
         "nombre": "Ciaran",
-        "puntos": 3,
+        "puntos": 5,
         "modificador": [
           "Agil"
         ],
@@ -326,12 +326,16 @@
         "seccion": "Asedio"
       },
       {
-        "nombre": "Guerrero",
+        "nombre": "Herrero",
+        "puntos": 4,
+        "modificador": ["Medico"],
+        "seccion": "Asedio"
+      },
+      {
+        "nombre": "Crone",
         "puntos": 6,
-        "modificador": [
-          "Carta Unida"
-        ],
-        "seccion": "Cuerpo a Cuerpo"
+        "modificador": [],
+        "seccion": "Asedio"
       },
       {
         "nombre": "Crone",

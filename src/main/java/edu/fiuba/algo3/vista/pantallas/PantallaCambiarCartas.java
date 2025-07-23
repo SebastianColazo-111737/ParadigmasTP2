@@ -37,6 +37,7 @@ public class PantallaCambiarCartas {
         Stage ventana = new Stage();
         ventana.initModality(Modality.APPLICATION_MODAL);
         ventana.initStyle(StageStyle.TRANSPARENT);
+        ventana.setFullScreenExitHint("");
 
         VBox layout = new VBox(30);
         layout.setPadding(new Insets(20));

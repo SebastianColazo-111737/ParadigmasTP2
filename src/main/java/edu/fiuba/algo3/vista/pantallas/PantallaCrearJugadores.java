@@ -115,6 +115,7 @@ public class PantallaCrearJugadores {
 
         stage.setScene(scene);
         stage.setTitle("Seleccionar Jugadores");
+        stage.setFullScreenExitHint("");
         stage.setFullScreen(true);
         stage.show();
 
