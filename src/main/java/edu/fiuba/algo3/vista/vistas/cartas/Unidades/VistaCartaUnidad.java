@@ -95,6 +95,9 @@ public class VistaCartaUnidad extends VistaCarta {
             popup.setTitle(nombreUnidad);
             popup.setScene(new Scene(vistaDetalle, 300, 450));
             popup.setResizable(false);
+            popup.focusedProperty().addListener((obs, oldVal, newVal) -> {
+                if (!newVal) popup.close();
+            });
             popup.show();
         });
     }
@@ -167,9 +170,6 @@ public class VistaCartaUnidad extends VistaCarta {
         capaInferior.setMaxHeight(160);
         StackPane.setAlignment(capaInferior, Pos.BOTTOM_CENTER);
 
-//        popup.focusedProperty().addListener((obs, oldVal, newVal) -> {
-//            if (!newVal) popup.close();
-//        });
 
         StackPane root = new StackPane(fondo, capaInferior);
         root.setPrefSize(300, 450);

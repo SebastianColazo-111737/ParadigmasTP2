@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo.gwent.reglaDeCierre;
 import edu.fiuba.algo3.modelo.gwent.Resultado;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 public class MejorDe3 implements ReglaDeCierre {
@@ -14,7 +14,7 @@ public class MejorDe3 implements ReglaDeCierre {
     }
     @Override
     public boolean terminoElJuego(List<Resultado> resultados) {
-        Hashtable<Jugador, Integer> rondasGanadas = new Hashtable<>();
+        HashMap<Jugador, Integer> rondasGanadas = new HashMap<>();
 
         for (Resultado resultado: resultados) {
             Jugador ganadorRonda = resultado.getGanador();

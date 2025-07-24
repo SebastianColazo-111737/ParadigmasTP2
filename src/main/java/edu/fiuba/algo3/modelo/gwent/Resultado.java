@@ -2,37 +2,36 @@ package edu.fiuba.algo3.modelo.gwent;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.HashMap;
-import java.util.List;
 
 public class Resultado {
 
     private HashMap<Jugador, Integer> puntuacion;
     private Jugador ganador;
     private Jugador perdedor;
+    private Boolean empato;
 
-    public Resultado(List<Jugador> jugadores){
+    public Resultado(Jugador jugador1, Jugador jugador2){
         this.puntuacion = new HashMap<>();
-        this.ganador = null;
+        int puntajeJ1 = jugador1.getPuntaje();
+        int puntajeJ2 = jugador2.getPuntaje();
+        puntuacion.put(jugador1, puntajeJ1);
+        puntuacion.put(jugador2, puntajeJ2);
 
-        int maxPuntaje = Integer.MIN_VALUE;
-        int minPuntaje = Integer.MAX_VALUE;
-
-        for (Jugador jugador : jugadores) {
-            int puntaje = jugador.getPuntaje();
-            puntuacion.put(jugador, puntaje);
-
-            if (puntaje > maxPuntaje) {
-                maxPuntaje = puntaje;
-                ganador = jugador;
-            }
-
-            if (puntaje < minPuntaje) {
-                minPuntaje = puntaje;
-                perdedor = jugador;
-            }
+        this.empato = false;
+        if(puntajeJ1 > puntajeJ2){
+            this.ganador = jugador1;
+            this.perdedor = jugador2;
+        }else if(puntajeJ2 > puntajeJ1){
+            this.ganador = jugador2;
+            this.perdedor = jugador1;
+        }else{
+            this.ganador = null;
+            this.perdedor = null;
+            this.empato = true;
         }
     }
 
+    public Boolean empato(){return this.empato;}
     public Jugador getGanador(){return this.ganador;}
     public Jugador getPerdedor(){return this.perdedor;}
     public HashMap<Jugador, Integer> getPuntuacion(){return this.puntuacion;}

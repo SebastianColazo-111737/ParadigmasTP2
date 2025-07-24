@@ -27,7 +27,6 @@ public class Jugador {
 
     public void cambiarCartaDeLaManoAlMazo(Carta carta){
 
-        //Puede lanzar exepcion
         mano.removerCarta(carta);
 
         Carta cartaDelMazo = this.mazo.cambiarCarta(carta);
@@ -45,17 +44,18 @@ public class Jugador {
 
     public void jugarCarta(Carta carta, Jugador oponenete, Posicion posicionElegida){
 
-        //puede lanzar exepcion
         removerCartaDeLaMano(carta);
-
         try {
             carta.jugarCarta(this, oponenete, posicionElegida);
         } catch (Exception e) {
-            // le vuelvo a agregar la carta
             mano.agregarCarta(carta);
             throw new RuntimeException(e);
         }
 
+    }
+
+    public Boolean puedeSeguirJugando(){
+        return (this.mano.getCantidadCartas() != 0);
     }
 
     //para poder mostrarlos en la vista

@@ -46,19 +46,23 @@ public class PantallaJuego {
 
         BiConsumer<Carta, Posicion> eventoJugarCarta = (carta, posicion) -> {
             controlador.jugarCarta(carta, posicion);
-            actualizarCambioDeTurno();
+            controlador.proximoTurno();
             emitirSonidoDeCarta();
+            actualizarCambioDeTurno();
+
 
         };
-        this.manoJ1 = new VistaMano(controlador.getJugador1().getMano(), eventoJugarCarta);
-        this.manoJ2 = new VistaMano(controlador.getJugador2().getMano(), eventoJugarCarta);
+        Image imagenDorsoJ1 = new Image("/imagenes/dorsoCarta1.png");
+        Image imagenDorsoJ2 = new Image("/imagenes/dorsoCarta2.png");
+        this.manoJ1 = new VistaMano(controlador.getJugador1().getMano(), eventoJugarCarta, imagenDorsoJ1);
+        this.manoJ2 = new VistaMano(controlador.getJugador2().getMano(), eventoJugarCarta, imagenDorsoJ2);
 
-        Image imagenMazoJ1 = new Image("/imagenes/dorsoCarta1.png");
-        this.mazoJ1 = new VistaMazo(controlador.getJugador1().getMazo(), imagenMazoJ1);
+
+        this.mazoJ1 = new VistaMazo(controlador.getJugador1().getMazo(), imagenDorsoJ1);
         this.descartej1 = new VistaDescarte(controlador.getJugador1().getDescarte());
 
-        Image imagenMazoJ2 = new Image("/imagenes/dorsoCarta2.png");
-        this.mazoJ2 = new VistaMazo(controlador.getJugador2().getMazo(), imagenMazoJ2);
+
+        this.mazoJ2 = new VistaMazo(controlador.getJugador2().getMazo(), imagenDorsoJ2);
         this.descartej2 = new VistaDescarte(controlador.getJugador2().getDescarte());
 
 
@@ -87,8 +91,10 @@ public class PantallaJuego {
         botonPasarTurno.setPrefWidth(150);
         botonPasarTurno.setStyle(estiloBotonNormal());
         botonPasarTurno.setOnAction(e -> {
-            controlador.pasarTurno();
+            controlador.finalizarParticipacion();
+            controlador.proximoTurno();
             actualizarCambioDeTurno();
+
         });
         botonPasarTurno.setOnMouseEntered(e -> botonPasarTurno.setStyle(estiloBotonHover()));
         botonPasarTurno.setOnMouseExited(e -> botonPasarTurno.setStyle(estiloBotonNormal()));

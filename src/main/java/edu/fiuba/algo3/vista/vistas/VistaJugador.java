@@ -130,7 +130,7 @@ public class VistaJugador extends StackPane {
 
     public void mostrarPantallaGanador(List<Resultado> resultados) {
         Stage ventana = new Stage();
-        ventana.setTitle("¡Victoria!");
+        ventana.setTitle("Fin de la partida");
         ventana.initModality(Modality.APPLICATION_MODAL);
 
         ImageView imagen = new ImageView(this.imagenJugador);

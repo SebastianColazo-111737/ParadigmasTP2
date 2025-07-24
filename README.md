@@ -55,36 +55,36 @@ Gana aquel jugador que llega primero a las dos rondas ganadas.
 <p>
   <strong>Legendaria: no es afectada por otros modificadores, tienen el puntaje fijo,
 generalmente valores altos</strong>
-  <img src="src/main/resources/imagenes/modificadores/legendaria.png" alt="Legendaria" width="100"/>
+  <img src="src/main/resources/imagenes/modificadores/legendaria.png" alt="Legendaria" width="40"/>
 </p>
 
 <p>
   <strong>Ágil: se pueden ubicar en dos o más secciones, por ejemplo, algún
 hechicero en cuerpo a cuerpo o distancia</strong>
-  <img src="src/main/resources/imagenes/modificadores/agil.png" alt="Ágil" width="100"/>
+  <img src="src/main/resources/imagenes/modificadores/agil.png" alt="Ágil" width="40"/>
 </p>
 
 <p>
   <strong>Animador: le sumas +1 a todas las cartas de una seccion </strong>
-  <img src="src/main/resources/imagenes/modificadores/impulsodemoral.png" alt="Animador" width="100"/>
+  <img src="src/main/resources/imagenes/modificadores/impulsodemoral.png" alt="Animador" width="40"/>
 </p>
 
 <p>
   <strong>Espía: Los ubicas en la sección del otro jugador (mejorando su puntaje)
 pero agarras 2 cartas del mazo</strong>
-  <img src="src/main/resources/imagenes/modificadores/espia.png" alt="Espía" width="100"/>
+  <img src="src/main/resources/imagenes/modificadores/espia.png" alt="Espía" width="40"/>
 </p>
 
 <p>
   <strong>Médico: te permiten revivir una carta de la pila de descarte y jugarla en el
 momento</strong>
-  <img src="src/main/resources/imagenes/modificadores/medico.png" alt="Médico" width="100"/>
+  <img src="src/main/resources/imagenes/modificadores/medico.png" alt="Médico" width="40"/>
 </p>
 
 <p>
   <strong>Unida: si se ubican varias cartas del mismo tipo se van duplicando
 sus puntos.</strong>
-  <img src="src/main/resources/imagenes/modificadores/cartaunida.png" alt="Unida" width="100"/>
+  <img src="src/main/resources/imagenes/modificadores/cartaunida.png" alt="Unida" width="40"/>
 </p>
 
 

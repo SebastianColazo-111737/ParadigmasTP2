@@ -58,6 +58,9 @@ public class VistaCartaEspecial extends VistaCarta {
             Stage popup = new Stage();
             popup.setScene(new Scene(detalle, 300, 450));
             popup.setResizable(false);
+            popup.focusedProperty().addListener((obs, oldVal, newVal) -> {
+                if (!newVal) popup.close();
+            });
             popup.show();
         });
     }

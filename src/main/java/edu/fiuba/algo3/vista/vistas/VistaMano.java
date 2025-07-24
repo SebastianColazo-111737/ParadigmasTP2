@@ -22,17 +22,21 @@ import java.util.function.BiConsumer;
 
 public class VistaMano extends StackPane implements Observador {
 
-    private final Mano manoModelo;
-    private final HBox contenedorCartas;
-    private final Rectangle fondo;
-    private final ArrayList<Node> cartasVistas;
+    private Mano manoModelo;
+    private HBox contenedorCartas;
+    private Rectangle fondo;
+    private ArrayList<Node> cartasVistas;
     private BiConsumer<Carta, Posicion> eventoJugarCarta;
+    private Image dorsoCarta;
+    private boolean sePuedenJugarCartas;
 
-    public VistaMano(Mano mano, BiConsumer<Carta, Posicion> eventoJugarCarta) {
+    public VistaMano(Mano mano, BiConsumer<Carta, Posicion> eventoJugarCarta, Image dorsoCarta) {
         this.manoModelo = mano;
         this.manoModelo.agregarObservador(this);
         this.cartasVistas = new ArrayList<>();
         this.eventoJugarCarta = eventoJugarCarta;
+        this.dorsoCarta = dorsoCarta;
+        this.sePuedenJugarCartas = true;
 
         Image imagenFondo = new Image(getClass().getResourceAsStream("/images/mano.jpg"));
         fondo = new Rectangle(1100, 100);
@@ -56,17 +60,26 @@ public class VistaMano extends StackPane implements Observador {
         cartasVistas.clear();
 
         for (Carta cartaModelo : manoModelo.getCartas()) {
-            EstiloVistaCarta estilo = CacheEstilosVistaCarta.getInstancia().getEstiloVistaCarta(cartaModelo.getNombre());
-            Node vista = estilo.construir(cartaModelo, eventoJugarCarta);
+            Node vista;
+            if (sePuedenJugarCartas) {
+                EstiloVistaCarta estilo = CacheEstilosVistaCarta.getInstancia().getEstiloVistaCarta(cartaModelo.getNombre());
+                vista = estilo.construir(cartaModelo, eventoJugarCarta);
+            } else {
+                Rectangle dorso = new Rectangle(90, 105);
+                dorso.setArcWidth(10);
+                dorso.setArcHeight(10);
+                dorso.setFill(new ImagePattern(dorsoCarta));
+                vista = dorso;
+            }
+
             contenedorCartas.getChildren().add(vista);
             cartasVistas.add(vista);
         }
     }
 
-    public void setInteractuable(Boolean sePuedenJugarCartas){
-        for (Node vistaCarta : cartasVistas) {
-            vistaCarta.setDisable(!sePuedenJugarCartas);
-        }
+    public void setInteractuable(Boolean sePuedenJugarCartas) {
+        this.sePuedenJugarCartas = sePuedenJugarCartas;
+        actualizarVista();
     }
 
     @Override

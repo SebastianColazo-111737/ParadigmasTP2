@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.gwent.AdminturnosTodosPasaronDeTurno;
 import edu.fiuba.algo3.modelo.gwent.Gwent;
 
 import edu.fiuba.algo3.modelo.gwent.Resultado;
+import edu.fiuba.algo3.modelo.gwent.reglaDeCierre.NoSePudoDefinirUnGanadorError;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 import edu.fiuba.algo3.vista.pantallas.PantallaCambiarCartas;
@@ -45,7 +46,7 @@ public class ControladorJuego {
 
 
     public void iniciarJuego(){
-        this.juego.repartirCartasALosJugadores();
+        this.juego.repartirCartasALosJugadores(10);
 
         Random random = new Random();
         Jugador moneda = random.nextBoolean()? jugador1: jugador2;
@@ -56,16 +57,19 @@ public class ControladorJuego {
 
     public void jugarCarta(Carta carta, Posicion posicion){
         this.juego.jugarCarta(carta, posicion);
-        this.juego.proximoTurno();
     }
 
-    public void pasarTurno(){
-        try {
-            this.juego.finalizarParticipacion();
-            this.juego.proximoTurno();
+    public void finalizarParticipacion(){
+        this.juego.finalizarParticipacion();
+    }
 
-        } catch (AdminturnosTodosPasaronDeTurno e) {
-            System.out.println("todos pasaron de turno, termino la ronda");
+    public void proximoTurno(){
+        if(!terminoLaRonda()){
+            this.juego.proximoTurno();
+            if(!juego.getJugadorActual().puedeSeguirJugando()){
+                finalizarParticipacion();
+                proximoTurno();
+            }
         }
     }
 
@@ -74,6 +78,7 @@ public class ControladorJuego {
     }
 
     public void iniciarNuevaRonda(){
+
         this.juego.iniciarNuevaRonda();
     }
 
@@ -89,6 +94,7 @@ public class ControladorJuego {
         int ganadas = 0;
         List<Resultado> marcadorPartido = this.juego.getResultados();
         for(Resultado ronda: marcadorPartido){
+            if(ronda.empato()) continue;
             if(ronda.getGanador().equals(jugador)){
                 ganadas+=1;
             }

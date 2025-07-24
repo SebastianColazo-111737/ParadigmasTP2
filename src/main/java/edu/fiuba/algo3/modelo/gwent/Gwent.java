@@ -3,11 +3,13 @@ package edu.fiuba.algo3.modelo.gwent;
 
 import edu.fiuba.algo3.modelo.carta.Carta;
 import edu.fiuba.algo3.modelo.gwent.reglaDeCierre.MejorDe3;
+import edu.fiuba.algo3.modelo.gwent.reglaDeCierre.NoSePudoDefinirUnGanadorError;
 import edu.fiuba.algo3.modelo.gwent.reglaDeCierre.ReglaDeCierre;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Gwent {
@@ -49,21 +51,17 @@ public class Gwent {
         }
     }
 
-    public Boolean terminoElJuego(){
-        return reglaDeCierre.terminoElJuego(this.resultados);
-    }
+    public Boolean terminoElJuego(){return reglaDeCierre.terminoElJuego(this.resultados);}
 
-    public Jugador getGanador(){
-        return reglaDeCierre.getGanador();
-    }
+    public Jugador getGanador(){return reglaDeCierre.getGanador();}
     public List<Resultado> getResultados(){
         return this.resultados;
     }
 
 
-    public void repartirCartasALosJugadores() {
+    public void repartirCartasALosJugadores(int cantidad) {
         for (Jugador jugador : this.jugadores) {
-            jugador.robarCartasDelMazo(10);
+            jugador.robarCartasDelMazo(cantidad);
         }
     }
 
@@ -86,12 +84,12 @@ public class Gwent {
         adminTurnos.jugadorPasaTurno(jugador);
 
         if(terminoLaRonda()){
-            this.resultados.add(new Resultado(this.jugadores));
+            this.resultados.add(new Resultado(jugadores.get(0), jugadores.get(1)));
         }
     }
 
     public void proximoTurno(){
-        if(adminTurnos.todosPasaronTurno()){
+        if(terminoLaRonda()){
             throw new AdminturnosTodosPasaronDeTurno("Todos los jugadores pasaron de turno");
         }
         adminTurnos.proximoTurno();
