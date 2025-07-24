@@ -78,7 +78,6 @@ public class ControladorJuego {
     }
 
     public void iniciarNuevaRonda(){
-
         this.juego.iniciarNuevaRonda();
     }
 

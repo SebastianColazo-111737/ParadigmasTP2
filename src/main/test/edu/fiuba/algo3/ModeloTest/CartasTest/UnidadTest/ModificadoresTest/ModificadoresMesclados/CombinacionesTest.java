@@ -134,16 +134,17 @@ public class CombinacionesTest {
         Descarte descarte = atrilJugador.getDescarte();
         descarte.descartarUnidad(unidadParaRevivirModificada);
 
-        Unidad medico = new Medico(
-                new UnidadBasica(
-                        "medico",
-                        new Puntaje(2),
-                        new Distancia()
-                )
-        );
 
-        Unidad medicoAgil = new Agil(medico, new CuerpoACuerpo());
-        Unidad medicoAgilYLegendaria = new Legendaria(medicoAgil);
+
+        List<String> modificadores = new ArrayList<>();
+        modificadores.add("Agil");
+        modificadores.add("Medico");
+        modificadores.add("Legendaria");
+        List<String> posiciones = new ArrayList<>();
+        posiciones.add("Rango");
+        posiciones.add("Cuerpo a Cuerpo");
+
+        Unidad medicoAgilYLegendaria = UnidadFactory.crear("cartaCombinada", 2, modificadores, posiciones);
 
         // Act
         medicoAgilYLegendaria.jugarCarta(jugador, oponente, new CuerpoACuerpo());

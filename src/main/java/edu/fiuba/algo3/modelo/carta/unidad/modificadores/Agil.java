@@ -4,16 +4,23 @@ package edu.fiuba.algo3.modelo.carta.unidad.modificadores;
 import edu.fiuba.algo3.modelo.carta.unidad.Unidad;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 
-public class Agil extends UnidadModificada {
-    private Posicion posicionExtra;
+import java.util.List;
 
-    public Agil(Unidad unidad, Posicion posicionExtra) {
+public class Agil extends UnidadModificada {
+    private List<Posicion> posicionesExtra;
+
+    public Agil(Unidad unidad, List<Posicion> posicionesExtra) {
         super(unidad);
-        this.posicionExtra = posicionExtra;
+        this.posicionesExtra = posicionesExtra;
     }
 
     @Override
     public boolean sePuedeColocar(Posicion posicion){
-        return super.unidad.sePuedeColocar(posicion) || posicionExtra.esCompatible(posicion);
+        boolean sePuedeColocarEnLasPosicionesExtra = false;
+        for(Posicion pos: posicionesExtra){
+            sePuedeColocarEnLasPosicionesExtra =
+                    sePuedeColocarEnLasPosicionesExtra || pos.esCompatible(posicion);
+        }
+        return super.unidad.sePuedeColocar(posicion) || sePuedeColocarEnLasPosicionesExtra;
     }
 }

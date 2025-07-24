@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.carta.unidad.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 
 
-
 import java.util.List;
 
 public class UnidadFactory {
@@ -40,7 +39,7 @@ public class UnidadFactory {
                 case "carta unida": unidadModificada = new Unida(unidadModificada);  break;
                 case "espia": unidadModificada = new Espia(unidadModificada);  break;
                 case "impulso de moral": unidadModificada = new Animador(unidadModificada);  break;
-                case "agil": unidadModificada = new Agil(unidadModificada, posiciones.get(1));  break;
+                case "agil": unidadModificada = new Agil(unidadModificada, posiciones);  break;
                 case "medico": unidadModificada = new Medico(unidadModificada); break;
             }
         }
