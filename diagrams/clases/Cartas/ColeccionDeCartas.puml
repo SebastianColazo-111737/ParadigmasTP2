@@ -1,0 +1,45 @@
+@startuml
+
+interface Observador{
+  + {abstract} notificar()
+}
+
+interface Observable{
+  + {abstract} agregarObservador(obs: Observador)
+  + {abstract} notificarObservadores()
+}
+ColeccionDeCartas ..|> Observable
+
+
+
+abstract class ColeccionDeCartas{
+  - cartas: List<Carta>
+  - Observadores: List<Observador>
+
+  + agregarCarta(carta: Carta)
+  + agregarCarta(cartas: List<Carta>)
+
+  + getCartas():List<Carta>
+  + getCantidadCartas():Int
+
+}
+
+ColeccionDeCartas <|-- Mano
+ColeccionDeCartas <|-- Mazo
+ColeccionDeCartas o-- "0..*" Observador
+
+class Mano{
+  +removerCarta(carta: Carta)
+
+}
+
+class Mazo{
+  - random: Random
+
+  + darCartas(cantidad: Int)
+  - agarrarCartaAleatoria():Carta
+
+  + cambiarCarta(carta: Carta):Carta
+}
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+
+interface Carta {
+  + {abstract} jugarCarta(jugador, oponente: Jugador, posicionElegida: Posicion)
+  + {abstract} getNombre(): String
+}
+
+Carta <|-- Unidad
+
+interface Unidad {
+  + {abstract} getPuntaje(): Puntaje
+  + {abstract} calcularPuntaje(unidades: List<Unidad>, efectos: List<Efecto>)
+  + {default} jugarCarta(jugador, oponente: Jugador, posicionElegida: Posicion)
+  + {abstract} sePuedeColocar(posicion: Posicion): Boolean
+  + {abstract} atrilDestino(jugador, oponente: Jugador): Atril
+  + {abstract} realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion)
+}
+
+class UnidadFactory {
+  + {static} crear(nombre: String, puntos: Int, modificadores, posiciones: List<String>) : Unidad
+  - aplicarModificadores(unidad: UnidadBasica, modificadores, posiciones: List<String>) : Unidad
+}
+
+UnidadFactory --> Unidad : crea
+
+note right of UnidadFactory::crear
+  Devuelve una Unidad que puede ser:
+  - UnidadBasica
+  - o UnidadModificada (decorada)
+end note
+
+@enduml

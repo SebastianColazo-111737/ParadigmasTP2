@@ -1,0 +1,62 @@
+@startuml
+
+class Puntaje{
+  - puntajeBase: Int
+  - puntajeActual: Int
+
+  + Puntaje(puntajeBase: Int)
+
+  + aplicarEfecto(efecto: Efecto)
+
+  + resetearPuntaje()
+  + getPuntajeActual()
+  + getPuntajeBase()
+}
+
+ Puntaje --> Efecto
+
+
+interface Efecto{
+  + {abstract} aplicar(puntaje: Int): Int
+  + {abstract} getPrioridad(): Prioridad
+
+}
+ Efecto --> Prioridad
+ Efecto <|.. EfectorAumentar
+ Efecto <|.. EfectorBoost
+ Efecto <|.. EfectorDebilitar
+
+enum Prioridad{
+  + Alta
+  + Media
+  + Baja
+
+}
+
+class EfectorAumentar{
+  - aumento: Int
+
+  + EfectorAumentar(aumento: Int)
+
+  + aplicar(puntaje: Int): Int
+  + getPrioridad(): Prioridad
+}
+
+class EfectorBoost{
+  - multiplicador: Int
+
+  + EfectorBoost(multiplicador: Int)
+
+  + aplicar(puntaje: Int): Int
+  + getPrioridad(): Prioridad
+}
+
+class EfectorDebilitar{
+
+  + EfectorDebilitar()
+
+  + aplicar(puntaje: Int): Int
+  + getPrioridad(): Prioridad
+}
+
+@enduml

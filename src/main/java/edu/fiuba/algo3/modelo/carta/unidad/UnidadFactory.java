@@ -18,7 +18,7 @@ public class UnidadFactory {
             List<String> posicionesTexto
     ){
         List<Posicion> posiciones = PosicionParser.crearPosiciones(posicionesTexto);
-        Unidad nuevaUnidad = new UnidadBasica(nombre,new Puntaje(puntos), posiciones.get(0));
+        UnidadBasica nuevaUnidad = new UnidadBasica(nombre,new Puntaje(puntos), posiciones.get(0));
 
         return modificadoresTexto.isEmpty()?
                 nuevaUnidad:
@@ -28,7 +28,7 @@ public class UnidadFactory {
 
 
     private static Unidad aplicarModificadores(
-            Unidad unidadBasica,
+            UnidadBasica unidadBasica,
             List<String> modificadoresTexto,
             List<Posicion> posiciones
     ){

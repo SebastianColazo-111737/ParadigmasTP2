@@ -1,0 +1,57 @@
+@startuml
+
+interface Carta{
+  + {abstract} jugarCarta(jugador, oponente: Jugador, posicionElegida: Posicion)
+  + {abstract} getNombre(): String
+
+}
+Carta <|-- Unidad
+
+interface Unidad{
+  + {abstract} getPuntaje(): Puntaje
+  + {abstract} calcularPuntaje(unidades:List<Unidad>, List<Efecto> efectos )
+
+  + {default} jugarCarta(jugador, oponente: Jugador, posicionElegida: Posicion)
+
+  + {abstract} sePuedeColocar(posicion: Posicion): Boolean
+  + {abstract} atrilDestino(jugador, oponente: Jugador): Atril
+  + {abstract} realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion)
+}
+
+Unidad <|.. UnidadBasica
+Unidad <|.. UnidadModificada
+
+
+class UnidadBasica{
+  - nombre: String
+  - puntaje: Puntaje
+  - posicionValida: Posicion
+
+  + UnidadBasica(nombre: String, puntaje: Puntaje, posicionValida: Posicion)
+
+  + getNombre(): String
+  + getPuntaje(): Puntaje
+  + calcularPuntaje(unidades:List<Unidad>, List<Efecto> efectos )
+
+  + sePuedeColocar(posicion: Posicion): Boolean
+  + atrilDestino(jugador, oponente: Jugador): Atril
+  + realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion
+}
+
+
+
+abstract class UnidadModificada{
+
+  + UnidadModificada(unidadParaModificar: Unidad)
+
+  + getNombre(): String
+  + getPuntaje(): Puntaje
+  + calcularPuntaje(unidades:List<Unidad>, List<Efecto> efectos )
+
+  + sePuedeColocar(posicion: Posicion): Boolean
+  + atrilDestino(jugador, oponente: Jugador): Atril
+  + realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion
+}
+UnidadModificada o-- Unidad
+
+@enduml

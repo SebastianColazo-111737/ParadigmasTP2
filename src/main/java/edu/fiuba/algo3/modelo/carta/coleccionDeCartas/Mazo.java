@@ -1,34 +1,18 @@
 package edu.fiuba.algo3.modelo.carta.coleccionDeCartas;
 
-import edu.fiuba.algo3.modelo.Observer.Observador;
 import edu.fiuba.algo3.modelo.carta.Carta;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Mazo {
-    private List<Carta> cartas;
+public class Mazo extends ColeccionDeCartas{
     private Random random;
-    private List<Observador> observadores;
 
     public Mazo(){
-        this.cartas = new ArrayList<>();
+        super();
         this.random = new Random();
-        this.observadores = new ArrayList<>();
     }
-
-    public void agregarCarta(Carta carta){
-        this.cartas.add(carta);
-        notificarObservadores();
-
-    }
-    public void agregarCarta(List<Carta> cartas){
-        this.cartas.addAll(cartas);
-        notificarObservadores();
-
-    }
-
 
     private Carta agarrarCartaAleatoria(){
         int indiceAleatorio = this.random.nextInt(this.cartas.size());
@@ -51,17 +35,4 @@ public class Mazo {
         return cartaDelMazo;
     }
 
-    public int getCantidadCartas(){
-        return this.cartas.size();
-    }
-
-    public void agregarObservador(Observador observador) {
-        this.observadores.add(observador);
-    }
-
-    private void notificarObservadores() {
-        for (Observador observador : observadores) {
-            observador.notificar();
-        }
-    }
 }

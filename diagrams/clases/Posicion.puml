@@ -1,0 +1,19 @@
+@startuml
+abstract class Posicion{
+  + {abstract} esCompatible(posicion: Posicion):Boolean
+}
+
+Posicion <|-- CuerpoACuerpo
+Posicion <|-- Distancia
+Posicion <|-- Asedio
+
+class CuerpoACuerpo{
+ + esCompatible(posicion: Posicion):Boolean
+}
+class Distancia{
+ + esCompatible(posicion: Posicion):Boolean
+}
+class Asedio{
+  + esCompatible(posicion: Posicion):Boolean
+ }
+@enduml
