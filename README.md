@@ -5,12 +5,11 @@
 Trabajo Práctico número 2 de la materia Paradigmas de la Programacion de FIUBA
 
 ## Grupo {05}
-
-* **Integrante 1** - [Iñaki Vydra]
-* **Integrante 2** - [Aksel Mendoza]
-* **Integrante 3** - [Nahuel Giner]
+* **Integrante 1** - [Sebastian Colazo]
+* **Integrante 2** - [Nahuel Giner]
+* **Integrante 3** - [Aksel Mendoza]
 * **Integrante 4** - [Miguel Zorrilla]
-* **Integrante 5** - [Sebastian Colazo]
+* **Integrante 5** - [Iñaki Vydra]
 
 
 Corrector: **Profesor Diego Sanchez**
