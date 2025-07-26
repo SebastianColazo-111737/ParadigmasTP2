@@ -57,6 +57,21 @@
 	%por qué motivos.
 
 	\subsection{Supuestos}\label{sup:intro}
+	\begin{itemize}
+		\item \textbf{Médico:} El modificador \textit{Médico} permite agarrar una carta de la pila de descarte y jugarla en el momento.
+		En nuestra implementación, se asume que la carta que se recupera es siempre la última unidad descartada. Esta elección simplifica la interacción y mantiene la dinámica del juego fluida. En la interfaz gráfica, se muestra la pila de descarte de cada jugador, lo que permite visualizar claramente cuál será la carta que será revivida.
+
+		\item \textbf{Nombres:} Las cartas, tanto especiales como de unidad, tienen un nombre asociado. Para poder crear las vistas de las cartas, asumimos que todas las cartas con el mismo nombre deben representarse de la misma manera, es decir, con la misma descripción e imagen. Esta suposición nos permitió asociar un estilo visual único a cada nombre, simplificando la construcción de vistas carta.
+
+	\end{itemize}
+
+	\subsection{Puntos conflictivos}\label{sup:conflicto}
+
+	%1) Atriles y jugadores Fue complicado encontrar un disenio donde cada jugdor tenga asociado su tablero y que no este muy acoplado
+
+	%2)Calcular el puntaje de las secciones tambien fue complicado por que dependia de varias cosas
+
+	%delegacion vs herencia?
 
 	\subsection{Patrones de diseño}\label{sup:patrones}
 
@@ -66,16 +81,13 @@
 
 		\item \textbf{Singleton:} \\
 		El patrón \textit{Singleton} fue aplicado para implementar una especie de \textit{cache} de constructores de vistas de cartas. Durante el proceso de parseo del GWENT.JSON con los datos de las cartas, se crea una instancia del modelo correspondiente a cada carta. Sin embargo, ciertos atributos como la descripción y el tipo de una carta especial o la imagen de las cartas son datos que se deben mostrar en la vista, pero que no deberían formar parte del modelo, ya que lo contaminarían con información propia de la interfaz.
-		Para resolver este problema, definimos "estilos" de vista para cada carta, que encapsulan esta información visual y saben construir una vista de carta a partir de una instancia del modelo. Utilizamos el nombre de la carta como identificador (ID), y al leer el JSON cargamos en \texttt{CacheEstilosVistaCarta} las configuraciones necesarias para representar visualmente cada carta según su nombre (ID).
+		Para resolver este problema, definimos estilos de vista para cada carta, que encapsulan esta información visual y saben construir una vista de carta a partir de una instancia del modelo. Utilizamos el nombre de la carta como identificador (ID), y al leer el JSON cargamos en \texttt{CacheEstilosVistaCarta} las configuraciones necesarias para representar visualmente cada carta según su nombre (ID).
 		Era necesario que esta cache tuviera una única instancia accesible desde cualquier vista que necesitara mostrar cartas, por lo que la utilización del patrón \textit{Singleton} resultó una solución adecuada.
 
 		\item \textbf{Template + Decorator:} \\
 		Crear las unidades y sus modificadores fue uno de los desafíos más complejos del trabajo, ya que constituyen uno de los aspectos centrales del juego. Un buen modelo debía permitir extender fácilmente la cantidad de modificadores que se pueden aplicar a las cartas.
 		Inicialmente probamos enfoques como el patrón \textit{Strategy}, permitiendo que cada modificador implemente su propia lógica sobre cómo debe jugarse la carta. Sin embargo, optamos por utilizar el patrón \textit{Decorator}, ya que nos permitía tomar una unidad base y agregarle funcionalidades adicionales a sus métodos, lo cual encajaba perfectamente con la idea de los modificadores. Como ventaja adicional, nos permitió combinar múltiples modificadores de forma muy sencilla, simplemente decorando una unidad ya decorada.
 		Complementamos esta solución con el patrón \textit{Template Method}, que define una estructura base para el comportamiento general de una unidad al ser jugada. Cada modificador puede intervenir decorando sólo las partes relevantes de esa estructura, permitiendo un código limpio y modular, donde cada clase de modificador declara únicamente lo que difiere del comportamiento base.
-
-
-
 
 
 		\begin{lstlisting}[language=Java, caption={Ejemplo de patrón Template + Decorator en una carta con modificador Espia}]
@@ -103,6 +115,7 @@ public void realizarAccionAdicional(Jugador jugador, Jugador oponente,
     super.unidad.realizarAccionAdicional(jugador, oponente, atril, posicionElegida);
 }
 		\end{lstlisting}
+El ultimo llamado a super.unidad.realizarAccionAdicional(...) se utiliza para continuar la cadena en el caso de que la carta tenga mas modificadores.
 
 		\item \textbf{Factory Method:} \\
 		El patrón \textit{Factory Method} fue utilizado para proporcionar una interfaz clara y flexible a la hora de crear unidades del juego. Debido a la posibilidad de combinar múltiples modificadores, la construcción manual de una unidad podía volverse confusa o tediosa.
@@ -139,11 +152,65 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 
 	\subsection{Diagramas de clase}\label{sec:diagramasdeclase}
 	% Uno o varios diagramas de clases mostrando las relaciones estáticas entre las clases.  Puede agregarse todo el texto necesario para aclarar y explicar su diseño. Recuerden que la idea de todo el documento es que quede documentado y entendible cómo está implementada la solución.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{diagramas/clases/Gwent}
+		\caption{\label{fig:class01}Juego \texttt{Gwent}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/Jugador}
+		\caption{\label{fig:class02}Jugador \texttt{Gwent}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{diagramas/clases/ColeccionDeCartas}
+		\caption{\label{fig:class03} ColeccionDeCartas \texttt{Gwent}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{diagramas/clases/Atril}
+		\caption{\label{fig:class04}  \texttt{atril}.}
+	\end{figure}
+
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/Especiales}
+		\caption{\label{fig:class05} Cartas \texttt{Especiales}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/UnidadBasica}
+		\caption{\label{fig:class06}Cartas unidad \texttt{UnidadBasica}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/Puntaje}
+		\caption{\label{fig:class07}\texttt{Puntaje}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/Modificadores}
+		\caption{\label{fig:class08}Cartas unidad \texttt{Modificadores}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/UnidadFactory}
+		\caption{\label{fig:class09} \texttt{UnidadFactory}.}
+	\end{figure}
 
 	\subsection{Diagramas de secuencia}\label{sec:diagramasdesecuencia}
 	% Mostrar las secuencias interesantes que hayan implementado. Pueden agregar texto para explicar si algo no queda claro.
 
-	\subsection{Diagramas de paquetes}\label{sec:diagramasdepaquetes}
+	%\subsection{Diagramas de paquetes}\label{sec:diagramasdepaquetes}
 	%Incluir un diagrama de paquetes UML para mostrar el acoplamiento de su trabajo.
 
 
