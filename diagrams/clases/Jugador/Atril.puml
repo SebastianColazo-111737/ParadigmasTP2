@@ -1,0 +1,68 @@
+@startuml
+abstract class Posicion{
+  + {abstract} esCompatible(posicion: Posicion):Boolean
+}
+
+class Atril{
+  - secciones: HashMap<Posicion, Seccion>
+
+  + agregarSeccion(seccion: Seccion)
+  + agregarEfecto(efecto: Efecto, posicion: Posicion)
+  + removerEfecto(tipoDeEfecto: Efecto, posicion: Posicion)
+
+  + descartarUnidadesIguales(unidadesParaDescartar: List<Unidad>)
+  + descartarUnidadesJugadas()
+
+  + getUnidadesColocadas():List<Unidad>
+  + getPuntaje(): Int
+  + getDescarte(): Descarte
+  + getSecciones(): List<Seccion>
+}
+
+Atril *-- Descarte
+Atril --> Posicion
+Atril "1" o-- "3" Seccion
+
+interface Observable{
+  + {abstract} agregarObservador(obs: Observador)
+  + {abstract} notificarObservadores()
+}
+
+
+class Descarte{
+  unidadesDescartadas: List<Unidad>
+  observadores: List<Observador>
+
+  + descartarUnidad(unidad: Unidad)
+  + descartarUnidad(unidades: List<Unidad>)
+  + getUltimaCarta():Unidad
+  + getUnidadesDescartadas():List<Unidad>
+
+}
+Descarte ..|> Observable
+Seccion ..|> Observable
+
+class Seccion{
+  - unidades: List<Unidad>
+  - efectos: List<Efecto>
+  - observadores: List<Observador>
+
+  + Seccion(posicion: Posicion)
+
+  + colocarUnidad(unidad: Unidad)
+  + agregarEfecto(efecto: Efecto)
+  - actualizarPuntajeUnidades()
+
+
+  + removerEfecto(tipoDeEfecto: Efecto)
+  + descartarUnidadesJugadas(): List<Unidad>
+  + descartarUnidadesIguales(unidades: List<Unidad>)
+  + limpiarEfectos()
+
+  + getUnidadesColocadas(): List<Unidad>
+  + getPosicion():Posicion
+  + getPuntaje(): Int
+}
+Seccion *-- Posicion
+
+@enduml

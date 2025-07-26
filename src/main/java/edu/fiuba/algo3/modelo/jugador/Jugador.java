@@ -61,7 +61,6 @@ public class Jugador {
     //para poder mostrarlos en la vista
     public Atril getAtril(){return this.atril;}
     public int getPuntaje(){return this.atril.getPuntajeActual();}
-
     public Descarte getDescarte(){return this.atril.getDescarte();}
     public Mano getMano(){return this.mano;}
     public Mazo getMazo(){return this.mazo;}

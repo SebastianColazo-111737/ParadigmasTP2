@@ -7,7 +7,6 @@ public class Resultado {
 
     private HashMap<Jugador, Integer> puntuacion;
     private Jugador ganador;
-    private Jugador perdedor;
     private Boolean empato;
 
     public Resultado(Jugador jugador1, Jugador jugador2){
@@ -20,19 +19,15 @@ public class Resultado {
         this.empato = false;
         if(puntajeJ1 > puntajeJ2){
             this.ganador = jugador1;
-            this.perdedor = jugador2;
         }else if(puntajeJ2 > puntajeJ1){
             this.ganador = jugador2;
-            this.perdedor = jugador1;
         }else{
             this.ganador = null;
-            this.perdedor = null;
             this.empato = true;
         }
     }
 
     public Boolean empato(){return this.empato;}
     public Jugador getGanador(){return this.ganador;}
-    public Jugador getPerdedor(){return this.perdedor;}
     public HashMap<Jugador, Integer> getPuntuacion(){return this.puntuacion;}
 }

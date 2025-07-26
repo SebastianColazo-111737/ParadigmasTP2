@@ -1,0 +1,74 @@
+@startuml
+
+class Jugador{
+
+  + Jugador(mazo:Mazo, mano: Mano, atril: Atril)
+
+  + robarCartasDelMazo(cantidad:Int)
+  + cambiarCartasDeLaManoALMazo(carta: Carta)
+
+  + agregarCartaALaMano(carta: Carta)
+  + removerCartaDeLaMano(carta: Carta)
+
+  + jugarCarta(carta: Carta, oponenete: Jugador, posicionElegida: Posicion)
+  + puedeSeguirJugando():Boolean
+
+  + getAtril(): Atril
+  + getPuntaje(): Int
+  + getDescarte(): Descarte
+  + getMano(): Mano
+  + getMazo(): Mazo
+}
+Jugador *-- Mazo
+Jugador *-- Mano
+Jugador *-- Atril
+
+abstract class ColeccionDeCartas{
+  - cartas: List<Carta>
+  - Observadores: List<Observador>
+
+  + agregarCarta(carta: Carta)
+  + agregarCarta(cartas: List<Carta>)
+
+  + getCartas():List<Carta>
+  + getCantidadCartas():Int
+
+}
+
+ColeccionDeCartas <|-- Mano
+ColeccionDeCartas <|-- Mazo
+
+class Mano{
+  + removerCarta(carta: Carta)
+  + agregarObservador(obs: Observador)
+  + notificarObservadores()
+}
+
+class Mazo{
+  - random: Random
+
+  + darCartas(cantidad: Int)
+  - agarrarCartaAleatoria():Carta
+
+  + cambiarCarta(carta: Carta):Carta
+
+  + agregarObservador(obs: Observador)
+  + notificarObservadores()
+}
+
+class Atril{
+  - secciones: HashMap<Posicion, Seccion>
+
+  + agregarSeccion(seccion: Seccion)
+  + agregarEfecto(efecto: Efecto, posicion: Posicion)
+  + removerEfecto(tipoDeEfecto: Efecto, posicion: Posicion)
+
+  + descartarUnidadesIguales(unidadesParaDescartar: List<Unidad>)
+  + descartarUnidadesJugadas()
+
+  + getUnidadesColocadas():List<Unidad>
+  + getPuntaje(): Int
+  + getDescarte(): Descarte
+  + getSecciones(): List<Seccion>
+}
+@enduml

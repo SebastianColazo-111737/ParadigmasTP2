@@ -1,0 +1,78 @@
+@startuml
+
+interface ReglaDeCierre{
+  + {abstract} terminoElJuego(resultados: List<Resultado>)
+  + {abstract} getGanador(): Jugador
+}
+MejorDe3 ..|> ReglaDeCierre
+ReglaDeCierre --> Resultado
+
+class MejorDe3{
+  - ganador: Jugador
+
+  terminoElJuego(resultados: List<Resultado>)
+  getGanador():Jugador
+}
+
+class AdminTurnos<T> {
+    - jugadores: List<T>
+    - indiceJugadorActual: Int
+    - pasoDeTurno: HashMap<T, Boolean>
+
+    + AdminTurnos(List<T>)
+
+    + getJugadorActual(): T
+    + getJugadorProximo(): T
+
+    + setJugadorActual(T)
+    + esSuTurno(T): boolean
+    + jugadorPasaTurno(T)
+    + todosPasaronTurno(): boolean
+    + proximoTurno()
+    + reiniciarAdminTurnos()
+}
+
+class Resultado {
+  - puntuacion :HashMap<Jugador, Integer>
+  - ganador: Jugador
+  - empato: Boolean
+
+  + Resultado(jugador1:, jugador2: Jugador)
+  + empato(): Boolean
+  + getGanador(): Jugador
+  + getPuntuacion(): HashMap<Jugador, Integer>
+
+}
+
+
+class Gwent {
+  - jugadores: List<Jugador>
+  - adminTurnos: AdminTurnos<Jugador>
+  - resultados: List<Resultado>
+  - reglaDeCierre: ReglaDeCierre
+
+  + Gwent(jugador1, jugador2: Jugador)
+
+  + getJugadorActual(): Jugador
+  + getJugadorProximo(): Jugador
+  + setJugadorActual(jugador: Jugador)
+
+  + terminoLaRonda(): Boolean
+  + iniciarNuevaRonda()
+
+  + terminoElJuego(): Boolean
+  + getGanador(): Jugador
+  + getResultados(): List<Resultado>
+
+
+  + repartirCartasALosJugadores(cantidad: Int)
+  + jugarCarta(carta: Carta, posicionElegida: Posicion)
+  + finalizarParticipacion()
+  + proximoTurno()
+}
+
+Gwent *-- AdminTurnos
+Gwent *-- ReglaDeCierre
+Gwent *-- "0..3" Resultado
+
+@enduml

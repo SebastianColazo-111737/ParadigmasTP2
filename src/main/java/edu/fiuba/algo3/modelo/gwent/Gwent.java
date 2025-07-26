@@ -3,13 +3,11 @@ package edu.fiuba.algo3.modelo.gwent;
 
 import edu.fiuba.algo3.modelo.carta.Carta;
 import edu.fiuba.algo3.modelo.gwent.reglaDeCierre.MejorDe3;
-import edu.fiuba.algo3.modelo.gwent.reglaDeCierre.NoSePudoDefinirUnGanadorError;
 import edu.fiuba.algo3.modelo.gwent.reglaDeCierre.ReglaDeCierre;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.posicion.Posicion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Gwent {
@@ -94,7 +92,4 @@ public class Gwent {
         }
         adminTurnos.proximoTurno();
     }
-
-
-
 }

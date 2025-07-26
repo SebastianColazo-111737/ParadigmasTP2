@@ -29,8 +29,9 @@ ColeccionDeCartas <|-- Mazo
 ColeccionDeCartas o-- "0..*" Observador
 
 class Mano{
-  +removerCarta(carta: Carta)
-
+  + removerCarta(carta: Carta)
+  + agregarObservador(obs: Observador)
+  + notificarObservadores()
 }
 
 class Mazo{
@@ -40,6 +41,9 @@ class Mazo{
   - agarrarCartaAleatoria():Carta
 
   + cambiarCarta(carta: Carta):Carta
+
+  + agregarObservador(obs: Observador)
+  + notificarObservadores()
 }
 
 @enduml

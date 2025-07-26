@@ -38,8 +38,6 @@ public class Descarte {
         return this.unidadesDescartadas;
     }
 
-    public int getCantidadDeCartas(){return this.unidadesDescartadas.size();}
-
     public void agregarObservador(Observador observador){
         this.observadores.add(observador);
     }
