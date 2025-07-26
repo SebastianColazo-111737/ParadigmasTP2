@@ -17,6 +17,8 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \fancyfoot[C]{\thepage}
 \renewcommand{\footrulewidth}{0.4pt}
+\usepackage{listings}
+\usepackage{xcolor}
 
 \begin{document}
 	\begin{titlepage} % Carátula
@@ -31,7 +33,7 @@
 		\begin{tabular}{ | l | l | l | } % Nueva tabla con encabezados
 			\hline
 			\textbf{Alumno} & \textbf{Número de padrón} & \textbf{Email} \\ \hline
-			Sebastian Colazo & & \\ \hline
+			Sebastian Colazo & 111737 & scolazo@fi.uba.ar \\ \hline
 			Nahuel Giner & 111884 & nginer@fi.uba.ar\\ \hline
 			Aksel Mendoza & 108171 & aemendoza@fi.uba.ar \\ \hline
 			Miguel Zorrilla & 110619 & mzorrilla@fi.uba.ar  \\ \hline
@@ -44,9 +46,9 @@
 	\newpage
 	
 	\section{Introducción}\label{sec:intro}
-	El presente informe reune la documentación de la solución del primer trabajo práctico de la materia Algoritmos y Programación III que consiste en desarrollar un modelo de predicción de valores de criptomonedas según un divulgadores en Pharo 11 utilizando los conceptos del paradigma de la orientación a objetos vistos hasta ahora en el curso.
+	El presente informe reune la documentación de la solución del segundo trabajo práctico de la materia Paradigmas De la Programacion que consiste en desarrollar una aplicacion completa del juego de cartas \textbf{Gwent}, aplicando todos los conceptos vistos en
+	el curso, utilizando el lenguaje Java con un diseño del modelo orientado a objetos y trabajando con las tecnicas de TDD e Integración Continua.
 
-	\section{Supuestos}\label{sup:intro}
 
 	\section{Detalles de implementación}\label{sec:implementacion}
 	%Deben detallar/explicar qué estrategias utilizaron para resolver todos los puntos más
@@ -54,13 +56,94 @@
 	%principio de diseño aplicaron en qué caso y mencionar qué patrones de diseño fueron utilizados y
 	%por qué motivos.
 
-	\section{Diagramas de clase}\label{sec:diagramasdeclase}
+	\subsection{Supuestos}\label{sup:intro}
+
+	\subsection{Patrones de diseño}\label{sup:patrones}
+
+	\begin{itemize}
+		\item \textbf{Observer:} \\
+		Se utilizó el patrón \textit{Observer} para actualizar las vistas correspondientes a la mano, las secciones del tablero y los mazos de los jugadores. Este patrón nos permitió suscribir las vistas a las clases del modelo, de modo que puedan ser notificadas automáticamente ante cambios relevantes, como por ejemplo cuando un jugador roba cartas de su mazo o cuando se agrega una unidad a una sección del tablero.
+
+		\item \textbf{Singleton:} \\
+		El patrón \textit{Singleton} fue aplicado para implementar una especie de \textit{cache} de constructores de vistas de cartas. Durante el proceso de parseo del GWENT.JSON con los datos de las cartas, se crea una instancia del modelo correspondiente a cada carta. Sin embargo, ciertos atributos como la descripción y el tipo de una carta especial o la imagen de las cartas son datos que se deben mostrar en la vista, pero que no deberían formar parte del modelo, ya que lo contaminarían con información propia de la interfaz.
+		Para resolver este problema, definimos "estilos" de vista para cada carta, que encapsulan esta información visual y saben construir una vista de carta a partir de una instancia del modelo. Utilizamos el nombre de la carta como identificador (ID), y al leer el JSON cargamos en \texttt{CacheEstilosVistaCarta} las configuraciones necesarias para representar visualmente cada carta según su nombre (ID).
+		Era necesario que esta cache tuviera una única instancia accesible desde cualquier vista que necesitara mostrar cartas, por lo que la utilización del patrón \textit{Singleton} resultó una solución adecuada.
+
+		\item \textbf{Template + Decorator:} \\
+		Crear las unidades y sus modificadores fue uno de los desafíos más complejos del trabajo, ya que constituyen uno de los aspectos centrales del juego. Un buen modelo debía permitir extender fácilmente la cantidad de modificadores que se pueden aplicar a las cartas.
+		Inicialmente probamos enfoques como el patrón \textit{Strategy}, permitiendo que cada modificador implemente su propia lógica sobre cómo debe jugarse la carta. Sin embargo, optamos por utilizar el patrón \textit{Decorator}, ya que nos permitía tomar una unidad base y agregarle funcionalidades adicionales a sus métodos, lo cual encajaba perfectamente con la idea de los modificadores. Como ventaja adicional, nos permitió combinar múltiples modificadores de forma muy sencilla, simplemente decorando una unidad ya decorada.
+		Complementamos esta solución con el patrón \textit{Template Method}, que define una estructura base para el comportamiento general de una unidad al ser jugada. Cada modificador puede intervenir decorando sólo las partes relevantes de esa estructura, permitiendo un código limpio y modular, donde cada clase de modificador declara únicamente lo que difiere del comportamiento base.
+
+
+
+
+
+		\begin{lstlisting}[language=Java, caption={Ejemplo de patrón Template + Decorator en una carta con modificador Espia}]
+// En la interfaz Unidad
+@Override
+default void jugarCarta(Jugador jugador, Jugador oponente, Posicion posicionElegida) {
+    if (!sePuedeColocar(posicionElegida)) {
+        throw new UnidadNoPuedeSerJugadaEnEsaPosicion("");
+    }
+    Atril atrilDestino = atrilDestino(jugador, oponente);
+    atrilDestino.colocarUnidad(this, posicionElegida);
+    realizarAccionAdicional(jugador, oponente, atrilDestino, posicionElegida);
+}
+
+// En el decorador Espia
+@Override
+public Atril atrilDestino(Jugador jugador, Jugador oponente) {
+    return oponente.getAtril(); // Coloca la unidad en el campo del oponente
+}
+
+@Override
+public void realizarAccionAdicional(Jugador jugador, Jugador oponente,
+                                    Atril atril, Posicion posicionElegida) {
+    jugador.robarCartasDelMazo(CANTIDAD_DE_CARTAS_PARA_ROBAR);
+    super.unidad.realizarAccionAdicional(jugador, oponente, atril, posicionElegida);
+}
+		\end{lstlisting}
+
+		\item \textbf{Factory Method:} \\
+		El patrón \textit{Factory Method} fue utilizado para proporcionar una interfaz clara y flexible a la hora de crear unidades del juego. Debido a la posibilidad de combinar múltiples modificadores, la construcción manual de una unidad podía volverse confusa o tediosa.
+
+		Por ejemplo, si deseamos crear una unidad de fuerza 5, ubicada en la posición Cuerpo a Cuerpo, con los modificadores de Ágil (en posición Asedio), Espía y Legendaria, sin una fábrica tendríamos que escribir algo como lo siguiente:
+
+		\begin{lstlisting}[language=Java, caption={Ejemplo de creación de unidad sin usar UnidadFactory}]
+Unidad nuevaUnidad = new UnidadBasica("nombre", 5, new CuerpoACuerpo());
+Unidad unidadAgil = new Agil(nuevaUnidad, new Asedio());
+Unidad unidadAgilYEspia = new Espia(unidadAgil);
+Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
+		\end{lstlisting}
+
+		Para simplificar este proceso, implementamos una clase \texttt{UnidadFactory} que permite construir unidades utilizando listas de modificadores y posiciones. De esta forma, el mismo ejemplo se puede expresar de manera mucho más legible:
+
+		\begin{lstlisting}[language=Java, caption={Ejemplo de creación de unidad usando UnidadFactory}]
+ modificadores = new ArrayList<>(List.of("Agil", "Espia", "Legendaria"));
+ posiciones = new ArrayList<>(List.of("cuerpo a cuerpo", "asedio"));
+ Unidad unidad = UnidadFactory.crear("nombre", 5, modificadores, posiciones);
+		\end{lstlisting}
+
+	\item \end{itemize}
+
+
+
+
+
+
+	
+
+
+	\section{Diagramas}\label{sec:diagramas}
+
+
+	\subsection{Diagramas de clase}\label{sec:diagramasdeclase}
 	% Uno o varios diagramas de clases mostrando las relaciones estáticas entre las clases.  Puede agregarse todo el texto necesario para aclarar y explicar su diseño. Recuerden que la idea de todo el documento es que quede documentado y entendible cómo está implementada la solución.
 
-	\section{Diagramas de secuencia}\label{sec:diagramasdesecuencia}
+	\subsection{Diagramas de secuencia}\label{sec:diagramasdesecuencia}
 	% Mostrar las secuencias interesantes que hayan implementado. Pueden agregar texto para explicar si algo no queda claro.
 
-	\section{Diagramas de paquetes}\label{sec:diagramasdepaquetes}
+	\subsection{Diagramas de paquetes}\label{sec:diagramasdepaquetes}
 	%Incluir un diagrama de paquetes UML para mostrar el acoplamiento de su trabajo.
 
 

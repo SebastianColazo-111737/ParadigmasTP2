@@ -66,9 +66,7 @@ public class CombinacionesTest {
     public void seLePuedeAgregarAUnaUnidadLosModificadoresDeLegendariaYEspia(){
 
         // Arrange
-        List<String> modificadores = new ArrayList<>();
-        modificadores.add("Legendaria");
-        modificadores.add("Espia");
+        List<String> modificadores = new ArrayList<>(List.of("Legendaria", "Espia"));
         List<String> posiciones = new ArrayList<>();
         posiciones.add("cuerpo a cuerpo");
 
