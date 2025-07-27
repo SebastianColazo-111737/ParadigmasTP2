@@ -1,0 +1,23 @@
+@startuml
+actor "jugador1: Jugador" as j1
+participant "carta: Espia" as espia
+participant "unidadBase: UnidadBasica" as base
+participant "posicionUnidad: Asedio" as pos
+participant "jugador2: Jugador" as j2
+participant "atrilJ2: Atril" as atril
+
+j1 -> espia: jugarCarta(jugador1, jugador2, asedio)
+espia -> espia: sePuedeColocar(asedio)
+espia -> base: sePuedeColocar(asedio)
+base -> pos: esCompatible(asedio)
+pos -> base: true
+base -> espia: true
+
+espia -> espia: atrilDestino
+espia -> j2: getAtril()
+j2 --> espia: atrilJ2
+espia -> atril: colocarUnidad(this, asedio)
+
+espia -> espia: realizarAccionAdicional(jugador1, jugador2, atrilJ2, asedio)
+espia -> j1: robarCartasDelMazo(2)
+@enduml

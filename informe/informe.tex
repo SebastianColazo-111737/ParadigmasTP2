@@ -61,15 +61,16 @@
 
 	\end{itemize}
 
+	\subsection{Delegación vs Herencia}\label{sup:vs}
+	En general, evitamos el uso de herencia ya que implica una relacion fuerte y rigida entre las clases pero la utilizamos para modelar la jerarquia entre \texttt{Carta} y \texttt{Unidad}, ya que una unidad es un tipo de carta. Lo mismo aplica para las \texttt{UnidadesModificadas}, ya que necesitabamos una clase base comun desde la cual poder aplicar los distintos modificadores.
+	Para el resto del diseño optamos por la delegación, ya que nos da mayor flexibilidad y favorece la composición de comportamientos sin acoplar fuertemente las clases.
+
 	\subsection{Puntos conflictivos}\label{sup:conflicto}
 
 	Uno de los aspectos más complejos del trabajo práctico fue la programación de las secciones del tablero de cada jugador y la lógica de las unidades, ya que el puntaje de una sección depende de las unidades que contiene, pero a su vez, el puntaje de cada unidad puede depender del estado actual de la sección en la que está colocada.
 	Por ejemplo, el puntaje de una unidad puede verse modificado si en la misma sección hay una unidad animadora, o si la sección está afectada por cartas especiales como \textit{climas} o \textit{morale boost}.
 	Para resolver este problema, decidimos que sea la sección calcule su puntaje como la suma de los puntajes de sus unidades colocadas y dejar que cada unidad calcule su puntaje pasandole las unidades y efectos en la seccion en ese momento.
 	De esta forma, la sección no necesita conocer los tipos específicos de unidades ni los efectos que la afectan; simplemente almacena sus componentes y delega el cálculo a quienes los conocen, lo cual es fundamental para que el diseño sea extensible.
-
-	%delegacion vs herencia
-
 
 
 	\subsection{Patrones de diseño}\label{sup:patrones}
@@ -228,8 +229,37 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 	\subsection{Diagramas de secuencia}\label{sec:diagramasdesecuencia}
 	% Mostrar las secuencias interesantes que hayan implementado. Pueden agregar texto para explicar si algo no queda claro.
 
+	\subsection{Secuencia: Jugar carta de unidad con modificador Espía}
+	Vamos a mostrar una secuencia de como se juega una \textbf{carta de unidad con el modificador \textit{Espia}} en la posicion \textbf{Asedio}.
 
-	%\subsection{Diagramas de paquetes}\label{sec:diagramasdepaquetes}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/secuencia/jugarCarta1}
+		\caption{\label{fig:secuencia01} Inicio de la jugada: validación de la ronda y turno del jugador.}
+	\end{figure}
+	A nivel del juego de Gwent, antes de jugar una carta se valida que \textbf{la ronda no haya terminado}, y se determina \textbf{quién debe jugar} la carta, dependiendo de a quién le corresponde el turno actual.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/secuencia/JugarCarta2}
+		\caption{\label{fig:secuencia02} Validación de que la carta pertenece a la mano del jugador.}
+	\end{figure}
+	En esta etapa, el \texttt{Jugador} valida que la carta que se intenta jugar \textbf{pertenezca a su mano}. El método \texttt{removerCartaDeLaMano()} puede lanzar una excepción en caso de que la carta no esté disponible en la mano del jugador.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/secuencia/jugarCarta3}
+		\caption{\label{fig:secuencia03} Aplicación del modificador \textit{Espía}.}
+	\end{figure}
+	En esta parte de la secuencia se muestra cómo el \textbf{modificador \textit{Espía}} altera el comportamiento de la carta: \textbf{cambia el atril de destino} (haciéndola jugar en el lado del oponente) y provoca que el jugador que la juega \textbf{robe 2 cartas} de su propio mazo luego de que la carta es colocada.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/secuencia/jugarCarta4}
+		\caption{\label{fig:secuencia04} Actualización del puntaje y notificación a los observadores.}
+	\end{figure}
+	Finalmente, al colocar una unidad en una sección, se actualiza el puntaje actual de las \textbf{unidades colocadas}. Además, se notifica a los \textbf{observadores} registrados en la sección.
+
 
 
 \end{document}

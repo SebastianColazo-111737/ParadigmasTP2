@@ -1,0 +1,23 @@
+@startuml
+actor "carta: Espia" as espia
+participant "atrilJ2: Atril" as atril
+participant "asedio: Seccion" as seccion
+participant ":Unidad" as unidades
+
+espia -> atril: colocarUnidad(this, asedio)
+atril -> atril: getSeccion(asedio)
+atril -> seccion: colocarUnidad(espia)
+
+seccion -> seccion: add(espia)
+
+seccion -> seccion: actualizarPuntajeUnidades
+loop para cada unidadColocada
+seccion -> unidades: calcularPuntaje(unidadesColocadas, efectosEnLaSeccion)
+end
+
+seccion -> seccion: notificarObservadores()
+loop para cada observador
+seccion -> ":observador": notificar()
+end
+
+@enduml

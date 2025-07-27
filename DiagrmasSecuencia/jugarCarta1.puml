@@ -1,0 +1,24 @@
+@startuml
+
+actor Usuario
+participant "juego: Gwent" as gwent
+participant "adminTurno: AdminTurnos" as turnos
+participant "jugador1: Jugador" as j1
+
+Usuario -> gwent : jugarCarta(espia, asedio)
+gwent -> gwent: terminoLaRonda()
+gwent -> turnos: todosPasaronTurno()
+turnos --> gwent: false
+
+gwent -> gwent: getJugadorActual()
+gwent -> turnos: getJugadorActual()
+turnos --> gwent: jugador1
+
+gwent -> gwent: getJugadorProximo()
+gwent -> turnos: getJugadorProximo()
+turnos --> gwent: jugador2
+
+gwent -> j1: jugarCarta(espia, jugador2, asedio)
+
+
+@enduml

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.26)  27 JUL 2025 01:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.26)  27 JUL 2025 19:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -412,7 +412,7 @@ l.46 	\newpage
                [1]
 
 [2]
-Overfull \hbox (9.5361pt too wide) in paragraph at lines 90--94
+Overfull \hbox (9.5361pt too wide) in paragraph at lines 87--91
 \T1/cmr/m/n/10 extender fácilmente la cantidad de modificadores que se pueden a
 plicar a las cartas. Inicialmente
  []
@@ -421,88 +421,88 @@ plicar a las cartas. Inicialmente
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 96.
+nput line 93.
 
-Overfull \hbox (116.29175pt too wide) in paragraph at lines 99--100
+Overfull \hbox (116.29175pt too wide) in paragraph at lines 96--97
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (68.3031pt too wide) in paragraph at lines 105--106
+Overfull \hbox (68.3031pt too wide) in paragraph at lines 102--103
 [][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (56.30594pt too wide) in paragraph at lines 111--112
+Overfull \hbox (56.30594pt too wide) in paragraph at lines 108--109
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (20.31445pt too wide) in paragraph at lines 115--116
+Overfull \hbox (20.31445pt too wide) in paragraph at lines 112--113
 [][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (56.30594pt too wide) in paragraph at lines 116--117
+Overfull \hbox (56.30594pt too wide) in paragraph at lines 113--114
 [][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (104.29459pt too wide) in paragraph at lines 118--119
+Overfull \hbox (104.29459pt too wide) in paragraph at lines 115--116
 [][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (1.37143pt too wide) in paragraph at lines 123--125
-\T1/cmr/m/n/10 hora de crear unidades del juego. Debido a la posibilidad de com
-binar múltiples modificadores,
  []
 
 
 
 [3]
-Overfull \hbox (32.31161pt too wide) in paragraph at lines 129--130
+Overfull \hbox (1.37143pt too wide) in paragraph at lines 120--122
+\T1/cmr/m/n/10 hora de crear unidades del juego. Debido a la posibilidad de com
+binar múltiples modificadores,
+ []
+
+
+Overfull \hbox (32.31161pt too wide) in paragraph at lines 126--127
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (14.31587pt too wide) in paragraph at lines 132--133
+Overfull \hbox (14.31587pt too wide) in paragraph at lines 129--130
 [][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (1.14926pt too wide) in paragraph at lines 135--136
+Overfull \hbox (1.14926pt too wide) in paragraph at lines 132--133
 []\T1/cmr/m/n/10 Para simplificar este proceso, implementamos una clase \T1/cmt
 t/m/n/10 UnidadFactory \T1/cmr/m/n/10 que permite construir
  []
 
 
-Overfull \hbox (38.3102pt too wide) in paragraph at lines 138--139
+Overfull \hbox (38.3102pt too wide) in paragraph at lines 135--136
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (8.31729pt too wide) in paragraph at lines 139--140
+Overfull \hbox (8.31729pt too wide) in paragraph at lines 136--137
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (62.30452pt too wide) in paragraph at lines 140--141
+Overfull \hbox (62.30452pt too wide) in paragraph at lines 137--138
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-<diagramas/clases/Gwent.png, id=69, 776.9025pt x 1061.9675pt>
+<diagramas/clases/Gwent.png, id=73, 776.9025pt x 1061.9675pt>
 File: diagramas/clases/Gwent.png Graphic file (type png)
 <use diagramas/clases/Gwent.png>
-Package pdftex.def Info: diagramas/clases/Gwent.png  used on input line 153.
+Package pdftex.def Info: diagramas/clases/Gwent.png  used on input line 150.
 (pdftex.def)             Requested size: 339.67029pt x 464.31796pt.
 
 
 [4]
-<diagramas/clases/Jugador.png, id=83, 1088.065pt x 704.6325pt>
+<diagramas/clases/Jugador.png, id=87, 1088.065pt x 704.6325pt>
 File: diagramas/clases/Jugador.png Graphic file (type png)
 <use diagramas/clases/Jugador.png>
-Package pdftex.def Info: diagramas/clases/Jugador.png  used on input line 163.
+Package pdftex.def Info: diagramas/clases/Jugador.png  used on input line 160.
 (pdftex.def)             Requested size: 424.58624pt x 274.96686pt.
 
 
@@ -511,18 +511,18 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.166 
+l.163 
        <./diagramas/clases/Gwent.png (PNG copy)>]
-<diagramas/clases/ColeccionDeCartas.png, id=89, 812.03375pt x 341.275pt>
+<diagramas/clases/ColeccionDeCartas.png, id=93, 812.03375pt x 341.275pt>
 File: diagramas/clases/ColeccionDeCartas.png Graphic file (type png)
 <use diagramas/clases/ColeccionDeCartas.png>
 Package pdftex.def Info: diagramas/clases/ColeccionDeCartas.png  used on input 
-line 169.
+line 166.
 (pdftex.def)             Requested size: 339.67029pt x 142.75128pt.
-<diagramas/clases/Atril.png, id=90, 787.94376pt x 852.18375pt>
+<diagramas/clases/Atril.png, id=94, 787.94376pt x 852.18375pt>
 File: diagramas/clases/Atril.png Graphic file (type png)
 <use diagramas/clases/Atril.png>
-Package pdftex.def Info: diagramas/clases/Atril.png  used on input line 175.
+Package pdftex.def Info: diagramas/clases/Atril.png  used on input line 172.
 (pdftex.def)             Requested size: 339.67029pt x 367.35509pt.
 
 
@@ -531,26 +531,26 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.178 
+l.175 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.178 
+l.175 
        <./diagramas/clases/Jugador.png (PNG copy)> <./diagramas/clases/Coleccio
 nDeCartas.png (PNG copy)>]
-<diagramas/clases/Especiales1.png, id=98, 869.2475pt x 303.1325pt>
+<diagramas/clases/Especiales1.png, id=102, 869.2475pt x 303.1325pt>
 File: diagramas/clases/Especiales1.png Graphic file (type png)
 <use diagramas/clases/Especiales1.png>
 Package pdftex.def Info: diagramas/clases/Especiales1.png  used on input line 1
-82.
+79.
 (pdftex.def)             Requested size: 339.67029pt x 118.45247pt.
-<diagramas/clases/Especiales2.png, id=99, 809.0225pt x 303.1325pt>
+<diagramas/clases/Especiales2.png, id=103, 809.0225pt x 303.1325pt>
 File: diagramas/clases/Especiales2.png Graphic file (type png)
 <use diagramas/clases/Especiales2.png>
 Package pdftex.def Info: diagramas/clases/Especiales2.png  used on input line 1
-88.
+85.
 (pdftex.def)             Requested size: 339.67029pt x 127.27315pt.
 
 
@@ -559,25 +559,25 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.191 
+l.188 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.191 
+l.188 
        <./diagramas/clases/Atril.png (PNG copy)> <./diagramas/clases/Especiales
 1.png (PNG copy)>]
-<diagramas/clases/UnidadBasica.png, id=106, 1362.08875pt x 698.61pt>
+<diagramas/clases/UnidadBasica.png, id=110, 1362.08875pt x 698.61pt>
 File: diagramas/clases/UnidadBasica.png Graphic file (type png)
 <use diagramas/clases/UnidadBasica.png>
 Package pdftex.def Info: diagramas/clases/UnidadBasica.png  used on input line 
-194.
+191.
 (pdftex.def)             Requested size: 424.58624pt x 217.77142pt.
-<diagramas/clases/Puntaje.png, id=107, 863.225pt x 584.1825pt>
+<diagramas/clases/Puntaje.png, id=111, 863.225pt x 584.1825pt>
 File: diagramas/clases/Puntaje.png Graphic file (type png)
 <use diagramas/clases/Puntaje.png>
-Package pdftex.def Info: diagramas/clases/Puntaje.png  used on input line 204.
+Package pdftex.def Info: diagramas/clases/Puntaje.png  used on input line 201.
 (pdftex.def)             Requested size: 424.58624pt x 287.3305pt.
 
 
@@ -586,26 +586,26 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.207 
+l.204 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.207 
+l.204 
        <./diagramas/clases/Especiales2.png (PNG copy)> <./diagramas/clases/Unid
 adBasica.png (PNG copy)>]
-<diagramas/clases/Modificadores1.png, id=114, 1075.01625pt x 437.635pt>
+<diagramas/clases/Modificadores1.png, id=118, 1075.01625pt x 437.635pt>
 File: diagramas/clases/Modificadores1.png Graphic file (type png)
 <use diagramas/clases/Modificadores1.png>
 Package pdftex.def Info: diagramas/clases/Modificadores1.png  used on input lin
-e 210.
+e 207.
 (pdftex.def)             Requested size: 424.58624pt x 172.84723pt.
-<diagramas/clases/Modificadores2.png, id=115, 1135.24126pt x 437.635pt>
+<diagramas/clases/Modificadores2.png, id=119, 1135.24126pt x 437.635pt>
 File: diagramas/clases/Modificadores2.png Graphic file (type png)
 <use diagramas/clases/Modificadores2.png>
 Package pdftex.def Info: diagramas/clases/Modificadores2.png  used on input lin
-e 216.
+e 213.
 (pdftex.def)             Requested size: 424.58624pt x 163.67867pt.
 
 
@@ -614,27 +614,33 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.219 
+l.216 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.219 
+l.216 
        <./diagramas/clases/Puntaje.png (PNG copy)> <./diagramas/clases/Modifica
 dores1.png (PNG copy)>]
-<diagramas/clases/Modificadores3.png, id=122, 1135.24126pt x 418.56375pt>
+<diagramas/clases/Modificadores3.png, id=126, 1135.24126pt x 418.56375pt>
 File: diagramas/clases/Modificadores3.png Graphic file (type png)
 <use diagramas/clases/Modificadores3.png>
 Package pdftex.def Info: diagramas/clases/Modificadores3.png  used on input lin
-e 222.
+e 219.
 (pdftex.def)             Requested size: 424.58624pt x 156.54587pt.
-<diagramas/clases/UnidadFactory.png, id=123, 934.49126pt x 341.275pt>
+<diagramas/clases/UnidadFactory.png, id=127, 934.49126pt x 341.275pt>
 File: diagramas/clases/UnidadFactory.png Graphic file (type png)
 <use diagramas/clases/UnidadFactory.png>
 Package pdftex.def Info: diagramas/clases/UnidadFactory.png  used on input line
- 228.
+ 225.
 (pdftex.def)             Requested size: 424.58624pt x 155.06165pt.
+<diagramas/secuencia/jugarCarta1.png, id=128, 611.28375pt x 576.1525pt>
+File: diagramas/secuencia/jugarCarta1.png Graphic file (type png)
+<use diagramas/secuencia/jugarCarta1.png>
+Package pdftex.def Info: diagramas/secuencia/jugarCarta1.png  used on input lin
+e 237.
+(pdftex.def)             Requested size: 424.58624pt x 400.18306pt.
 
 
 [10
@@ -642,24 +648,77 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.239 \end{document}
-                    
+l.239 	\end{figure}
+                   
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.239 \end{document}
-                    
+l.239 	\end{figure}
+                   
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.239 \end{document}
-                     <./diagramas/clases/Modificadores2.png (PNG copy)> <./diag
-ramas/clases/Modificadores3.png (PNG copy)> <./diagramas/clases/UnidadFactory.p
-ng (PNG copy)>]
+l.239 	\end{figure}
+                    <./diagramas/clases/Modificadores2.png (PNG copy)> <./diagr
+amas/clases/Modificadores3.png (PNG copy)> <./diagramas/clases/UnidadFactory.pn
+g (PNG copy)>]
+<diagramas/secuencia/JugarCarta2.png, id=136, 655.44875pt x 327.2225pt>
+File: diagramas/secuencia/JugarCarta2.png Graphic file (type png)
+<use diagramas/secuencia/JugarCarta2.png>
+Package pdftex.def Info: diagramas/secuencia/JugarCarta2.png  used on input lin
+e 244.
+(pdftex.def)             Requested size: 424.58624pt x 211.96811pt.
 
-[11] (/home/vaky/Documentos/FIUBA/2Â°materias/TP2/auxil/informe.aux
+
+[11
+pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.247 	E
+        n esta etapa, el \texttt{Jugador} valida que la carta que se intenta...
+ <./diagramas/secuencia/jugarCarta1.png (PNG copy)>]
+<diagramas/secuencia/jugarCarta3.png, id=143, 1218.5525pt x 608.2725pt>
+File: diagramas/secuencia/jugarCarta3.png Graphic file (type png)
+<use diagramas/secuencia/jugarCarta3.png>
+Package pdftex.def Info: diagramas/secuencia/jugarCarta3.png  used on input lin
+e 251.
+(pdftex.def)             Requested size: 424.58624pt x 211.94257pt.
+<diagramas/secuencia/jugarCarta4.png, id=144, 911.405pt x 561.09625pt>
+File: diagramas/secuencia/jugarCarta4.png Graphic file (type png)
+<use diagramas/secuencia/jugarCarta4.png>
+Package pdftex.def Info: diagramas/secuencia/jugarCarta4.png  used on input lin
+e 258.
+(pdftex.def)             Requested size: 424.58624pt x 261.39507pt.
+
+
+[12
+pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.261 	F
+        inalmente, al colocar una unidad en una secciÃ³n, se actualiza el pu...
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.261 	F
+        inalmente, al colocar una unidad en una secciÃ³n, se actualiza el pu...
+ <./diagramas/secuencia/JugarCarta2.png (PNG copy)> <./diagramas/secuencia/juga
+rCarta3.png (PNG copy)>]
+
+[13
+pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.265 \end{document}
+                     <./diagramas/secuencia/jugarCarta4.png (PNG copy)>]
+(/home/vaky/Documentos/FIUBA/2Â°materias/TP2/auxil/informe.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
 )
@@ -669,26 +728,27 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 13282 strings out of 475460
- 208325 string characters out of 5766735
- 819706 words of memory out of 5000000
- 36062 multiletter control sequences out of 15000+600000
- 566917 words of font info for 49 fonts, out of 8000000 for 9000
+ 13343 strings out of 475460
+ 210309 string characters out of 5766735
+ 820552 words of memory out of 5000000
+ 36114 multiletter control sequences out of 15000+600000
+ 567618 words of font info for 50 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 75i,11n,79p,568b,1215s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1000.
-pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti1000
-.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx120
-0.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx10
-00.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1
-000.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx
-1440.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecr
-m1440.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ec
-bx2488.pk>
+ 75i,12n,79p,732b,1215s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbi1000.
+pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1000
+.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecti100
+0.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx12
+00.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1
+000.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm
+1000.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ecb
+x1440.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ec
+rm1440.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/e
+cbx2488.pk>
 Output written on /home/vaky/Documentos/FIUBA/2Â°materias/TP2/out/informe.pdf (
-12 pages, 1117005 bytes).
+14 pages, 1290766 bytes).
 PDF statistics:
- 503 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
- 130 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 565 PDF objects out of 1000 (max. 8388607)
+ 74 named destinations out of 1000 (max. 500000)
+ 166 words of extra memory for PDF output out of 10000 (max. 10000000)
 

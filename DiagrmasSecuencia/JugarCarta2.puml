@@ -1,0 +1,16 @@
+
+
+@startuml
+
+actor "juego: Gwent" as gwent
+participant "jugador1: Jugador" as j1
+participant "manoJ1: Mano" as mano
+participant "espia: Espia" as carta
+
+
+gwent -> j1: jugarCarta(espia, jugador2, asedio)
+j1 -> j1: removerCartaDeLaMano(carta)
+j1 -> mano: removerCarta(carta)
+j1 -> carta: jugarCarta(this, jugador2, asedio)
+
+@enduml
