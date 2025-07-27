@@ -1,5 +1,11 @@
 @startuml
 
+interface Carta{
+  + {abstract} jugarCarta(jugador, oponente: Jugador, pos: Posicion)
+  + {abstract} getNombre(): String
+
+}
+
 interface Observador{
   + {abstract} notificar()
 }
@@ -24,26 +30,9 @@ abstract class ColeccionDeCartas{
 
 }
 
-ColeccionDeCartas <|-- Mano
-ColeccionDeCartas <|-- Mazo
 ColeccionDeCartas o-- "0..*" Observador
+ColeccionDeCartas o-- "0..*" Carta
 
-class Mano{
-  + removerCarta(carta: Carta)
-  + agregarObservador(obs: Observador)
-  + notificarObservadores()
-}
 
-class Mazo{
-  - random: Random
-
-  + darCartas(cantidad: Int)
-  - agarrarCartaAleatoria():Carta
-
-  + cambiarCarta(carta: Carta):Carta
-
-  + agregarObservador(obs: Observador)
-  + notificarObservadores()
-}
 
 @enduml

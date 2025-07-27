@@ -8,9 +8,6 @@ interface Carta{
 
 Carta <|.. Clima
 Carta <|.. ClimaSoleado
-Carta <|.. MoraleBoost
-Carta <|.. TierraArrasada
-
 
 class Clima{
   - nombre: String
@@ -26,23 +23,6 @@ class ClimaSoleado{
   - posAfectadas: List<Posicion>
 
   + Clima(nombre: String, List<Posicion> posicionesAfectadas)
-  + jugarCarta(jugador, oponente: Jugador, pos: Posicion)
-  + getNombre(): String
-}
-
-class MoraleBoost{
-  - nombre: String
-  - {static} multiplicador : int
-
-  + MoraleBoost(nombre: String)
-  + jugarCarta(jugador, oponente: Jugador, pos: Posicion)
-  + getNombre(): String
-}
-
-class TierraArrasada{
-  - nombre: String
-
-  + TierraArrasada(nombre: String)
   + jugarCarta(jugador, oponente: Jugador, pos: Posicion)
   + getNombre(): String
 }

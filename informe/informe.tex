@@ -51,10 +51,6 @@
 
 
 	\section{Detalles de implementación}\label{sec:implementacion}
-	%Deben detallar/explicar qué estrategias utilizaron para resolver todos los puntos más
-	%conflictivos del trabajo práctico. Justificar el uso de herencia vs. delegación, mencionar que
-	%principio de diseño aplicaron en qué caso y mencionar qué patrones de diseño fueron utilizados y
-	%por qué motivos.
 
 	\subsection{Supuestos}\label{sup:intro}
 	\begin{itemize}
@@ -67,11 +63,14 @@
 
 	\subsection{Puntos conflictivos}\label{sup:conflicto}
 
-	%1) Atriles y jugadores Fue complicado encontrar un disenio donde cada jugdor tenga asociado su tablero y que no este muy acoplado
+	Uno de los aspectos más complejos del trabajo práctico fue la programación de las secciones del tablero de cada jugador y la lógica de las unidades, ya que el puntaje de una sección depende de las unidades que contiene, pero a su vez, el puntaje de cada unidad puede depender del estado actual de la sección en la que está colocada.
+	Por ejemplo, el puntaje de una unidad puede verse modificado si en la misma sección hay una unidad animadora, o si la sección está afectada por cartas especiales como \textit{climas} o \textit{morale boost}.
+	Para resolver este problema, decidimos que sea la sección calcule su puntaje como la suma de los puntajes de sus unidades colocadas y dejar que cada unidad calcule su puntaje pasandole las unidades y efectos en la seccion en ese momento.
+	De esta forma, la sección no necesita conocer los tipos específicos de unidades ni los efectos que la afectan; simplemente almacena sus componentes y delega el cálculo a quienes los conocen, lo cual es fundamental para que el diseño sea extensible.
 
-	%2)Calcular el puntaje de las secciones tambien fue complicado por que dependia de varias cosas
+	%delegacion vs herencia
 
-	%delegacion vs herencia?
+
 
 	\subsection{Patrones de diseño}\label{sup:patrones}
 
@@ -140,23 +139,20 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 	\item \end{itemize}
 
 
-
-
-
-
-	
-
-
 	\section{Diagramas}\label{sec:diagramas}
 
 
 	\subsection{Diagramas de clase}\label{sec:diagramasdeclase}
-	% Uno o varios diagramas de clases mostrando las relaciones estáticas entre las clases.  Puede agregarse todo el texto necesario para aclarar y explicar su diseño. Recuerden que la idea de todo el documento es que quede documentado y entendible cómo está implementada la solución.
+
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\textwidth]{diagramas/clases/Gwent}
 		\caption{\label{fig:class01}Juego \texttt{Gwent}.}
 	\end{figure}
+
+	En este diagrama se muestran las clases utilizadas para administrar los turnos y las rondas del juego.
+	El \texttt{AdministradorDeTurnos} permite detectar si los jugadores han pasado su turno, y cuando ambos lo hacen, se genera un objeto de tipo \texttt{Resultado}, que contiene el estado actual de los jugadores, sus puntajes en ese momento y quién ganó la ronda.
+	Luego, esa información se pasa a una \texttt{ReglaDeCierre}, que se encarga de determinar si el juego debe finalizar o continuar con una nueva ronda.
 
 	\begin{figure}[H]
 		\centering
@@ -179,8 +175,14 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{diagramas/clases/Especiales}
+		\includegraphics[width=0.8\textwidth]{diagramas/clases/Especiales1}
 		\caption{\label{fig:class05} Cartas \texttt{Especiales}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\textwidth]{diagramas/clases/Especiales2}
+		\caption{\label{fig:class052} Cartas \texttt{Especiales}.}
 	\end{figure}
 
 	\begin{figure}[H]
@@ -188,6 +190,10 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 		\includegraphics[width=1\textwidth]{diagramas/clases/UnidadBasica}
 		\caption{\label{fig:class06}Cartas unidad \texttt{UnidadBasica}.}
 	\end{figure}
+
+	La clase \texttt{UnidadBasica} representa una unidad sin modificadores, y funciona como la base sobre la cual pueden aplicarse distintos modificadores.
+	Por otro lado, la clase \texttt{UnidadModificada} implementa las interfaces \texttt{Unidad} y \texttt{Carta}, y contiene una referencia a otra unidad.
+	Esto le permite delegar sus mensajes a la unidad que envuelve y modificar su comportamiento, agregando lógica adicional antes o después de invocar los métodos originales.
 
 	\begin{figure}[H]
 		\centering
@@ -197,8 +203,20 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\textwidth]{diagramas/clases/Modificadores}
-		\caption{\label{fig:class08}Cartas unidad \texttt{Modificadores}.}
+		\includegraphics[width=1\textwidth]{diagramas/clases/Modificadores1}
+		\caption{\label{fig:class081}Cartas unidad \texttt{Modificadores}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/Modificadores2}
+		\caption{\label{fig:class082}Cartas unidad \texttt{Modificadores}.}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{diagramas/clases/Modificadores3}
+		\caption{\label{fig:class083}Cartas unidad \texttt{Modificadores}.}
 	\end{figure}
 
 	\begin{figure}[H]
@@ -210,8 +228,8 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 	\subsection{Diagramas de secuencia}\label{sec:diagramasdesecuencia}
 	% Mostrar las secuencias interesantes que hayan implementado. Pueden agregar texto para explicar si algo no queda claro.
 
+
 	%\subsection{Diagramas de paquetes}\label{sec:diagramasdepaquetes}
-	%Incluir un diagrama de paquetes UML para mostrar el acoplamiento de su trabajo.
 
 
 \end{document}

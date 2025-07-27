@@ -1,11 +1,5 @@
 @startuml
 
-interface Carta {
-  + {abstract} jugarCarta(jugador, oponente: Jugador, posicionElegida: Posicion)
-  + {abstract} getNombre(): String
-}
-
-Carta <|-- Unidad
 
 interface Unidad {
   + {abstract} getPuntaje(): Puntaje

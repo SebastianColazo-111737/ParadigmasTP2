@@ -1,0 +1,38 @@
+@startuml
+
+
+
+abstract class UnidadModificada{
+  - unidadParaModificar: Unidad
+  + UnidadModificada(unidadParaModificar: Unidad)
+
+  + getNombre(): String
+  + getPuntaje(): Puntaje
+  + calcularPuntaje(unidades:List<Unidad>, List<Efecto> efectos )
+
+  + sePuedeColocar(posicion: Posicion): Boolean
+  + atrilDestino(jugador, oponente: Jugador): Atril
+  + realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion
+}
+
+UnidadModificada <|-- Espia
+UnidadModificada <|-- Legendaria
+
+
+class Espia{
+  + Espia(unidad: Unidad)
+
+  + atrilDestino(jugador, oponente: Jugador): Atril
+  + realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion
+
+}
+
+class Legendaria{
+  + Legendaria(unidad: Unidad)
+
+  + getPuntaje(): Puntaje
+  + calcularPuntaje(unidades:List<Unidad>, List<Efecto> efectos )
+
+}
+
+@enduml

@@ -15,43 +15,9 @@ abstract class UnidadModificada{
   + realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion
 }
 
-UnidadModificada <|-- Agil
-UnidadModificada <|-- Animador
-UnidadModificada <|-- Espia
-UnidadModificada <|-- Legendaria
 UnidadModificada <|-- Medico
 UnidadModificada <|-- Unida
 
-
-
-class Agil{
-  - List<Posicion> posicionesExtra
-  + Agil(unidad: Unidad, List<Posicion> posicionesExtra)
-
-  + sePuedeColocar(posicion: Posicion): Boolean
-}
-
-class Animador{
-  + Animador(unidad: Unidad)
-
-  + realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion
-}
-
-class Espia{
-  + Espia(unidad: Unidad)
-
-  + atrilDestino(jugador, oponente: Jugador): Atril
-  + realizarAccionAdicional(jugador, oponente: Jugador, atrilDestino: Atril, posicionElegida: Posicion
-
-}
-
-class Legendaria{
-  + Legendaria(unidad: Unidad)
-
-  + getPuntaje(): Puntaje
-  + calcularPuntaje(unidades:List<Unidad>, List<Efecto> efectos )
-
-}
 
 class Medico{
   + Medico(unidad: Unidad)

@@ -78,9 +78,7 @@ public class ControladorJuego {
     }
 
     public void iniciarNuevaRonda(){
-        this.juego.repartirCartasALosJugadores(2);
         this.juego.iniciarNuevaRonda();
-        //new PantallaCambiarCartas(jugador1, jugador2);
     }
 
     public boolean terminoElJuego(){

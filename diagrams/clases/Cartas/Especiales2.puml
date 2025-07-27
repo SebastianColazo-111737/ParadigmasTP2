@@ -1,0 +1,29 @@
+@startuml
+
+interface Carta{
+  + {abstract} jugarCarta(jugador, oponente: Jugador, pos: Posicion)
+  + {abstract} getNombre(): String
+
+}
+
+Carta <|.. MoraleBoost
+Carta <|.. TierraArrasada
+
+class MoraleBoost{
+  - nombre: String
+  - {static} multiplicador : int
+
+  + MoraleBoost(nombre: String)
+  + jugarCarta(jugador, oponente: Jugador, pos: Posicion)
+  + getNombre(): String
+}
+
+class TierraArrasada{
+  - nombre: String
+
+  + TierraArrasada(nombre: String)
+  + jugarCarta(jugador, oponente: Jugador, pos: Posicion)
+  + getNombre(): String
+}
+
+@enduml
