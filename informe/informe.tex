@@ -235,28 +235,28 @@ Unidad unidadAgilEspiaYLegendaria = new Legendaria(unidadAgilYEspia);
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{diagramas/secuencia/jugarCarta1}
-		\caption{\label{fig:secuencia01} Inicio de la jugada: validación de la ronda y turno del jugador.}
+		\caption{\label{fig:secuencia01} validación de la ronda y turno del jugador.}
 	\end{figure}
 	A nivel del juego de Gwent, antes de jugar una carta se valida que \textbf{la ronda no haya terminado}, y se determina \textbf{quién debe jugar} la carta, dependiendo de a quién le corresponde el turno actual.
 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{diagramas/secuencia/JugarCarta2}
-		\caption{\label{fig:secuencia02} Validación de que la carta pertenece a la mano del jugador.}
+		\caption{\label{fig:secuencia02} Jugador juega carta}
 	\end{figure}
 	En esta etapa, el \texttt{Jugador} valida que la carta que se intenta jugar \textbf{pertenezca a su mano}. El método \texttt{removerCartaDeLaMano()} puede lanzar una excepción en caso de que la carta no esté disponible en la mano del jugador.
 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{diagramas/secuencia/jugarCarta3}
-		\caption{\label{fig:secuencia03} Aplicación del modificador \textit{Espía}.}
+		\caption{\label{fig:secuencia03} modificador \textit{Espia}}
 	\end{figure}
 	En esta parte de la secuencia se muestra cómo el \textbf{modificador \textit{Espía}} altera el comportamiento de la carta: \textbf{cambia el atril de destino} (haciéndola jugar en el lado del oponente) y provoca que el jugador que la juega \textbf{robe 2 cartas} de su propio mazo luego de que la carta es colocada.
 
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\textwidth]{diagramas/secuencia/jugarCarta4}
-		\caption{\label{fig:secuencia04} Actualización del puntaje y notificación a los observadores.}
+		\caption{\label{fig:secuencia04} Actualizacion del puntaje y notificacion a los observadores}
 	\end{figure}
 	Finalmente, al colocar una unidad en una sección, se actualiza el puntaje actual de las \textbf{unidades colocadas}. Además, se notifica a los \textbf{observadores} registrados en la sección.
 
