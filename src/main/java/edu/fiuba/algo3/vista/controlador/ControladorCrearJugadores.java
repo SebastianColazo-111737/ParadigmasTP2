@@ -16,17 +16,10 @@ public class ControladorCrearJugadores {
     private  Stage stage;
 
     private  TextField inputNombreJ1;
-    private  ImageView inputImagenJ1;
-
     private  TextField inputNombreJ2;
-    private  ImageView inputImagenJ2;
-
-    private  Button botonAceptar;
-
 
     private String nombreJ1;
     private Image imagenJ1;
-
     private String nombreJ2;
     private Image imagenJ2;
 
@@ -37,17 +30,15 @@ public class ControladorCrearJugadores {
         this.stage = stage;
 
         this.inputNombreJ1 = inputNombreJ1;
-        this.inputImagenJ1 = inputImagenJ1;
-
         this.inputNombreJ2 = inputNombreJ2;
-        this.inputImagenJ2 = inputImagenJ2;
 
-        this.botonAceptar = botonAceptar;
-
-        configurarEventos();
+        configurarEventos(inputImagenJ1, inputImagenJ2, botonAceptar);
     }
 
-    private void configurarEventos() {
+    private void configurarEventos(ImageView inputImagenJ1,
+                                   ImageView inputImagenJ2,
+                                   Button botonAceptar) {
+
         inputImagenJ1.imageProperty().addListener((obs, oldImg, newImg) -> {
             imagenJ1 = newImg;
         });

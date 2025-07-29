@@ -29,7 +29,7 @@ public class VistaJugador extends StackPane {
     private Jugador jugadorModelo;
     private String nombreJugador;
     private Image imagenJugador;
-    private Label puntajeLabel;
+
     private HBox rondasGanadasBox;
     private Label puntajeCirculoLabel;
 
@@ -52,7 +52,7 @@ public class VistaJugador extends StackPane {
         Label nombreLabel = new Label(nombre);
         nombreLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 20px; -fx-text-fill: #ffffff;");
 
-        puntajeLabel = new Label();
+        Label puntajeLabel = new Label();
         puntajeLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #dddddd;");
 
         rondasGanadasBox = new HBox(5);

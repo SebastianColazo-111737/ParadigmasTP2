@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.26)  27 JUL 2025 19:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.26)  29 JUL 2025 14:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -328,7 +328,7 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count295
 \l__pdf_internal_box=\box56
 )
-(/home/vaky/Documentos/FIUBA/2°materias/TP2/auxil/informe.aux
+(/home/vaky/Documentos/FIUBA/2°materias/algo3/TP2/auxil/informe.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
 )
@@ -392,7 +392,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {/home/vaky/.miktex/texmfs/data/fonts/map/pdftex/pdftex.map} <./logofiuba.jpg>]
- (/home/vaky/Documentos/FIUBA/2°materias/TP2/auxil/informe.toc
+ (/home/vaky/Documentos/FIUBA/2°materias/algo3/TP2/auxil/informe.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -586,26 +586,28 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.204 
-      
+l.204 	L
+        os efectos tienen una \texttt{prioridad} para poder aplicar los efec...
+
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.204 
-       <./diagramas/clases/Especiales2.png (PNG copy)> <./diagramas/clases/Unid
-adBasica.png (PNG copy)>]
+l.204 	L
+        os efectos tienen una \texttt{prioridad} para poder aplicar los efec...
+ <./diagramas/clases/Especiales2.png (PNG copy)> <./diagramas/clases/UnidadBasi
+ca.png (PNG copy)>]
 <diagramas/clases/Modificadores1.png, id=118, 1075.01625pt x 437.635pt>
 File: diagramas/clases/Modificadores1.png Graphic file (type png)
 <use diagramas/clases/Modificadores1.png>
 Package pdftex.def Info: diagramas/clases/Modificadores1.png  used on input lin
-e 207.
+e 208.
 (pdftex.def)             Requested size: 424.58624pt x 172.84723pt.
 <diagramas/clases/Modificadores2.png, id=119, 1135.24126pt x 437.635pt>
 File: diagramas/clases/Modificadores2.png Graphic file (type png)
 <use diagramas/clases/Modificadores2.png>
 Package pdftex.def Info: diagramas/clases/Modificadores2.png  used on input lin
-e 213.
+e 214.
 (pdftex.def)             Requested size: 424.58624pt x 163.67867pt.
 
 
@@ -614,32 +616,32 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.216 
+l.217 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.216 
+l.217 
        <./diagramas/clases/Puntaje.png (PNG copy)> <./diagramas/clases/Modifica
 dores1.png (PNG copy)>]
 <diagramas/clases/Modificadores3.png, id=126, 1135.24126pt x 418.56375pt>
 File: diagramas/clases/Modificadores3.png Graphic file (type png)
 <use diagramas/clases/Modificadores3.png>
 Package pdftex.def Info: diagramas/clases/Modificadores3.png  used on input lin
-e 219.
+e 220.
 (pdftex.def)             Requested size: 424.58624pt x 156.54587pt.
 <diagramas/clases/UnidadFactory.png, id=127, 934.49126pt x 341.275pt>
 File: diagramas/clases/UnidadFactory.png Graphic file (type png)
 <use diagramas/clases/UnidadFactory.png>
 Package pdftex.def Info: diagramas/clases/UnidadFactory.png  used on input line
- 225.
+ 226.
 (pdftex.def)             Requested size: 424.58624pt x 155.06165pt.
 <diagramas/secuencia/jugarCarta1.png, id=128, 611.28375pt x 576.1525pt>
 File: diagramas/secuencia/jugarCarta1.png Graphic file (type png)
 <use diagramas/secuencia/jugarCarta1.png>
 Package pdftex.def Info: diagramas/secuencia/jugarCarta1.png  used on input lin
-e 237.
+e 238.
 (pdftex.def)             Requested size: 424.58624pt x 400.18306pt.
 
 
@@ -648,19 +650,19 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.239 	\end{figure}
+l.240 	\end{figure}
                    
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.239 	\end{figure}
+l.240 	\end{figure}
                    
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.239 	\end{figure}
+l.240 	\end{figure}
                     <./diagramas/clases/Modificadores2.png (PNG copy)> <./diagr
 amas/clases/Modificadores3.png (PNG copy)> <./diagramas/clases/UnidadFactory.pn
 g (PNG copy)>]
@@ -668,7 +670,7 @@ g (PNG copy)>]
 File: diagramas/secuencia/JugarCarta2.png Graphic file (type png)
 <use diagramas/secuencia/JugarCarta2.png>
 Package pdftex.def Info: diagramas/secuencia/JugarCarta2.png  used on input lin
-e 244.
+e 245.
 (pdftex.def)             Requested size: 424.58624pt x 211.96811pt.
 
 
@@ -677,20 +679,20 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.247 	E
+l.248 	E
         n esta etapa, el \texttt{Jugador} valida que la carta que se intenta...
  <./diagramas/secuencia/jugarCarta1.png (PNG copy)>]
 <diagramas/secuencia/jugarCarta3.png, id=143, 1218.5525pt x 608.2725pt>
 File: diagramas/secuencia/jugarCarta3.png Graphic file (type png)
 <use diagramas/secuencia/jugarCarta3.png>
 Package pdftex.def Info: diagramas/secuencia/jugarCarta3.png  used on input lin
-e 251.
+e 252.
 (pdftex.def)             Requested size: 424.58624pt x 211.94257pt.
 <diagramas/secuencia/jugarCarta4.png, id=144, 911.405pt x 561.09625pt>
 File: diagramas/secuencia/jugarCarta4.png Graphic file (type png)
 <use diagramas/secuencia/jugarCarta4.png>
 Package pdftex.def Info: diagramas/secuencia/jugarCarta4.png  used on input lin
-e 258.
+e 259.
 (pdftex.def)             Requested size: 424.58624pt x 261.39507pt.
 
 
@@ -699,14 +701,14 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.261 	F
+l.262 	F
         inalmente, al colocar una unidad en una sección, se actualiza el pu...
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.261 	F
+l.262 	F
         inalmente, al colocar una unidad en una sección, se actualiza el pu...
  <./diagramas/secuencia/JugarCarta2.png (PNG copy)> <./diagramas/secuencia/juga
 rCarta3.png (PNG copy)>]
@@ -716,9 +718,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.265 \end{document}
+l.266 \end{document}
                      <./diagramas/secuencia/jugarCarta4.png (PNG copy)>]
-(/home/vaky/Documentos/FIUBA/2°materias/TP2/auxil/informe.aux
+(/home/vaky/Documentos/FIUBA/2°materias/algo3/TP2/auxil/informe.aux
 LaTeX Info: Redefining \. on input line 12.
 LaTeX Info: Redefining \% on input line 12.
 )
@@ -726,10 +728,14 @@ LaTeX Info: Redefining \% on input line 12.
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
  13343 strings out of 475460
- 210309 string characters out of 5766735
+ 210381 string characters out of 5766735
  820552 words of memory out of 5000000
  36114 multiletter control sequences out of 15000+600000
  567618 words of font info for 50 fonts, out of 8000000 for 9000
@@ -745,10 +751,10 @@ pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ectt1000
 x1440.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/ec
 rm1440.pk> </home/vaky/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/e
 cbx2488.pk>
-Output written on /home/vaky/Documentos/FIUBA/2°materias/TP2/out/informe.pdf (
-14 pages, 1290766 bytes).
+Output written on /home/vaky/Documentos/FIUBA/2°materias/algo3/TP2/out/informe
+.pdf (14 pages, 1290534 bytes).
 PDF statistics:
- 565 PDF objects out of 1000 (max. 8388607)
+ 564 PDF objects out of 1000 (max. 8388607)
  74 named destinations out of 1000 (max. 500000)
  166 words of extra memory for PDF output out of 10000 (max. 10000000)
 

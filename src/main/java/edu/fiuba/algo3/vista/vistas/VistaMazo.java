@@ -41,7 +41,7 @@ public class VistaMazo extends StackPane implements Observador {
         indicadorCantidad.setPrefSize(40, 40);
 
         StackPane.setAlignment(indicadorCantidad, Pos.TOP_RIGHT);
-        StackPane.setMargin(indicadorCantidad, new Insets(10, 10, 0, 0)); // Margen desde arriba y derecha
+        StackPane.setMargin(indicadorCantidad, new Insets(10, 10, 0, 0));
 
         this.getChildren().addAll(imagenView, indicadorCantidad);
         this.setAlignment(Pos.CENTER);

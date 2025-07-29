@@ -89,15 +89,15 @@ public class PantallaJuego {
 
         Button botonPasarTurno = new Button("Pasar");
         botonPasarTurno.setPrefWidth(150);
-        botonPasarTurno.setStyle(estiloBotonNormal());
+        botonPasarTurno.setStyle(EstilosPantalla.botonEstiloNormal());
         botonPasarTurno.setOnAction(e -> {
             controlador.finalizarParticipacion();
             controlador.proximoTurno();
             actualizarCambioDeTurno();
 
         });
-        botonPasarTurno.setOnMouseEntered(e -> botonPasarTurno.setStyle(estiloBotonHover()));
-        botonPasarTurno.setOnMouseExited(e -> botonPasarTurno.setStyle(estiloBotonNormal()));
+        botonPasarTurno.setOnMouseEntered(e -> botonPasarTurno.setStyle(EstilosPantalla.botonEstiloHover()));
+        botonPasarTurno.setOnMouseExited(e -> botonPasarTurno.setStyle(EstilosPantalla.botonEstiloNormal()));
 
         VBox.setMargin(botonPasarTurno, new Insets(270, 0, 270, 0));
 
@@ -212,30 +212,5 @@ public class PantallaJuego {
         }
     }
 
-    private String estiloBotonNormal() {
-        return "-fx-background-color: #333333;" +
-                "-fx-text-fill: gold;" +
-                "-fx-font-weight: bold;" +
-                "-fx-font-family: 'Georgia';" +
-                "-fx-font-size: 22px;" +
-                "-fx-background-radius: 12;" +
-                "-fx-border-radius: 12;" +
-                "-fx-border-color: gold;" +
-                "-fx-border-width: 3px;" +
-                "-fx-effect: dropshadow(gaussian, gold, 10, 0.4, 0, 0);";
-    }
-
-    private String estiloBotonHover() {
-        return "-fx-background-color: #555555;" +
-                "-fx-text-fill: gold;" +
-                "-fx-font-weight: bold;" +
-                "-fx-font-family: 'Georgia';" +
-                "-fx-font-size: 22px;" +
-                "-fx-background-radius: 12;" +
-                "-fx-border-radius: 12;" +
-                "-fx-border-color: gold;" +
-                "-fx-border-width: 3px;" +
-                "-fx-effect: dropshadow(gaussian, gold, 12, 0.6, 0, 0);";
-    }
 }
 

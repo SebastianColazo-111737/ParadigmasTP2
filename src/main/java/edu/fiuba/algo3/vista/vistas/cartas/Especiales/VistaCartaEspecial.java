@@ -102,9 +102,9 @@ public class VistaCartaEspecial extends VistaCarta {
                 for (String posicionTexto : posicionesParaMostrar) {
                     Posicion pos = PosicionParser.crearPosicion(posicionTexto);
                     Button botonPosicion = new Button(posicionTexto);
-                    botonPosicion.setStyle(estiloBotonNormal());
-                    botonPosicion.setOnMouseEntered(e -> botonPosicion.setStyle(estiloBotonHover()));
-                    botonPosicion.setOnMouseExited(e -> botonPosicion.setStyle(estiloBotonNormal()));
+                    botonPosicion.setStyle(super.estiloBotonNormal());
+                    botonPosicion.setOnMouseEntered(e -> botonPosicion.setStyle(super.estiloBotonHover()));
+                    botonPosicion.setOnMouseExited(e -> botonPosicion.setStyle(super.estiloBotonNormal()));
                     botonPosicion.setOnAction(e -> {
                         if (eventoJugarCarta != null) {
                             eventoJugarCarta.accept(this.especialModelo, pos);
@@ -116,9 +116,9 @@ public class VistaCartaEspecial extends VistaCarta {
                 }
             } else {
                 Button botonJugar = new Button("Jugar");
-                botonJugar.setStyle(estiloBotonNormal());
-                botonJugar.setOnMouseEntered(e -> botonJugar.setStyle(estiloBotonHover()));
-                botonJugar.setOnMouseExited(e -> botonJugar.setStyle(estiloBotonNormal()));
+                botonJugar.setStyle(super.estiloBotonNormal());
+                botonJugar.setOnMouseEntered(e -> botonJugar.setStyle(super.estiloBotonHover()));
+                botonJugar.setOnMouseExited(e -> botonJugar.setStyle(super.estiloBotonNormal()));
                 botonJugar.setOnAction(e -> {
                     if (eventoJugarCarta != null) {
                         eventoJugarCarta.accept(this.especialModelo, null);

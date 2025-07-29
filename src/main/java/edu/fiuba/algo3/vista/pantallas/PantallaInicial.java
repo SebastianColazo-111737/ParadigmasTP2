@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.vista.pantallas;
 
 import edu.fiuba.algo3.vista.controlador.ControladorPantallaInicial;
+import edu.fiuba.algo3.vista.vistas.EstilosPantalla;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PantallaInicial {
@@ -25,18 +25,18 @@ public class PantallaInicial {
         Button btnJugar = new Button("Jugar");
         btnJugar.setPrefWidth(300);
         btnJugar.setPrefHeight(70);
-        btnJugar.setStyle(estiloBotonNormal());
+        btnJugar.setStyle(EstilosPantalla.botonEstiloNormal());
         btnJugar.setOnAction(e -> controlador.iniciarPartida());
-        btnJugar.setOnMouseEntered(e -> btnJugar.setStyle(estiloBotonHover()));
-        btnJugar.setOnMouseExited(e -> btnJugar.setStyle(estiloBotonNormal()));
+        btnJugar.setOnMouseEntered(e -> btnJugar.setStyle(EstilosPantalla.botonEstiloHover()));
+        btnJugar.setOnMouseExited(e -> btnJugar.setStyle(EstilosPantalla.botonEstiloNormal()));
 
         Button btnSalir = new Button("Salir");
         btnSalir.setPrefWidth(300);
         btnSalir.setPrefHeight(70);
-        btnSalir.setStyle(estiloBotonNormal());
+        btnSalir.setStyle(EstilosPantalla.botonEstiloNormal());
         btnSalir.setOnAction(e -> System.exit(0));
-        btnSalir.setOnMouseEntered(e -> btnSalir.setStyle(estiloBotonHover()));
-        btnSalir.setOnMouseExited(e -> btnSalir.setStyle(estiloBotonNormal()));
+        btnSalir.setOnMouseEntered(e -> btnSalir.setStyle(EstilosPantalla.botonEstiloHover()));
+        btnSalir.setOnMouseExited(e -> btnSalir.setStyle(EstilosPantalla.botonEstiloNormal()));
 
         VBox layout = new VBox(30);
         layout.setAlignment(Pos.CENTER);
@@ -57,31 +57,5 @@ public class PantallaInicial {
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
-    }
-
-    private String estiloBotonNormal() {
-        return "-fx-background-color: #333333;" +
-                "-fx-text-fill: white;" +
-                "-fx-font-weight: bold;" +
-                "-fx-font-family: 'Georgia';" +
-                "-fx-font-size: 24px;" +
-                "-fx-background-radius: 12;" +
-                "-fx-border-radius: 12;" +
-                "-fx-border-color: gold;" +
-                "-fx-border-width: 3px;" +
-                "-fx-effect: dropshadow(gaussian, black, 10, 0.5, 0, 2);";
-    }
-
-    private String estiloBotonHover() {
-        return "-fx-background-color: #555555;" +
-                "-fx-text-fill: gold;" +
-                "-fx-font-weight: bold;" +
-                "-fx-font-family: 'Georgia';" +
-                "-fx-font-size: 24px;" +
-                "-fx-background-radius: 12;" +
-                "-fx-border-radius: 12;" +
-                "-fx-border-color: gold;" +
-                "-fx-border-width: 3px;" +
-                "-fx-effect: dropshadow(gaussian, gold, 12, 0.6, 0, 0);";
     }
 }

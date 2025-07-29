@@ -50,18 +50,4 @@ public class MusicJuego {
             delay.play();
         }
     }
-
-    public void detener() {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-            enLoop = false;
-        }
-    }
-
-    public void cerrar() {
-        if (clip != null) {
-            clip.close();
-            enLoop = false;
-        }
-    }
 }

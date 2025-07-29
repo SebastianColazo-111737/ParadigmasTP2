@@ -19,13 +19,13 @@ public class VistaDescarte extends StackPane implements Observador {
 
     private Descarte descarteModelo;
     private Node vistaCarta;
-    private final Rectangle fondo;
+
 
     public VistaDescarte(Descarte descarte) {
         this.descarteModelo = descarte;
         this.descarteModelo.agregarObservador(this);
 
-        fondo = new Rectangle(120, 180);
+        Rectangle fondo = new Rectangle(120, 180);
         fondo.setFill(Color.TRANSPARENT);
         fondo.setStroke(Color.BLACK);
         fondo.setArcWidth(15);
